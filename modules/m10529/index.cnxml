@@ -1,0 +1,159 @@
+<document xmlns="http://cnx.rice.edu/cnxml" xmlns:m="http://www.w3.org/1998/Math/MathML" xmlns:md="http://cnx.rice.edu/mdml">
+
+  
+  <title>Reference: propositional inference rules</title> <metadata><md:content-id>undefined</md:content-id><md:title/><md:uuid>5e17b9b9-0a77-4ebc-89c7-41adb0ba2fc1</md:uuid>
+</metadata>
+
+
+<content>
+
+<table id="table1" summary="">
+<title>Our propositional inference rules</title>
+<tgroup cols="4">
+<thead><row>
+      <entry> Abbreviation </entry>
+      <entry> Name </entry>
+      <entry> If you know all of… </entry>
+      <entry> …then you can infer </entry>
+    </row></thead>
+<tbody><row>
+      <entry> <m:math><m:mo>∧</m:mo></m:math>Intro </entry>
+      <entry> and-introduction </entry>
+      <entrytbl cols="1"><tbody>
+         <row><entry> <m:math><m:ci>φ</m:ci></m:math> </entry></row>
+               <row><entry> <m:math><m:ci>ψ</m:ci></m:math> </entry></row>
+        
+      </tbody></entrytbl>
+      <entry> <m:math><m:apply><m:and/> <m:ci>φ</m:ci> <m:ci>ψ</m:ci> </m:apply></m:math> </entry>
+    </row>
+<row>
+      <entry morerows="1"> <m:math><m:mo>∧</m:mo></m:math>Elim </entry>
+      <entry> and-elimination (left) </entry>
+      <entry>  <m:math><m:apply><m:and/> <m:ci>φ</m:ci> <m:ci>ψ</m:ci> </m:apply></m:math> </entry>
+      <entry> <m:math><m:ci>φ</m:ci></m:math> </entry>
+    </row>
+<row>
+      <entry> and-elimination (right) </entry>
+      <entry>  <m:math><m:apply><m:and/> <m:ci>φ</m:ci> <m:ci>ψ</m:ci> </m:apply></m:math> </entry>
+      <entry> <m:math><m:ci>ψ</m:ci></m:math> </entry>
+    </row>
+<row>
+      <entry morerows="1"> <m:math><m:mo>∨</m:mo></m:math>Intro </entry>
+      <entry> or-introduction (left) </entry>
+      <entry> <m:math><m:ci>φ</m:ci></m:math> </entry>
+      <entry> <m:math><m:apply><m:or/> <m:ci>φ</m:ci> <m:ci>ψ</m:ci> </m:apply></m:math> </entry>
+    </row>
+<row>
+      <entry> or-introduction (right) </entry>
+      <entry> <m:math><m:ci>ψ</m:ci></m:math> </entry>
+      <entry> <m:math><m:apply><m:or/> <m:ci>φ</m:ci> <m:ci>ψ</m:ci> </m:apply></m:math> </entry>
+    </row>
+<row>
+      <entry> <m:math><m:mo>∨</m:mo></m:math>Elim </entry>
+      <entry> or-elimination </entry>
+      <entrytbl cols="1"><tbody>
+         <row><entry> <m:math><m:mrow><m:ci>φ</m:ci> <m:mo>⊢</m:mo> <m:ci>θ</m:ci></m:mrow></m:math> </entry></row>
+               <row><entry> <m:math><m:mrow><m:ci>ψ</m:ci> <m:mo>⊢</m:mo> <m:ci>θ</m:ci></m:mrow></m:math> </entry></row>
+               <row><entry> <m:math><m:apply><m:or/> <m:ci>φ</m:ci> <m:ci>ψ</m:ci> </m:apply></m:math> </entry></row>
+        
+      </tbody></entrytbl>
+      <entry> <m:math><m:ci>θ</m:ci></m:math> </entry>
+    </row>
+<row>
+      <entry> <m:math><m:mo>⇒</m:mo></m:math>Intro </entry>
+      <entry> if-introduction </entry>
+      <entry> <m:math><m:mrow><m:ci>φ</m:ci><m:mtext>, </m:mtext><m:ci>ψ</m:ci><m:mtext>, </m:mtext><m:mtext>…</m:mtext><m:mtext>, </m:mtext><m:ci>θ</m:ci> <m:mo>⊢</m:mo> <m:ci>ω</m:ci></m:mrow></m:math> </entry>
+      <entry> <m:math><m:apply><m:implies/> <m:apply><m:and/><m:ci>φ</m:ci> <m:ci>ψ</m:ci> <m:mtext>…</m:mtext> <m:ci>θ</m:ci></m:apply>
+                   <m:ci>ω</m:ci></m:apply></m:math> </entry>
+    </row>
+<row>
+      <entry> <m:math><m:mo>⇒</m:mo></m:math>Elim </entry>
+      <entry> if-elimination (modus ponens) </entry>
+      <entrytbl cols="1"><tbody>
+         <row><entry> <m:math><m:apply><m:implies/> <m:ci>φ</m:ci> <m:ci>ψ</m:ci> </m:apply></m:math> </entry></row>
+               <row><entry> <m:math><m:ci>φ</m:ci></m:math> </entry></row>
+        
+      </tbody></entrytbl>
+      <entry> <m:math><m:ci>ψ</m:ci></m:math> </entry>
+    </row>
+<row>
+      <entry> <m:math><m:false/></m:math>Intro </entry>
+      <entry> false-introduction </entry>
+      <entrytbl cols="1"><tbody>
+         <row><entry> <m:math><m:ci>φ</m:ci></m:math> </entry></row>
+               <row><entry> <m:math><m:apply><m:not/> <m:ci>φ</m:ci> </m:apply></m:math> </entry></row>
+        
+      </tbody></entrytbl>
+      <entry> <m:math><m:false/></m:math> </entry>
+    </row>
+<row>
+      <entry> <m:math><m:false/></m:math>Elim </entry>
+      <entry> false-elimination </entry>
+      <entry> <m:math><m:false/></m:math> </entry>
+      <entry> <m:math><m:ci>φ</m:ci></m:math> </entry>
+    </row>
+<row>
+      <entry morerows="1"> RAA </entry>
+      <entry> reductio ad absurdum (v. 1)</entry>
+      <entry> <m:math><m:mrow><m:apply><m:not/><m:ci>φ</m:ci></m:apply> <m:mo>⊢</m:mo> <m:false/></m:mrow></m:math> </entry>
+      <entry> <m:math><m:ci>φ</m:ci></m:math> </entry>
+    </row>
+<row>
+      <entry> reductio ad absurdum (v. 2)</entry>
+      <entry> <m:math><m:mrow><m:ci>φ</m:ci> <m:mo>⊢</m:mo> <m:false/></m:mrow></m:math> </entry>
+      <entry> <m:math><m:apply><m:not/><m:ci>φ</m:ci></m:apply></m:math> </entry>
+    </row>
+<row>
+      <entry> <m:math><m:mo>¬</m:mo></m:math>Intro </entry>
+      <entry> negation-introduction </entry>
+      <entry> <m:math><m:ci>φ</m:ci></m:math> </entry>
+      <entry> <m:math><m:apply><m:not/><m:apply><m:not/><m:ci>φ</m:ci></m:apply></m:apply></m:math> </entry>
+    </row>
+<row>
+      <entry> <m:math><m:mo>¬</m:mo></m:math>Elim </entry>
+      <entry> negation-elimination </entry>
+      <entry> <m:math><m:apply><m:not/><m:apply><m:not/><m:ci>φ</m:ci></m:apply></m:apply></m:math> </entry>
+      <entry> <m:math><m:ci>φ</m:ci></m:math> </entry>
+    </row>
+<row>
+      <entry morerows="1"> CaseElim </entry>
+      <entry> case-elimination (left) </entry>
+      <entrytbl cols="1"><tbody>
+        
+          <row><entry> <m:math><m:apply><m:or/><m:ci>φ</m:ci> <m:ci>ψ</m:ci></m:apply></m:math> </entry></row>
+          <row><entry> <m:math><m:apply><m:not/><m:ci>φ</m:ci></m:apply></m:math> </entry></row>
+        
+      </tbody></entrytbl>
+      <entry> <m:math><m:ci>ψ</m:ci></m:math> </entry>
+    </row>
+<row>
+      <entry> case-elimination (right) </entry>
+      <entrytbl cols="1"><tbody>
+        
+          <row><entry> <m:math><m:apply><m:or/><m:ci>φ</m:ci> <m:ci>ψ</m:ci></m:apply></m:math> </entry></row>
+          <row><entry> <m:math><m:apply><m:not/><m:ci>ψ</m:ci></m:apply></m:math> </entry></row>
+        
+      </tbody></entrytbl>
+      <entry> <m:math><m:ci>φ</m:ci></m:math> </entry>
+    </row></tbody>
+</tgroup>
+</table>
+
+<para id="para1">
+  As usual, <m:math><m:ci>φ</m:ci></m:math>, <m:math><m:ci>ψ</m:ci></m:math>, <m:math><m:ci>θ</m:ci></m:math>, <m:math><m:ci>ω</m:ci></m:math>  
+  are meta-variables standing for any WFF.
+</para>
+
+<para id="para2">
+  This is by no means the only
+  possible inference system for propositional logic.
+  <note type="aside" id="idm13596464">
+    This set of inference rules is based upon
+    <cite><cite-title>Discrete Mathematics with a Computer</cite-title></cite>
+    by Hall and O'Donnell (Springer, 2000) and
+    <link url="http://www.cs.ou.edu/~beseme/">The Beseme Project</link>.
+  </note>
+</para>
+
+</content>
+</document>

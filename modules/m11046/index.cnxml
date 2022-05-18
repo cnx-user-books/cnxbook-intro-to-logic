@@ -1,0 +1,112 @@
+<document xmlns="http://cnx.rice.edu/cnxml" xmlns:m="http://www.w3.org/1998/Math/MathML" xmlns:md="http://cnx.rice.edu/mdml">
+  <title>Reference: first-order inference rules</title>
+  <metadata><md:content-id>undefined</md:content-id><md:title/><md:uuid>20b2563c-f71f-47d8-aa71-637e4d7c75da</md:uuid>
+</metadata>
+
+
+<content>
+
+<para id="para1">
+The following are in addition to
+<link document="m10529">those of propositional logic</link>.
+</para>
+
+     
+<table id="table1" summary="">
+<title>Our first-order inference rules</title>
+<tgroup cols="4">
+<thead><row>
+      <entry> Abbreviation </entry>
+      <entry> Name </entry>
+      <entry> If you know all of… </entry>
+      <entry> …then you can infer </entry>
+    </row></thead>
+<tbody><row>
+      <entry> <m:math><m:mo>∀</m:mo></m:math>Intro </entry>
+      <entry> <m:math><m:mo>∀</m:mo></m:math>-introduction </entry>
+      <entrytbl cols="1"><tbody> 
+         <row><entry> <m:math><m:ci>φ</m:ci></m:math> </entry></row>
+               <row><entry> <m:math><m:ci>y</m:ci></m:math> <link document="m10774" target-id="arbitrary">arbitrary</link>. </entry></row>
+        
+      </tbody></entrytbl>
+      <entry>
+       <m:math><m:mo>∀</m:mo><m:ci>x</m:ci><m:mtext>.</m:mtext> <m:ci>φ</m:ci><m:mtext>[</m:mtext><m:ci>y</m:ci><m:mtext>↦</m:mtext><m:ci>x</m:ci><m:mtext>]</m:mtext></m:math> </entry>
+    </row>
+<row>
+      <entry> <m:math><m:mo>∀</m:mo></m:math>Elim </entry>
+      <entry> <m:math><m:mo>∀</m:mo></m:math>-elimination </entry>
+      <entrytbl cols="1"><tbody>
+         <row><entry> <m:math><m:mo>∀</m:mo><m:ci>x</m:ci><m:mtext>.</m:mtext> <m:ci>φ</m:ci></m:math>  </entry></row>
+               <row><entry> <m:math><m:ci>t</m:ci></m:math> is any term that is free to be replaced in
+               <m:math><m:ci>φ</m:ci></m:math>. </entry></row>
+               <row><entry> Domain non-empty. </entry></row>
+        
+      </tbody></entrytbl>
+      <entry> <m:math><m:ci>φ</m:ci>  <m:mtext>[</m:mtext><m:ci>x</m:ci><m:mtext>↦</m:mtext><m:ci>t</m:ci><m:mtext>]</m:mtext></m:math> </entry>
+    </row>
+<row>
+      <entry> <m:math><m:mo>∃</m:mo></m:math>Intro </entry>
+      <entry> <m:math><m:mo>∃</m:mo></m:math>-introduction </entry>
+      <entrytbl cols="1"><tbody>
+         <row><entry> <m:math><m:ci>φ</m:ci></m:math> </entry></row>
+               <row><entry> <m:math><m:ci>t</m:ci></m:math> is any term in <m:math><m:ci>φ</m:ci></m:math> that is free to be
+               replaced.</entry></row>
+               <row><entry> Domain non-empty. </entry></row>
+        
+      </tbody></entrytbl>
+      <entry> <m:math><m:mo>∃</m:mo><m:ci>x</m:ci><m:mtext>.</m:mtext> <m:ci>φ</m:ci><m:mtext>[</m:mtext><m:ci>t</m:ci><m:mtext>↦</m:mtext><m:ci>x</m:ci><m:mtext>]</m:mtext></m:math> , 
+               where <m:math><m:ci>t</m:ci></m:math> is arbitrary </entry>
+    </row>
+<row>
+      <entry> <m:math><m:mo>∃</m:mo></m:math>Elim </entry>
+      <entry> <m:math><m:mo>∃</m:mo></m:math>-elimination </entry>
+      <entrytbl cols="1"><tbody>
+         <row><entry> <m:math><m:mo>∃</m:mo><m:ci>x</m:ci><m:mtext>.</m:mtext> <m:ci>φ</m:ci></m:math>  </entry></row>
+               <row><entry> <m:math><m:ci>c</m:ci></m:math> is a new constant in the proof. </entry></row>
+               <row><entry> <m:math><m:ci>c</m:ci></m:math> does not occur in the proof's
+               conclusion. </entry></row>
+        
+      </tbody></entrytbl>
+      <entry> <m:math><m:ci>φ</m:ci>  <m:mtext>[</m:mtext><m:ci>x</m:ci><m:mtext>↦</m:mtext><m:ci>c</m:ci><m:mtext>]</m:mtext></m:math> </entry>
+    </row></tbody>
+</tgroup>
+</table>
+
+<para id="para2">
+As usual, we use <m:math><m:ci>φ</m:ci></m:math> as a meta-variable to range over first-order WFFs.
+Similarly, <m:math><m:ci>t</m:ci></m:math> is a meta-variable for first-order terms, and <m:math><m:ci>c</m:ci></m:math> is a 
+meta-variable for domain constants.
+The notation <m:math><m:ci>φ</m:ci><m:mtext>[</m:mtext><m:ci>v</m:ci><m:mtext>↦</m:mtext><m:ci>w</m:ci><m:mtext>]</m:mtext></m:math> means the 
+formula <m:math><m:ci>φ</m:ci></m:math> but with every 
+<link document="m10774" target-id="renaming-for-subst">appropriate</link>
+occurrence of <m:math><m:ci>v</m:ci></m:math> replaced by <m:math><m:ci>w</m:ci></m:math>.
+</para>
+
+<para id="para3">
+As discussed in the
+<link document="m10774" target-id="arbitrary">lecture notes</link>, a variable is <term>arbitrary</term> <emphasis>unless</emphasis>:
+
+<list id="list1">
+  <item> A variable is not arbitrary if it is free in (an enclosing) premise.
+          
+  </item>
+  <item> A variable is not arbitrary if it is free after applying <m:math><m:mo>∃</m:mo></m:math>Elim
+          — either as the introduced witness <m:math><m:ci>c</m:ci></m:math>,
+            or free anywhere else in the formula.
+            
+  </item>
+</list>
+The usual way to introduce arbitrary variables is during <m:math><m:mo>∀</m:mo></m:math>Elim (w/o later using it in <m:math><m:mo>∃</m:mo></m:math>Elim).
+</para>
+
+<para id="para4">
+As a detail in <m:math><m:mo>∀</m:mo></m:math>Elim and <m:math><m:mo>∃</m:mo></m:math>Intro, the term <m:math><m:ci>t</m:ci></m:math> must be <term>free to replace</term> the variable <m:math><m:ci>x</m:ci></m:math> in <m:math><m:ci>φ</m:ci></m:math>.
+This means that it is <emphasis>not</emphasis> the case that both <m:math><m:ci>t</m:ci></m:math> contains a variable quantified in <m:math><m:ci>φ</m:ci></m:math>, and that <m:math><m:ci>x</m:ci></m:math> occurs free within that quantifier.
+In short, the bound variable names should be kept distinct from the free variable names.
+Also, only free occurrences <m:math><m:ci>x</m:ci></m:math> get replaced.
+The restriction in <m:math><m:mo>∃</m:mo></m:math>Elim on <m:math><m:ci>c</m:ci></m:math> being new is similar.
+</para>
+
+
+</content>
+</document>

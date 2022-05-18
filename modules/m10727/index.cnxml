@@ -1,0 +1,606 @@
+<document xmlns="http://cnx.rice.edu/cnxml" xmlns:m="http://www.w3.org/1998/Math/MathML">
+
+<title>modeling with relations</title>
+<metadata xmlns:md="http://cnx.rice.edu/mdml">
+  <md:content-id>m10727</md:content-id>
+  <md:title>modeling with relations</md:title>
+  <md:abstract>(Blank Abstract)</md:abstract>
+  <md:uuid>31e7b5af-f072-4755-9cd7-8fe9125d2e7a</md:uuid>
+</metadata>
+
+<content>
+
+<section id="imp-id4188936">
+<title>Modeling with Relations</title>
+
+<para id="imp-id24429425">
+<note id="imp-id23275195" type="aside">
+  Note that the <m:math><m:ci type="fn">nhbr</m:ci></m:math> relation can actually represent an arbitrarily
+  weird board, such as 
+  locations that look adjacent on the map but actually aren't,
+  boards which wrap around a
+  <link url="http://hades.ph.tn.tudelft.nl/Internal/PHServices/Documentation/MathWorld/math/math/c/c904.htm">cylinder</link> or
+  <link url="http://hades.ph.tn.tudelft.nl/Internal/PHServices/Documentation/MathWorld/math/math/t/t188.htm">toroid</link>,
+  or a location with a tunnel connecting it to
+  a location far across the board (like the secret passages
+  in the game Clue, or the harrowing sub trip through Naboo in
+  <link url="http://www.starwars.com/episode-i/"><cite>Star Wars: The Phantom Menace</cite></link>.)
+  One-way passages can be encoded as well
+  (meaning the <m:math><m:ci type="fn">nhbr</m:ci></m:math> relation need not be symmetric).
+  Actually, <emphasis>any</emphasis> graph can be represented!
+  </note>
+</para>
+
+
+
+
+
+<exercise id="waterworld-shows-relation">
+  <problem id="imp-id23900777">
+    <para id="imp-id24355171">
+      How shall we encode concepts such as
+      <quote display="inline">
+        location <m:math><m:ci>A</m:ci></m:math> has 3 dangerous neighbors
+      </quote>,
+      using relations?
+    </para>
+  </problem>
+
+  <solution id="imp-id17013569">
+    <para id="imp-id21203427">
+      A good first guess might be to say we have a function
+      which returns the number of pirates next to a given location.
+      That is, 
+      <quote display="inline">
+        <m:math>
+          <m:apply><m:eq/>
+            <m:apply><m:ci type="fn">piratesNear</m:ci>
+              <m:ci>A</m:ci>
+            </m:apply>
+            <m:cn>3</m:cn>
+          </m:apply>
+        </m:math>
+      </quote>.
+      However,
+      <quote display="inline"><m:math><m:ci type="fn">piratesNear</m:ci></m:math></quote>
+      doesn't qualify as a relation.  Why not?
+    </para>
+
+    <para id="imp-id25204010">
+      To work around this, we could propose a binary relation 
+      along the lines of 
+      <quote display="inline">
+        <m:math>
+          <m:apply><m:eq/>
+            <m:apply>
+              <m:ci type="fn">piratesNear</m:ci>
+              <m:ci>A</m:ci>
+              <m:cn>3</m:cn>
+            </m:apply>
+            <m:true/>
+          </m:apply>
+        </m:math>
+      </quote>.
+      This is better, but it requires our domain
+      to be not only board locations, but also numbers.
+      And to be able to talk about numbers, we'd need more axioms,
+      as well as numeric relations such as &gt;.
+      <note id="imp-id23931445" type="aside">
+        Hmmm, what is the arity of <quote display="inline">&gt;</quote>?
+      </note>
+      While this approach is feasible, and ultimately might be what
+      we want, for now, let's stick with relations involving
+      only locations, not numbers.
+    </para>
+
+    <para id="imp-id24295921">
+      Okay, the third time's the charm:
+      we'll implement the concept 
+      <quote display="inline"><m:math><m:ci>A</m:ci></m:math> neighbors three pirates</quote>
+      as a relation
+      <m:math>
+        <m:apply>
+          <m:ci type="fn">has-3</m:ci>
+          <m:ci>A</m:ci>
+        </m:apply>
+      </m:math>
+      being true.
+      To cover the cases when there are exactly two neighboring pirates,
+      we'll use a whole new separate relation,
+      <quote display="inline"><m:math><m:ci type="fn">has-2</m:ci></m:math></quote>;
+      <m:math>
+        <m:apply>
+          <m:ci type="fn">has-2</m:ci>
+          <m:ci>A</m:ci>
+        </m:apply>
+      </m:math>
+      would be false on any board where
+      <m:math>
+        <m:apply> <m:ci type="fn">has-3</m:ci> <m:ci>A</m:ci> </m:apply>
+      </m:math>
+      is true (at least, in our standard interpretation).
+    </para>
+  </solution>
+</exercise>
+
+<para id="imp-id24409914">
+  
+  Proofs otherwise unchanged.
+  Note that we might express our rules as
+  <quote display="inline">
+    for any locations <m:math><m:ci>x</m:ci></m:math> and <m:math><m:ci>y</m:ci></m:math>,
+    we have the following axiom:
+    <m:math><m:apply><m:implies/>
+      <m:apply><m:and/>
+        <m:apply> <m:ci type="fn">has-3</m:ci> <m:ci>x</m:ci></m:apply> 
+        <m:apply>
+          <m:ci type="fn">nhbr</m:ci>
+          <m:ci>x</m:ci>
+          <m:ci>y</m:ci>
+        </m:apply>
+      </m:apply>
+      <m:apply><m:not/>
+        <m:apply><m:ci type="fn">safe</m:ci> <m:ci>y</m:ci> </m:apply>
+      </m:apply>
+    </m:apply></m:math>
+  </quote>.
+  Really, note that there's something else going on here:
+  <m:math><m:ci>x</m:ci></m:math> and <m:math><m:ci>y</m:ci></m:math> are symbols which can represent <emphasis>any</emphasis>
+  location: they are variables, whose value can be any element of the domain.
+</para>
+
+
+<para id="imp-id23953412">
+  For the domain of types-of-vegetables, the relation
+  <m:math><m:ci type="fn">yummy</m:ci></m:math>
+  is a useful one to know, when cooking.
+  In case you weren't sure,
+  <m:math>
+    <m:apply>
+      <m:eq/>
+      <m:apply>
+        <m:ci type="fn">yummy</m:ci>
+        <m:mtext>Brussels sprouts</m:mtext>
+      </m:apply>
+      <m:false/>
+    </m:apply>
+  </m:math>,
+  and
+  <m:math>
+    <m:apply>
+      <m:eq/>
+      <m:apply>
+        <m:ci type="fn">yummy</m:ci>
+        <m:mtext>carrots</m:mtext>
+      </m:apply>
+      <m:true/>
+    </m:apply>
+  </m:math>.
+</para>
+
+<para id="imp-id20505331">
+  Suppose we had a second relation, <m:math><m:ci type="fn">yucky</m:ci></m:math>.
+  Is it conceivable that we could model a vegetable that's neither
+  yucky nor yummy, using these relations?
+  Sure!  (Iceberg lettuce, perhaps.)
+  In fact, we could even have a vegetable which is both
+  yummy and yucky — radishes!
+</para>
+
+<para id="imp-id24330825">
+  <note id="imp-id13953406" type="aside">
+    A quick digression on a philosophical nuance:
+    the domain for the above problem is <emphasis>not</emphasis> vegetables; 
+    it's types-of-vegetables.
+    That is, we talk about whether or not carrots are yummy;
+    this is different than talking the yumminess of 
+    the carrot I dropped under the couch yesterday,
+    or the carrot underneath the chocolate sauce.
+    In computer science, this often manifests itself as the difference
+    between values, and types of values.
+    As examples, we distinguish between 3 and the set of all integers, and
+    we distinguish between particular carrots and the abstract idea of carrots.
+    (Some languages even include types as values.)
+    Philosophers enjoy debating how particular instances define
+    the abstract generalization,
+    but for our purposes we'll take each both vegetables and
+    types-of-vegetables as given.
+  </note>
+</para>
+
+<exercise id="yummy-binary">
+  <problem id="imp-id23705894">
+    <para id="imp-id15559299">
+      You might have objected to the idea of the unary relation
+      <m:math><m:ci type="fn">yummy</m:ci></m:math>, since
+      different people have different tastes.
+      How could you model individuals' tastes?
+      (Hint: 
+        Use a <emphasis>binary</emphasis> relation.)
+      )
+    </para>
+  </problem>
+
+  <solution id="imp-id24459458">
+    <para id="imp-id3910809">
+      We can use the binary relation
+      <m:math><m:ci type="fn">thinksIsYummy</m:ci></m:math>:
+      In particular,
+      <m:math>
+        <m:apply>
+          <m:eq/>
+          <m:apply>
+            <m:ci type="fn">thinksIsYummy</m:ci>
+            <m:mtext>Ian</m:mtext>
+            <m:mtext>anchovies</m:mtext>
+          </m:apply>
+          <m:false/>
+        </m:apply>
+      </m:math>
+      but
+      <m:math>
+        <m:apply>
+          <m:eq/>
+          <m:apply>
+            <m:ci type="fn">thinksIsYummy</m:ci>
+            <m:mtext>Phokion</m:mtext>
+            <m:mtext>anchovies</m:mtext>
+          </m:apply>
+          <m:true/>
+        </m:apply>
+      </m:math>
+      What set are we using, as the domain for this?
+      Really, the domain is the union of people and pizza-toppings.
+      So 
+      <m:math>
+        <m:apply>
+          <m:ci type="fn">thinksIsYummy</m:ci>
+          <m:mtext>radishes</m:mtext>
+          <m:mtext>brusselsSprouts</m:mtext>
+        </m:apply>
+      </m:math>
+      is a valid thing to write down; it would be false.
+      Note that if working with such a domain,
+      having unary predicates
+      <m:math><m:ci type="fn">isVegetable</m:ci></m:math>
+      and 
+      <m:math><m:ci type="fn">isPerson</m:ci></m:math>
+      would be useful.
+    </para>
+  </solution>
+</exercise>
+
+
+<para id="imp-id23735684">
+  Modeling actors and the has-starred-with relation
+  didn't include information about specific movies.
+  For instance, it was impossible to write any formula which 
+  could capture the notion of three actors all being in the same movie.
+</para>
+
+<exercise id="exercise3">
+  <problem id="imp-id24464512">
+    <para id="imp-id10535268">
+      Why doesn't
+      <m:math><m:apply><m:and/>
+        <m:apply>
+          <m:ci type="fn">hasStarredWith</m:ci>
+          <m:ci>a</m:ci>
+          <m:ci>b</m:ci>
+        </m:apply>
+        <m:apply>
+          <m:ci type="fn">hasStarredWith</m:ci>
+          <m:ci>b</m:ci>
+          <m:ci>c</m:ci>
+        </m:apply>
+        <m:apply>
+          <m:ci type="fn">hasStarredWith</m:ci>
+          <m:ci>c</m:ci>
+          <m:ci>a</m:ci>
+        </m:apply>
+      </m:apply></m:math>
+      capture the notion of
+      <m:math><m:ci>a</m:ci></m:math>, <m:math><m:ci>b</m:ci></m:math>, and <m:math><m:ci>c</m:ci></m:math>
+      all being in the same movie?
+      Prove your answer by giving a counterexample.
+    </para>
+  </problem>
+
+  <solution id="imp-id20273758">
+    <para id="imp-id23705068">
+      The proposed formula asserts that
+      each pair has been in some movie together, 
+      but they each could have been different movies
+      without being in the same one simultaneously.
+       
+      As a counterexample, it <emphasis>is</emphasis> true that
+      <m:math><m:apply>
+        <m:ci type="fn">hasStarredWith</m:ci>
+        <m:mtext>Charlie Chaplin</m:mtext>
+        <m:mtext>Norman Lloyd</m:mtext>
+      </m:apply></m:math>
+      (as witnessed by
+       <cite>Limelight</cite>, 1952),
+      <m:math><m:apply>
+        <m:ci type="fn">hasStarredWith</m:ci>
+        <m:mtext>Norman Lloyd</m:mtext>
+        <m:mtext>Janeane Garofolo</m:mtext>
+      </m:apply></m:math>
+      (as witnessed by
+       <cite>The Adventures of Rocky and Bullwinkle</cite>, 2000),
+      and if we generously include archive footage,
+      <m:math><m:apply>
+        <m:ci type="fn">hasStarredWith</m:ci>
+        <m:mtext>Charlie Chaplin</m:mtext>
+        <m:mtext>Janeane Garofolo</m:mtext>
+      </m:apply></m:math>
+      (as witnessed by
+       <cite>Outlaw Comic: The Censoring of Bill Hicks</cite>, 2003);
+      however, they have not all been in a movie together.
+      Might the counterexample you chose become nullified, in the future?
+    </para>
+  </solution>
+</exercise>
+
+<exercise id="exercise4">
+  <problem id="imp-id21193800">
+    <para id="imp-id9870292">
+      How might we make a model which <emphasis>does</emphasis> capture this?
+      What is the domain?  What relations do you want?
+    </para>
+  </problem>
+
+  <solution id="imp-id24293493">
+    <para id="imp-id12404097">
+      As always, there are several ways of modeling this problem.
+      We'll outline three.
+    </para>
+
+    <para id="imp-id20067073">
+      First, we could augment the <m:math><m:ci type="fn">hasStarredWith</m:ci></m:math>
+      to be a ternary (3-input) relation to include the movie.
+      Like in the <m:math><m:ci type="fn">yummy</m:ci></m:math>
+      <link target-id="yummy-binary">extension</link>,
+      the domain would then include both actors and movies, and we'd
+      also want relations to know which is which.
+    </para>
+
+    <para id="imp-id24303024">
+      Second, we could use a bunch of relations.
+      Starting with the familiar binary
+      <m:math><m:ci type="fn">hasStarredWith</m:ci></m:math>, we'd add the ternary
+      <m:math><m:ci type="fn">hasStarredWith3</m:ci></m:math>, the quaternary
+      <m:math><m:ci type="fn">hasStarredWith4</m:ci></m:math>, ….
+      Our domain would just be actors.
+      However, we'd either need an infinite number of such relations,
+      which we normally don't allow, or we'd need an arbitrary cap
+      on the number of people we're interested in at a time.
+    </para>
+
+    <para id="imp-id12919153">
+      Third, we could use <emphasis>sets</emphasis> of actors,
+      instead of individuals.
+      We'd need only one relation, <m:math><m:ci type="fn">haveStarredtogether</m:ci></m:math>,
+      that states a set of actors have starred together in a single movie.
+    </para>
+  </solution>
+</exercise>
+
+<para id="imp-id24417668">
+  Of course, the notion of interpretations are still with us,
+  though usually everybody wants to be thinking of one standard interpretation.
+  Consider a relation
+  with elements such as
+  <m:math><m:apply>
+    <m:ci type="fn">isChildOf</m:ci>
+    <m:mtext>Bart</m:mtext>
+    <m:mtext>Homer</m:mtext>
+    <m:mtext>Marge</m:mtext>
+  </m:apply></m:math>.
+  Would the triple 
+  <m:math><m:mfenced>
+    <m:mtext>Bart</m:mtext>
+    <m:mtext>Marge</m:mtext>
+    <m:mtext>Homer</m:mtext>
+  </m:mfenced></m:math>
+  be in the relation as well as 
+  <m:math><m:mfenced>
+    <m:mtext>Bart</m:mtext>
+    <m:mtext>Homer</m:mtext>
+    <m:mtext>Marge</m:mtext>
+  </m:mfenced></m:math>?
+</para>
+
+<para id="imp-id12498784">
+  As long as all the writers and users of formulas involving 
+  <m:math><m:ci type="fn">isChildOf</m:ci></m:math>
+  all agree on what the intended interpretation is, 
+  either convention can be used.
+</para>
+
+</section>  
+
+
+<section id="imp-id23310415">
+<title>A Case Study: iTunes</title>
+
+<para id="imp-id25208975">
+  Consider iTunes' <quote display="inline">smart playlists</quote>:
+  you can create a playlist consisting of (say) 
+  <quote id="imp-id3925993" type="block">
+    All songs I've rated 3-stars or better,
+    and whose genre is not Classical
+  </quote>.
+  This is <quote display="inline">smart</quote> because its a program which
+  is re-run every time your music library changes: 
+  For example, if you change a song's genre, it may be immediately
+  added or deleted from the playlist.
+  We realize actually have a simple formula
+  (which we can express in propositional logic with relations).
+  The structure (instance) for a single is the interpretation.
+  This formula is true when interpreted on
+  (my library's representation of)
+  Brian Eno's <quote display="inline">Here Come the Warm Jets</quote>,
+  but false for 
+  Bonnie Tyler's '80's epic
+  <quote display="inline">Holding Out for a Hero</quote>
+  and for Bach's
+  <quote display="inline">
+    <quote display="inline">Little</quote> Fugue in Gm
+  </quote>.
+  We now have one formula, and want to determine its truth-value in
+  many different particular interpretations.
+  In fact, we want to return all interpretations which make
+  the formula (playlist) true.
+</para>
+
+
+
+<exercise id="exercise5">
+  <problem id="imp-id10472292">
+    <para id="imp-id10345438">
+      Look at the GUI box for defining these queries.
+      Compared to propositional logic,
+      what sort of formulas can you define?
+    </para>
+  </problem>
+
+  <solution id="imp-id24335717">
+    <para id="imp-id23581686">This is effectively Disjunctive or Conjunctive Normal Form, limited
+      to clauses of one term each.
+
+    </para>
+  </solution>
+</exercise>
+
+
+<exercise id="exercise6">
+  <problem id="imp-id18880085">
+    <para id="imp-id12758994">
+      Are there queries which can't be directly
+      transliterated into the GUI box?
+      <footnote id="transliteration">
+        <quote display="inline">Transliterate</quote>
+        meaning a word-for-word substitution, while
+        <quote display="inline">translate</quote>
+        preserves meanings and idioms.  So while the German
+        <quote display="inline">Übung macht den Meister</quote>
+        transliterates to
+        <quote display="inline">Drill makes the master</quote>,
+        it translates to
+        <quote display="inline">Practice makes perfect</quote>.
+      </footnote>
+    </para>
+  </problem>
+
+  <solution id="imp-id7442103">
+    <para id="imp-id5177985">
+      Yes.  Two examples are
+      <m:math><m:apply><m:not/>
+        <m:apply><m:or/>
+          <m:apply><m:eq/><m:ci>genre</m:ci><m:ci>Classical</m:ci></m:apply>
+          <m:apply><m:eq/><m:ci>genre</m:ci><m:ci>Holiday  </m:ci></m:apply>
+        </m:apply>
+      </m:apply></m:math>,
+      and
+      <m:math><m:apply><m:and/>
+        <m:apply><m:eq/><m:ci>genre</m:ci><m:ci>Rock  </m:ci></m:apply>
+        <m:apply><m:or/>
+          <m:apply><m:geq/><m:ci>Rating</m:ci><m:cn>4</m:cn></m:apply>
+          <m:apply><m:eq/><m:ci>genre</m:ci><m:ci>Classical</m:ci></m:apply>
+        </m:apply>
+      </m:apply></m:math>.
+    </para>
+  </solution>
+</exercise>
+
+<exercise id="exercise7"><problem id="imp-id3491163">
+    <para id="imp-id4084071">
+      Can you find formulas equivalent to each of the preceding two,
+      which can be expressed?
+    </para>
+  </problem>
+
+  <solution id="imp-id25204008">
+    <para id="imp-id21535605">For the first example, 
+      <m:math><m:apply><m:not/>
+        <m:apply><m:or/>
+          <m:apply><m:eq/><m:ci>genre</m:ci><m:ci>Classical</m:ci></m:apply>
+          <m:apply><m:eq/><m:ci>genre</m:ci><m:ci>Holiday  </m:ci></m:apply>
+        </m:apply>
+      </m:apply></m:math>,
+      we can clearly use DeMorgan's law and make the query
+      <m:math><m:apply><m:and/>
+        <m:apply><m:not/>
+          <m:apply><m:eq/><m:ci>genre</m:ci><m:ci>Classical</m:ci></m:apply>
+        </m:apply>
+        <m:apply><m:not/>
+          <m:apply><m:eq/><m:ci>genre</m:ci><m:ci>Holiday  </m:ci></m:apply>
+        </m:apply>
+      </m:apply></m:math>.
+    </para>
+
+    <para id="eip-id1168199621070">However, for
+<m:math><m:apply><m:and/>
+        <m:apply><m:eq/><m:ci>genre</m:ci><m:ci>Rock  </m:ci></m:apply>
+        <m:apply><m:or/>
+          <m:apply><m:geq/><m:ci>Rating</m:ci><m:cn>4</m:cn></m:apply>
+          <m:apply><m:eq/><m:ci>genre</m:ci><m:ci>Classical</m:ci></m:apply>
+        </m:apply>
+      </m:apply>
+</m:math>
+there is no equivalent one-term-per-clause DNF or CNF formula!
+      <footnote id="no-equivalent-NF">
+        Budding logicians might wonder how you actually
+        <emphasis>prove</emphasis> this claim!
+      </footnote>
+    </para>
+
+    <para id="eip-id1168200093401">Fortunately, iTunes has a way around this.  Playlist membership or non-membership is itself an available predicate, allowing you to nest playlists.  Thus, you can build a playlist
+<m:math><m:ci>GoodOrClassical</m:ci></m:math>
+for
+<m:math>
+      <m:apply><m:or/>
+        <m:apply><m:geq/><m:ci>Rating</m:ci><m:cn>4</m:cn></m:apply>
+        <m:apply><m:eq/><m:ci>genre</m:ci><m:ci>Classical</m:ci></m:apply>
+      </m:apply>
+</m:math>,
+      then another
+<m:math>
+      <m:apply><m:and/>
+        <m:apply><m:eq/><m:ci>genre</m:ci><m:ci>Rock  </m:ci></m:apply>
+        <m:ci>GoodOrClassical</m:ci>
+      </m:apply>
+</m:math>
+      for the desired result.
+    </para>
+  </solution>
+</exercise>
+
+
+<para id="imp-id6078143">The upshot is that 
+  iTunes came up with a query language which is as expressive
+  as propositional<footnote id="imp-id23926208">
+    Technically, this
+    is a <quote display="inline">relational calculus</quote> formula,
+    since we are using relations instead of flat propositions.
+  </footnote>
+  logic.
+  For some queries, it can be awkward to use, but the GUI designers
+  who came up with smart playlists might have figured that few users would
+  want such queries.
+  <note id="imp-id23693773" type="challenge">
+    How might you create a GUI widget which can specify
+    <emphasis>any</emphasis> propositional formula,
+    and yet still look nice and be intuitive enough for
+    my mother to use?    
+    Is there a better usability/expressibility trade-off than what
+    iTunes has done, or are they optimal?
+   </note>
+</para>
+
+</section> 
+
+
+</content>
+</document>

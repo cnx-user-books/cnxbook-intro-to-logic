@@ -1,0 +1,690 @@
+<document xmlns="http://cnx.rice.edu/cnxml" xmlns:m="http://www.w3.org/1998/Math/MathML" xmlns:md="http://cnx.rice.edu/mdml">
+
+<title>First-Order Logic: inference rules</title>
+<metadata><md:content-id>undefined</md:content-id><md:title/><md:uuid>1c14cd1f-f9da-4bb8-bd8c-736f489700bc</md:uuid>
+</metadata>
+
+
+<content>
+
+<section id="section1">
+<title>Inference with quantifiers</title>
+
+
+<para id="para1">
+  Proving first-order sentences with inference rules is not too
+  different than for propositional ones.
+  We have two slight twists to add:
+  upgrading propositions to relations, 
+  and quantifiers.
+  We still keep all our original
+  <link document="m10529">propositional inference rules</link>,
+  but declare they can now be used on <emphasis>first-order</emphasis> WFFs.
+  
+  For our quantifiers, we introduce new
+  <link document="m11046">first-order inference rules</link>
+  for adding and eliminating quantifiers from formulas.
+  These four new rules look surprisingly simple, 
+  but they do have a couple of subtleties we have to keep track of.
+</para>
+
+
+
+<section id="section2">
+
+<title>Exists-intro</title>
+
+<para id="para2">
+  What is the most natural way to prove an existential sentence, like
+  “there exists a prime number greater than 5”?
+  That's easy — you just mention such a number, like 11,
+  and show that it is indeed prime and greater than 5.
+  In other words, once we prove
+  <m:math><m:apply><m:and/>
+    <m:apply><m:gt/><m:cn>11</m:cn> <m:cn>5</m:cn></m:apply>
+    <m:apply><m:forall/><m:bvar><m:ci>j</m:ci></m:bvar>
+      <m:apply><m:forall/><m:bvar><m:ci>k</m:ci></m:bvar>
+        <m:apply><m:implies/>
+          <m:apply><m:eq/>
+            <m:cn>11</m:cn>
+            <m:apply><m:times/><m:ci>j</m:ci><m:ci>k</m:ci></m:apply>
+          </m:apply>
+          <m:apply><m:or/>
+            <m:apply><m:eq/><m:ci>j</m:ci><m:cn>1</m:cn></m:apply>
+            <m:apply><m:eq/><m:ci>k</m:ci><m:cn>1</m:cn></m:apply>
+          </m:apply>
+        </m:apply>
+      </m:apply>
+    </m:apply>
+  </m:apply></m:math>
+  we can then conclude — using the 
+  inference rule <term><m:math><m:mo>∃</m:mo></m:math>Intro</term> — that
+  the formula
+  <m:math><m:apply><m:exists/><m:bvar><m:ci>p</m:ci></m:bvar> 
+    <m:apply><m:and/>
+      <m:apply><m:gt/><m:ci>p</m:ci><m:cn>5</m:cn></m:apply>
+      <m:apply><m:forall/><m:bvar><m:ci>j</m:ci></m:bvar>
+        <m:apply><m:forall/><m:bvar><m:ci>k</m:ci></m:bvar>
+          <m:apply><m:implies/>
+            <m:apply><m:eq/>
+              <m:ci>p</m:ci>
+              <m:apply><m:times/><m:ci>j</m:ci><m:ci>k</m:ci></m:apply>
+            </m:apply>
+            <m:apply><m:or/>
+              <m:apply><m:eq/><m:ci>j</m:ci><m:cn>1</m:cn></m:apply>
+              <m:apply><m:eq/><m:ci>k</m:ci><m:cn>1</m:cn></m:apply>
+            </m:apply>
+          </m:apply>
+        </m:apply>
+      </m:apply>
+    </m:apply>
+  </m:apply></m:math>
+  is true.
+  In general, to prove a formula of the form
+  <m:math><m:apply><m:exists/><m:bvar><m:ci>x</m:ci></m:bvar> <m:ci>φ</m:ci> </m:apply></m:math>,
+  we show that <m:math><m:ci>φ</m:ci></m:math> holds when <m:math><m:ci>x</m:ci></m:math> is replaced with
+  some particular <term>witness</term>.
+  (The witness was 11 in this example.)
+  The inference rule is
+  <m:math><m:mrow><m:ci>φ</m:ci><m:mtext>[</m:mtext><m:ci>p</m:ci><m:mtext>↦</m:mtext><m:ci>c</m:ci><m:mtext>]</m:mtext> <m:mo>⊢</m:mo> <m:apply><m:exists/><m:bvar><m:ci>p</m:ci></m:bvar><m:ci>φ</m:ci></m:apply></m:mrow></m:math>.
+  The notation 
+  “<m:math><m:ci>φ</m:ci><m:mtext>[</m:mtext><m:ci>v</m:ci><m:mtext>↦</m:mtext><m:ci>w</m:ci><m:mtext>]</m:mtext></m:math>”
+  means the formula <m:math><m:ci>φ</m:ci></m:math> but with every occurrence
+  of <m:math><m:ci>v</m:ci></m:math> replaced by <m:math><m:ci>w</m:ci></m:math>.  For example,
+  we earlier wrote down the formula
+  <m:math><m:ci>φ</m:ci><m:mtext>[</m:mtext><m:ci>p</m:ci><m:mtext>↦</m:mtext><m:cn>11</m:cn><m:mtext>]</m:mtext></m:math>,
+  and then decided that this was sufficient to conclude
+  <m:math><m:apply><m:exists/><m:bvar><m:ci>p</m:ci></m:bvar> <m:ci>φ</m:ci> </m:apply></m:math>.
+</para>
+
+<para id="para3">
+<note type="watch out" id="idp1211568"><label>Watch out</label>
+  Observe that
+  <emphasis>
+    you'll never use the substitution-notation
+    “
+        <m:math><m:ci>φ</m:ci>
+        <m:mtext>[</m:mtext><m:mtext>…</m:mtext><m:mtext>↦</m:mtext><m:mtext>…</m:mtext><m:mtext>]</m:mtext></m:math>”
+    as part of a literal formula
+  </emphasis>
+  —
+  it is only used in the inference rule, as a shorthand to describe
+  the actual formula.
+  (It's a pattern-matching metalanguage!)
+</note>
+
+<note id="renaming-for-subst" type="Aside for logicians and macro-writers"><label>Aside for logicians and macro-writers</label>
+  While it seems like substitution should be a simple textual
+  search-and-replace, it is sometimes more complicated.  In the formula
+  <m:math><m:apply><m:eq/>
+    <m:ci>φ</m:ci>
+    <m:apply><m:and/>
+      <m:apply><m:gt/> <m:ci>x</m:ci> <m:cn>5</m:cn></m:apply>
+      <m:apply><m:exists/>
+        <m:bvar><m:ci>x</m:ci></m:bvar>
+        <m:apply><m:ci type="function">R</m:ci><m:ci>x</m:ci></m:apply>
+      </m:apply>
+    </m:apply>
+  </m:apply></m:math>,
+  we don't want <m:math><m:ci>φ</m:ci><m:mtext>[</m:mtext><m:ci>x</m:ci><m:mtext>↦</m:mtext><m:cn>6</m:cn><m:mtext>]</m:mtext></m:math>
+  to try to mention <m:math><m:apply><m:ci type="function">R</m:ci><m:cn>6</m:cn></m:apply></m:math>,
+  much less generate something nonsensical like
+  <m:math><m:apply><m:forall/>
+    <m:bvar><m:ci>6</m:ci></m:bvar>
+    <m:ci>…</m:ci>
+  </m:apply></m:math>.
+  
+  In programming languages, we say we want “hygienic macros”, 
+  to respect our the language's notions of variables and scope.
+  <foreign>E.g.</foreign>, the C pre-processor's
+  <code display="inline">#define</code> and <code display="inline">#include</code> notably
+  does <emphasis>not</emphasis> respect hygiene, and can inadvertently lead to
+  hard-to-find bugs.
+  Solution: For simplicity, we will always
+  <link document="m12081" target-id="alpha-renaming">consistently rename variables</link>
+  so that each quantifier binds a distinct variable.
+</note>
+</para>
+
+<para id="para4">
+  How do you find a witness?  That's the difficult part.
+  You, the person creating the proof, must grab a suitable
+  example out of thin air, based on your knowledge of what you want
+  to prove about it.  In our previous example, we used our
+  knowledge about prime numbers and about the greater-than relation
+  to pick a witness that would work.
+  In essence, we figured out what facts needed to be true about
+  the witness for the formula to hold, and used that to guide
+  our choice of witness.
+  Of course, this can easily be more difficult, as when proving that
+  there exists a prime greater than 6971 of the form
+  <m:math>
+    <m:apply>
+      <m:minus/>
+      <m:apply> <m:times/> <m:cn>4</m:cn> <m:ci>x</m:ci> </m:apply>
+      <m:cn>1</m:cn>
+    </m:apply>
+  </m:math>.
+  (It turns out that 796751 will suffice as a witness here.)
+  Another approach is trial-and-error:  
+  Pick some candidate value, 
+  and see if it does indeed witness what you're trying to prove.
+  If you succeed, you're done.  If not, pick another candidate.
+</para>
+
+</section>
+
+<section id="section3">
+
+<title>Exists-Elim</title>
+
+<para id="para5">
+  The complementary <m:math><m:mo>∃</m:mo></m:math>Elim rule corresponds to giving a (new) name
+  to a witness.
+  Thus if you know “there exists some prime bigger than 5”,
+  then by <m:math><m:mo>∃</m:mo></m:math>Elim we can think of giving some witness the name (say) <m:math><m:ci>c</m:ci></m:math>,
+  and end up concluding “<m:math><m:ci>c</m:ci></m:math> is a prime bigger than 5”.
+  The caveats are that <m:math><m:ci>c</m:ci></m:math> must be a new name not already used in the proof,
+  and different from any variables free in the conclusion we're aiming for.
+  However, we will be able to use that variable <m:math><m:ci>c</m:ci></m:math> along with
+  universal formulas to get useful statements.
+</para>
+
+<para id="para6">
+  Thus the general form of the rule is that
+  <m:math><m:mrow><m:apply><m:exists/><m:bvar><m:ci>p</m:ci></m:bvar><m:ci>φ</m:ci></m:apply> <m:mo>⊢</m:mo> <m:ci>φ</m:ci><m:mtext>[</m:mtext><m:ci>p</m:ci><m:mtext>↦</m:mtext><m:ci>c</m:ci><m:mtext>]</m:mtext></m:mrow></m:math>.
+  That is, we can rewrite the body of the exists, replacing the quantified
+  variable <m:math><m:ci>p</m:ci></m:math> with any new variable name <m:math><m:ci>c</m:ci></m:math>, subject to the restrictions
+  just mentioned.
+</para>
+</section>
+
+
+<section id="section4">
+<title>Forall-Intro</title>
+
+<para id="para7">
+  Can we extend that idea to proving a universal sentence?
+  One witness is certainly not enough.  We'd need to work with
+  <emphasis>lots</emphasis> of witnesses, in fact, every single
+  member of our domain.
+  That's not very practical, especially with infinitely large domains.
+  We need to show that no matter what domain element you choose,
+  the formula holds.
+</para>
+
+<para id="para8">
+  Consider the statements
+  “If <m:math><m:ci>n</m:ci></m:math> is prime, then we know that …”
+  and
+  “A person <m:math><m:ci>X</m:ci></m:math> who runs a business should always …”.
+  <emphasis>Which</emphasis> <m:math><m:ci>n</m:ci></m:math> is being 
+  talked about, and <emphasis>which</emphasis> person?
+  Well, any number or person, respectively.
+  After learning about quantifiers, you may want to preface these
+  sentences with
+  “For all <m:math><m:ci>n</m:ci></m:math>” or
+  “For all [any] persons <m:math><m:ci>X</m:ci></m:math>”.
+  But a linguist might point out that while yes
+  “for all” is 
+  <emphasis>related</emphasis> to the speaker's thought,
+  they are actually using a subtly different mode  — that
+  of referring to a single person or number, albeit an
+  anonymous, <emphasis>arbitrary</emphasis> one.
+  If “an arbitrary element” really is a natural mode of thought,
+  should our proof system reflect that?
+</para>
+
+<para id="arbitrary">
+  If we choose an <term>arbitrary</term> member of the domain,
+  and show that the sentence holds for it, that is sufficient.
+  But, what do we mean by “arbitrary”?
+  In short, it means that we have no control over what element is picked,
+  or equivalently, that the proof must hold regardless of what element is
+  picked.  More precisely,
+  a variable is <term>arbitrary</term> <emphasis>unless</emphasis>:
+  
+  <list id="list1">
+    <item>
+      A variable is not arbitrary if it is free in (an enclosing) premise.
+      
+    </item>
+    <item>
+      A variable is not arbitrary if it is free after applying <m:math><m:mo>∃</m:mo></m:math>Elim
+      — either as the introduced witness <m:math><m:ci>c</m:ci></m:math>,
+      or free anywhere else in the formula.
+      
+    </item>
+  </list>
+  The usual way to introduce arbitrary variables is during
+  <m:math><m:mo>∀</m:mo></m:math>Elim (w/o later using it in <m:math><m:mo>∃</m:mo></m:math>Elim).
+  The formal inference rule for introduction of universal
+  quantification will use these cases as restrictions.
+</para>
+
+</section>
+
+<section id="section5">
+<title>Forall-Elim</title>
+
+<para id="para10">
+  Getting rid of universal quantifiers is easy: if you know
+  <m:math><m:apply><m:forall/><m:bvar><m:ci>x</m:ci></m:bvar><m:ci>φ</m:ci></m:apply></m:math>
+  (where <m:math><m:ci>φ</m:ci></m:math> is a formula presumably involving <m:math><m:ci>x</m:ci></m:math>),
+  well then you can replace <m:math><m:ci>x</m:ci></m:math> with anything you want, and
+  the resulting formula will be true.
+  We say
+  <m:math><m:mrow><m:apply><m:forall/><m:bvar><m:ci>x</m:ci></m:bvar><m:ci>φ</m:ci></m:apply> <m:mo>⊢</m:mo> <m:ci>φ</m:ci><m:mtext>[</m:mtext><m:ci>x</m:ci><m:mtext>↦</m:mtext><m:ci>t</m:ci><m:mtext>]</m:mtext></m:mrow></m:math>
+  where <m:math><m:ci>t</m:ci></m:math> is any term.
+  Any variables in <m:math><m:ci>t</m:ci></m:math>  are arbitrary,
+  unless it is an already-existing non-arbitrary variable.
+</para>
+
+<para id="para11">
+  For example, suppose we know that
+  <m:math><m:apply><m:forall/><m:bvar><m:ci>n</m:ci></m:bvar>
+    <m:apply><m:implies/>
+      <m:apply><m:and/>
+        <m:apply><m:ci type="function">prime</m:ci><m:ci>n</m:ci></m:apply>
+        <m:apply><m:gt/><m:ci>n</m:ci> <m:cn>2</m:cn></m:apply>
+      </m:apply>
+      <m:apply><m:ci type="function">odd</m:ci><m:ci>n</m:ci></m:apply>
+    </m:apply>
+  </m:apply></m:math>.
+  We can replace <m:math><m:ci>n</m:ci></m:math> with some term like 
+  <m:math><m:apply><m:plus/><m:ci>m</m:ci><m:cn>4</m:cn></m:apply></m:math>
+  to conclude
+  <m:math><m:apply><m:implies/>
+    <m:apply><m:and/>
+      <m:apply>
+        <m:ci type="function">prime</m:ci>
+        <m:apply><m:plus/><m:ci>m</m:ci><m:cn>4</m:cn></m:apply>
+      </m:apply>
+      <m:apply>
+        <m:gt/>
+        <m:apply>
+          <m:plus/>
+          <m:ci>m</m:ci>
+          <m:cn>4</m:cn>
+        </m:apply>
+        <m:cn>2</m:cn>
+      </m:apply>
+    </m:apply>
+    <m:apply>
+      <m:ci type="function">odd</m:ci>
+      <m:apply><m:plus/><m:ci>m</m:ci><m:cn>4</m:cn></m:apply>
+    </m:apply>
+  </m:apply></m:math>.
+  The variable <m:math><m:ci>m</m:ci></m:math> is arbitrary, unless it already occurred in non-arbitrary
+  in a previous line of the proof (perhaps introduced via <m:math><m:mo>∃</m:mo></m:math>Elim).
+  A more usual step is to use a term which is just a single variable,
+  and (by coincidence) happens to have the same name as
+  the quantified variable we are eliminating.
+  Thus we often conclude
+  <m:math><m:apply><m:implies/>
+    <m:apply><m:and/>
+      <m:apply><m:ci type="function">prime</m:ci><m:ci>n</m:ci></m:apply>
+      <m:apply><m:gt/><m:ci>n</m:ci> <m:cn>2</m:cn></m:apply>
+    </m:apply>
+    <m:apply><m:ci type="function">odd</m:ci><m:ci>n</m:ci></m:apply>
+  </m:apply></m:math>
+  (note the absence of the initial <m:math><m:mo>∀</m:mo></m:math>);
+  <m:math><m:ci>n</m:ci></m:math> is arbitrary (unless it had already been confusingly in use
+  as a non-arbitrary variable earlier).
+  This is helpful when we'll be later re-introducing the <m:math><m:mo>∀</m:mo></m:math> in
+  a later step; see the example below.
+</para>
+
+</section>
+</section> 
+
+
+<section id="section6">
+<title>Formal inference rules and proofs</title>
+
+<para id="para12">
+  Recall the syllogisms from a previous lecture.
+  The general form of a syllogism is
+  <list id="list2" list-type="enumerated">
+    <item>
+      <m:math><m:apply><m:forall/><m:bvar><m:ci>x</m:ci></m:bvar> 
+        <m:apply><m:implies/>
+          <m:apply><m:ci type="function">P</m:ci><m:ci>x</m:ci></m:apply>
+          <m:apply><m:ci type="function">Q</m:ci><m:ci>x</m:ci></m:apply>
+        </m:apply> 
+      </m:apply></m:math>  [major premise]
+    </item>
+    <item>
+      <m:math><m:apply><m:ci type="function">P</m:ci><m:ci>c</m:ci></m:apply></m:math>  [minor premise]
+    </item>
+    <item>
+      <m:math><m:apply><m:ci type="function">Q</m:ci><m:ci>c</m:ci></m:apply></m:math>  [conclusion]
+    </item>
+  </list>
+</para>
+
+<para id="para13">
+  In our system, we don't have syllogism as a separate
+  rule of inference, but it's easy to see how to translate
+  any syllogism into our system:
+  (for specific relations <m:math><m:ci type="function">P</m:ci></m:math> and <m:math><m:ci type="function">Q</m:ci></m:math>,
+   and a specific constant <m:math><m:ci>c</m:ci></m:math>).
+</para>
+
+<table id="proof1" summary="">
+
+<tgroup cols="3" align="center" colsep="1" rowsep="1">
+<colspec colwidth="*" colname="c1"/>
+<colspec colwidth="*" colname="c2"/>
+<colspec colwidth="*" colname="c3"/>
+
+<tbody>
+<row>
+<entry align="left">1</entry><entry namest="c2" nameend="c2"><m:math><m:apply><m:forall/><m:bvar><m:ci>x</m:ci></m:bvar>
+           <m:apply><m:implies/> <m:apply><m:ci type="function">P</m:ci><m:ci>x</m:ci></m:apply>
+                <m:apply><m:ci type="function">Q</m:ci><m:ci>x</m:ci></m:apply>
+           </m:apply>
+         </m:apply></m:math></entry><entry colname="c3"> Premise
+         </entry>
+</row>
+<row>
+<entry align="left">2</entry><entry namest="c2" nameend="c2"><m:math><m:apply><m:ci type="function">P</m:ci><m:ci>c</m:ci></m:apply></m:math></entry><entry colname="c3"> Premise
+         </entry>
+</row>
+<row>
+<entry align="left">3</entry><entry namest="c2" nameend="c2"><m:math><m:apply><m:implies/> <m:apply><m:ci type="function">P</m:ci><m:ci>c</m:ci></m:apply>
+              <m:apply><m:ci type="function">Q</m:ci><m:ci>c</m:ci></m:apply>
+         </m:apply></m:math></entry><entry colname="c3"> <m:math><m:mo>∀</m:mo></m:math>Elim,
+                         by line 1,
+                         with <m:math><m:apply><m:eq/><m:ci>x</m:ci> <m:ci>c</m:ci></m:apply></m:math>
+         </entry>
+</row>
+<row>
+<entry align="left">4</entry><entry namest="c2" nameend="c2"><m:math><m:apply><m:ci type="function">Q</m:ci><m:ci>c</m:ci></m:apply></m:math></entry><entry colname="c3">
+           <m:math><m:mo>⇒</m:mo></m:math>Elim,
+           by lines 2,3,
+           with <m:math><m:apply><m:eq/><m:ci>φ</m:ci> <m:ci type="function">P</m:ci><m:ci>c</m:ci></m:apply></m:math>
+           and  <m:math><m:apply><m:eq/><m:ci>ψ</m:ci> <m:ci type="function">Q</m:ci><m:ci>c</m:ci></m:apply></m:math>
+         </entry>
+</row></tbody>
+</tgroup>
+</table>
+
+<para id="para14">
+  Eliminating a quantifier via <m:math><m:mo>∀</m:mo></m:math>Elim and <m:math><m:mo>∃</m:mo></m:math>Elim
+  is often merely an intermediate step, where the quantifier will
+  be reintroduced later.
+  This moves the quantification from being explicit to implicit,
+  so that we can use other inference rules on the body of the formula.
+  When this is done, it is very important to pay attention to the
+  restrictions on <m:math><m:mo>∀</m:mo></m:math>Intro, so that we don't accidentally
+  “prove” anything too strong.
+</para>
+
+<example id="example1">
+  <para id="para15">
+    
+    <emphasis>
+      <m:math>
+        <m:mrow><m:apply><m:exists/><m:bvar><m:ci>x</m:ci></m:bvar>
+            <m:apply><m:forall/><m:bvar><m:ci>y</m:ci></m:bvar> <m:ci>φ</m:ci></m:apply>
+          </m:apply> <m:mo>⊢</m:mo> <m:apply><m:forall/><m:bvar><m:ci>y</m:ci></m:bvar>
+            <m:apply><m:exists/><m:bvar><m:ci>x</m:ci></m:bvar> <m:ci>φ</m:ci></m:apply>
+          </m:apply></m:mrow>
+      </m:math>
+    </emphasis>,
+    for the particular case of
+    <m:math>
+      <m:apply>
+        <m:eq/>
+        <m:ci>φ</m:ci>
+        <m:apply><m:ci type="function">R</m:ci><m:ci>x</m:ci><m:ci>y</m:ci></m:apply>
+      </m:apply>
+    </m:math>
+    (other cases all similar).
+  </para>
+
+  <table id="proof2" summary="">
+
+<tgroup cols="3" align="center" colsep="1" rowsep="1">
+<colspec colwidth="*" colname="c1"/>
+<colspec colwidth="*" colname="c2"/>
+<colspec colwidth="*" colname="c3"/>
+
+<tbody>
+<row>
+<entry align="left">1</entry><entry namest="c2" nameend="c2"><m:math><m:apply><m:exists/><m:bvar><m:ci>x</m:ci></m:bvar>
+        <m:apply><m:forall/><m:bvar><m:ci>y</m:ci></m:bvar>
+          <m:apply><m:ci type="function">R</m:ci><m:ci>x</m:ci><m:ci>y</m:ci></m:apply>
+        </m:apply>
+      </m:apply></m:math></entry><entry colname="c3">
+        Premise
+      </entry>
+</row>
+<row>
+<entry align="left">2</entry><entry namest="c2" nameend="c2"><m:math><m:apply><m:forall/><m:bvar><m:ci>y</m:ci></m:bvar>
+        <m:apply><m:ci type="function">R</m:ci><m:ci>p</m:ci><m:ci>y</m:ci></m:apply>
+      </m:apply></m:math></entry><entry colname="c3">
+        <m:math><m:mo>∃</m:mo></m:math>Elim, line 1
+      </entry>
+</row>
+<row>
+<entry align="left">3</entry><entry namest="c2" nameend="c2"><m:math><m:apply><m:ci type="function">R</m:ci><m:ci>p</m:ci><m:ci>q</m:ci></m:apply></m:math></entry><entry colname="c3">
+        <m:math><m:mo>∀</m:mo></m:math>Elim, line 2
+      </entry>
+</row>
+<row>
+<entry align="left">4</entry><entry namest="c2" nameend="c2"><m:math><m:apply><m:exists/><m:bvar><m:ci>x</m:ci></m:bvar>
+        <m:apply><m:ci type="function">R</m:ci><m:ci>x</m:ci><m:ci>q</m:ci></m:apply>
+      </m:apply></m:math></entry><entry colname="c3">
+        <m:math><m:mo>∃</m:mo></m:math>Intro, line 3
+      </entry>
+</row>
+<row>
+<entry align="left">5</entry><entry namest="c2" nameend="c2"><m:math><m:apply><m:forall/><m:bvar><m:ci>y</m:ci></m:bvar>
+        <m:apply><m:exists/><m:bvar><m:ci>x</m:ci></m:bvar>
+          <m:apply><m:ci type="function">R</m:ci><m:ci>x</m:ci><m:ci>y</m:ci></m:apply>
+        </m:apply>
+      </m:apply></m:math></entry><entry colname="c3">
+        <m:math><m:mo>∀</m:mo></m:math>Intro, line 4
+      </entry>
+</row></tbody>
+</tgroup>
+</table>
+
+  <para id="para16">
+    Remember that in line 5, for <m:math><m:mo>∀</m:mo></m:math>Intro, we must verify that
+    <m:math><m:ci>q</m:ci></m:math> is arbitrary.  It is, since it was introduced in line 3 by
+    <m:math><m:mo>∀</m:mo></m:math>Elim, and there hasn't been an intervening <m:math><m:mo>∃</m:mo></m:math>Elim
+    between lines 3 and 5.
+  </para>
+
+  <para id="para17">
+    We <emphasis>cannot</emphasis> instead conclude in line 4 that
+    <m:math><m:apply><m:forall/><m:bvar><m:ci>x</m:ci></m:bvar>
+      <m:apply><m:ci type="function">R</m:ci><m:ci>x</m:ci><m:ci>q</m:ci></m:apply>
+    </m:apply></m:math>
+    by <m:math><m:mo>∀</m:mo></m:math>Intro, since variable <m:math><m:ci>p</m:ci></m:math> was introduced by <m:math><m:mo>∃</m:mo></m:math>Elim
+    in line 2, and therefore not arbitrary.
+  </para>
+</example>
+
+<exercise id="exercise1">
+  <problem id="idp1039456">
+    <para id="para18">
+      Let's reverse the previous proof goal:
+      <emphasis>
+        <m:math>
+          <m:mrow><m:apply><m:forall/><m:bvar><m:ci>y</m:ci></m:bvar>
+              <m:apply><m:exists/>
+                <m:bvar><m:ci>x</m:ci></m:bvar>
+                <m:ci>φ</m:ci>
+              </m:apply>
+            </m:apply> <m:mo>⊢</m:mo> <m:apply><m:exists/><m:bvar><m:ci>x</m:ci></m:bvar>
+              <m:apply><m:forall/>
+                <m:bvar><m:ci>y</m:ci></m:bvar>
+                <m:ci>φ</m:ci>
+              </m:apply>
+            </m:apply></m:mrow>
+        </m:math>
+      </emphasis>,
+      for the particular case of
+      <m:math>
+        <m:apply>
+          <m:eq/>
+          <m:ci>φ</m:ci>
+          <m:apply><m:ci type="function">R</m:ci><m:ci>x</m:ci><m:ci>y</m:ci></m:apply>
+        </m:apply>
+      </m:math>
+      (other cases all similar).
+      This statement does <emphasis>not</emphasis> hold in general.
+      So, what's the problem with the following “proof”?
+    </para>
+
+    <table id="proof3" summary="">
+
+<tgroup cols="3" align="center" colsep="1" rowsep="1">
+<colspec colwidth="*" colname="c1"/>
+<colspec colwidth="*" colname="c2"/>
+<colspec colwidth="*" colname="c3"/>
+
+<tbody>
+<row>
+<entry align="left">1</entry><entry namest="c2" nameend="c2"><m:math><m:apply><m:forall/><m:bvar><m:ci>y</m:ci></m:bvar>
+          <m:apply><m:exists/><m:bvar><m:ci>x</m:ci></m:bvar>
+            <m:apply><m:ci type="function">R</m:ci><m:ci>x</m:ci><m:ci>y</m:ci></m:apply>
+          </m:apply>  
+        </m:apply></m:math></entry><entry colname="c3">
+          Premise
+        </entry>
+</row>
+<row>
+<entry align="left">2</entry><entry namest="c2" nameend="c2"><m:math><m:apply><m:exists/><m:bvar><m:ci>x</m:ci></m:bvar>
+          <m:apply><m:ci type="function">R</m:ci><m:ci>x</m:ci><m:ci>q</m:ci></m:apply>
+        </m:apply></m:math></entry><entry colname="c3">
+          <m:math><m:mo>∀</m:mo></m:math>Elim, line 1
+        </entry>
+</row>
+<row>
+<entry align="left">3</entry><entry namest="c2" nameend="c2"><m:math><m:apply><m:ci type="function">R</m:ci><m:ci>p</m:ci><m:ci>q</m:ci></m:apply></m:math></entry><entry colname="c3">
+          <m:math><m:mo>∃</m:mo></m:math>Elim, line 2
+        </entry>
+</row>
+<row>
+<entry align="left">4</entry><entry namest="c2" nameend="c2"><m:math><m:apply><m:forall/><m:bvar><m:ci>y</m:ci></m:bvar>
+          <m:apply><m:ci type="function">R</m:ci><m:ci>p</m:ci><m:ci>y</m:ci></m:apply>
+        </m:apply></m:math></entry><entry colname="c3">
+          <m:math><m:mo>∀</m:mo></m:math>Intro, line 3
+        </entry>
+</row>
+<row>
+<entry align="left">5</entry><entry namest="c2" nameend="c2"><m:math><m:apply><m:exists/><m:bvar><m:ci>x</m:ci></m:bvar>
+          <m:apply><m:forall/><m:bvar><m:ci>y</m:ci></m:bvar>
+            <m:apply><m:ci type="function">R</m:ci><m:ci>x</m:ci><m:ci>y</m:ci></m:apply>
+          </m:apply> 
+        </m:apply></m:math></entry><entry colname="c3">
+          <m:math><m:mo>∃</m:mo></m:math>Intro, line 4
+        </entry>
+</row></tbody>
+</tgroup>
+</table>
+  </problem>
+
+  <solution id="idp7491392">
+    <para id="para19">
+      In line 4, <m:math><m:mo>∀</m:mo></m:math>Intro requires that variable being generalized, <m:math><m:ci>q</m:ci></m:math>,
+      be arbitrary.
+      It was introduced in line 2 by <m:math><m:mo>∀</m:mo></m:math>Elim, so that's OK.
+      (<foreign>E.g.</foreign>, we could've used <m:math><m:mo>∀</m:mo></m:math>Intro on line 3
+       to reintroduce the quantifier just eliminated.)
+      But, <m:math><m:ci>q</m:ci></m:math> was free when we used <m:math><m:mo>∃</m:mo></m:math>Elim on line 3,
+      and this makes the variable no longer arbitrary.
+      Line 3's choice of <m:math><m:ci>p</m:ci></m:math> may depend on <m:math><m:ci>q</m:ci></m:math>, and a variable
+      is only arbitrary if it is free of any such constraints.
+    </para>
+  </solution>
+</exercise>
+
+<para id="para20">
+  The <m:math><m:mo>∀</m:mo></m:math>Intro principle is actually very familiar.
+  For instance, after having shown
+  <m:math><m:mrow><m:apply><m:not/><m:apply><m:and/> <m:ci>a</m:ci> <m:ci>b</m:ci></m:apply></m:apply> <m:mo>⊢</m:mo> <m:apply><m:or/>
+      <m:apply><m:not/><m:ci>a</m:ci></m:apply> <m:apply><m:not/><m:ci>b</m:ci></m:apply>
+    </m:apply></m:mrow></m:math>, 
+  we then claimed this was really true for 
+  <emphasis>arbitrary</emphasis> propositions instead of just <m:math><m:ci>a</m:ci></m:math>,<m:math><m:ci>b</m:ci></m:math>.
+  (We actually went a bit further, generalizing individual propositions
+  to entire (arbitrary) WFFs <m:math><m:ci>φ</m:ci></m:math>,<m:math><m:ci>ψ</m:ci></m:math>.
+  This could only be done because in any particular interpretation,
+  a formula <m:math><m:ci>φ</m:ci></m:math> will either be true or false, 
+  so replacing it by a proposition still preserves the important
+  part of the proof-of-equivalence.)
+</para>
+
+<para id="para21">
+  The <m:math><m:mo>∀</m:mo></m:math>Intro is also used in many informal proofs.
+  Consider: “If a number <m:math><m:ci>n</m:ci></m:math> is prime, then …”.
+  This translates to
+  “<m:math><m:apply><m:implies/>
+      <m:apply><m:ci type="function">prime</m:ci><m:ci>n</m:ci></m:apply>
+      <m:mtext>…</m:mtext>
+    </m:apply></m:math>”,
+  where <m:math><m:ci>n</m:ci></m:math> is arbitrary.
+  We are entirely used to thinking of this as 
+  “<m:math><m:apply><m:forall/><m:bvar><m:ci>n</m:ci></m:bvar>
+      <m:apply><m:implies/>
+        <m:apply><m:ci type="function">prime</m:ci><m:ci>n</m:ci></m:apply>
+        <m:mtext>…</m:mtext>
+      </m:apply>
+    </m:apply></m:math>”
+  even though “<m:math><m:ci>n</m:ci></m:math>” was introduced as
+  if it were a particular number.
+</para>
+
+
+
+
+
+</section> 
+
+
+
+<section id="section7">
+<title>Proofs and programming</title>
+
+<para id="para22">
+  We <link document="m12079" target-id="programming">previously saw</link>
+  that the inference rules of propositional logic are closely
+  related to the process of type checking.  The same holds here.
+  For example, in many programming languages, we can write a sorting function
+  that works on <emphasis>any</emphasis> type of data.
+  It takes two arguments, a comparison function for the type and a collection
+  (array, list, …) of data of that type.
+  The type of the sorting function can then be described as
+  “for all types <m:math><m:ci>T</m:ci></m:math>,
+    given a function of type
+    (<m:math><m:ci>T</m:ci></m:math> and <m:math><m:ci>T</m:ci></m:math>) → <m:math><m:ci>T</m:ci></m:math>,
+    and data of type (collection <m:math><m:ci>T</m:ci></m:math>), it returns data of type
+    (collection <m:math><m:ci>T</m:ci></m:math>)”.
+  This <term>polymorphic</term> type-rule uses universal quantification.
+</para>
+
+<para id="para23">
+  Note that the details about substitutions and capture noted here
+  arise in any kind of program that manipulates expressions with bound
+  variables.  That includes not only automated theorem provers, but
+  compilers.  To avoid such issues, many systems essentially rename
+  all variables by using pointers or some similar system of each
+  variable referring to its binding-site.
+</para>
+
+<para id="para24">
+  When people speak of 
+  <link url="http://www.economist.com/science/displayStory.cfm?story_id=3809661">proofs written by computer</link>,
+  they're talking about this style of inference rule proofs.
+</para>
+
+</section> 
+
+</content>
+</document>

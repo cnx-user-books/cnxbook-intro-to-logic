@@ -1,0 +1,1952 @@
+<document xmlns="http://cnx.rice.edu/cnxml" xmlns:m="http://www.w3.org/1998/Math/MathML" xmlns:md="http://cnx.rice.edu/mdml">
+
+<title>Exercises for First-Order Logic</title>
+
+<metadata>
+  <md:content-id>m12353</md:content-id><md:title>Exercises for First-Order Logic</md:title>
+  <md:abstract/>
+  <md:uuid>46af3ad0-8636-4653-b64a-ea5f934df9d6</md:uuid>
+</metadata>
+
+
+
+<content>
+
+
+
+
+
+<para id="imp-id9754439">
+  Throughout these exercises,
+  <m:math>
+    <m:apply><m:neq/> <m:ci>a</m:ci> <m:ci>b</m:ci></m:apply>
+  </m:math>
+  is simply a shorthand for
+  <m:math>
+    <m:apply><m:not/>
+      <m:apply><m:eq/>
+        <m:ci>a</m:ci>
+        <m:ci>b</m:ci>
+      </m:apply>
+    </m:apply>
+  </m:math>.
+</para>
+
+
+<section id="imp-id9160550">
+<title>Relations and Interpretations</title>
+
+
+<exercise id="exercise1">
+<problem id="imp-id9548138">
+    <para id="imp-id7647861">
+      
+      Consider the binary relation
+      <m:math><m:ci type="fn">is-a-factor-of</m:ci></m:math>
+      on the domain
+      <m:math>
+        <m:set>
+          <m:cn>1</m:cn>
+          <m:cn>2</m:cn>
+          <m:cn>3</m:cn>
+          <m:cn>4</m:cn>
+          <m:cn>5</m:cn>
+          <m:cn>6</m:cn>
+        </m:set>
+      </m:math>.
+    </para>
+  
+<list id="imp-id8125006" list-type="enumerated">
+<item>
+      <para id="imp-id9555728">
+        List all the ordered pairs in the relation.
+      </para>
+    </item>
+<item>
+      <para id="imp-id9181927">
+        Display the relation as a directed graph.
+      </para>
+    </item>
+<item>
+      <para id="imp-id9520676">
+        Display the relation in tabular form.
+      </para>
+    </item>
+<item>
+      <para id="imp-id9590271">
+        Is the relation reflexive? symmetric? transitive?
+      </para>
+    </item>
+</list>
+</problem>
+
+
+</exercise>
+
+<exercise id="addsTo">
+<problem id="imp-id9182886">
+    <para id="imp-id9312846">
+      How would you define
+      <m:math><m:ci type="fn">addsTo</m:ci></m:math>
+      as a ternary relation?
+    </para>
+  
+<list id="imp-id9721251" list-type="enumerated">
+<item>
+      Give a prose definition of
+      <m:math>
+        <m:apply>
+          <m:ci type="fn">addsTo</m:ci>
+          <m:ci>x</m:ci>
+          <m:ci>y</m:ci>
+          <m:ci>z</m:ci>
+        </m:apply>
+      </m:math>
+      in terms of the addition function.
+    </item>
+<item>
+      <para id="imp-id9753943">
+        List the set of triples in the relation on the domain
+        <m:math>
+          <m:set>
+            <m:cn>1</m:cn>
+            <m:cn>2</m:cn>
+            <m:cn>3</m:cn>
+            <m:cn>4</m:cn>
+          </m:set>
+        </m:math>.
+      </para>
+    </item>
+</list>
+</problem>
+
+
+</exercise>
+
+<exercise id="function-as-relation">
+  <problem id="imp-id7691658">
+    <para id="imp-id9525258">
+      Generalize the
+      <link target-id="addsTo">previous problem</link>
+      to describe how you can represent any
+      <m:math><m:ci>k</m:ci></m:math>-ary function as a
+      <m:math>
+        <m:mfenced>
+          <m:apply><m:plus/>
+            <m:ci>k</m:ci>
+            <m:cn>1</m:cn>
+          </m:apply>
+        </m:mfenced></m:math>-ary
+      relation.
+    </para>
+  </problem>
+
+  
+</exercise>
+
+<exercise id="exercise4">
+  <problem id="imp-id9063486">
+    <para id="imp-id9663259">
+      Are each of the following formulas valid,
+      <foreign>i.e.</foreign>, true for all interpretations?
+      (Remember that the relation names are just names in the formula;
+       don't assume the name has to have any bearing on their interpretation.)
+      <list id="imp-id9167234">
+        <item>
+          For arbitrary
+          <m:math><m:ci>a</m:ci></m:math> and
+          <m:math><m:ci>b</m:ci></m:math> in the domain,
+          <m:math>
+            <m:apply>
+              <m:or/>
+              <m:apply>
+                <m:ci type="fn">atLeastAsWiseAs</m:ci>
+                <m:ci>a</m:ci>
+                <m:ci>b</m:ci>
+              </m:apply>
+              <m:apply>
+                <m:ci type="fn">atLeastAsWiseAs</m:ci>
+                <m:ci>b</m:ci>
+                <m:ci>a</m:ci>
+              </m:apply>
+            </m:apply>
+          </m:math>
+        </item>
+
+        <item>
+          For arbitrary <m:math><m:ci>a</m:ci></m:math> in the domain,
+          <m:math>
+            <m:apply><m:implies/>
+              <m:apply><m:ci type="fn">prime</m:ci><m:ci>a</m:ci></m:apply>
+              <m:mfenced>  
+                <m:apply><m:implies/>
+                  <m:apply><m:ci type="fn">odd</m:ci><m:ci>a</m:ci></m:apply>
+                  <m:apply><m:ci type="fn">prime</m:ci><m:ci>a</m:ci></m:apply>
+                </m:apply>
+              </m:mfenced>
+            </m:apply>
+          </m:math>
+        </item>
+
+        <item>
+          For arbitrary <m:math><m:ci>a</m:ci></m:math> and
+          <m:math><m:ci>b</m:ci></m:math> in the domain,
+          <m:math>
+            <m:apply><m:implies/>
+              <m:apply>
+                <m:ci type="fn">betterThan</m:ci>
+                <m:ci>a</m:ci>
+                <m:ci>b</m:ci>
+              </m:apply>
+              <m:apply><m:not/>
+                <m:apply>
+                  <m:ci type="fn">betterThan</m:ci>
+                  <m:ci>b</m:ci>
+                  <m:ci>a</m:ci>
+                </m:apply>
+              </m:apply>
+            </m:apply>
+          </m:math>
+        </item>
+      </list>
+      For each, if it is true or false under all interpretations, prove that.
+      For these small examples, a truth table like
+      <link document="m10726" target-id="truth-table-interpretations">this one</link>
+      will probably be easier
+      than using Boolean algebra or inference rules.
+      Otherwise, give an interpretation in which it is true,
+      and one in which it is false.
+      <note id="imp-id9321832" type="Hint">
+        As always, look at trivial and small test cases first.  
+        Here, try domains with zero, one, or two elements,
+        and small relations.
+      </note>
+    </para>
+  </problem>
+
+  
+</exercise>
+
+<exercise id="exercise5">
+<problem id="imp-id9738254"><para id="imp-id7657032">[Practice problem<m:math><m:mo>—</m:mo></m:math>solution provided.]</para>
+    <para id="imp-id9730995">
+      Suppose we wanted to represent the count of neighboring pirates
+      with a binary relation, such that when location
+      <m:math><m:ci>A</m:ci></m:math>
+      has two neighboring pirates,
+      <m:math>
+        <m:apply>
+          <m:ci type="fn">piratesNextTo</m:ci>
+          <m:ci>A</m:ci>
+          <m:cn>2</m:cn>
+        </m:apply>
+      </m:math>
+      will be true.  Of course,
+      <m:math>
+        <m:apply>
+          <m:ci type="fn">piratesNextTo</m:ci>
+          <m:ci>A</m:ci>
+          <m:cn>1</m:cn>
+        </m:apply>
+      </m:math>
+      would not be true in this situation.
+      These would be analogous with the propositional WaterWorld propositions
+      <m:math><m:ci>A-has-2</m:ci></m:math> and
+      <m:math><m:ci>A-has-1</m:ci></m:math>, respectively.
+    </para>
+  
+<list id="imp-id9557400" list-type="enumerated">
+<item>
+      <para id="imp-id9663274">
+        If we only allow binary relations to be subsets of
+        a domain crossed with itself,
+        then what must the domain be
+        for this new relation
+        <m:math><m:ci type="fn">piratesNextTo</m:ci></m:math>?
+      </para>
+    </item>
+<item>
+      <para id="imp-id9721154">
+        If we further introduced another relation,
+        <m:math><m:ci type="fn">isNumber?</m:ci></m:math>,
+        what is a formula that would help distinguish
+        intended interpretations from unintended interpretations?
+        That is, give a formula that is true under all our intended
+        interpretations of
+        <m:math><m:ci type="fn">piratesNextTo</m:ci></m:math>
+        but is not true for some
+        <quote display="inline">nonsense</quote>
+        interpretations we want to exclude.
+        (This will be a formula without an analog in the
+         <link document="m10528">WaterWorld domain axioms</link>.)
+      </para>
+    </item>
+</list>
+</problem>
+
+<solution id="imp-id9730255">
+<list id="imp-id9738738" list-type="enumerated">
+<item>
+      <para id="imp-id9591629">
+         The relation needs to accept locations as well as numbers,
+         so the domain is
+         <m:math>
+           <m:apply><m:union/>
+             <m:ci>L</m:ci>
+             <m:naturalnumbers/>
+           </m:apply>
+         </m:math>,
+         where
+         <m:math><m:ci>L</m:ci></m:math>
+         is the set of WaterWorld locations.  Alternatively, you could use
+         <m:math>
+           <m:set>
+             <m:cn>0</m:cn>
+             <m:cn>1</m:cn>
+             <m:cn>2</m:cn>
+             <m:cn>3</m:cn>
+           </m:set>
+         </m:math>
+         instead of
+         <m:math><m:naturalnumbers/></m:math>,
+         the set of all natural numbers.
+      </para>
+    </item>
+<item>
+      <para id="imp-id9754296">
+        The difficulty is that it's possible to ask about
+        nonsensical combinations like
+        <m:math>
+          <m:apply>
+            <m:ci type="fn">piratesNextTo</m:ci>
+            <m:cn>17</m:cn>
+            <m:cn>2</m:cn> 
+          </m:apply>
+        </m:math>
+        and 
+        <m:math>
+          <m:apply>
+            <m:ci type="fn">piratesNextTo</m:ci>
+            <m:ci>W</m:ci>
+            <m:ci>B</m:ci>
+          </m:apply>
+        </m:math>.
+        Adding <m:math><m:ci type="fn">isNumber?</m:ci></m:math>,
+        any interpretation would be expected to satisfy, for arbitrary
+        <m:math><m:ci>a</m:ci></m:math> and
+        <m:math><m:ci>b</m:ci></m:math>,
+        <m:math>
+          <m:apply><m:implies/>
+            <m:apply>
+              <m:ci type="fn">piratesNextTo</m:ci>
+              <m:ci>a</m:ci>
+              <m:ci>b</m:ci>
+            </m:apply>
+            <m:apply>
+              <m:and/>
+              <m:apply><m:ci type="fn">isNumber?</m:ci><m:ci>b</m:ci></m:apply>
+              <m:apply><m:not/>
+                <m:apply>
+                  <m:ci type="fn">isNumber?</m:ci>
+                  <m:ci>a</m:ci>
+                  <m:ci>b</m:ci>
+                </m:apply>
+              </m:apply>
+            </m:apply>
+          </m:apply>
+        </m:math>.
+        <note id="imp-id9575370" type="aside">
+          More interestingly though, imagine we did interpret
+          <m:math><m:ci type="fn">piratesNextTo</m:ci></m:math>
+          over the domain <m:math><m:naturalnumbers/></m:math> only.
+          We could then pretend that the locations, instead of being named
+          <m:math><m:ci>A</m:ci></m:math>,…,<m:math><m:ci>Z</m:ci></m:math>,
+          were just numbered 1,…,24.
+          While this representation doesn't reflect how we model the problem,
+          it is legal.
+          Exercise for the reader: Write a formula which excludes relation
+          <m:math><m:ci type="fn">piratesNextTo</m:ci></m:math>
+          which can't match this convention!
+        </note>
+      </para>
+    </item>
+</list>
+</solution>
+</exercise>
+
+<exercise id="exercise6">
+<problem id="imp-id9588691">
+    <para id="imp-id9180877">
+      
+      Determine whether the relation
+      <m:math><m:ci type="fn">R</m:ci></m:math>
+      on the set of all people is
+      reflexive,
+      antireflexive,
+      symmetric,
+      antisymmetric, and/or
+      transitive, where
+      <m:math>
+        <m:apply><m:in/>
+          <m:mfenced><m:ci>a</m:ci> <m:ci>b</m:ci></m:mfenced>
+          <m:ci type="fn">R</m:ci>
+        </m:apply>
+      </m:math>
+      if and only if …
+    </para>
+  
+<list id="imp-id9567435" list-type="enumerated">
+<item>
+      <para id="imp-id9574901">
+        <m:math><m:ci>a</m:ci></m:math> is older than
+        <m:math><m:ci>b</m:ci></m:math>.
+      </para>
+    </item>
+<item>
+      <para id="imp-id9739130">
+        <m:math><m:ci>a</m:ci></m:math> is at least as old as
+        <m:math><m:ci>b</m:ci></m:math>.
+      </para>
+    </item>
+<item>
+      <para id="imp-id9039829">
+        <m:math><m:ci>a</m:ci></m:math> and <m:math><m:ci>b</m:ci></m:math>
+        are exactly the same age.
+      </para>
+    </item>
+<item>
+      <para id="imp-id9735894">
+        <m:math><m:ci>a</m:ci></m:math> and <m:math><m:ci>b</m:ci></m:math>
+        have a common grandparent.
+      </para>
+    </item>
+<item>
+      <para id="imp-id9076593">
+        <m:math><m:ci>a</m:ci></m:math> and <m:math><m:ci>b</m:ci></m:math>
+        have a common grandchild.
+      </para>
+    </item>
+</list>
+</problem>
+
+
+</exercise>
+
+<exercise id="exercise7">
+<problem id="imp-id9670270">
+    <para id="imp-id9302348">
+      For each of the following, if the statement is true, explain why, and
+      if the statement is false, give a counter-example relation.
+    </para>
+  
+<list id="imp-id8378431" list-type="enumerated">
+<item>
+      <para id="imp-id9728712">
+        If <m:math><m:ci type="fn">R</m:ci></m:math> is reflexive,
+        then <m:math><m:ci type="fn">R</m:ci></m:math> is symmetric.
+      </para>
+    </item>
+<item>
+      <para id="imp-id9107821">
+        If <m:math><m:ci type="fn">R</m:ci></m:math> is reflexive,
+        then <m:math><m:ci type="fn">R</m:ci></m:math> is antisymmetric.
+      </para>
+    </item>
+<item>
+      <para id="imp-id9302476">
+        If <m:math><m:ci type="fn">R</m:ci></m:math> is reflexive,
+        then <m:math><m:ci type="fn">R</m:ci></m:math> is not symmetric.
+      </para>
+    </item>
+<item>
+      <para id="imp-id9567900">
+        If <m:math><m:ci type="fn">R</m:ci></m:math> is reflexive,
+        then <m:math><m:ci type="fn">R</m:ci></m:math> is not antisymmetric.
+      </para>
+    </item>
+<item>
+      <para id="imp-id9160552">
+        If <m:math><m:ci type="fn">R</m:ci></m:math> is symmetric,
+        then <m:math><m:ci type="fn">R</m:ci></m:math> is reflexive.
+      </para>
+    </item>
+<item>
+      <para id="imp-id9181930">
+        If <m:math><m:ci type="fn">R</m:ci></m:math> is symmetric,
+        then <m:math><m:ci type="fn">R</m:ci></m:math> is antireflexive.
+      </para>
+    </item>
+<item>
+      <para id="imp-id9339320">
+        If <m:math><m:ci type="fn">R</m:ci></m:math> is symmetric,
+        then <m:math><m:ci type="fn">R</m:ci></m:math> is not antireflexive.
+      </para>
+    </item>
+</list>
+</problem>
+
+
+</exercise>
+
+</section> 
+
+
+<section id="imp-id9728278">
+<title>Quantifiers</title>
+
+<exercise id="exercise8">
+<problem id="imp-id9397859">
+    <para id="imp-id9180875">
+      Let
+      <m:math>
+        <m:apply><m:ci type="fn">P</m:ci><m:ci>x</m:ci></m:apply>
+      </m:math>
+      be the statement
+      <quote display="inline">has been to Prague</quote>,
+      where the domain consists of your classmates.
+    </para>
+  
+<list id="imp-id9669883" list-type="enumerated">
+<item>
+      <para id="imp-id9721743">
+        
+        Express each of these quantifications in English.
+        <list id="imp-id9198598">
+          <item>
+            <m:math>
+              <m:apply><m:exists/><m:bvar><m:ci>x</m:ci></m:bvar>
+                <m:apply><m:ci type="fn">P</m:ci> <m:ci>x</m:ci></m:apply>
+              </m:apply>
+            </m:math>
+          </item>
+          <item>
+            <m:math>
+              <m:apply><m:forall/><m:bvar><m:ci>x</m:ci></m:bvar>
+                <m:apply><m:ci type="fn">P</m:ci> <m:ci>x</m:ci></m:apply>
+              </m:apply>
+            </m:math>
+          </item>
+          <item>
+            <m:math>
+              <m:apply><m:not/>
+                <m:apply><m:exists/><m:bvar><m:ci>x</m:ci></m:bvar>
+                  <m:apply><m:ci type="fn">P</m:ci> <m:ci>x</m:ci></m:apply>
+                </m:apply>
+              </m:apply>
+            </m:math>
+          </item>
+          <item>
+            <m:math>
+              <m:apply><m:not/>
+                <m:apply><m:forall/><m:bvar><m:ci>x</m:ci></m:bvar>
+                  <m:apply><m:ci type="fn">P</m:ci> <m:ci>x</m:ci></m:apply>
+                </m:apply>
+              </m:apply>
+            </m:math>
+          </item>
+          <item>
+            <m:math>
+              <m:apply><m:exists/><m:bvar><m:ci>x</m:ci></m:bvar>
+                <m:apply><m:not/>
+                  <m:apply><m:ci type="fn">P</m:ci> <m:ci>x</m:ci></m:apply>
+                </m:apply>
+              </m:apply>
+             </m:math>
+          </item>
+          <item>
+            <m:math>
+              <m:apply><m:forall/><m:bvar><m:ci>x</m:ci></m:bvar>
+                <m:apply><m:not/>
+                  <m:apply><m:ci type="fn">P</m:ci> <m:ci>x</m:ci></m:apply>
+                </m:apply>
+              </m:apply>
+            </m:math>
+          </item>
+          <item>
+            <m:math>
+              <m:apply><m:not/>
+                <m:apply><m:exists/><m:bvar><m:ci>x</m:ci></m:bvar>
+                  <m:apply><m:not/>
+                    <m:apply><m:ci type="fn">P</m:ci> <m:ci>x</m:ci></m:apply>
+                  </m:apply>
+                </m:apply>
+              </m:apply>
+            </m:math>
+          </item>
+          <item>
+            <m:math>
+              <m:apply><m:not/>
+                <m:apply><m:forall/><m:bvar><m:ci>x</m:ci></m:bvar>
+                  <m:apply><m:not/>
+                    <m:apply><m:ci type="fn">P</m:ci> <m:ci>x</m:ci></m:apply>
+                  </m:apply>
+                </m:apply>
+              </m:apply>
+            </m:math>
+          </item>
+        </list>
+      </para>
+    </item>
+<item>
+      <para id="imp-id9720983">
+        Which of these mean the same thing?
+      </para>
+    </item>
+</list>
+</problem>
+
+
+</exercise>
+
+<exercise id="exercise9">
+<problem id="imp-id9590282">
+    <para id="imp-id9396562">
+      
+      Let <m:math><m:apply><m:ci type="fn">C</m:ci> <m:ci>x</m:ci></m:apply></m:math>
+      be the statement
+      <quote display="inline"><m:math><m:ci>x</m:ci></m:math> has a cat</quote>,
+      let <m:math><m:apply><m:ci type="fn">D</m:ci> <m:ci>x</m:ci></m:apply></m:math>
+      be the statement
+      <quote display="inline"><m:math><m:ci>x</m:ci></m:math> has a dog</quote>, and
+      let <m:math><m:apply><m:ci type="fn">F</m:ci> <m:ci>x</m:ci></m:apply></m:math>
+      be the statement
+      <quote display="inline"><m:math><m:ci>x</m:ci></m:math> has a ferret</quote>.
+      Express each of these statements in first-order logic using
+      these relations.
+      Let the domain be your classmates.
+    </para>
+  
+<list id="imp-id9754114" list-type="enumerated">
+<item>
+      <para id="imp-id9721162">
+        A classmate has a cat, a dog, and a ferret.
+      </para>
+    </item>
+<item>
+      <para id="imp-id9130041">
+        All your classmates have a cat, a dog, or a ferret.
+      </para>
+    </item>
+<item>
+      <para id="imp-id9721694">
+        At least one of your classmates has a cat and a ferret, but not a dog.
+      </para>
+    </item>
+<item>
+      <para id="imp-id9731495">
+        None of your classmates has a cat, a dog, and a ferret.
+      </para>
+    </item>
+<item>
+      <para id="imp-id9736324">
+        For each of the three animals,
+        there is a classmate of yours that has one.
+      </para>
+    </item>
+</list>
+</problem>
+
+
+</exercise>
+
+<exercise id="exercise10">
+<problem id="imp-id9157803">
+    <para id="imp-id8812107">
+      
+      Determine the truth value of each of these statements if
+      the domain is all real numbers.
+      Where appropriate, give a witness.
+    </para>
+  
+<list id="imp-id9157311" list-type="enumerated">
+<item>
+      <m:math><m:apply><m:exists/><m:bvar><m:ci>x</m:ci></m:bvar>
+        <m:apply><m:eq/>
+          <m:apply><m:power/><m:ci>x</m:ci>  <m:cn>2</m:cn></m:apply>
+          <m:cn>2</m:cn>
+        </m:apply>
+      </m:apply></m:math>
+    </item>
+<item>
+      <m:math><m:apply><m:exists/><m:bvar><m:ci>x</m:ci></m:bvar>
+        <m:apply><m:eq/>
+          <m:apply><m:power/><m:ci>x</m:ci>  <m:cn>2</m:cn></m:apply>
+          <m:cn>-1</m:cn>
+        </m:apply>
+      </m:apply></m:math>
+    </item>
+<item>
+      <m:math><m:apply><m:forall/><m:bvar><m:ci>x</m:ci></m:bvar>
+        <m:apply>
+          <m:geq/>
+          <m:apply>
+            <m:plus/>
+            <m:apply><m:power/><m:ci>x</m:ci>  <m:cn>2</m:cn></m:apply>  
+            <m:cn>2</m:cn>
+          </m:apply>
+          <m:cn>1</m:cn>
+        </m:apply>
+      </m:apply></m:math>
+    </item>
+<item>
+      <m:math><m:apply><m:forall/><m:bvar><m:ci>x</m:ci></m:bvar> 
+        <m:apply><m:neq/>
+          <m:apply><m:power/><m:ci>x</m:ci>  <m:cn>2</m:cn></m:apply> 
+          <m:ci>x</m:ci>
+        </m:apply>
+      </m:apply></m:math>
+    </item>
+</list>
+</problem>
+
+
+</exercise>
+
+</section>
+
+
+<section id="imp-id9727353">
+<title>Interpreting First-order Formulas</title>
+
+<exercise id="ducks-exercise">
+<problem id="imp-id9721374">
+    <para id="imp-id9524332">
+      
+      Let
+      <m:math><m:apply><m:ci type="fn">P</m:ci><m:ci>x</m:ci></m:apply></m:math>,
+      <m:math><m:apply><m:ci type="fn">Q</m:ci><m:ci>x</m:ci></m:apply></m:math>,
+      <m:math><m:apply><m:ci type="fn">R</m:ci><m:ci>x</m:ci></m:apply></m:math>, and
+      <m:math><m:apply><m:ci type="fn">S</m:ci><m:ci>x</m:ci></m:apply></m:math>
+      be the statements
+      <quote display="inline"><m:math><m:ci>x</m:ci></m:math> is a duck</quote>,
+      <quote display="inline"><m:math><m:ci>x</m:ci></m:math> is one of my poultry</quote>,
+      <quote display="inline"><m:math><m:ci>x</m:ci></m:math> is an officer</quote>, and
+      <quote display="inline"><m:math><m:ci>x</m:ci></m:math> is willing to waltz</quote>,
+      respectively.
+      Express each of these statements using quantifiers, logical connectives,
+      and the relations
+      <m:math><m:apply><m:ci type="fn">P</m:ci><m:ci>x</m:ci></m:apply></m:math>,
+      <m:math><m:apply><m:ci type="fn">Q</m:ci><m:ci>x</m:ci></m:apply></m:math>,
+      <m:math><m:apply><m:ci type="fn">R</m:ci><m:ci>x</m:ci></m:apply></m:math>, and
+      <m:math><m:apply><m:ci type="fn">S</m:ci><m:ci>x</m:ci></m:apply></m:math>.
+    </para>
+  
+<list id="imp-id9663330" list-type="enumerated">
+<item>
+      <para id="imp-id9737335">
+        No ducks are willing to waltz.
+      </para>
+    </item>
+<item>
+      <para id="imp-id9548105">
+        No officers ever decline to waltz.
+      </para>
+    </item>
+<item>
+      <para id="imp-id9669524">
+        All my poultry are ducks.
+      </para>
+    </item>
+<item>
+      <para id="imp-id9736341">
+        My poultry are not officers.
+      </para>
+    </item>
+<item>
+      <para id="imp-id9077028">
+        Does the fourth item follow from the first three taken together?
+        Argue informally; you don't need to use the 
+        algebra or inference rules for first-order logic here.
+      </para>
+    </item>
+</list>
+</problem>
+
+
+</exercise>
+
+<exercise id="exercise12">
+<problem id="imp-id9159529">
+    <para id="imp-id9604588">
+      You come home one evening
+      to find your roommate exuberant because
+      they have managed to prove that there is an even prime number
+      bigger than two.
+      More precisely, they have a correct proof of
+      <m:math><m:apply><m:exists/><m:bvar><m:ci>y</m:ci></m:bvar>
+        <m:apply><m:implies/>
+          <m:apply><m:and/>
+            <m:apply><m:ci type="fn">P</m:ci><m:ci>y</m:ci></m:apply>
+            <m:apply><m:gt/><m:ci>y</m:ci><m:cn>2</m:cn></m:apply>
+          </m:apply>
+          <m:apply><m:ci type="fn">E</m:ci><m:ci>y</m:ci></m:apply>
+         </m:apply>
+      </m:apply></m:math>,
+      for the domain of natural numbers,
+      with <m:math><m:ci type="fn">P</m:ci></m:math> interpreted as
+      <quote display="inline">is prime?</quote> and
+      <m:math><m:ci type="fn">E</m:ci></m:math> interpreted as
+      <quote display="inline">is even?</quote>.
+      While they are celebrating their imminent fame at this
+      amazing mathematical discovery, you ponder…
+    </para>
+  
+<list id="imp-id9669532" list-type="enumerated">
+<item>
+      <para id="imp-id9670520">
+        …and realize the formula is indeed true 
+        for that interpretation.
+        Briefly explain why.
+        You don't need to give a formal proof using Boolean algebra or
+        inference rules; just give a particular value for <m:math><m:ci>y</m:ci></m:math> and explain why
+        it satisfies the body of
+        <quote display="inline">
+          <m:math><m:apply><m:exists/><m:bvar><m:ci>y</m:ci></m:bvar></m:apply></m:math>
+        </quote>.
+      </para>
+    </item>
+<item>
+      <para id="imp-id9575348">
+        Is the formula still true when restricted to
+        the domain of natural numbers two or less?
+        Briefly explain why or why not.
+      </para>
+    </item>
+<item>
+      <para id="imp-id9730260">
+        Is the formula still true when restricted to the empty domain?
+        Briefly explain why or why not.
+      </para>
+    </item>
+<item>
+      <para id="imp-id9160888">
+        Give a formula that correctly captures the notion
+        <quote display="inline">
+          there is an even prime number bigger than 2
+        </quote>.
+      </para>
+    </item>
+</list>
+</problem>
+
+
+</exercise>
+
+
+<exercise id="exercise13">
+<problem id="imp-id9754544">
+    <para id="imp-id9313678">
+      For the sentence
+      <m:math><m:apply><m:forall/><m:bvar><m:ci>x</m:ci></m:bvar>
+        <m:apply><m:forall/><m:bvar><m:ci>y</m:ci></m:bvar>
+          <m:apply><m:implies/>
+            <m:apply><m:and/>
+              <m:apply><m:ci type="fn">A</m:ci><m:ci>x</m:ci></m:apply>
+              <m:apply><m:ci type="fn">B</m:ci><m:ci>x</m:ci><m:ci>y</m:ci></m:apply>
+            </m:apply>
+            <m:apply><m:ci type="fn">A</m:ci><m:ci>y</m:ci></m:apply>
+          </m:apply>
+        </m:apply>
+      </m:apply></m:math>
+      state whether it is true or false,
+      relative to the following interpretations.
+      If false, give values for <m:math><m:ci>x</m:ci></m:math> and <m:math><m:ci>y</m:ci></m:math>
+      witnessing that.
+    </para>
+  
+<list id="imp-id9754316" list-type="enumerated">
+<item>
+      The domain of the natural numbers, where 
+      <m:math><m:ci type="fn">A</m:ci></m:math> is interpreted as
+      <quote display="inline">even?</quote>, and 
+      <m:math><m:ci type="fn">B</m:ci></m:math> is interpreted as
+      <quote display="inline">equals</quote>
+    </item>
+<item>
+      The domain of the natural numbers, where 
+      <m:math><m:ci type="fn">A</m:ci></m:math> is interpreted as
+      <quote display="inline">even?</quote>, and 
+      <m:math><m:ci type="fn">B</m:ci></m:math> is interpreted as
+      <quote display="inline">is an integer divisor of</quote>
+    </item>
+<item>
+      The domain of the natural numbers, where 
+      <m:math><m:ci type="fn">A</m:ci></m:math> is interpreted as
+      <quote display="inline">even?</quote>, and 
+      <m:math><m:ci type="fn">B</m:ci></m:math> is interpreted as
+      <quote display="inline">is an integer multiple of</quote>
+    </item>
+<item>
+      The domain of the Booleans,
+      <m:math>
+        <m:set>
+          <m:true/>
+          <m:false/>
+        </m:set>
+      </m:math>, where 
+      <m:math><m:ci type="fn">A</m:ci></m:math> is interpreted as
+      <quote display="inline">false?</quote>, and 
+      <m:math><m:ci type="fn">B</m:ci></m:math> is interpreted as
+      <quote display="inline">equals</quote>
+    </item>
+<item>
+      The domain of WaterWorld locations
+      in the particular board
+      where locations <m:math><m:ci>Y</m:ci></m:math> and <m:math><m:ci>Z</m:ci></m:math> contain pirates,
+      but all other locations are safe, the relation symbol
+      <m:math><m:ci type="fn">A</m:ci></m:math> is interpreted as
+      <quote display="inline">unsafe?</quote>, and 
+      <m:math><m:ci type="fn">B</m:ci></m:math> is interpreted as
+      <quote display="inline">neighbors</quote>
+    </item>
+<item>
+      All WaterWorld boards, where
+      <m:math><m:ci type="fn">A</m:ci></m:math> is interpreted as
+      <quote display="inline">safe?</quote>, and 
+      <m:math><m:ci type="fn">B</m:ci></m:math> is interpreted as
+      <quote display="inline">neighbors</quote>.
+      (That is, is the formula valid for WaterWorld?)
+    </item>
+</list>
+</problem>
+
+
+</exercise>
+
+<exercise id="exercise14">
+<problem id="imp-id9612605">
+    <para id="imp-id7684308">
+      Translate the following conversational English statements
+      into first-order logic, using the suggested predicates,
+      or inventing appropriately-named ones if none provided.
+      (You may also freely use <m:math><m:apply><m:eq/></m:apply></m:math>
+       which we'll choose to always interpret as the standard equality
+       relation.)
+
+      
+    </para>
+  
+<list id="imp-id9392527" list-type="enumerated">
+<item>
+      <quote display="inline">All books rare and used</quote>.
+      This is claimed by a local bookstore;
+      
+      what is the intended domain?
+      Do you believe they mean to claim
+      <quote display="inline">all books rare <emphasis>or</emphasis> used</quote>?
+    </item>
+<item>
+      <quote display="inline">
+        Everybody who knows that UFOs have kidnapped people
+        knows that Agent Mulder has been kidnapped.
+      </quote>
+      (Is this true, presuming that no UFOs have actually
+       visited Earth…yet?)
+    </item>
+</list>
+</problem>
+
+
+</exercise>
+
+<exercise id="musketeer-exercise">
+  <problem id="imp-id9519740">
+    <para id="imp-id9200496">
+      Write a formula for each of the following.
+      Use the two binary relations 
+      <m:math><m:ci type="fn">isFor</m:ci></m:math> and <m:math><m:ci type="fn">isAgainst</m:ci></m:math>
+      and domain of all people.
+
+      <list id="imp-id9342359" type="enumerated">
+        <item>
+          <quote display="inline">All for one, and one for all!</quote>
+
+          We'll take <quote display="inline">one</quote> to mean 
+          <quote display="inline">one particular person</quote>,
+          and moreover, that both <quote display="inline">one</quote>s are referring 
+          the same particular person, 
+          resulting in 
+          <quote display="inline">There is one whom everybody is for,
+          and that one person is for everybody.</quote>
+          <footnote id="musketeers">
+            Dumas' original musketeers presumably meant something
+            different: that <emphasis>each</emphasis> one of
+            them was for each (other) one of the them, 
+            making the vice-versa clause redundant.
+            But this is boring for our situation, so we'll
+            leave that interpretation to Athos, Porthos, and Aramis alone.)
+            
+          </footnote>
+
+        </item>
+        <item>
+          <quote display="inline">If you're not for us, you're against us.</quote>
+
+          In aphorisms, <quote display="inline">you</quote>
+          is meant to be an arbitrary person; 
+          consider using the word <quote display="inline">one</quote> instead.
+          Furthermore, we'll interpret <quote display="inline">us</quote> as applying
+          to everybody.  That is,
+          <quote display="inline">
+            One always believes that `if one is not for me,
+            then one is against me'
+          </quote>.
+        </item>
+        <item>
+          <quote display="inline">The enemy of your enemy is your friend.</quote>
+
+          By <quote display="inline">your enemy</quote> we mean
+          <quote display="inline">somebody you are against</quote>,
+          and similarly,
+          <quote display="inline">your friend</quote> will mean
+          <quote display="inline">somebody you are for</quote>.
+          (Be carefule!  This may be different 
+           than <quote display="inline">somebody who is against/for you</quote>).
+
+        </item>
+        <item>
+          <quote display="inline">Somebody has an enemy.</quote>
+          (We don't know of an aphorism expressing this.
+           <footnote id="aphorism">
+             None of the following <emphasis>quite</emphasis> capture it:
+             <quote display="inline">Life's not a bed of roses</quote>;
+             <quote display="inline">It's a dog-eat-dog world</quote>;
+             <quote display="inline">Everyone for themselves</quote>;
+             <quote display="inline">You can't please all the people all the time</quote>.
+           </footnote>)
+        </item>
+      </list>
+    </para>
+  </problem>
+
+  
+</exercise>
+
+<para id="imp-id9342816">
+  Two interpretations are considered fundamentally the same
+  (or <term>isomorphic</term>) if you can map one
+  interpretation to the other simply by a consistent renaming of
+  domain elements.
+</para>
+
+<exercise id="exercise16">
+  <problem id="imp-id9576523"><para id="imp-id9576524">[Practice problem<m:math><m:mo>—</m:mo></m:math>solution provided.]</para>
+    <para id="imp-id9576900">
+      Find two fundamentally different interpretations that satisfy
+      the statement
+      <quote display="inline">There exists one person who is liked by two people</quote>.
+    </para>
+  </problem>
+
+  <solution id="imp-id9520636">
+    <para id="imp-id9166741">
+      One interpretation that satisfies this is
+      a domain of three people Alice, Bob, Charlie,
+      with the <m:math><m:ci type="fn">likes</m:ci></m:math> relation:
+      <m:math>
+        <m:set>
+          <m:mfenced>
+            <m:ci>Alice</m:ci>
+            <m:ci>Bob</m:ci>
+          </m:mfenced>
+          <m:mfenced>
+            <m:ci>Bob</m:ci>
+            <m:ci>Bob</m:ci>
+          </m:mfenced>
+        </m:set>
+      </m:math>.
+      Bob is liked by two people, so it satisfies the statement.
+    </para>
+
+    <para id="imp-id9754774">
+      Here's another interpretation that is the same except for renaming,
+      and thus <emphasis>not</emphasis> fundamentally different:
+      a domain of three people Alyssa, Bobby, Chuck,
+      with the <m:math><m:ci type="fn">likes</m:ci></m:math> relation:
+      <m:math>
+        <m:set>
+          <m:mfenced>
+            <m:ci>Chuck</m:ci>
+            <m:ci>Alyssa</m:ci>
+          </m:mfenced>
+          <m:mfenced>
+            <m:ci>Alyssa</m:ci>
+            <m:ci>Alyssa</m:ci>
+          </m:mfenced>
+        </m:set>
+      </m:math>.
+      With the substitutions 
+      
+        <m:math><m:mtext>[</m:mtext><m:mtext>Chuck</m:mtext><m:mtext>↦</m:mtext>  <m:mtext>Alice</m:mtext><m:mtext>]</m:mtext></m:math>
+      and
+      
+        <m:math><m:mtext>[</m:mtext><m:mtext>Alyssa</m:mtext><m:mtext>↦</m:mtext>  <m:mtext>Bob</m:mtext><m:mtext>]</m:mtext></m:math>,
+      we see that the underlying structure is the same as before.
+    </para>
+
+    <para id="imp-id9738226">
+      Here's an interpretation that <emphasis>is</emphasis>
+      fundamentally different:
+      a domain of three people Alice, Bob, Charlie,
+      with the <m:math><m:ci type="fn">likes</m:ci></m:math> relation:
+      <m:math>
+        <m:set>
+          <m:mfenced>
+            <m:ci>Charlie</m:ci>
+            <m:ci>Bob</m:ci>
+          </m:mfenced>
+          <m:mfenced>
+            <m:ci>Alice</m:ci>
+            <m:ci>Bob</m:ci>
+          </m:mfenced>
+        </m:set>
+      </m:math>.
+      No matter how you rename, you don't get somebody liking themself,
+      so you can see its underlying structure is truly different than the 
+      preceding interpretations.
+    </para>
+
+    <para id="imp-id9424726">
+      English is fuzzy enough that it is unclear whether
+      <quote display="inline">one</quote> and <quote display="inline">two</quote> are meant as exact counts.
+      The above two examples each assumed they are.
+      <note id="imp-id9841976" type="aside">
+        If we change the statement slightly to add a comma:
+        <quote display="inline">
+          There exists one person, who is liked by two people
+        </quote>,
+        we arguably change the meaning significantly.
+        The now-independent first clause arguably means there is only one
+        person existent in total, so the overall statement must be false!
+        There's a quick lesson in the difference between English
+        dependent and independent clauses.
+      </note>
+    </para>
+  </solution>
+</exercise>
+
+<exercise id="exercise17">
+  <problem id="imp-id8257755">
+    <para id="imp-id9078870">
+      For the four <quote display="inline">Musketeer</quote> formulas from
+      <link target-id="musketeer-exercise">a previous exercise</link>,
+      find three fundamentally different interpretations
+      of <m:math><m:ci type="fn">isFor</m:ci></m:math> which satisfy all the
+      formulas on a domain of three people.
+    </para>
+
+    <para id="imp-id9837744">       
+      Depict each of these interpretations as a <term>graph</term>.
+      Draw three  circles (<term>nodes</term>) representing the
+      three people, and an arrow (<term>edge</term>) from a person
+      to each person they like.
+      (You can glance at Rosen Section 9.1, Figure 8 for an example.)
+      
+    </para>
+
+    <note id="imp-id8271183" type="hint">
+      One of the interpretations is unintuitive in that
+      <m:math><m:ci type="fn">isFor</m:ci></m:math> and
+      <m:math><m:ci type="fn">isAgainst</m:ci></m:math> don't correspond to what we probably
+      mean in English.
+    </note>
+  </problem>
+
+  
+</exercise>
+
+<exercise id="kth">
+<problem id="imp-id9630971">
+    <para id="imp-id9321338">
+      Translate the following statements into first-order logic.
+      The domain is the set of natural numbers, and the binary relation
+      <m:math><m:apply><m:ci type="fn">kth</m:ci><m:ci>k</m:ci><m:ci>n</m:ci></m:apply></m:math>
+      indicates whether or not 
+      the <m:math><m:ci>k</m:ci></m:math>th number of the sequence is <m:math><m:ci>n</m:ci></m:math>.
+      For example, the sequence 
+      <m:math><m:mfenced><m:cn>5</m:cn><m:cn>7</m:cn><m:cn>5</m:cn></m:mfenced></m:math>,
+      is represented by the relation
+      <m:math>
+        <m:apply><m:eq/>
+          <m:ci type="fn">kth</m:ci>
+          <m:set>
+            <m:mfenced><m:cn>0</m:cn><m:cn>5</m:cn></m:mfenced>
+            <m:mfenced><m:cn>1</m:cn><m:cn>7</m:cn></m:mfenced>
+            <m:mfenced><m:cn>2</m:cn><m:cn>5</m:cn></m:mfenced>
+          </m:set>
+        </m:apply>
+      </m:math>.
+      You can also use the binary relations
+      <m:math><m:apply><m:eq/></m:apply></m:math>,
+      <m:math><m:apply><m:lt/></m:apply></m:math>, and
+      <m:math><m:apply><m:leq/></m:apply></m:math>,
+      but no others.
+    </para>
+
+    <para id="imp-id9169584">
+      You may assume that <m:math><m:ci type="fn">kth</m:ci></m:math> models a sequence.
+      No index <m:math><m:ci>k</m:ci></m:math> is occurs multiple times, thus excluding
+      <m:math>
+        <m:apply><m:eq/>
+          <m:ci type="fn">kth</m:ci>
+          <m:set>
+            <m:mfenced><m:cn>0</m:cn><m:cn>5</m:cn></m:mfenced>
+            <m:mfenced><m:cn>1</m:cn><m:cn>7</m:cn></m:mfenced>
+            <m:mfenced><m:cn>0</m:cn><m:cn>9</m:cn></m:mfenced>
+          </m:set>
+        </m:apply>
+      </m:math>.
+      Thus, <m:math><m:ci type="fn">kth</m:ci></m:math> is a function, as in
+      <link document="m10728" target-id="sorted-array">a previous example representing an array as a function</link>.
+      Also, no higher index <m:math><m:ci>k</m:ci></m:math> occurs without all lower-numbered indices
+      being present, thus excluding
+      <m:math>
+        <m:apply><m:eq/>
+          <m:ci type="fn">kth</m:ci>
+          <m:set>
+            <m:mfenced><m:cn>0</m:cn><m:cn>5</m:cn></m:mfenced>
+            <m:mfenced><m:cn>1</m:cn><m:cn>7</m:cn></m:mfenced>
+            <m:mfenced><m:cn>3</m:cn><m:cn>9</m:cn></m:mfenced>
+          </m:set>
+        </m:apply>
+      </m:math>.
+    </para>
+  
+<list id="imp-id9737386" list-type="enumerated">
+<item>
+      The sequence is finite.
+    </item>
+<item>
+      The sequence contains at least three distinct numbers ,
+      <foreign>e.g.</foreign>,
+      <m:math><m:mfenced>
+        <m:cn>5</m:cn>
+        <m:cn>6</m:cn>
+        <m:cn>5</m:cn>
+        <m:cn>6</m:cn>
+        <m:cn>7</m:cn>
+        <m:cn>8</m:cn>
+      </m:mfenced></m:math>,
+      but not
+      <m:math><m:mfenced>
+        <m:cn>5</m:cn>
+        <m:cn>6</m:cn>
+        <m:cn>5</m:cn>
+        <m:cn>6</m:cn>
+      </m:mfenced></m:math>.
+    </item>
+<item>
+      <para id="imp-id6823480">
+        The sequence is sorted in non-decreasing order,
+        <foreign>e.g.</foreign>,
+        <m:math><m:mfenced>
+          <m:cn>3</m:cn>
+          <m:cn>5</m:cn>
+          <m:cn>5</m:cn>
+          <m:cn>6</m:cn>
+          <m:cn>8</m:cn>
+          <m:cn>10</m:cn>
+          <m:cn>10</m:cn>
+          <m:cn>12</m:cn>
+        </m:mfenced></m:math>.
+      </para>
+    </item>
+<item> 
+      The sequence is sorted in non-decreasing order,
+      except for exactly one out-of-order element,
+      <foreign>e.g.</foreign>,
+      <m:math><m:mfenced>
+        <m:cn>20</m:cn>
+        <m:cn>30</m:cn>
+        <m:cn>4</m:cn>
+        <m:cn>50</m:cn>
+        <m:cn>60</m:cn>
+      </m:mfenced></m:math>.
+    </item>
+</list>
+</problem>
+
+
+</exercise>
+
+<exercise id="exercise19">
+<problem id="imp-id9322631">
+    <para id="imp-id9397583">
+      Some binary relations can be viewed as the encoding of a unary
+      function, where the first element of the ordered pair represents
+      the function's value.
+      For instance, in <link target-id="addsTo">a previous exercise</link>
+      we encoded the binary function addition
+      as a ternary relation <m:math><m:ci type="fn">addsTo</m:ci></m:math>.
+    </para>
+  
+<list id="imp-id9721679" list-type="enumerated">
+<item>
+      Give one example of a binary relation which does <emphasis>not</emphasis>
+      correspond to the encoding of a function.
+    </item>
+<item>
+      <para id="imp-id9754519">
+        Write a first-order formula describing the properties
+        that a binary relation <m:math><m:ci type="fn">R</m:ci></m:math> must have
+        to correspond to a unary function.
+      </para>
+    </item>
+</list>
+</problem>
+
+
+</exercise>
+
+<exercise id="exercise20">
+  <problem id="imp-id9728758">
+    <para id="imp-id9179990">
+      Alternation of quantifiers:
+      Determine the truth of each of the following sentences
+      in each of the indicated domains.
+      <note id="imp-id9179992" type="hint">
+        To help yourself, you might want to develop an
+        English version of what the logic sentences say.
+        Start with the inner formula (talking about people <m:math><m:ci>x</m:ci></m:math>,<m:math><m:ci>y</m:ci></m:math>,<m:math><m:ci>z</m:ci></m:math>),
+        then add the quantifier for <m:math><m:ci>z</m:ci></m:math> to get a statement about 
+        people <m:math><m:ci>x</m:ci></m:math>,<m:math><m:ci>y</m:ci></m:math>, and repeat for the other two quantifiers.
+      </note>
+    </para>
+
+    <para id="imp-id9180339">
+      Four sentences:
+    </para>
+
+    <list id="imp-id9440717" list-type="enumerated">
+      <item>
+        <m:math>
+          <m:apply><m:forall/><m:bvar><m:ci>x</m:ci></m:bvar>
+            <m:apply><m:forall/><m:bvar><m:ci>y</m:ci></m:bvar>
+              <m:apply><m:exists/><m:bvar><m:ci>z</m:ci></m:bvar> 
+                <m:apply><m:and/>
+                  <m:apply><m:ci type="fn">likes</m:ci><m:ci>x</m:ci><m:ci>y</m:ci></m:apply>  
+                  <m:mfenced>  
+                    <m:apply><m:implies/>
+                      <m:apply><m:neq/> <m:ci>z</m:ci> <m:ci>y</m:ci></m:apply>
+                      <m:apply><m:not/>
+                        <m:apply><m:ci type="fn">likes</m:ci><m:ci>y</m:ci><m:ci>z</m:ci></m:apply>
+                      </m:apply>
+                    </m:apply>
+                  </m:mfenced>
+                </m:apply>
+              </m:apply>
+            </m:apply>
+          </m:apply>
+        </m:math>
+      </item>
+
+      <item>
+        <m:math>
+          <m:apply><m:exists/><m:bvar><m:ci>x</m:ci></m:bvar>
+            <m:apply><m:forall/><m:bvar><m:ci>y</m:ci></m:bvar>
+              <m:apply><m:forall/><m:bvar><m:ci>z</m:ci></m:bvar> 
+                <m:apply><m:and/>
+                  <m:apply>
+                    <m:ci type="fn">likes</m:ci>
+                    <m:ci>x</m:ci>
+                    <m:ci>y</m:ci>
+                  </m:apply>  
+                  <m:mfenced>  
+                    <m:apply><m:implies/>
+                      <m:apply><m:neq/> <m:ci>z</m:ci> <m:ci>y</m:ci></m:apply>
+                      <m:apply><m:not/>
+                        <m:apply><m:ci type="fn">likes</m:ci><m:ci>y</m:ci><m:ci>z</m:ci></m:apply>
+                      </m:apply>
+                    </m:apply>
+                  </m:mfenced>
+                </m:apply>
+              </m:apply>
+            </m:apply>
+          </m:apply>
+        </m:math>
+      </item>
+
+      <item>
+        <m:math>
+          <m:apply><m:exists/><m:bvar><m:ci>x</m:ci></m:bvar>
+            <m:apply><m:exists/><m:bvar><m:ci>y</m:ci></m:bvar>
+              <m:apply><m:forall/><m:bvar><m:ci>z</m:ci></m:bvar> 
+                <m:apply><m:and/>
+                  <m:apply><m:ci type="fn">likes</m:ci><m:ci>x</m:ci><m:ci>y</m:ci></m:apply>  
+                  <m:mfenced>  
+                    <m:apply><m:implies/>
+                      <m:apply><m:neq/> <m:ci>z</m:ci> <m:ci>y</m:ci></m:apply>
+                      <m:apply><m:not/>
+                        <m:apply><m:ci type="fn">likes</m:ci><m:ci>y</m:ci><m:ci>z</m:ci></m:apply>
+                      </m:apply>
+                    </m:apply>
+
+                  </m:mfenced>
+                </m:apply>
+              </m:apply>
+            </m:apply>
+          </m:apply>
+        </m:math>
+      </item>
+
+      <item>
+        <m:math>
+          <m:apply><m:forall/><m:bvar><m:ci>x</m:ci></m:bvar>
+            <m:apply><m:exists/><m:bvar><m:ci>y</m:ci></m:bvar>
+              <m:apply><m:forall/><m:bvar><m:ci>z</m:ci></m:bvar> 
+                <m:apply><m:and/>
+                  <m:apply><m:ci type="fn">likes</m:ci><m:ci>x</m:ci><m:ci>y</m:ci></m:apply>
+                  <m:mfenced>  
+                    <m:apply><m:implies/>
+                      <m:apply><m:neq/> <m:ci>z</m:ci> <m:ci>y</m:ci></m:apply>
+                      <m:apply><m:not/>
+                        <m:apply><m:ci type="fn">likes</m:ci><m:ci>y</m:ci><m:ci>z</m:ci></m:apply>
+                      </m:apply>
+                    </m:apply>
+
+                  </m:mfenced>
+                </m:apply>
+              </m:apply>
+            </m:apply>
+          </m:apply>
+        </m:math>
+      </item>
+    </list>
+
+    <para id="imp-id9392589">
+      Four domains:
+    </para>
+
+    <list id="imp-id9526031" list-type="enumerated">
+      <item>
+        The empty domain.
+      </item>
+      <item>
+        A world with one person, who likes herself.
+      </item>
+      <item>
+        A world with Yorick and Zelda,
+        where Yorick likes Zelda, Zelda likes herself, and that's all.
+      </item>
+      <item>
+        A world with many people, including 
+        CJ (Catherine Zeta-Jones), JC (John Cusack), and
+        JR (Julia Roberts).
+        Everybody likes themselves;
+        everybody likes JC;
+        everybody likes CJ except JR;
+        everybody likes JR except CJ and IB.
+        Any others may or may not like each other, as you choose,
+        subject to the preceding.
+        (You may wish to sketch a graph of this
+         <m:math><m:ci type="fn">likes</m:ci></m:math>
+         relation, similar to Rosen Section 9.1 Figure 8.)
+      </item>
+    </list>
+
+    <para id="imp-id9589132">
+      Determine the truth of all sixteen combinations of the
+      four statements and four domains.
+    </para>
+  </problem>
+
+  
+</exercise>
+
+
+</section> 
+
+<section id="imp-id9565981">
+<title>Modeling</title>
+
+<exercise id="exercise21">
+  <problem id="imp-id9167898">
+    <para id="imp-id9167900">
+      Translate the following into first-order logic:
+      <quote display="inline">
+        Raspberry sherbet with hot fudge (<m:math><m:ci>rshf</m:ci></m:math>)
+        is the tastiest dessert.
+      </quote>
+      Use <m:math><m:ci type="fn">tastier</m:ci></m:math> as your only relation.
+    </para>
+
+    <para id="imp-id9753983">
+      What is the intended domain for your formula?
+      What is a relation which makes this statement true?
+      One which makes it false?
+    </para>
+  </problem>
+
+  
+</exercise>
+
+<exercise id="ww-incomplete">
+<problem id="imp-id5833803">
+    <para id="imp-id9727557">
+      Even allowing for ellision, the list of
+      <link document="m11072">WaterWorld domain axioms</link>
+      is incomplete, in a sense.
+      The game reports how many pirates exist in total, but
+      that global information is not reflected in the propositions or
+      axioms.  We had the
+      <link document="m10514" target-id="ww-incomplete">same problem</link> with the propositional logic domain axioms
+    </para>
+  
+<list id="imp-id9546325" list-type="enumerated">
+<item>
+      First, assume we only use the default
+      WaterWorld board size and number of pirates,
+      <foreign>i.e.</foreign>, five.
+      What additional axiom or axioms do we need?
+    </item>
+<item>
+      Next, generalize your answer to model the program's ability to
+      play the game with a different number of pirates.
+      What problem do you encounter?
+    </item>
+</list>
+</problem>
+
+
+</exercise>
+
+<exercise id="exercise23">
+  <problem id="imp-id8659798">
+    <para id="imp-id8659800">
+      The puzzle game of Sudoku is played on a
+      <m:math><m:apply><m:times/><m:cn>9</m:cn><m:cn>9</m:cn></m:apply></m:math> grid,
+      where each square holds a number between 1 and 9.
+      The positions of the numbers must obey constraints.
+      Each row and each column has each of the 9 numbers.
+      Each of the 9 non-overlapping
+      <m:math><m:apply><m:times/><m:cn>3</m:cn><m:cn>3</m:cn></m:apply></m:math>
+      square sub-grids has each of the 9 numbers.
+    </para>
+
+    <para id="imp-id9719883">
+      Like WaterWorld, throughout the game, some of the values have
+      not been discovered, although they are determined.
+      You start with some numbers revealed, enough to guarantee that
+      the rest of the board is uniquely determined by the constraints.
+      Thus, like in WaterWorld, when deducing the value of another
+      location, what has been revealed so far would serve as
+      premises in a proof.
+    </para>
+
+    <para id="imp-id6631529">
+      Fortunately, there are the same number of rows, columns, subgrids,
+      and values.
+      So, our domain is
+      <m:math>
+        <m:set>
+          <m:cn>1</m:cn>
+          <m:cn>2</m:cn>
+          <m:cn>3</m:cn>
+          <m:cn>4</m:cn>
+          <m:cn>5</m:cn>
+          <m:cn>6</m:cn>
+          <m:cn>7</m:cn>
+          <m:cn>8</m:cn>
+          <m:cn>9</m:cn>
+        </m:set>
+      </m:math>.
+    </para>
+
+    <para id="imp-id7556977">
+      To model the game, we will use the following relations:
+      <list id="imp-id7556980">
+        <item>
+          <m:math><m:apply><m:ci type="fn">value</m:ci><m:ci>r</m:ci><m:ci>c</m:ci><m:ci>v</m:ci></m:apply></m:math>
+          indicates that at row <m:math><m:ci>r</m:ci></m:math>, column <m:math><m:ci>c</m:ci></m:math> is the value <m:math><m:ci>v</m:ci></m:math>.
+        </item>
+        <item>
+          <m:math><m:apply><m:eq/><m:ci>v</m:ci> <m:ci>w</m:ci></m:apply></m:math>
+          is the standard equality relation.
+        </item>
+        <item>
+          <m:math><m:apply><m:ci type="fn">subgrid</m:ci><m:ci>g</m:ci><m:ci>r</m:ci><m:ci>c</m:ci></m:apply></m:math>
+          indicates that subgrid <m:math><m:ci>g</m:ci></m:math> includes the location at row <m:math><m:ci>r</m:ci></m:math>,
+          column <m:math><m:ci>c</m:ci></m:math>.
+        </item>
+      </list>
+    </para>
+
+    <para id="imp-id8413879">
+      Provide domain axioms for Sudoku, and briefly explain them.
+      These will model the row, column, and subgrid constraints.
+      In addition, you should include constraints on our above relations,
+      such as that each location holds one value.
+    </para>
+  </problem>
+
+  
+</exercise>
+
+</section> 
+
+<section id="imp-id9839486">
+<title>Reasoning with Equivalences</title>
+
+<exercise id="exercise24">
+<problem id="imp-id9738168">
+    <para id="imp-id9738170">
+      Some of the
+      <link document="m11045">first-order equivalences</link>
+      are redundant.  For each of the following, prove the equivalence
+      using the other equivalences.
+    </para>
+  
+<list id="imp-id9123209" list-type="enumerated">
+<item>
+      <m:math><m:apply>
+        <m:equivalent/>
+        <m:apply><m:forall/>
+          <m:bvar><m:ci>x</m:ci></m:bvar>
+          <m:apply><m:implies/> <m:ci>ϕ</m:ci> <m:ci>θ</m:ci> </m:apply>
+        </m:apply>
+        <m:apply><m:implies/>
+          <m:apply><m:exists/>
+            <m:bvar><m:ci>x</m:ci></m:bvar>
+            <m:ci>ϕ</m:ci>
+          </m:apply>
+          <m:ci>θ</m:ci>
+        </m:apply>
+      </m:apply></m:math>
+    </item>
+<item>
+      <para id="imp-id9730290">
+        Assuming a non-empty domain,
+        <m:math><m:apply>
+          <m:equivalent/>
+          <m:apply><m:exists/>
+            <m:bvar><m:ci>x</m:ci></m:bvar>
+            <m:apply><m:implies/> <m:ci>θ</m:ci> <m:ci>ϕ</m:ci> </m:apply>
+          </m:apply> 
+          <m:apply><m:implies/>
+            <m:ci>θ</m:ci>
+            <m:apply><m:exists/>
+              <m:bvar><m:ci>x</m:ci></m:bvar>
+              <m:ci>ϕ</m:ci>
+            </m:apply>
+          </m:apply>
+        </m:apply></m:math>.
+      </para>
+    </item>
+</list>
+</problem>
+
+
+</exercise>
+
+<exercise id="exercise25">
+  <problem id="imp-id9563499">
+    <para id="imp-id9563501">
+      We can characterize a prime number as
+      a number <m:math><m:ci>n</m:ci></m:math> satisfying
+      <m:math><m:apply><m:forall/><m:bvar><m:ci>q</m:ci></m:bvar>
+        <m:apply><m:forall/><m:bvar><m:ci>r</m:ci></m:bvar>
+          <m:apply><m:implies/>
+            <m:apply><m:eq/><m:apply><m:times/><m:ci>q</m:ci><m:ci>r</m:ci></m:apply><m:ci>n</m:ci></m:apply>
+            <m:apply><m:or/>
+              <m:apply><m:eq/><m:ci>q</m:ci> <m:cn>1</m:cn></m:apply>
+              <m:apply><m:eq/><m:ci>r</m:ci> <m:cn>1</m:cn></m:apply>
+            </m:apply>
+          </m:apply>
+        </m:apply>
+      </m:apply></m:math>.
+      Using the equivalences for first-order logic,
+      show step-by-step that this is equivalent to the formula
+      <m:math><m:apply><m:not/>
+        <m:apply><m:exists/><m:bvar><m:ci>q</m:ci></m:bvar>
+          <m:apply><m:exists/><m:bvar><m:ci>r</m:ci></m:bvar>
+            <m:apply><m:and/>
+              <m:apply><m:eq/><m:apply><m:times/><m:ci>q</m:ci><m:ci>r</m:ci></m:apply><m:ci>n</m:ci></m:apply>
+              <m:apply><m:neq/> <m:ci>q</m:ci> <m:cn>1</m:cn></m:apply>
+              <m:apply><m:neq/> <m:ci>r</m:ci> <m:cn>1</m:cn></m:apply>
+            </m:apply>
+          </m:apply>
+        </m:apply>
+      </m:apply></m:math>.
+      Do <emphasis>not</emphasis> use any arithmetic equivalences.
+    </para>
+  </problem>
+
+  
+</exercise>
+
+<exercise id="exercise26">
+  <problem id="imp-id9061572">
+    <para id="imp-id9858218">
+      A student claims that
+      <m:math><m:apply><m:equivalent/>
+        <m:apply><m:forall/><m:bvar><m:ci>x</m:ci></m:bvar>
+          <m:apply><m:implies/>
+            <m:apply><m:and/>
+              <m:apply><m:ci type="fn">A</m:ci><m:ci>x</m:ci></m:apply>
+              <m:apply><m:ci type="fn">B</m:ci><m:ci>x</m:ci></m:apply>
+            </m:apply>
+            <m:apply><m:ci type="fn">C</m:ci><m:ci>z</m:ci></m:apply>
+          </m:apply>
+        </m:apply>
+        <m:apply><m:implies/>
+          <m:apply><m:and/>
+            <m:apply><m:forall/><m:bvar><m:ci>x</m:ci></m:bvar>
+              <m:apply><m:ci type="fn">A</m:ci><m:ci>x</m:ci></m:apply>
+            </m:apply>
+            <m:apply><m:forall/><m:bvar><m:ci>x</m:ci></m:bvar>
+              <m:apply><m:ci type="fn">B</m:ci><m:ci>x</m:ci></m:apply>
+            </m:apply>
+          </m:apply>
+          <m:apply><m:ci type="fn">C</m:ci><m:ci>z</m:ci></m:apply>
+        </m:apply>
+      </m:apply></m:math>
+      by the
+      <quote display="inline">distribution of quantifiers</quote>.
+      This is actually trying to do two steps at once.
+      Rewrite this as the two separate intended steps,
+      determine which is wrong, and describe why that step is wrong.
+    </para>
+  </problem>
+
+  
+</exercise>
+
+<exercise id="exercise27">
+  <problem id="imp-id8688085">
+    <para id="imp-id8688087">
+      Simplify the formula
+      <m:math><m:apply><m:forall/><m:bvar><m:ci>x</m:ci></m:bvar>
+        <m:apply><m:forall/><m:bvar><m:ci>y</m:ci></m:bvar>
+          <m:apply><m:exists/><m:bvar><m:ci>z</m:ci></m:bvar>
+            <m:apply><m:implies/>
+              <m:apply><m:and/>
+                <m:apply><m:ci type="fn">A</m:ci><m:ci>x</m:ci></m:apply>
+                <m:apply><m:ci type="fn">B</m:ci><m:ci>y</m:ci></m:apply>
+              </m:apply>
+              <m:apply><m:ci type="fn">C</m:ci><m:ci>z</m:ci></m:apply>
+            </m:apply>
+          </m:apply>
+        </m:apply>
+      </m:apply></m:math>,
+      so that the body of each quantifier contains only a single
+      <link document="m10728" target-id="wff">atomic formula</link>
+      involving that quantified variable.  
+      Provide reasoning for each step of your simplification.
+    </para>
+
+    <para id="imp-id9028717">
+    </para>
+  </problem>
+
+  
+</exercise>
+
+</section> 
+
+
+
+<section id="imp-id9563861">
+<title>Reasoning with Inference Rules</title>
+
+
+<exercise id="exercise28">
+  <problem id="imp-id8897912"><para id="imp-id8897913">[Practice problem<m:math><m:mo>—</m:mo></m:math>solution provided.]</para>
+    <para id="imp-id9333486">
+      Prove that syllogisms are valid inferences.  In other words, show
+      that
+      <m:math><m:mrow><m:apply><m:forall/><m:bvar><m:ci>x</m:ci></m:bvar>
+          <m:apply><m:implies/>
+            <m:apply><m:ci type="fn">R</m:ci><m:ci>x</m:ci></m:apply>
+            <m:apply><m:ci type="fn">S</m:ci><m:ci>x</m:ci></m:apply>
+          </m:apply>
+        </m:apply><m:mtext>, </m:mtext><m:apply><m:ci type="fn">R</m:ci><m:ci>c</m:ci></m:apply> <m:mo>⊢</m:mo> <m:apply><m:ci type="fn">S</m:ci><m:ci>c</m:ci></m:apply></m:mrow></m:math>.
+    </para>
+  </problem>
+
+  <solution id="imp-id8182208">
+    <table id="proof1" summary="A proof">
+
+<tgroup cols="3" align="center" colsep="1" rowsep="1">
+<colspec colwidth="*" colname="c1"/>
+<colspec colwidth="*" colname="c2"/>
+<colspec colwidth="*" colname="c3"/>
+
+<tbody>
+<row>
+<entry align="left">1</entry><entry namest="c2" nameend="c2"><m:math><m:apply><m:forall/><m:bvar><m:ci>x</m:ci></m:bvar>
+          <m:apply><m:implies/>
+            <m:apply><m:ci type="fn">R</m:ci><m:ci>x</m:ci></m:apply>
+            <m:apply><m:ci type="fn">S</m:ci><m:ci>x</m:ci></m:apply>
+          </m:apply>
+        </m:apply></m:math></entry><entry colname="c3"> Premise
+        </entry>
+</row>
+<row>
+<entry align="left">2</entry><entry namest="c2" nameend="c2"><m:math><m:apply><m:ci type="fn">R</m:ci><m:ci>c</m:ci></m:apply></m:math></entry><entry colname="c3"> Premise
+        </entry>
+</row>
+<row>
+<entry align="left">3</entry><entry namest="c2" nameend="c2"><m:math><m:apply><m:implies/>
+          <m:apply><m:ci type="fn">R</m:ci><m:ci>c</m:ci></m:apply>
+          <m:apply><m:ci type="fn">S</m:ci><m:ci>c</m:ci></m:apply>
+        </m:apply></m:math></entry><entry colname="c3"> ∀Elim, line 1
+        </entry>
+</row>
+<row>
+<entry align="left">4</entry><entry namest="c2" nameend="c2"><m:math><m:apply><m:ci type="fn">X</m:ci><m:ci>c</m:ci></m:apply></m:math></entry><entry colname="c3"> ⇒Elim, lines 2,3
+        </entry>
+</row></tbody>
+</tgroup>
+</table>
+  </solution>
+</exercise>
+
+<exercise id="exercise29">
+  <problem id="imp-id9564861">
+    <para id="imp-id9564863">
+      What is wrong with the following
+      <quote display="inline">proof</quote> of
+      <m:math><m:apply><m:implies/>
+        <m:apply><m:exists/><m:bvar><m:ci>x</m:ci></m:bvar>
+          <m:apply><m:ci type="fn">E</m:ci><m:ci>x</m:ci></m:apply>
+        </m:apply>
+        <m:apply><m:ci type="fn">E</m:ci><m:ci>c</m:ci></m:apply>
+      </m:apply></m:math>?
+    </para>
+
+    <table id="proof2" summary="A proof">
+
+<tgroup cols="4" align="center" colsep="1" rowsep="1">
+<colspec colwidth="*" colname="c1"/>
+<colspec colwidth="*" colname="c2"/>
+<colspec colwidth="*" colname="c3"/>
+<colspec colwidth="*" colname="c4"/>
+
+<tbody>
+<row>
+<entry align="left">1</entry><entry namest="c2" nameend="c3">subproof:<m:math><m:mrow><m:mrow>
+            <m:apply><m:exists/><m:bvar><m:ci>x</m:ci></m:bvar>
+              <m:apply><m:ci type="fn">E</m:ci><m:ci>x</m:ci></m:apply>
+            </m:apply>
+          </m:mrow> <m:mo>⊢</m:mo> <m:apply><m:ci type="fn">E</m:ci><m:ci>c</m:ci></m:apply></m:mrow></m:math></entry><entry/><entry colname="c4"/>
+</row>
+<row>
+<entry align="left">1.a</entry><entry/> <entry namest="c3" nameend="c3"><m:math><m:apply><m:exists/><m:bvar><m:ci>x</m:ci></m:bvar>
+                <m:apply><m:ci type="fn">E</m:ci><m:ci>x</m:ci></m:apply>
+              </m:apply></m:math></entry><entry colname="c4">
+                Premise for subproof
+              </entry>
+</row>
+<row>
+<entry align="left">1.b</entry><entry/> <entry namest="c3" nameend="c3"><m:math><m:apply><m:ci type="fn">E</m:ci><m:ci>c</m:ci></m:apply></m:math></entry><entry colname="c4">
+                ∃Elim, line 1.a
+              </entry>
+</row>
+<row>
+<entry align="left">2</entry><entry namest="c2" nameend="c3"><m:math><m:apply><m:implies/>
+          <m:apply><m:exists/><m:bvar><m:ci>x</m:ci></m:bvar>
+            <m:apply><m:ci type="fn">E</m:ci><m:ci>x</m:ci></m:apply>
+          </m:apply>
+          <m:apply><m:ci type="fn">E</m:ci><m:ci>c</m:ci></m:apply>
+        </m:apply></m:math></entry><entry/><entry colname="c4">
+          ⇒Intro, line 1
+        </entry>
+</row></tbody>
+</tgroup>
+</table>
+  </problem>
+
+  
+</exercise>
+
+<exercise id="exercise30">
+  <problem id="imp-id9424279">
+    <para id="imp-id9168246">
+      Using the inference rules,
+      <emphasis>formally</emphasis> prove the last part of
+      <link target-id="ducks-exercise">the previous problem about ducks and such</link>.
+    </para>
+  </problem>
+
+  
+</exercise>
+
+<exercise id="exercise31">
+  <problem id="imp-id7967108">
+    <para id="imp-id7967110">
+      Give an inference rule proof of
+      <m:math><m:mrow><m:apply><m:forall/><m:bvar><m:ci>x</m:ci></m:bvar>
+          <m:apply><m:implies/>
+            <m:apply><m:ci type="fn">Fruit</m:ci><m:ci>x</m:ci></m:apply>
+            <m:apply>
+              <m:ci type="fn">hasMethod</m:ci><m:mtext>tasty</m:mtext><m:ci>x</m:ci>
+            </m:apply>
+          </m:apply>
+        </m:apply><m:mtext>, </m:mtext><m:apply><m:forall/><m:bvar><m:ci>y</m:ci></m:bvar>
+          <m:apply><m:implies/>
+            <m:apply><m:ci type="fn">Apple</m:ci><m:ci>y</m:ci></m:apply>
+            <m:apply><m:ci type="fn">Fruit</m:ci><m:ci>y</m:ci></m:apply>
+          </m:apply>
+        </m:apply> <m:mo>⊢</m:mo> <m:apply><m:forall/><m:bvar><m:ci>z</m:ci></m:bvar>
+          <m:apply><m:implies/>
+            <m:apply><m:ci type="fn">Apple</m:ci><m:ci>z</m:ci></m:apply>
+            <m:apply>
+              <m:ci type="fn">hasMethod</m:ci><m:mtext>tasty</m:mtext><m:ci>z</m:ci>
+            </m:apply>
+          </m:apply>
+        </m:apply></m:mrow></m:math>.
+    </para>
+  </problem>
+
+  
+</exercise>
+
+<exercise id="exercise32">
+<problem id="imp-id9730102">
+<list id="imp-id9588594" list-type="enumerated">
+<item>
+      Prove the following:
+      <m:math><m:mrow><m:mrow>
+          <m:apply><m:exists/><m:bvar><m:ci>x</m:ci></m:bvar>
+            <m:apply><m:ci type="fn">P</m:ci><m:ci>x</m:ci></m:apply>
+          </m:apply>
+        </m:mrow><m:mtext>, </m:mtext><m:mrow>
+          <m:apply><m:forall/><m:bvar><m:ci>y</m:ci></m:bvar>
+            <m:apply><m:implies/>
+              <m:apply><m:ci type="fn">P</m:ci><m:ci>y</m:ci></m:apply>
+              <m:apply><m:ci type="fn">Q</m:ci><m:ci>y</m:ci></m:apply>
+            </m:apply>
+          </m:apply>
+        </m:mrow> <m:mo>⊢</m:mo> <m:mrow>
+          <m:apply><m:exists/><m:bvar><m:ci>z</m:ci></m:bvar>
+            <m:apply><m:ci type="fn">Q</m:ci><m:ci>z</m:ci></m:apply>
+          </m:apply>
+        </m:mrow></m:mrow></m:math>
+    </item>
+<item>
+      Your proof above used ∃Intro.
+      Why can't we replace that step with the formula
+      <m:math><m:apply><m:forall/><m:bvar><m:ci>z</m:ci></m:bvar>
+        <m:apply><m:ci type="fn">Q</m:ci><m:ci>z</m:ci></m:apply>
+      </m:apply></m:math>
+      with the justification <quote display="inline">∀Intro</quote>?
+    </item>
+<item>
+      Describe an interpretation which satisfies 
+      the proof's premises, but does not satisfy
+      <m:math><m:apply><m:forall/><m:bvar><m:ci>z</m:ci></m:bvar>
+        <m:apply><m:ci type="fn">Q</m:ci><m:ci>z</m:ci></m:apply>
+      </m:apply></m:math>.
+    </item>
+</list>
+</problem>
+
+
+</exercise>
+
+
+
+</section> 
+
+</content>
+</document>

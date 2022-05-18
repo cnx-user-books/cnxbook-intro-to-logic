@@ -1,0 +1,1479 @@
+<document xmlns="http://cnx.rice.edu/cnxml" xmlns:m="http://www.w3.org/1998/Math/MathML" xmlns:md="http://cnx.rice.edu/mdml"> 
+
+<title>syntax and semantics of quantifiers</title>
+<metadata>
+  <md:content-id>m10728</md:content-id><md:title>syntax and semantics of quantifiers</md:title>
+  <md:abstract>Introducting quantifiers, to upgrade from propositional logic
+to first-order logic.
+</md:abstract>
+  <md:uuid>1e94d4e0-b5d6-485c-a6b2-48b36aaa773e</md:uuid>
+</metadata>
+
+
+<content>
+
+<section id="imp-id12889930"> 
+<title>Talking about unnamed items</title>
+
+<para id="imp-id12804942">
+  Suppose we want to express a statement like
+  <quote display="inline">there is a location which has two neighbors</quote>
+  (which is true, at least for the domain of WaterWorld board
+   locations), or
+  <quote display="inline">
+    all actors have co-starred with
+    <link url="http://us.imdb.com/Name?Bacon,+Kevin">Kevin Bacon</link>
+  </quote>
+  (which isn't true, at least for the domain of all Hollywood actors).
+  As it stands, we can formulate these only awkwardly,
+  by talking about 
+  <emphasis>specific</emphasis> (constant) locations like
+  <m:math><m:ci>A</m:ci></m:math> and <m:math><m:ci>G</m:ci></m:math>,
+  or specific actors like
+  <link url="http://us.imdb.com/Name?McGregor,+Ewan">Ewan McGregor</link> and
+  <link url="http://us.imdb.com/Name?Diaz,+Cameron">Cameron Diaz</link>.
+  To talk about all locations, or actors, we're forced to
+  make huge formulas such as
+  <m:math><m:apply><m:and/>
+    <m:apply>
+      <m:ci type="fn">nhbr</m:ci>
+      <m:ci>Z</m:ci>
+      <m:ci>Y</m:ci>
+    </m:apply>
+    <m:apply><m:not/>
+      <m:apply>
+        <m:ci type="fn">nhbr</m:ci>
+        <m:ci>Z</m:ci>
+        <m:ci>A</m:ci>
+      </m:apply>
+    </m:apply>
+    <m:apply><m:not/>
+      <m:apply>
+        <m:ci type="fn">nhbr</m:ci>
+        <m:ci>Z</m:ci>
+        <m:ci>B</m:ci>
+      </m:apply>
+    </m:apply>
+    <m:mtext>…</m:mtext>
+    <m:apply><m:not/>
+      <m:apply>
+        <m:ci type="fn">nhbr</m:ci>
+        <m:ci>Z</m:ci>
+        <m:ci>X</m:ci>
+      </m:apply>
+    </m:apply>
+  </m:apply></m:math>,
+  just to express
+  <quote display="inline">there is a location which has only one neighbor</quote>.
+</para>
+
+<para id="imp-id14714904">
+  We'll redress this by introducing two <term>quantifiers</term>,
+  ∃ (<quote display="inline">there exists</quote>) and
+  ∀ (<quote display="inline">for all</quote>).
+  For example, <quote display="inline">all actors have co-starred with Kevin Bacon</quote>
+  will be written 
+  <m:math><m:apply><m:forall/><m:bvar><m:ci>a</m:ci></m:bvar>
+    <m:apply>
+      <m:ci type="fn">coStarredWith</m:ci>
+      <m:ci>a</m:ci>
+      <m:ci>Kevin Bacon</m:ci>
+    </m:apply>
+  </m:apply></m:math>.
+  For
+  <quote display="inline">
+    there is a location which has (at least) two neighbors
+  </quote>,
+  we'll start with
+  <quote display="inline">
+    there exists a location <m:math><m:ci>x</m:ci></m:math> …
+  </quote>,
+  written
+  <m:math><m:apply><m:exists/>
+    <m:bvar><m:ci>x</m:ci></m:bvar>
+    <m:ci>…</m:ci>
+  </m:apply></m:math>.
+</para>
+
+<para id="imp-id14659150">
+  <quote display="inline">For all</quote> is really just an abbreviation for a
+  large conjunction, while <quote display="inline">exists</quote> is a disjunction
+  (it could also be called <quote display="inline">for some</quote>,
+   though it's not).
+  How large a conjunction/disjunction? 
+  As big as your domain, which actually could be very
+  small, or it could be infinitely large.
+  Even aside from the fact that we can't write down an infinitely large
+  conjunction or disjunction, 
+  quantifiers let us form the conjunction without having to
+  select a domain in advance.
+</para>
+
+<para id="imp-id4420114">
+  To continue with our WaterWorld example,
+  how can we express the concept
+  <quote display="inline"><m:math><m:ci>x</m:ci></m:math> has (at least) two neighbors</quote>?
+  Well, we'll rephrase this as,
+  <quote display="inline">
+    there exist distinct locations, <m:math><m:ci>y</m:ci></m:math> and <m:math><m:ci>z</m:ci></m:math>, which each of which
+    is a neighbor of <m:math><m:ci>x</m:ci></m:math>
+  </quote>,
+  written
+  <m:math><m:apply><m:exists/><m:bvar><m:ci>x</m:ci></m:bvar>
+    <m:apply><m:exists/><m:bvar><m:ci>y</m:ci></m:bvar>
+      <m:apply><m:exists/><m:bvar><m:ci>z</m:ci></m:bvar>
+        <m:apply><m:and/>
+          <m:apply><m:neq/><m:ci>y</m:ci> <m:ci>z</m:ci></m:apply>
+          <m:apply><m:ci type="fn">nhbr</m:ci> <m:ci>x</m:ci> <m:ci>y</m:ci></m:apply>
+          <m:apply><m:ci type="fn">nhbr</m:ci> <m:ci>x</m:ci> <m:ci>z</m:ci></m:apply>
+        </m:apply>
+      </m:apply>
+    </m:apply>
+  </m:apply></m:math>.
+  We need the condition
+  <m:math><m:apply><m:not/><m:apply><m:eq/> <m:ci>y</m:ci> <m:ci>z</m:ci></m:apply></m:apply></m:math>
+  in that formula to ensure that we have distinct locations.
+  Compare to the algebraic equation
+  <m:math>
+    <m:apply><m:eq/>
+     <m:apply>
+       <m:plus/>
+       <m:ci>x</m:ci>
+       <m:ci>y</m:ci>
+      </m:apply>
+      <m:cn>4</m:cn>
+    </m:apply>
+  </m:math>
+  in which one possible solution is
+  <m:math>
+    <m:apply><m:eq/>
+      <m:ci>x</m:ci>
+      <m:ci>y</m:ci>
+      <m:cn>2</m:cn>
+    </m:apply>
+  </m:math>.
+  Variables act the same way in both logic and algebra:
+  different variables can happen to take on the same value.
+</para>
+
+<para id="imp-id9121909">
+  We use quantifiers all the time in natural language.
+  Consider the following examples, where we provide a natural
+  English wording together with an equivalent phrasing that
+  makes the quantification more explicit.
+  We'll take the translations with a grain of salt, since
+  sometimes people can disagree on the exact details of
+  the intended English meaning.
+  Such ambiguity can sometimes be a rich source of creativity,
+  but it's not tolerable when documenting safety properties of software.
+  While some of these examples are a bit frivolous,
+  in general quantifiers let us precisely capture 
+  more interesting concepts in type-checking,
+  data structures such as trees and hash tables, 
+  circuit specifications, <foreign>etc.</foreign>
+</para>
+
+
+
+<table id="table1" summary="Quantification in English">
+<title>Quantification in English</title>
+<tgroup cols="2">
+<thead><row>
+      <entry> Natural English </entry>
+      <entry> Formalized English </entry>
+      
+    </row></thead>
+<tbody><row>
+      <entry>
+        <quote display="inline">
+          If you don't love yourself, you can't love anybody else.
+        </quote>
+      </entry>
+      <entry>
+        <quote display="inline">
+          If you don't love you, there does not exists a person <m:math><m:ci>y</m:ci></m:math>,
+          such that you love <m:math><m:ci>y</m:ci></m:math>.
+        </quote>
+      </entry>
+    </row>
+<row>
+      <entry> <quote display="inline">N*Sync is the best band ever!</quote>
+      </entry>
+      <entry>
+        <quote display="inline">
+          For all bands <m:math><m:ci>x</m:ci></m:math>, N*Sync is better than band <m:math><m:ci>x</m:ci></m:math>
+          (or, <m:math><m:apply><m:eq/><m:ci>x</m:ci> <m:ci>N*Sync</m:ci></m:apply></m:math>).
+        </quote>
+        A quick listen can easily show this statement false.
+      </entry>
+    </row>
+<row>
+      <entry>
+        A casually subtle line from <cite>Something About Mary</cite>:
+        <quote display="inline">Every day is better than the next.</quote>
+      </entry>
+      <entry>
+        <quote display="inline">
+          For all days <m:math><m:ci>x</m:ci></m:math>,
+          <m:math><m:ci>x</m:ci></m:math> is better than next(<m:math><m:ci>x</m:ci></m:math>).
+        </quote>
+      </entry>
+    </row>
+<row>
+      <entry> A buggy line from a song (<cite>Everybody Loves My Baby</cite>,
+              Jack Palmer and Spencer Willson, 1924):
+              <quote display="inline">Everybody loves my baby; My baby don't love [anybody] but me.</quote>
+      </entry>
+      <entry>
+        <quote display="inline">
+          For all persons <m:math><m:ci>x</m:ci></m:math>, <m:math><m:ci>x</m:ci></m:math> loves my baby.
+          For all persons <m:math><m:ci>y</m:ci></m:math>, if my baby loves <m:math><m:ci>y</m:ci></m:math>, then <m:math><m:ci>y</m:ci></m:math> is me.
+        </quote>
+        If true, one can conclude
+        the speaker is his own baby, and is narcissistic.
+      </entry>
+    </row>
+<row>
+      <entry> <quote display="inline">Every neighbor of x is unsafe.</quote>
+      </entry>
+      <entry> <quote display="inline">For all locations <m:math><m:ci>y</m:ci></m:math>,
+               if <m:math><m:ci>y</m:ci></m:math> is a neighbor of <m:math><m:ci>x</m:ci></m:math>, then <m:math><m:ci>y</m:ci></m:math> is unsafe.</quote>
+      </entry>
+    </row>
+<row>
+      <entry> <quote display="inline">There is a safe location that is a neighbor of x,
+               if num(x)&lt;3.</quote>
+      </entry>
+      <entry> <quote display="inline">If num(x)&lt;3,
+               then there exists a location y,
+                    such that y is safe, and y is a neighbor of x.</quote>
+      </entry>
+    </row>
+<row>
+      <entry><quote display="inline">If you've seen one episode, you've seen 'em all.</quote></entry>
+      <entry><quote display="inline">If there exists one episode <m:math><m:ci>x</m:ci></m:math> such that you've seen <m:math><m:ci>x</m:ci></m:math>,
+             then for all episodes <m:math><m:ci>z</m:ci></m:math>, you've seen <m:math><m:ci>z</m:ci></m:math>.</quote>
+      </entry>
+    </row>
+<row>
+      <entry> <quote display="inline">Somebody loves everybody.</quote>
+      </entry>
+      <entry> <quote display="inline">There exists some person <m:math><m:ci>y</m:ci></m:math>, such that
+               for all persons <m:math><m:ci>x</m:ci></m:math>, <m:math><m:ci>y</m:ci></m:math> loves <m:math><m:ci>x</m:ci></m:math>.</quote>
+      </entry>
+    </row>
+<row>
+      <entry> <quote display="inline">There is someone for everybody.</quote>
+      </entry>
+      <entry> <quote display="inline">For all persons <m:math><m:ci>x</m:ci></m:math>, there exists a person <m:math><m:ci>y</m:ci></m:math>,
+               such that <m:math><m:ci>y</m:ci></m:math> is for <m:math><m:ci>x</m:ci></m:math>.</quote>
+      </entry>
+    </row>
+<row>
+     <entry>
+       <quote display="inline">All's well that ends well.</quote>
+     </entry>
+     <entry>
+       <quote display="inline">For all events <m:math><m:ci>x</m:ci></m:math>, if <m:math><m:ci>x</m:ci></m:math> ends well then <m:math><m:ci>x</m:ci></m:math> is well.</quote>
+     </entry>
+    </row></tbody>
+</tgroup>
+</table>
+
+<section id="imp-id8867561">
+   
+<title>Warning: The Ambiguous <quote display="inline">Any</quote></title>
+
+<para id="imp-id14579296">
+  The ambiguous <quote display="inline">any</quote>:
+  I was playing a game with some friends, and we came across the rule:
+  <quote display="inline">
+    If you have more cards than any other player,
+    then discard a card.
+  </quote>
+  Does this mean
+  <quote display="inline">than <emphasis>all</emphasis> other players</quote>, or
+  <quote display="inline">than <emphasis>some</emphasis> other player</quote>?
+  Our group's opinion was divided (incl. across many native English speakers).
+</para>
+
+<para id="imp-id14168822">
+  In our class terms, it's not always clear 
+  whether <quote display="inline">any</quote> means for-all,
+  or for-some (there-exists).
+  Or maybe more accurately, 
+  in the phrase <quote display="inline">for any <m:math><m:ci>x</m:ci></m:math></quote>, 
+  does <m:math><m:ci>x</m:ci></m:math> necessarily mean an 
+  <link document="m10774" target-id="arbitrary">arbitrary</link> 
+  player?  
+  <note id="imp-id14165011" type="aside">
+    Linguistics students, or those who are so sure the rule clearly 
+    intended <quote display="inline">than all other players</quote>:
+    Switching
+    <quote display="inline">
+      <m:math>
+        <m:apply><m:gt/> <m:ci>x</m:ci> <m:ci>y</m:ci></m:apply>
+      </m:math>
+    </quote>
+    to
+    <quote display="inline">
+      <m:math>
+        <m:apply><m:lt/> <m:ci>x</m:ci> <m:ci>y</m:ci></m:apply>
+      </m:math>
+    </quote>
+    changes from an active voice to a passive voice
+    
+    but may also reverse your interpretation of the English 
+    quantifier <quote display="inline">any</quote>:
+    <quote display="inline">If any player has fewer points than you, …</quote>
+  </note>
+</para>
+
+<para id="imp-id12982271">
+  In your proof-writing (and your English writing, and your informal writing),
+  think about replacing <quote display="inline">any</quote> with 
+  either <quote display="inline">every</quote> or 
+  with <quote display="inline">some</quote>, to make
+  your meaning clear.
+</para>
+</section>
+</section>
+
+
+<section id="imp-id6134118">
+<title>First-order logic: WFFs revisited</title>
+
+<para id="imp-id14573414">
+  We originally defined a well-formed formula (WFF) for
+  propositional logic; we'll extend this to WFFs for
+  <term>first-order logic</term>, also known as
+  <term>predicate logic</term>.
+  At the same time, we'll more precisely define the binding of variables.
+</para>
+
+
+
+<para id="imp-id14361700">
+  This logic allows use of both functions and relations.
+  Since these functions' outputs are not Booleans (otherwise, we'd call
+  them relations), but rather data than can be used as a relation's input,
+  we separate the syntax into that of <term>terms</term> and formulas.
+  Terms are all the possible inputs for a relation.
+</para>
+
+<definition id="term">
+  <term>term</term>
+
+  <meaning id="imp-id11250603">
+    A variable.
+  </meaning>
+  <example id="imp-id10941455">
+    <para id="imp-id13726744">
+      <m:math><m:ci>a</m:ci></m:math>, <m:math><m:ci>b</m:ci></m:math>, …
+    </para>
+  </example>
+
+  <meaning id="imp-id11250396">
+    A constant.
+  </meaning>
+  <example id="imp-id11250399">
+    <para id="imp-id12834615">
+      WaterWorld location <m:math><m:ci>F</m:ci></m:math>, Kevin Bacon, or the number 3.
+    </para>
+  </example>
+
+  <meaning id="imp-id12466316">
+    A function applied to one or more terms.
+  </meaning>
+  <example id="imp-id13888772">
+    <para id="imp-id13888774">
+      <m:math><m:apply><m:ci type="fn">successor</m:ci><m:cn>3</m:cn></m:apply></m:math>
+    </para>
+  </example>
+</definition>
+
+
+<definition id="wff">
+  <term>Well-Formed Formula (WFF) for first-order logic</term>
+
+  <meaning id="imp-id13028623">
+    A constant: <m:math><m:true/></m:math> or <m:math><m:false/></m:math>.
+  </meaning>
+
+  <meaning id="imp-id14602557">
+    An <term>atomic formula</term>: a relation symbol applied to one
+    or more terms.
+  </meaning>
+
+  <example id="imp-id13384689">
+    <para id="imp-id15319293">
+      <m:math><m:apply><m:ci type="fn">nhbr</m:ci> <m:ci>x</m:ci> <m:ci>F</m:ci></m:apply></m:math>
+    </para>
+  </example>
+
+  <meaning id="imp-id13703599">
+    A negation of a WFF,
+    <m:math><m:apply><m:not/> <m:ci>φ</m:ci> </m:apply></m:math>.
+  </meaning>
+
+  <meaning id="imp-id14635884">
+    A conjunction of WFFs,
+    <m:math><m:apply><m:and/> <m:ci>φ</m:ci> <m:ci>ψ</m:ci> </m:apply></m:math>.
+  </meaning>
+
+  <meaning id="imp-id12185999">
+    A disjunction of WFFs,
+    <m:math><m:apply><m:or/> <m:ci>φ</m:ci> <m:ci>ψ</m:ci> </m:apply></m:math>.
+  </meaning>
+
+  <meaning id="imp-id13821071">
+    An implication of WFFs,
+    <m:math><m:apply><m:implies/><m:ci>φ</m:ci><m:ci>ψ</m:ci></m:apply></m:math>.
+  </meaning>
+
+  <meaning id="imp-id13044900">
+    A <term>universal quantification</term> of a WFF,
+    <m:math><m:apply><m:forall/>
+      <m:bvar><m:ci>x</m:ci></m:bvar>
+      <m:ci>φ</m:ci>
+    </m:apply></m:math>.
+  </meaning>
+
+  <example id="imp-id13036357">
+    <para id="imp-id13679005">
+      <m:math><m:apply><m:forall/>
+        <m:bvar><m:ci>x</m:ci></m:bvar>
+        <m:apply><m:ci type="fn">nhbr</m:ci> <m:ci>x</m:ci> <m:ci>F</m:ci></m:apply>
+      </m:apply></m:math>
+    </para>
+  </example>
+
+  <meaning id="imp-id12991022">
+    An <term>existential quantification</term> of a WFF,
+    <m:math><m:apply><m:exists/><m:bvar><m:ci>x</m:ci></m:bvar> <m:ci>φ</m:ci> </m:apply></m:math>.
+  </meaning>
+
+  <example id="imp-id13622927">
+    <para id="imp-id13622929">
+      <m:math><m:apply><m:exists/>
+        <m:bvar><m:ci>x</m:ci></m:bvar>
+        <m:apply><m:ci type="fn">nhbr</m:ci> <m:ci>x</m:ci> <m:ci>F</m:ci></m:apply>
+      </m:apply></m:math>
+    </para>
+  </example>
+</definition>
+
+<para id="imp-id13642396">
+  While a formula is just a piece of syntax,
+  the meaning of its connectives, including the quantifiers,
+  is part of the definition of a WFF.
+  However, as previously discussed,
+  the meaning of a WFF also depends on the
+  <link document="m10726">interpretation</link>
+  we give to its relations.
+</para>
+
+<section id="imp-id13919411">
+<title>Examples</title>
+
+
+<example id="imp-id11679701">
+  <para id="imp-id11679703">
+    Everybody likes John Cusack:
+    <m:math><m:apply><m:forall/><m:bvar><m:ci>x</m:ci></m:bvar>
+      <m:apply>
+        <m:ci type="fn">likes</m:ci>
+        <m:ci>x</m:ci>
+        <m:ci>John Cusack</m:ci>
+      </m:apply>
+    </m:apply></m:math>.
+  </para>
+</example>
+
+<example id="imp-id5185366">
+  <para id="imp-id5185368">
+    Somebody likes Joan Cusack:
+    <m:math><m:apply><m:exists/><m:bvar><m:ci>x</m:ci></m:bvar>
+      <m:apply>
+        <m:ci type="fn">likes</m:ci>
+        <m:ci>x</m:ci>
+        <m:ci>Joan Cusack</m:ci>
+      </m:apply>
+    </m:apply></m:math>.
+  </para>
+</example>
+
+<example id="somebody-likes-everybody">
+  <para id="imp-id14385080">
+    Somebody likes everybody:
+    <m:math><m:apply><m:exists/><m:bvar><m:ci>x</m:ci></m:bvar>
+      <m:apply><m:forall/><m:bvar><m:ci>y</m:ci></m:bvar>
+        <m:apply><m:ci type="fn">likes</m:ci><m:ci>x</m:ci> <m:ci>y</m:ci></m:apply>
+      </m:apply>
+    </m:apply></m:math>.
+    (We use <m:math><m:ci>n</m:ci></m:math> for <quote display="inline">needy</quote>?)
+  </para>
+</example>
+
+<example id="imp-id14631106">
+  <para id="imp-id14648047">
+    Everybody likes somebody:
+    <m:math><m:apply><m:forall/><m:bvar><m:ci>y</m:ci></m:bvar>
+      <m:apply><m:exists/><m:bvar><m:ci>x</m:ci></m:bvar>
+        <m:apply><m:ci type="fn">likes</m:ci><m:ci>y</m:ci> <m:ci>x</m:ci></m:apply>
+      </m:apply>
+    </m:apply></m:math>.
+    Careful; this formula looks similar to the preceding one, but it has
+    a very different meaning!
+  </para>
+</example>
+
+<exercise id="exercise1">
+  <problem id="imp-id13691302">
+    <para id="imp-id13863506">
+      How would you express 
+      <quote display="inline">Somebody is liked by everybody</quote>?
+    </para>
+  </problem>
+
+  <solution id="imp-id14754831">
+    <para id="imp-id14754833">
+      The cue 
+      <quote display="inline">Somebody …</quote>
+      suggests one person who exists; we'll call them <m:math><m:ci>p</m:ci></m:math> for
+      <quote display="inline">popular</quote>:
+      <m:math><m:apply><m:exists/>
+        <m:bvar><m:ci>p</m:ci></m:bvar>
+        <m:ci>…</m:ci>
+      </m:apply></m:math>.
+      Now we need to fill in the dots with 
+      <quote display="inline">everybody likes <m:math><m:ci>p</m:ci></m:math></quote>, to get:
+      <m:math><m:apply><m:exists/>
+        <m:bvar><m:ci>p</m:ci></m:bvar>
+        <m:apply><m:forall/>
+          <m:bvar><m:ci>x</m:ci></m:bvar>
+          <m:apply><m:ci type="fn">likes</m:ci><m:ci>x</m:ci><m:ci>p</m:ci></m:apply>
+        </m:apply>
+      </m:apply></m:math>.
+    </para>
+  </solution>
+</exercise>
+
+<exercise id="exercise2">
+  <problem id="imp-id6314837">
+    <para id="imp-id13726849">
+      How would you express 
+      <quote display="inline">Everybody is liked by somebody</quote>?
+    </para>
+  </problem>
+
+  <solution id="imp-id8829811">
+    <para id="imp-id8829814">
+      The cue 
+      <quote display="inline">Everybody …</quote>
+      suggests a universal; we'll call them <m:math><m:ci>j</m:ci></m:math> for
+      <quote display="inline">J. Doe</quote>:
+      <m:math><m:apply><m:forall/>
+        <m:bvar><m:ci>j</m:ci></m:bvar>
+        <m:ci>…</m:ci>
+      </m:apply></m:math>.
+      Now we need to fill in the dots with 
+      <quote display="inline">somebody likes <m:math><m:ci>j</m:ci></m:math></quote>, to get:
+      <m:math><m:apply><m:forall/><m:bvar><m:ci>j</m:ci></m:bvar>
+        <m:apply><m:exists/><m:bvar><m:ci>x</m:ci></m:bvar>
+          <m:apply><m:ci type="fn">likes</m:ci><m:ci>x</m:ci> <m:ci>j</m:ci></m:apply>
+        </m:apply>
+      </m:apply></m:math>.
+      Note that this formula is just like the preceding 
+      <link target-id="somebody-likes-everybody"><quote display="inline">Somebody likes everybody</quote> example</link>,
+      except that the quantifiers have been swapped
+      (and different variable names were used, a superficial difference).
+    </para>
+  </solution>
+</exercise>
+
+
+
+
+<example id="imp-id10860364">
+  <para id="imp-id10860366">
+    The following formula is a simple application of symmetry.
+    <m:math><m:apply><m:implies/>
+      <m:apply><m:and/>
+        <m:apply><m:forall/><m:bvar><m:ci>x</m:ci></m:bvar>
+          <m:apply><m:forall/><m:bvar><m:ci>y</m:ci></m:bvar>
+            <m:apply><m:implies/>
+              <m:apply><m:ci type="fn">near</m:ci> <m:ci>x</m:ci> <m:ci>y</m:ci></m:apply>
+              <m:apply><m:ci type="fn">near</m:ci> <m:ci>y</m:ci> <m:ci>x</m:ci></m:apply>
+            </m:apply>
+          </m:apply>
+        </m:apply>
+        <m:apply>
+          <m:ci type="fn">near</m:ci>
+          <m:ci>Sue</m:ci>
+          <m:ci>Joe</m:ci>
+        </m:apply>
+      </m:apply>
+      <m:apply>
+        <m:ci type="fn">near</m:ci>
+        <m:ci>Joe</m:ci>
+        <m:ci>Sue</m:ci>
+      </m:apply>
+    </m:apply></m:math>.
+  </para>
+
+  <para id="imp-id14255322">
+    While it is certainly true under the intended interpretation,
+    it is also true under <emphasis>any</emphasis> interpretation.
+    Such formulas are called <term>valid</term>.
+    Valid first-order formulas are the natural analog of tautological
+    propositional formulas.
+  </para>
+</example>
+
+<example id="example-using-even-prime">
+  <para id="imp-id14176934">
+    <m:math><m:apply><m:forall/><m:bvar><m:ci>x</m:ci></m:bvar>
+      <m:apply><m:implies/>
+        <m:apply><m:and/>
+          <m:apply><m:ci type="fn">even</m:ci>  <m:ci>x</m:ci></m:apply>
+          <m:apply><m:ci type="fn">prime</m:ci> <m:ci>x</m:ci></m:apply>
+        </m:apply>
+        <m:apply><m:eq/> <m:ci>x</m:ci> <m:cn>2</m:cn></m:apply>
+      </m:apply>
+    </m:apply></m:math>
+    is a mathematical fact, in the standard interpretation of arithmetic.
+  </para>
+</example>
+
+<para id="imp-id14176557">
+  While technically not allowed by our
+  <link document="m10728" target-id="term">term</link> and
+  <link document="m10728" target-id="wff">formula</link>
+  syntax, we'll continue using infix notation
+  for common mathematical functions and relations, as in
+  <link target-id="example-using-even-prime">the previous example</link>.
+</para>
+
+<exercise id="exercise-even-and-prime">
+  <problem id="imp-id13680827">
+    <para id="imp-id13680829">
+      The
+      <link target-id="example-using-even-prime">previous example</link> used the relations
+      <m:math><m:ci type="fn">even</m:ci></m:math> and <m:math><m:ci type="fn">prime</m:ci></m:math>.
+      Of course, to use such relations,
+      they must either be defined directly by the interpretation, or
+      be defined in terms of functions and relations provided by
+      the interpretation.
+    </para>
+
+    <para id="imp-id13261668">
+      How would you define these two relations in terms of the basic
+      numerical functions (addition, multiplication, …)
+      and relations (<m:math><m:mo>=</m:mo></m:math> , &lt;, &gt;)?
+    </para>
+  </problem>
+
+  <solution id="imp-id13851553">
+    <para id="imp-id13851555">
+      <quote display="inline">Evenness</quote> is a straightforward translation from 
+      <quote display="inline">
+        An integer n is even, iff it is twice some other integer k
+      </quote>:
+      <m:math><m:apply><m:equivalent/>
+        <m:apply><m:ci type="fn">even</m:ci> <m:ci>n</m:ci></m:apply>
+        <m:apply><m:exists/><m:bvar><m:ci>k</m:ci></m:bvar>
+          <m:apply><m:eq/>
+            <m:ci>n</m:ci>
+            <m:apply><m:times/><m:cn>2</m:cn><m:ci>k</m:ci></m:apply>
+          </m:apply>
+        </m:apply>
+      </m:apply></m:math>.
+      Note that by this standard definition, zero is even.
+    </para>
+
+    <para id="imp-id13728013">
+      There are many equivalent ways to define primality, just as there
+      many algorithms for checking primality.
+      One straightforward solution is
+      <m:math><m:apply><m:equivalent/>
+        <m:apply><m:ci type="fn">noncomposite</m:ci> <m:ci>n</m:ci></m:apply>
+        <m:apply><m:forall/><m:bvar><m:ci>j</m:ci></m:bvar>
+          <m:apply><m:forall/><m:bvar><m:ci>k</m:ci></m:bvar>
+            <m:apply><m:implies/>
+              <m:apply><m:eq/>
+                <m:apply><m:times/> <m:ci>j</m:ci> <m:ci>k</m:ci></m:apply>
+                <m:ci>n</m:ci>
+              </m:apply> 
+              <m:apply><m:or/>
+                <m:apply><m:eq/> <m:ci>j</m:ci> <m:cn>1</m:cn></m:apply>
+                <m:apply><m:eq/> <m:ci>k</m:ci> <m:cn>1</m:cn></m:apply>
+              </m:apply>
+            </m:apply>
+          </m:apply>
+        </m:apply>
+      </m:apply></m:math>.
+      
+      Well, this is almost expresses <quote display="inline">prime</quote>,
+      except that
+      <m:math>
+        <m:apply><m:eq/>
+          <m:ci>n</m:ci>
+          <m:cn>1</m:cn>
+        </m:apply>
+      </m:math>
+      satisfies this formula.
+      A mathematician points out that just as 0 is neither positive nor
+      negative, 1 is neither prime nor composite;
+      as stated this formula
+      actually captures <quote display="inline">noncomposite</quote>, oops.
+      There are several ways to upgrade this to exactly capture
+      <quote display="inline">prime</quote>.
+      <note id="imp-id13363244" type="aside">
+        1 is called a <quote display="inline">unit</quote>.  
+        If we consider the domain of all integers (not just natural numbers),
+        the idea of primality still makes sense; -17 is also prime;
+        and -1 is also another unit.  Similarly, considering the domain
+        of <quote display="inline">complex integers</quote>
+        
+        <m:math><m:set>
+          <m:bvar><m:ci>a</m:ci></m:bvar>
+          <m:bvar><m:ci>b</m:ci></m:bvar>
+          <m:condition>
+            <m:apply><m:and/>
+              <m:apply><m:in/>
+                <m:ci>a</m:ci>
+                <m:integers/>
+              </m:apply>
+              <m:apply><m:in/>
+                <m:ci>b</m:ci>
+                <m:integers/>
+              </m:apply>
+            </m:apply>
+          </m:condition>
+          <m:apply><m:plus/>
+            <m:ci>a</m:ci>
+            <m:apply><m:times/>
+              <m:ci>b</m:ci>
+              <m:imaginaryi/>
+            </m:apply>
+          </m:apply>
+        </m:set></m:math>
+        
+        (could be written
+         <quote display="inline">
+           <m:math>
+             <m:apply><m:plus/>
+               <m:integers/>
+               <m:apply><m:times/>
+                 <m:integers/>
+                 <m:imaginaryi/>
+               </m:apply>
+             </m:apply>
+           </m:math>
+         </quote>),
+        then
+        <m:math>
+          <m:imaginaryi/>
+        </m:math>
+        and
+        <m:math>
+          <m:apply><m:minus/>
+            <m:imaginaryi/>
+          </m:apply>
+        </m:math>
+        are also units.
+        
+        How might we generalize our definition of prime, to work
+        in these further interpretations?
+        
+      </note>
+      A similar, equivalent formula to the above is
+      <m:math><m:apply><m:equivalent/>
+        <m:apply><m:ci type="fn">noncomposite</m:ci> <m:ci>n</m:ci></m:apply>
+        <m:apply><m:not/>
+          <m:apply><m:exists/><m:bvar><m:ci>j</m:ci></m:bvar> 
+            <m:apply><m:exists/><m:bvar><m:ci>k</m:ci></m:bvar>
+              <m:apply><m:and/>
+                <m:apply><m:eq/> 
+                  <m:apply> <m:times/> <m:ci>j</m:ci> <m:ci>k</m:ci></m:apply>
+                  <m:ci>n</m:ci>
+                </m:apply>
+                <m:apply><m:neq/> <m:ci>j</m:ci> <m:cn>1</m:cn></m:apply>
+                <m:apply><m:neq/> <m:ci>k</m:ci> <m:cn>1</m:cn></m:apply>
+              </m:apply> 
+            </m:apply> 
+          </m:apply>
+        </m:apply> 
+      </m:apply></m:math>.
+    </para>
+  </solution>
+</exercise>
+
+<exercise id="exercise4">
+  <problem id="imp-id13958319">
+    <para id="imp-id13958321">
+      One hypothesis about natural numbers is known as 
+      <link url="http://www.wikipedia.org/wiki/Goldbachs_conjecture">Goldbach's Conjecture</link>.
+      It states that all even integers greater than two
+      can be expressed as the sum of two primes.
+      It is one of the oldest still-unsolved problems about numbers.
+      How would you write this conjecture as a WFF?
+    </para>
+  </problem>
+
+  <solution id="imp-id14655811">
+    <para id="imp-id14336483">
+      <m:math><m:apply><m:forall/><m:bvar><m:ci>n</m:ci></m:bvar> 
+        <m:apply><m:implies/>
+          <m:apply><m:and/>
+            <m:apply><m:ci type="fn">even</m:ci> <m:ci>n</m:ci></m:apply>
+            <m:apply><m:gt/> <m:ci>n</m:ci> <m:cn>2</m:cn> </m:apply>
+          </m:apply>
+          <m:apply><m:exists/><m:bvar><m:ci>p</m:ci></m:bvar> 
+            <m:apply><m:exists/><m:bvar><m:ci>q</m:ci></m:bvar>
+              <m:apply><m:and/>
+                <m:apply><m:ci type="fn">prime</m:ci> <m:ci>p</m:ci></m:apply>
+                <m:apply><m:ci type="fn">prime</m:ci> <m:ci>q</m:ci></m:apply>
+                <m:apply><m:eq/> 
+                  <m:apply><m:plus/> <m:ci>p</m:ci> <m:ci>q</m:ci></m:apply>
+                  <m:ci>n</m:ci>
+                </m:apply>
+              </m:apply> 
+            </m:apply> 
+          </m:apply>
+        </m:apply>
+      </m:apply></m:math>
+    </para>
+  </solution>
+</exercise>
+
+<para id="imp-id14258664">
+  Enough about number theory.  Let's look at some examples
+  about common data structures and some about our favorite problem,
+  WaterWorld.
+</para>
+
+<example id="imp-id13706809">
+  <para id="imp-id14258666">
+    If your program uses binary search trees and your domain is
+    tree nodes, you need to know
+    
+    <m:math><m:apply><m:forall/><m:bvar><m:ci>node</m:ci></m:bvar>
+      <m:apply><m:and/>
+        <m:apply>
+          <m:leq/>
+          <m:apply>
+            <m:fn><m:ci>data</m:ci></m:fn>
+            <m:apply>
+              <m:fn><m:ci>left</m:ci></m:fn>
+              <m:ci>node</m:ci>
+            </m:apply>
+          </m:apply>
+          <m:apply>
+            <m:fn><m:ci>data</m:ci></m:fn>
+            <m:ci>node</m:ci>
+          </m:apply>
+        </m:apply>
+        <m:apply>
+          <m:gt/>
+          <m:apply>
+            <m:fn><m:ci>data</m:ci></m:fn>
+            <m:apply>
+              <m:fn><m:ci>right</m:ci></m:fn>
+              <m:ci>node</m:ci>
+            </m:apply>
+          </m:apply>
+          <m:apply>
+            <m:fn><m:ci>data</m:ci></m:fn>
+            <m:ci>node</m:ci>
+          </m:apply>
+        </m:apply>
+      </m:apply>
+    </m:apply></m:math>.
+    If these trees are also balanced, you need to know
+    <m:math><m:apply><m:forall/><m:bvar><m:ci>node</m:ci></m:bvar>
+      <m:apply><m:or/>
+        <m:apply>
+          <m:eq/>
+          <m:apply>
+            <m:fn><m:ci>height</m:ci></m:fn>
+            <m:apply>
+              <m:fn><m:ci>left</m:ci></m:fn>
+              <m:ci>node</m:ci>
+            </m:apply>
+          </m:apply>
+          <m:apply>
+            <m:fn><m:ci>height</m:ci></m:fn>
+            <m:apply>
+              <m:fn><m:ci>right</m:ci></m:fn>
+              <m:ci>node</m:ci>
+            </m:apply>
+          </m:apply>
+        </m:apply>
+        <m:apply>
+          <m:eq/>
+          <m:apply>
+            <m:plus/>
+            <m:apply>
+              <m:fn><m:ci>height</m:ci></m:fn>
+              <m:apply>
+                <m:fn><m:ci>left</m:ci></m:fn>
+                <m:ci>node</m:ci>
+              </m:apply>
+            </m:apply>
+            <m:cn>1</m:cn>
+          </m:apply>
+          <m:apply>
+            <m:fn><m:ci>height</m:ci></m:fn>
+            <m:apply>
+              <m:fn><m:ci>right</m:ci></m:fn>
+              <m:ci>node</m:ci>
+            </m:apply>
+          </m:apply>
+        </m:apply>
+        <m:apply>
+          <m:eq/>
+          <m:apply>
+            <m:fn><m:ci>height</m:ci></m:fn>
+            <m:apply>
+              <m:fn><m:ci>left</m:ci></m:fn>
+              <m:ci>node</m:ci>
+            </m:apply>
+          </m:apply>
+          <m:apply>
+            <m:plus/>
+            <m:apply>
+              <m:fn><m:ci>height</m:ci></m:fn>
+              <m:apply>
+                <m:fn><m:ci>right</m:ci></m:fn>
+                <m:ci>node</m:ci>
+              </m:apply>
+            </m:apply>
+            <m:cn>1</m:cn>
+          </m:apply>
+        </m:apply>
+      </m:apply>
+    </m:apply></m:math>.
+    Again, these assume the implied interpretations.
+  </para>
+</example>
+
+<example id="sorted-array">
+  <para id="imp-id11866865">
+    We would like to be able to state that the output of a sorting
+    routine is, in fact, sorted.
+    Let's assume we're sorting arrays into ascending order.
+  </para>
+
+  <para id="imp-id11464637">
+    To talk about the elements of an array in a typical programming
+    language, we would write something like
+    <m:math><m:ci>a</m:ci><m:mfenced close="]" open="["><m:ci>i</m:ci></m:mfenced></m:math>.
+    For this example, we'll use that notation, even though it doesn't
+    quite fit the logic's syntax.
+  </para>
+
+  <para id="imp-id13994998">
+    To describe sortedness (in non-decreasing order),
+    we want to state that each element is greater than or equal to  
+    the previous one.  However, just like in a program, we need to
+    ensure our formula doesn't index outside the bounds of the array.
+    For this example, we'll assume that an array's indices are
+    zero to (but not including) 
+    <m:math><m:apply><m:fn><m:ci>size</m:ci></m:fn><m:ci>a</m:ci></m:apply></m:math>.
+  </para>
+
+  <para id="imp-id12992569">
+    <m:math><m:apply><m:equivalent/>
+      <m:apply><m:ci type="fn">sorted</m:ci> <m:ci>a</m:ci></m:apply>
+      <m:apply><m:forall/><m:bvar><m:ci>i</m:ci></m:bvar>
+        <m:apply><m:implies/>
+          <m:apply><m:and/>
+            <m:apply>
+              <m:leq/>
+              <m:cn>1</m:cn>
+              <m:ci>i</m:ci>
+            </m:apply>
+            <m:apply>
+              <m:lt/>
+              <m:ci>i</m:ci>
+              <m:apply>
+                <m:fn><m:ci>size</m:ci></m:fn>
+                <m:ci>a</m:ci>
+              </m:apply>
+            </m:apply>
+          </m:apply>
+          <m:apply>
+            <m:lt/>
+            <m:mrow>
+              <m:ci>a</m:ci>
+              <m:mfenced close="]" open="[">
+                <m:apply><m:minus/><m:ci>i</m:ci><m:cn>1</m:cn></m:apply>
+              </m:mfenced>
+            </m:mrow>  
+            <m:mrow>
+              <m:ci>a</m:ci>
+              <m:mfenced close="]" open="["><m:ci>i</m:ci></m:mfenced>
+            </m:mrow>
+          </m:apply>
+        </m:apply>
+      </m:apply>
+    </m:apply></m:math>
+  </para>
+
+  <para id="imp-id13576852">
+    When proving things about programs, it's often useful to realize
+    there are alternate ways of defining things.  So, let's see a couple
+    more definitions.
+  </para>
+
+  <para id="imp-id13228030">
+    We could change our indexing slightly:
+    
+    <m:math><m:apply><m:equivalent/>
+      <m:apply><m:ci type="fn">sorted</m:ci> <m:ci>a</m:ci></m:apply>
+      <m:apply><m:forall/><m:bvar><m:ci>i</m:ci></m:bvar>
+        <m:apply><m:implies/>
+          <m:apply><m:and/>
+            <m:apply> <m:leq/> <m:cn>0</m:cn> <m:ci>i</m:ci> </m:apply>
+            <m:apply>
+              <m:lt/>
+              <m:ci>i</m:ci>
+              <m:apply>
+                <m:minus/>
+                <m:apply>
+                  <m:fn><m:ci>size</m:ci></m:fn>
+                  <m:ci>a</m:ci>
+                </m:apply>
+                <m:cn>1</m:cn>
+              </m:apply>
+            </m:apply>
+          </m:apply>
+          <m:apply>
+            <m:lt/>
+            <m:mrow>
+              <m:ci>a</m:ci>
+              <m:mfenced close="]" open="["><m:ci>i</m:ci></m:mfenced>
+            </m:mrow> 
+            <m:mrow>
+              <m:ci>a</m:ci>
+              <m:mfenced close="]" open="[">
+                <m:apply>
+                  <m:plus/>
+                  <m:ci>i</m:ci>
+                  <m:cn>1</m:cn>
+                </m:apply>
+              </m:mfenced>
+            </m:mrow> 
+          </m:apply>
+        </m:apply>
+      </m:apply>
+    </m:apply></m:math>.
+  </para>
+
+
+  <para id="imp-id13007934">
+    
+    Or we could state that the ordering holds on every pair of elements:
+    <m:math><m:apply><m:equivalent/>
+      <m:apply><m:ci type="fn">sorted</m:ci> <m:ci>a</m:ci></m:apply>
+      <m:apply><m:forall/><m:bvar><m:ci>i</m:ci></m:bvar>
+        <m:apply><m:forall/><m:bvar><m:ci>j</m:ci></m:bvar>
+          <m:apply><m:implies/>
+            <m:apply><m:and/>
+              <m:apply> <m:leq/> <m:cn>0</m:cn> <m:ci>i</m:ci> </m:apply>
+              <m:apply>
+                <m:lt/>
+                <m:ci>i</m:ci>
+                <m:apply><m:fn><m:ci>size</m:ci></m:fn> <m:ci>a</m:ci></m:apply>
+              </m:apply>
+              <m:apply> <m:leq/> <m:cn>0</m:cn> <m:ci>j</m:ci> </m:apply>
+              <m:apply>
+                <m:lt/>
+                <m:ci>j</m:ci>
+                <m:apply><m:fn><m:ci>size</m:ci></m:fn> <m:ci>a</m:ci></m:apply>
+              </m:apply>
+              <m:apply> <m:lt/> <m:ci>i</m:ci>  <m:ci>j</m:ci> </m:apply>
+            </m:apply>
+            <m:apply>
+              <m:leq/>
+              <m:mrow>
+                <m:ci>a</m:ci>
+                <m:mfenced close="]" open="["><m:ci>i</m:ci></m:mfenced>
+              </m:mrow> 
+              <m:mrow>
+                <m:ci>a</m:ci>
+                <m:mfenced close="]" open="["><m:ci>j</m:ci></m:mfenced>
+              </m:mrow>
+            </m:apply>
+          </m:apply>
+        </m:apply>
+      </m:apply>
+    </m:apply></m:math>.
+    This definition isn't any stronger, but it makes an additional
+    property explicit.  Generally, you'd find it harder to prove that
+    this formula was true, but once you did, you'd find it easier to
+    use this formula to prove other statements.
+  </para>
+</example>
+
+<exercise id="functions">
+  <problem id="imp-id14575491">
+    <para id="imp-id14575493">
+      The two preceding examples used functions like <m:math><m:ci>left</m:ci></m:math>,
+      <m:math><m:ci>size</m:ci></m:math>, and subtraction, although our logic syntax
+      doesn't include such functions.
+      However, we can rewrite any use of functions with appropriate new
+      relations.
+    </para>
+
+    <para id="imp-id13794579">
+      As an example, rewrite
+      <m:math><m:apply>
+        <m:lt/>
+        <m:ci>i</m:ci>
+        <m:apply><m:fn><m:ci>size</m:ci></m:fn> <m:ci>a</m:ci></m:apply>
+      </m:apply></m:math>
+      in proper first-order syntax.
+    </para>
+  </problem>
+
+  <solution id="imp-id13196259">
+    <para id="imp-id13196261">
+      We need a new relation that combines the syntax of
+      <m:math><m:apply><m:lt/></m:apply></m:math> and <m:math><m:ci>size</m:ci></m:math>.
+      The result would look like
+      <m:math><m:apply>
+        <m:ci type="fn">less-than-size</m:ci>
+        <m:ci>i</m:ci>
+        <m:ci>a</m:ci>
+      </m:apply></m:math>.
+      This assumes the new relation has the obvious intended definition.
+    </para>
+
+  </solution>
+</exercise>
+
+<exercise id="exercise6">
+  <problem id="imp-id13054470">
+    <para id="imp-id13793385">
+    One simple WaterWorld fact is that if a location has no unsafe
+    neighbors, then its number of adjacent pirates is zero.
+    Furthermore, the implication goes both ways.
+    How would you state that as a WFF?
+    </para>
+  </problem>
+
+  <solution id="imp-id13793387">
+    
+    <para id="imp-id12974350">
+      <m:math>
+        <m:declare nargs="2" occurrence="infix" type="fn">
+          <m:mo>⇔</m:mo>
+        </m:declare>
+        <m:apply><m:forall/><m:bvar><m:ci>x</m:ci></m:bvar>
+          <m:apply><m:mo>⇔</m:mo>
+            <m:apply><m:forall/><m:bvar><m:ci>y</m:ci></m:bvar>
+              <m:apply><m:implies/>
+                <m:apply>
+                  <m:ci type="fn">nhbr</m:ci>
+                  <m:ci>x</m:ci>
+                  <m:ci>y</m:ci>
+                </m:apply>
+                <m:apply> <m:ci type="fn">safe</m:ci> <m:ci>y</m:ci></m:apply>
+              </m:apply>
+            </m:apply>
+            <m:apply><m:ci type="fn">has-0</m:ci> <m:ci>x</m:ci></m:apply>
+          </m:apply>
+        </m:apply>
+      </m:math>
+    </para>
+  </solution>
+</exercise>
+
+<exercise id="exercise7">
+  <problem id="imp-id13107520">
+    <para id="imp-id13618040">
+      How would you make a similar statement about the number of
+      adjacent pirates being one?
+    </para>
+  </problem>
+
+  <solution id="imp-id14060357">
+    <para id="imp-id14060359">
+      There are various solutions, but they all must capture the same idea:
+      there exists exactly one unsafe neighbor.
+      This solution states that in two parts:
+      <list id="imp-id4900335">
+        <item>
+          There exists an unsafe neighbor, <m:math><m:ci>u</m:ci></m:math>.
+        </item>
+        <item>
+          Every unsafe neighbor is <m:math><m:ci>u</m:ci></m:math>.
+        </item>
+      </list>
+      Together, these two parts imply there is only one such <m:math><m:ci>u</m:ci></m:math>.
+    </para>
+
+    <para id="imp-id12727056">
+      <m:math>
+        <m:declare nargs="2" occurrence="infix" type="fn">
+          <m:mo>⇔</m:mo>
+        </m:declare>
+        <m:apply><m:forall/><m:bvar><m:ci>x</m:ci></m:bvar>
+          <m:apply><m:mo>⇔</m:mo>
+            <m:apply><m:exists/><m:bvar><m:ci>u</m:ci></m:bvar>
+              <m:apply><m:and/>
+                <m:apply>
+                  <m:ci type="fn">nhbr</m:ci>
+                  <m:ci>x</m:ci>
+                  <m:ci>u</m:ci>
+                </m:apply>
+                <m:apply><m:not/>
+                  <m:apply><m:ci type="fn">safe</m:ci><m:ci>u</m:ci></m:apply>
+                </m:apply>
+                <m:apply><m:forall/><m:bvar><m:ci>y</m:ci></m:bvar>
+                  <m:apply><m:implies/>
+                    <m:apply>
+                      <m:ci type="fn">nhbr</m:ci>
+                      <m:ci>x</m:ci>
+                      <m:ci>y</m:ci>
+                    </m:apply>
+                    <m:apply><m:mo>⇔</m:mo>
+                      <m:apply><m:not/>
+                        <m:apply>
+                          <m:ci type="fn">safe</m:ci>
+                          <m:ci>y</m:ci>
+                        </m:apply>
+                      </m:apply>
+                      <m:apply><m:eq/> <m:ci>y</m:ci> <m:ci>u</m:ci> </m:apply>
+                    </m:apply>
+                  </m:apply>
+                </m:apply>
+              </m:apply>
+            </m:apply>
+            <m:apply><m:ci type="fn">has-1</m:ci> <m:ci>x</m:ci></m:apply>
+          </m:apply>
+        </m:apply>
+      </m:math>
+    </para>
+  </solution>
+</exercise>
+
+<para id="imp-id12240670">
+  These statements are very similar to, and provable from, the
+  <link document="m11072">first-order WaterWorld domain axioms</link>.
+</para>
+
+</section> 
+
+
+<section id="imp-id12899683">
+<title>A hint on deciphering formulas' meanings</title>
+
+<para id="imp-id12844815">
+  Some formulas can get pretty hairy:
+  <m:math><m:apply><m:forall/><m:bvar><m:ci>x</m:ci></m:bvar>
+    <m:apply><m:exists/><m:bvar><m:ci>y</m:ci></m:bvar>
+      <m:apply><m:forall/><m:bvar><m:ci>z</m:ci></m:bvar> 
+        <m:apply><m:and/>
+          <m:apply><m:ci type="fn">likes</m:ci> <m:ci>x</m:ci> <m:ci>y</m:ci></m:apply>
+          <m:apply><m:not/><m:apply><m:ci type="fn">likes</m:ci> <m:ci>y</m:ci> <m:ci>z</m:ci></m:apply></m:apply>
+        </m:apply>
+      </m:apply>
+    </m:apply>
+  </m:apply></m:math>.
+  The zeroth step is to take a breath, and read this in English:
+  for every <m:math><m:ci>x</m:ci></m:math>, there's some <m:math><m:ci>y</m:ci></m:math>
+  such that for every <m:math><m:ci>z</m:ci></m:math>,
+  <m:math><m:ci>x</m:ci></m:math> likes <m:math><m:ci>y</m:ci></m:math> but <m:math><m:ci>y</m:ci></m:math>
+  doesn't like <m:math><m:ci>z</m:ci></m:math>.
+  Even so, how do we approach getting a handle on what this means?
+  Given an interpretation, how do we know it's true?
+</para>
+
+<para id="imp-id14609202">
+  The top-down way would be to read this formula left-to-right.
+  Is the whole formula true?
+  Well, it's only true if, for every possible value of x,
+  some smaller formula is true
+  (namely, 
+   <quote display="inline">
+     there exists a <m:math><m:ci>y</m:ci></m:math> such that forall <m:math><m:ci>z</m:ci></m:math>,
+     <m:math><m:apply>
+       <m:ci type="fn">likes</m:ci>
+       <m:ci>x</m:ci>
+       <m:ci>y</m:ci>
+     </m:apply></m:math>
+     and <m:math><m:apply><m:not/><m:apply><m:ci type="fn">likes</m:ci> <m:ci>y</m:ci> <m:ci>z</m:ci></m:apply></m:apply></m:math>.
+   </quote>).
+  (This is a formula with <m:math><m:ci>x</m:ci></m:math> free,
+   that is, it's a statement about <m:math><m:ci>x</m:ci></m:math>.)
+  And is that formula true? 
+  Well, precisely when we can find some <m:math><m:ci>y</m:ci></m:math> such that …
+  (and so on).
+  This direct approach is hard to keep inside your head all at once.
+</para>
+
+<para id="imp-id11476139">
+  Most people prefer approaching the problems in a bottom-up manner
+  (or if you prefer, right-to-left or inside-out):
+  First consider at the small inner bits alone, figure out what they mean,
+  and only then figure out how they relate.
+
+  <list id="imp-id12459711">
+    <item>
+      What does the innermost formula
+      <m:math><m:apply><m:and/>
+        <m:apply><m:ci type="fn">likes</m:ci> <m:ci>x</m:ci> <m:ci>y</m:ci></m:apply>
+        <m:apply><m:not/>
+          <m:apply><m:ci type="fn">likes</m:ci> <m:ci>y</m:ci> <m:ci>z</m:ci></m:apply>
+        </m:apply>
+      </m:apply></m:math>
+      mean, in English?  That's not so bad:
+      <m:math><m:ci>x</m:ci></m:math> likes <m:math><m:ci>y</m:ci></m:math>, and <m:math><m:ci>y</m:ci></m:math> dislikes <m:math><m:ci>z</m:ci></m:math>.
+      A statement about three people called <m:math><m:ci>x</m:ci></m:math>, <m:math><m:ci>y</m:ci></m:math>, <m:math><m:ci>z</m:ci></m:math>.
+    </item>
+
+    <item>
+      Working outward, what does
+      <m:math><m:apply><m:forall/><m:bvar><m:ci>z</m:ci></m:bvar>
+        <m:apply><m:and/>
+          <m:apply><m:ci type="fn">likes</m:ci> <m:ci>x</m:ci> <m:ci>y</m:ci></m:apply> 
+          <m:apply><m:not/>
+            <m:apply><m:ci type="fn">likes</m:ci> <m:ci>y</m:ci> <m:ci>z</m:ci></m:apply>
+          </m:apply>
+        </m:apply>
+      </m:apply></m:math>
+      mean?  Ah, not so bad either:
+      <m:math><m:ci>x</m:ci></m:math> likes <m:math><m:ci>y</m:ci></m:math>, and <m:math><m:ci>y</m:ci></m:math> dislikes everybody.
+      <footnote id="misanthropes">
+        Or if you prefer,
+        <quote display="inline"><m:math><m:ci>x</m:ci></m:math> likes <m:math><m:ci>y</m:ci></m:math>, who is a misanthrope</quote>.
+        A self-loathing misanthrope, at that!
+      </footnote>
+    </item>
+
+    <item>
+      Keep on going:
+      <m:math><m:apply><m:exists/><m:bvar><m:ci>y</m:ci></m:bvar>
+        <m:apply><m:forall/><m:bvar><m:ci>z</m:ci></m:bvar>
+          <m:apply><m:and/>
+            <m:apply><m:ci type="fn">likes</m:ci> <m:ci>x</m:ci> <m:ci>y</m:ci></m:apply> 
+            <m:apply><m:not/>
+              <m:apply><m:ci type="fn">likes</m:ci> <m:ci>y</m:ci> <m:ci>z</m:ci></m:apply>
+            </m:apply>
+          </m:apply>
+        </m:apply>
+      </m:apply></m:math>
+      becomes <quote display="inline"><m:math><m:ci>x</m:ci></m:math> likes some misanthrope</quote>.
+    </item>
+
+    <item>
+      Now it's clear:
+      <m:math><m:apply><m:forall/><m:bvar><m:ci>x</m:ci></m:bvar>
+        <m:apply><m:exists/><m:bvar><m:ci>y</m:ci></m:bvar>
+          <m:apply><m:forall/><m:bvar><m:ci>z</m:ci></m:bvar>
+            <m:apply><m:and/>
+              <m:apply>
+                <m:ci type="fn">likes</m:ci>
+                <m:ci>x</m:ci>
+                <m:ci>y</m:ci>
+              </m:apply> 
+              <m:apply><m:not/>
+                <m:apply>
+                  <m:ci type="fn">likes</m:ci>
+                  <m:ci>y</m:ci>
+                  <m:ci>z</m:ci>
+                </m:apply>
+              </m:apply>
+            </m:apply>
+          </m:apply>
+        </m:apply>
+      </m:apply></m:math>
+      is just <quote display="inline">everybody likes some misanthrope</quote>.
+    </item>
+  </list>
+
+  Phew!
+</para>
+
+</section>
+
+
+
+
+
+<section id="imp-id8840830">
+<title><quote display="inline">Forall</quote>'s friend <quote display="inline">if</quote></title>
+
+<para id="imp-id14551950">
+  We have already seen quite a few formulas of the general form
+  <m:math><m:apply><m:forall/><m:bvar><m:ci>x</m:ci></m:bvar>
+    <m:apply><m:implies/>
+      <m:apply><m:ci type="fn">P</m:ci> <m:ci>x</m:ci></m:apply>
+      <m:ci>…</m:ci>
+    </m:apply>
+  </m:apply></m:math>.
+  Indeed, this is a very useful idiom:
+  If our domain is natural numbers but we want to say something
+  about all primes, we simply write
+  <m:math><m:apply><m:forall/><m:bvar><m:ci>n</m:ci></m:bvar>
+    <m:apply><m:implies/>
+      <m:apply><m:ci type="fn">prime</m:ci> <m:ci>n</m:ci></m:apply>
+      <m:ci>…</m:ci>
+    </m:apply>
+  </m:apply></m:math>.
+  Don't be fooled;
+  this formula is in no way suggesting that all numbers are prime!
+
+  <note id="imp-id13678896" type="warning">
+    This same construct using ∃ is usually a mistake.  Consider
+    <m:math><m:apply><m:exists/><m:bvar><m:ci>x</m:ci></m:bvar>
+      <m:apply><m:implies/>
+        <m:apply><m:ci type="fn">P</m:ci> <m:ci>x</m:ci></m:apply>
+        <m:ci>…</m:ci>
+      </m:apply>
+    </m:apply></m:math>.
+    By choosing <m:math><m:ci>x</m:ci></m:math> to be any non-<m:math><m:ci type="fn">P</m:ci></m:math> element,
+    this entire formula is true, without even glancing at what is inside
+    the <quote display="inline">…</quote>!
+  </note>
+</para>
+
+<note id="imp-id4127795">
+  If you have to demonstrate that all ravens are black,
+  <m:math><m:apply><m:forall/><m:bvar><m:ci>i</m:ci></m:bvar>
+    <m:apply><m:implies/>
+      <m:apply><m:ci type="fn">isRaven</m:ci><m:ci>i</m:ci></m:apply>
+      <m:apply><m:ci type="fn">isBlack</m:ci><m:ci>i</m:ci></m:apply>
+    </m:apply>
+  </m:apply></m:math>,
+  there are two ways to do so:
+  You can go out and find every raven and verify that it's black.
+  Alternately, you can go and find every non-black item, and verify
+  that it's a non-raven.
+
+  Epistemologists, philosophers dealing with how we humans
+  come to learn and know things (about, say, raven colors),
+  go on to ponder about real-world degrees-of-belief:
+  If we have only looked at some ravens, and we find another raven and
+  confirm it is black, does this increase our degree of belief about
+  all ravens being black?
+  If so, then whenever we find a non-black item which is a non-raven,
+  this must also increase our degree of belief that all ravens
+  are black.
+  This leads to Hempel's (so-called) Paradox:
+  if we are looking for evidence to choose between two competing hypotheses
+  (say, <quote display="inline">all non-black items are not ravens</quote>
+   versus <quote display="inline">all non-orange items are not ravens</quote>),
+  then finding a purple cow increases our belief in <emphasis>both</emphasis>
+  of these hypotheses, simultaneously!
+</note>
+
+</section>
+</section> 
+
+</content>
+</document>

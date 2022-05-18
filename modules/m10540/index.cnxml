@@ -1,0 +1,325 @@
+<document xmlns="http://cnx.rice.edu/cnxml" xmlns:m="http://www.w3.org/1998/Math/MathML" xmlns:md="http://cnx.rice.edu/mdml">
+
+<title>Reference: propositional equivalences</title>
+<metadata><md:content-id>undefined</md:content-id><md:title/><md:uuid>9bf3ccce-d434-4076-9234-df635aef1cfd</md:uuid>
+</metadata>
+
+
+
+<content>
+<para id="para1">
+  The following lists some propositional formula equivalences.
+  Remember that we use the symbol <m:math><m:mo>≡</m:mo></m:math> as a relation between two WFFs,
+  not as a connective inside a WFF.
+  In these, <m:math><m:ci>φ</m:ci></m:math>, <m:math><m:ci>ψ</m:ci></m:math>, and <m:math><m:ci>θ</m:ci></m:math>
+  are meta-variables standing for any WFF.
+</para>
+
+
+
+<table id="table1" summary="">
+<title>Propositional Logic Equivalences</title>
+<tgroup cols="3">
+<colspec colname="c2" colnum="2"/><colspec colname="c3" colnum="3"/>
+<tbody><row>
+    <entry> Double Complementation </entry>
+    <entry nameend="c3" namest="c2">
+      <m:math><m:apply>
+        <m:equivalent/>
+        <m:apply>
+          <m:not/>
+          <m:apply>
+            <m:not/>
+            <m:ci>φ</m:ci>
+          </m:apply>
+        </m:apply>
+        <m:ci>φ</m:ci>
+      </m:apply></m:math>
+    </entry>
+  </row>
+<row>
+    <entry> Complement </entry>
+    <entry>
+      <m:math><m:apply>
+        <m:equivalent/>
+        <m:apply>
+          <m:or/>
+          <m:ci>φ</m:ci>
+          <m:apply>
+            <m:not/>
+            <m:ci>φ</m:ci>
+          </m:apply>
+        </m:apply>
+        <m:true/>
+      </m:apply></m:math>
+    </entry>
+    <entry>
+      <m:math><m:apply>
+        <m:equivalent/>
+        <m:apply>
+          <m:and/>
+          <m:ci>φ</m:ci>
+          <m:apply><m:not/><m:ci>φ</m:ci></m:apply>
+        </m:apply>
+        <m:false/>
+      </m:apply></m:math>
+    </entry>
+  </row>
+<row>
+    <entry> Identity </entry>
+    <entry>
+      <m:math><m:apply>
+        <m:equivalent/>
+        <m:apply><m:or/><m:ci>φ</m:ci> <m:false/></m:apply>
+        <m:ci>φ</m:ci>
+      </m:apply></m:math>
+    </entry>
+    <entry>
+      <m:math><m:apply>
+        <m:equivalent/>
+        <m:apply><m:and/><m:ci>φ</m:ci> <m:true/></m:apply>
+        <m:ci>φ</m:ci>
+      </m:apply></m:math>
+    </entry>
+  </row>
+<row>
+    <entry> Dominance </entry>
+    <entry>
+      <m:math><m:apply>
+        <m:equivalent/>
+        <m:apply><m:or/><m:ci>φ</m:ci> <m:true/></m:apply>
+        <m:true/>
+      </m:apply></m:math>
+    </entry>
+    <entry>
+      <m:math><m:apply>
+        <m:equivalent/>
+        <m:apply><m:and/><m:ci>φ</m:ci> <m:false/></m:apply>
+        <m:false/>
+      </m:apply></m:math>
+    </entry>
+  </row>
+<row>
+    <entry> Idempotency </entry>
+    <entry>
+      <m:math><m:apply>
+        <m:equivalent/>
+        <m:apply><m:or/><m:ci>φ</m:ci> <m:ci>φ</m:ci></m:apply>
+        <m:ci>φ</m:ci>
+      </m:apply></m:math>
+    </entry>
+    <entry>
+      <m:math><m:apply>
+        <m:equivalent/>
+        <m:apply><m:and/><m:ci>φ</m:ci> <m:ci>φ</m:ci></m:apply>
+        <m:ci>φ</m:ci>
+      </m:apply></m:math>
+    </entry>
+  </row>
+<row>
+    <entry> Absorption </entry>
+    <entry>
+      <m:math><m:apply>
+        <m:equivalent/>
+        <m:apply>
+          <m:and/>
+          <m:ci>φ</m:ci>
+          <m:apply><m:or/><m:ci>φ</m:ci> <m:ci>ψ</m:ci></m:apply>
+        </m:apply>
+        <m:ci>φ</m:ci>
+      </m:apply></m:math>
+    </entry>
+    <entry>
+      <m:math><m:apply>
+        <m:equivalent/>
+        <m:apply>
+          <m:or/>
+          <m:ci>φ</m:ci>
+          <m:apply><m:and/><m:ci>φ</m:ci> <m:ci>ψ</m:ci></m:apply>
+        </m:apply>
+        <m:ci>φ</m:ci>
+      </m:apply></m:math>
+    </entry>
+  </row>
+<row>
+    <entry> Redundancy </entry>
+    <entry>
+      <m:math><m:apply>
+        <m:equivalent/>
+        <m:apply>
+          <m:and/>
+          <m:ci>φ</m:ci>
+          <m:apply>
+            <m:or/>
+            <m:apply><m:not/><m:ci>φ</m:ci></m:apply>
+            <m:ci>ψ</m:ci>
+          </m:apply>
+        </m:apply>  
+        <m:apply><m:and/><m:ci>φ</m:ci> <m:ci>ψ</m:ci></m:apply>
+      </m:apply></m:math>
+    </entry>
+    <entry>
+      <m:math><m:apply>
+        <m:equivalent/>
+        <m:apply>
+          <m:or/>
+          <m:ci>φ</m:ci>
+          <m:apply><m:and/><m:apply><m:not/><m:ci>φ</m:ci></m:apply> <m:ci>ψ</m:ci></m:apply>
+        </m:apply>  
+        <m:apply><m:or/><m:ci>φ</m:ci> <m:ci>ψ</m:ci></m:apply>
+      </m:apply></m:math>
+    </entry>
+  </row>
+<row>
+    <entry> DeMorgan's Laws </entry>
+    <entry>
+      <m:math><m:apply>
+        <m:equivalent/>
+        <m:apply>
+          <m:not/>
+          <m:apply><m:and/><m:ci>φ</m:ci> <m:ci>ψ</m:ci></m:apply>
+        </m:apply>
+        <m:apply>
+          <m:or/>
+          <m:apply><m:not/><m:ci>φ</m:ci></m:apply>
+          <m:apply><m:not/><m:ci>ψ</m:ci></m:apply>
+        </m:apply>
+      </m:apply></m:math>
+    </entry>
+    <entry>
+      <m:math><m:apply>
+        <m:equivalent/>
+        <m:apply>
+          <m:not/>
+          <m:apply><m:or/><m:ci>φ</m:ci> <m:ci>ψ</m:ci></m:apply>
+        </m:apply>
+        <m:apply>
+          <m:and/>
+          <m:apply><m:not/><m:ci>φ</m:ci></m:apply>
+          <m:apply><m:not/><m:ci>ψ</m:ci></m:apply>
+        </m:apply>
+      </m:apply></m:math>
+    </entry>
+  </row>
+<row>
+    <entry> Associativity </entry>
+    <entry>
+      <m:math><m:apply>
+        <m:equivalent/>
+        <m:apply>
+          <m:and/>
+          <m:ci>φ</m:ci>
+          <m:mfenced>
+            <m:apply><m:and/><m:ci>ψ</m:ci> <m:ci>θ</m:ci></m:apply>
+          </m:mfenced>
+        </m:apply>
+        <m:apply>
+          <m:and/>
+          <m:mfenced>
+            <m:apply><m:and/><m:ci>φ</m:ci> <m:ci>ψ</m:ci></m:apply>
+          </m:mfenced>
+          <m:ci>θ</m:ci>
+        </m:apply>
+      </m:apply></m:math>
+    </entry>
+    <entry>
+      <m:math><m:apply>
+        <m:equivalent/>
+        <m:apply>
+          <m:or/>
+          <m:ci>φ</m:ci>
+          <m:mfenced>
+            <m:apply><m:or/><m:ci>ψ</m:ci> <m:ci>θ</m:ci></m:apply>
+          </m:mfenced>
+        </m:apply>
+        <m:apply>
+          <m:or/>
+          <m:mfenced>
+            <m:apply><m:or/><m:ci>φ</m:ci> <m:ci>ψ</m:ci></m:apply>
+          </m:mfenced>
+          <m:ci>θ</m:ci>
+        </m:apply>
+      </m:apply></m:math>
+    </entry>
+  </row>
+<row>
+    <entry> Commutativity </entry>
+    <entry>
+      <m:math><m:apply>
+        <m:equivalent/>
+        <m:apply><m:and/><m:ci>φ</m:ci> <m:ci>ψ</m:ci></m:apply> 
+        <m:apply><m:and/><m:ci>ψ</m:ci> <m:ci>φ</m:ci></m:apply> 
+      </m:apply></m:math>
+    </entry>
+    <entry>
+      <m:math><m:apply>
+        <m:equivalent/>
+        <m:apply><m:or/><m:ci>φ</m:ci> <m:ci>ψ</m:ci></m:apply> 
+        <m:apply><m:or/><m:ci>ψ</m:ci> <m:ci>φ</m:ci></m:apply> 
+      </m:apply></m:math>
+    </entry>
+  </row>
+<row>
+    <entry> Distributivity</entry>
+    <entry>
+      <m:math><m:apply>
+        <m:equivalent/>
+        <m:apply>
+          <m:and/>
+          <m:ci>φ</m:ci>
+          <m:apply><m:or/><m:ci>ψ</m:ci> <m:ci>θ</m:ci></m:apply>
+        </m:apply>
+        <m:apply>
+          <m:or/>
+          <m:apply><m:and/><m:ci>φ</m:ci> <m:ci>ψ</m:ci></m:apply>
+          <m:apply><m:and/><m:ci>φ</m:ci> <m:ci>θ</m:ci></m:apply>
+        </m:apply>
+      </m:apply></m:math>
+    </entry>
+    <entry>
+      <m:math><m:apply>
+        <m:equivalent/>
+        <m:apply>
+          <m:or/>
+          <m:ci>φ</m:ci>
+          <m:apply><m:and/><m:ci>ψ</m:ci> <m:ci>θ</m:ci></m:apply>
+        </m:apply>
+        <m:apply>
+          <m:and/>
+          <m:apply><m:or/><m:ci>φ</m:ci> <m:ci>ψ</m:ci></m:apply>
+          <m:apply><m:or/><m:ci>φ</m:ci> <m:ci>θ</m:ci></m:apply>
+        </m:apply>
+      </m:apply></m:math>
+    </entry>
+  </row></tbody>
+</tgroup>
+</table>
+
+<para id="para2">
+  Equivalences for implication are omitted above for brevity and for
+  tradition.  They can be derived, using the definition
+  <m:math><m:apply>
+    <m:equivalent/>
+    <m:apply><m:implies/><m:ci>a</m:ci> <m:ci>b</m:ci></m:apply>
+    <m:apply><m:or/><m:apply><m:not/><m:ci>a</m:ci></m:apply> <m:ci>b</m:ci></m:apply>
+  </m:apply></m:math>.
+</para>
+
+<example id="example1">
+  <para id="para3">
+    For example, using Identity and Commutativity, we have
+    <m:math><m:apply>
+      <m:equivalent/>
+      <m:apply><m:implies/><m:true/> <m:ci>b</m:ci></m:apply>
+      <m:apply><m:or/><m:apply><m:not/><m:true/></m:apply> <m:ci>b</m:ci></m:apply>
+      <m:apply><m:or/><m:false/> <m:ci>b</m:ci></m:apply>
+      <m:apply><m:or/><m:ci>b</m:ci> <m:false/></m:apply>
+      <m:ci>b</m:ci>
+    </m:apply></m:math>.
+  </para>
+</example>
+
+
+
+</content>
+</document>

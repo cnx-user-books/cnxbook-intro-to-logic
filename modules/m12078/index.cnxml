@@ -1,0 +1,80 @@
+<document xmlns="http://cnx.rice.edu/cnxml" xmlns:m="http://www.w3.org/1998/Math/MathML" xmlns:md="http://cnx.rice.edu/mdml">
+
+<title>Propositional Logic: soundness and completeness revisited</title>
+<metadata><md:content-id>undefined</md:content-id><md:title/><md:uuid>1d5b97d1-48b1-4485-819c-b69eabbc0981</md:uuid>
+</metadata>
+
+
+<content>
+
+<para id="para1">
+  <quote display="inline" class="no-marks">The folly of mistaking a paradox for a discovery, a metaphor for a
+    proof, a torrent of verbiage for a spring of capital truths, and
+    oneself for an oracle, is inborn in us.
+    — Paul Valery, poet and philosopher (1871-1945)</quote>
+</para>
+
+<para id="para2">
+  Throughout this discussion, we've implicitly
+  assumed that if we've proven something, it must be true.
+  But we should be careful: 
+  What if one of those listed inference rule isn't always valid?
+  What if we introduced a new rule?
+  (Sure, you'd probably balk if
+  we proposed something silly like
+  <m:math><m:apply>
+    <m:implies/>
+    <m:apply><m:or/><m:ci>a</m:ci> <m:ci>b</m:ci></m:apply>
+    <m:ci>a</m:ci>
+  </m:apply></m:math>,
+  or even more degenerately <m:math><m:false/></m:math>.
+  But what about some more reasonable-sounding rule?)  
+  What if our new rule introduces an inconsistency,
+  when combined with the other rules in a some complicated way?
+  In fact, are we <emphasis>absolutely certain</emphasis> that this
+  can't already happen with the inference rules we have?!
+  This brings us back to the questions of 
+  <link document="m12076">soundness and completeness</link>
+  of a proof system.
+  Fortunately, the system presented here is both sound and complete
+  (though proving this is beyond our current scope).
+  However, we can rest assured, that for propositional logic,
+  what we can <emphasis>prove</emphasis> really does correspond
+  entirely to what is <emphasis>true</emphasis>.
+</para>
+
+<exercise id="exercise1">
+  <problem id="idm6540784">
+    <para id="para3">
+      If we omitted the RAA inference rule, would this new system be sound?
+      Would it be complete?
+    </para>
+  </problem>
+
+  <solution id="idp1012480">
+    <para id="para4">
+      It would be sound: 
+      Look at all the possible proofs that can be made in the original
+      system; all those proofs lead to true conclusions (since that
+      original system is sound, as we're claiming).
+      If we just discard all those that include RAA, the remaining
+      proofs are still all true, so the smaller system is sound.
+    </para>
+
+    <para id="para5">
+      It would not be complete, though:
+      As pointed out, RAA is our only way to prove negations without
+      premises. 
+      There are negated formulas that are true
+      (and have no premises) —
+      for example
+      <m:math><m:apply><m:not/><m:false/></m:apply></m:math>.
+      Without RAA, we cannot provide a proof of
+      <m:math><m:apply><m:not/><m:false/></m:apply></m:math>,
+      so the smaller system is <term>incomplete</term>.
+    </para>
+  </solution>
+</exercise>
+
+</content>
+</document>

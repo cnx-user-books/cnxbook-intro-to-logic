@@ -1,0 +1,331 @@
+<document xmlns="http://cnx.rice.edu/cnxml" xmlns:m="http://www.w3.org/1998/Math/MathML" xmlns:md="http://cnx.rice.edu/mdml">
+
+<title>Reference: propositional WaterWorld</title>
+<metadata><md:content-id>undefined</md:content-id><md:title/><md:uuid>0d3b7847-0750-4a4a-918b-55fea408ad6c</md:uuid>
+</metadata>
+
+
+
+<content>
+
+<para id="para1">
+  We summarize the details of how we
+  choose to model WaterWorld boards
+  in propositional logic:
+  exactly what propositions we make up,
+  and the formal domain axioms which capture the game's rules.
+</para>
+
+<para id="para2">
+  The board is fixed at 6×4,
+  named <m:math><m:ci>A</m:ci></m:math>,…,<m:math><m:ci>Z</m:ci></m:math> (with I and O omitted).
+</para>
+
+<figure id="figure1">
+  <media id="idm18839072" alt=""><image src="../../media/hwA-1.png" mime-type="image/png"/></media>
+
+  <caption>A Sample WaterWorld board</caption>
+</figure>
+
+
+<section id="waterworld-props">
+<title>Propositions</title>
+
+<para id="para3">
+  There are a myriad of propositions for WaterWorld,
+  which can be grouped:
+</para>
+
+<list id="list1">
+  <item>
+    Whether or not a location contains a pirate:
+    <m:math><m:ci>A-unsafe</m:ci></m:math>, <m:math><m:ci>B-unsafe</m:ci></m:math>, …, <m:math><m:ci>Z-unsafe</m:ci></m:math>.
+  </item>
+  <item>
+    Whether or not a location contains no pirate:
+    <m:math><m:ci>A-safe</m:ci></m:math>, <m:math><m:ci>B-safe</m:ci></m:math>, …, <m:math><m:ci>Z-safe</m:ci></m:math>.
+    <note type="aside" id="idm18711792">
+      Yes, using the intended interpretation,
+      these are redundant with the previous ones.
+      Some domain axioms below will formalize this.
+    </note>
+  </item>
+
+  <item>
+    Propositions indicating
+    the number of neighboring pirates, to a location:
+    <m:math><m:ci>A-has-0</m:ci></m:math>, <m:math><m:ci>A-has-1</m:ci></m:math>, <m:math><m:ci>A-has-2</m:ci></m:math>,
+    <m:math><m:ci>B-has-0</m:ci></m:math>, <m:math><m:ci>B-has-1</m:ci></m:math>, <m:math><m:ci>B-has-2</m:ci></m:math>,
+    …,
+    <m:math><m:ci>H-has-0</m:ci></m:math>, <m:math><m:ci>H-has-1</m:ci></m:math>, <m:math><m:ci>H-has-2</m:ci></m:math>, <m:math><m:ci>H-has-3</m:ci></m:math>,
+    …,
+    <m:math><m:ci>Z-has-0</m:ci></m:math>, <m:math><m:ci>Z-has-1</m:ci></m:math>.
+    These are all true/false propositions; — there are no
+    explicit numbers in the logic.
+    A domain axiom below will assert that whenever (say)
+    <m:math><m:ci>B-has-1</m:ci></m:math> is true, then <m:math><m:ci>B-has-0</m:ci></m:math> and <m:math><m:ci>B-has-2</m:ci></m:math> are both false.
+    <note type="aside" id="idm7251888">
+      There is no proposition <m:math><m:ci>A-has-3</m:ci></m:math>  — since location <m:math><m:ci>A</m:ci></m:math>
+      has only two neighbors.
+      Similarly, there is no proposition <m:math><m:ci>B-has-3</m:ci></m:math>.
+      We <emphasis>could</emphasis> have chosen to 
+      include those, but under the intended interpretation
+      they'd always be false.
+    </note>
+  </item>
+
+
+</list>
+
+<para id="para4">
+  <emphasis>
+    These propositions describe the state of the underlying
+    board  — the model  — and not our particular view of it.
+  </emphasis>
+  Our particular view will be reflected in which formulas 
+  we'll accept as premises.  So we'll accept <m:math><m:ci>A-has-2</m:ci></m:math> as a premise
+  only when <m:math><m:ci>A</m:ci></m:math> has been exposed and shows a 2.
+</para>
+
+</section>
+
+
+
+<section id="waterworld-rules">
+<title>The domain axioms</title>
+
+<para id="para5">
+  Axioms asserting that the neighbor counts are correct:
+
+  <list id="list2">
+    <item>
+      Count of 0:
+      <list id="list3">
+        <item> “A0”:
+               <m:math><m:apply><m:implies/> <m:ci>A-has-0</m:ci>
+                    <m:apply><m:and/> <m:ci>B-safe</m:ci> <m:ci>G-safe</m:ci></m:apply>
+               </m:apply></m:math>
+        </item>
+        <item> …
+        </item>
+        <item> “H0”:
+               <m:math><m:apply><m:implies/> <m:ci>H-has-0</m:ci>
+                    <m:apply><m:and/> <m:ci>G-safe</m:ci> <m:ci>J-safe</m:ci> <m:ci>P-safe</m:ci> </m:apply>
+               </m:apply></m:math>
+        </item>
+        <item> …
+        </item>
+        <item> “Z0”:
+               <m:math><m:apply><m:implies/> <m:ci>Z-has-0</m:ci>
+                    <m:apply><m:and/> <m:ci>Y-safe</m:ci></m:apply>
+               </m:apply></m:math>
+        </item>
+      </list>
+    </item>
+
+    <item>
+      Count of 1:
+      <list id="list4">
+        <item> “A1”:
+               <m:math><m:apply><m:implies/>
+                 <m:ci>A-has-1</m:ci>
+                 <m:apply><m:or/>
+                   <m:apply><m:and/> <m:ci>B-safe</m:ci>   <m:ci>G-unsafe</m:ci></m:apply>
+                   <m:apply><m:and/> <m:ci>B-unsafe</m:ci> <m:ci>G-safe</m:ci>  </m:apply>
+                 </m:apply>
+               </m:apply></m:math>
+        </item>
+        <item> …
+        </item>
+        <item> “H1”:
+               <m:math><m:apply><m:implies/> <m:ci>H-has-1</m:ci>
+                    <m:apply><m:or/><m:apply><m:and/> <m:ci>G-safe</m:ci>   <m:ci>J-safe</m:ci>   <m:ci>P-unsafe</m:ci> </m:apply>
+                        <m:apply><m:and/> <m:ci>G-safe</m:ci>   <m:ci>J-unsafe</m:ci> <m:ci>P-safe</m:ci>   </m:apply>   
+                        <m:apply><m:and/> <m:ci>G-unsafe</m:ci> <m:ci>J-safe</m:ci>   <m:ci>P-safe</m:ci>   </m:apply>
+                    </m:apply>
+               </m:apply></m:math>
+        </item>
+        <item> …
+        </item>
+        <item> “Z1”:
+               <m:math><m:apply><m:implies/> <m:ci>Z-has-1</m:ci>
+                    <m:apply><m:and/> <m:ci>Y-unsafe</m:ci> </m:apply>
+               </m:apply></m:math>
+        </item>
+      </list>
+    </item>
+
+    <item>
+      Count of 2:
+      <list id="list5">
+        <item> “A2”:
+               <m:math><m:apply><m:implies/>
+                 <m:ci>A-has-2</m:ci>
+                 <m:apply><m:and/> <m:ci>B-unsafe</m:ci>   <m:ci>G-unsafe</m:ci></m:apply>
+               </m:apply></m:math>
+        </item>
+        <item> …
+        </item>
+        <item> “H2”:
+               <m:math><m:apply><m:implies/>
+                 <m:ci>H-has-2</m:ci>
+                 <m:apply><m:or/>
+                   <m:apply><m:and/><m:ci>G-safe</m:ci> <m:ci>J-unsafe</m:ci> <m:ci>P-unsafe</m:ci></m:apply>
+                   <m:apply><m:and/><m:ci>G-unsafe</m:ci> <m:ci>J-safe</m:ci> <m:ci>P-unsafe</m:ci></m:apply>
+                   <m:apply><m:and/><m:ci>G-unsafe</m:ci> <m:ci>J-unsafe</m:ci> <m:ci>P-safe</m:ci></m:apply>
+                 </m:apply>
+               </m:apply></m:math>
+        </item>
+        <item> …
+        </item>
+      </list>
+      There aren't any such axioms for locations
+      with only one neighbor.
+    </item>
+
+    <item>
+      Count of 3:
+      <list id="list6">
+        <item> “H3”:
+               <m:math><m:apply><m:implies/> <m:ci>H-has-3</m:ci>
+                    <m:apply><m:and/> <m:ci>G-unsafe</m:ci>   <m:ci>J-unsafe</m:ci> <m:ci>P-unsafe</m:ci> </m:apply>
+               </m:apply></m:math>
+        </item>
+        <item> …
+        </item>
+      </list>
+      There aren't any such axioms for locations
+      with only one or two neighbors.
+    </item>
+  </list>
+</para>
+
+<para id="para6">
+  Axioms asserting that the propositions for counting neighbors
+  are consistent:
+
+  <list id="list7">
+    <item> <m:math><m:apply><m:or/><m:ci>A-has-0</m:ci> <m:ci>A-has-1</m:ci></m:apply></m:math>
+    </item>
+    <item> <m:math><m:apply><m:implies/><m:ci>A-has-0</m:ci>
+               <m:apply><m:not/><m:ci>A-has-1</m:ci></m:apply>
+           </m:apply></m:math>
+    </item>
+    <item> <m:math><m:apply><m:implies/><m:ci>A-has-1</m:ci>
+               <m:apply><m:not/><m:ci>A-has-0</m:ci></m:apply>
+           </m:apply></m:math>
+    </item>
+
+    <item> <m:math><m:apply><m:or/><m:ci>B-has-0</m:ci> <m:ci>B-has-1</m:ci> <m:ci>B-has-2</m:ci></m:apply></m:math>
+    </item>
+    <item> <m:math><m:apply><m:implies/><m:ci>B-has-0</m:ci>
+               <m:apply><m:and/><m:apply><m:not/><m:ci>B-has-1</m:ci></m:apply>
+                    <m:apply><m:not/><m:ci>B-has-2</m:ci></m:apply>
+               </m:apply>
+           </m:apply></m:math>
+    </item>
+    <item> <m:math><m:apply><m:implies/><m:ci>B-has-1</m:ci>
+               <m:apply><m:and/><m:apply><m:not/><m:ci>B-has-0</m:ci></m:apply>
+                    <m:apply><m:not/><m:ci>B-has-2</m:ci></m:apply>
+               </m:apply>
+           </m:apply></m:math>
+    </item>
+    <item> <m:math><m:apply><m:implies/><m:ci>B-has-2</m:ci>
+               <m:apply><m:and/><m:apply><m:not/><m:ci>B-has-0</m:ci></m:apply>
+                    <m:apply><m:not/><m:ci>B-has-1</m:ci></m:apply>
+               </m:apply> 
+           </m:apply></m:math>
+    </item>
+
+    <item>…
+    </item>
+
+    <item> <m:math><m:apply><m:or/><m:ci>H-has-0</m:ci> <m:ci>H-has-1</m:ci> <m:ci>H-has-2</m:ci> <m:ci>H-has-3</m:ci></m:apply></m:math>
+    </item>
+    <item> <m:math><m:apply><m:implies/><m:ci>H-has-0</m:ci>
+               <m:apply><m:and/><m:apply><m:not/><m:ci>H-has-1</m:ci></m:apply>
+                    <m:apply><m:not/><m:ci>H-has-2</m:ci></m:apply>
+                    <m:apply><m:not/><m:ci>H-has-3</m:ci></m:apply>
+               </m:apply> 
+           </m:apply></m:math>
+    </item>
+    <item> <m:math><m:apply><m:implies/><m:ci>H-has-1</m:ci>
+               <m:apply><m:and/><m:apply><m:not/><m:ci>H-has-0</m:ci></m:apply>
+                    <m:apply><m:not/><m:ci>H-has-2</m:ci></m:apply> 
+                    <m:apply><m:not/><m:ci>H-has-3</m:ci></m:apply>
+               </m:apply>
+           </m:apply></m:math>
+    </item>
+    <item> <m:math><m:apply><m:implies/><m:ci>H-has-2</m:ci> 
+               <m:apply><m:and/><m:apply><m:not/><m:ci>H-has-0</m:ci></m:apply>
+                    <m:apply><m:not/><m:ci>H-has-1</m:ci></m:apply> 
+                    <m:apply><m:not/><m:ci>H-has-3</m:ci></m:apply>
+               </m:apply> 
+           </m:apply></m:math>
+    </item>
+    <item> <m:math><m:apply><m:implies/><m:ci>H-has-3</m:ci> 
+               <m:apply><m:and/><m:apply><m:not/><m:ci>H-has-0</m:ci></m:apply>
+                    <m:apply><m:not/><m:ci>H-has-1</m:ci></m:apply>
+                    <m:apply><m:not/><m:ci>H-has-2</m:ci></m:apply>
+               </m:apply> 
+           </m:apply></m:math>
+    </item>
+
+    <item>…
+    </item>   
+  </list>
+</para>
+
+<para id="para7">
+  Axioms asserting that the safety propositions are consistent:
+
+  <list id="list8">
+    <item> <m:math><m:apply><m:implies/><m:ci>A-safe</m:ci> <m:apply><m:not/><m:ci>A-unsafe</m:ci></m:apply></m:apply></m:math>,
+    </item>
+    <item> <m:math><m:apply><m:implies/><m:apply><m:not/><m:ci>A-safe</m:ci></m:apply> <m:ci>A-unsafe</m:ci></m:apply></m:math>,
+    </item>
+    <item> …
+    </item>
+    <item> <m:math><m:apply><m:implies/><m:ci>Z-safe</m:ci> <m:apply><m:not/><m:ci>Z-unsafe</m:ci></m:apply></m:apply></m:math>,
+    </item>
+    <item> <m:math><m:apply><m:implies/><m:apply><m:not/><m:ci>Z-safe</m:ci></m:apply> <m:ci>Z-unsafe</m:ci></m:apply></m:math>.
+    </item>
+  </list>
+</para>
+  
+
+
+
+<para id="para8">
+  This set of axioms is not quite complete, as explored in 
+  <link document="m10514" target-id="ww-incomplete">an exercise</link>.
+</para>
+
+<para id="para9">
+  As mentioned, it is redundant to have both
+  <m:math><m:ci>A-safe</m:ci></m:math> and <m:math><m:ci>A-unsafe</m:ci></m:math> as propositions.
+  Furthermore, having both allows us to express inconsistent states
+  (ones that would contradict the safety axioms).
+  If implementing this in a program, you might use both as variables,
+  but have a safety-check function to make sure
+  that a given board representation is consistent.
+  Even better, you could implement WaterWorld so that these
+  propositions wouldn't be variables,
+  but instead be calls to a lookup (accessor) functions.
+  These would examine the same internal state,
+  to eliminate the chance of inconsistent data.
+</para>
+
+<para id="para10">
+  Using only true/false propositions;
+  without recourse to numbers makes these domain axioms unwieldy.
+  Later, we'll see how
+  <link document="m10724">relations</link> and
+  <link document="m10728">quantifiers</link>
+  help us model the game of WaterWorld more concisely.
+</para>
+
+</section>
+
+</content>
+</document>

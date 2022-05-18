@@ -1,0 +1,162 @@
+<document xmlns="http://cnx.rice.edu/cnxml" xmlns:m="http://www.w3.org/1998/Math/MathML" xmlns:md="http://cnx.rice.edu/mdml">
+
+<title>First-Order Logic: bound variables, free variables</title>
+<metadata><md:content-id>undefined</md:content-id><md:title/><md:uuid>656fc5e5-1cab-4a31-a06c-6dff60e035c5</md:uuid>
+</metadata>
+
+
+<content>
+
+<para id="para1">
+  In the previous examples we often re-used variable names, even within
+  the same formula.
+  This shouldn't be surprising or confusing, since we do the same
+  thing in programs (another formal language).
+  In fact, the same notions of <term>bound</term> and <term>free</term>
+  variables occur in both situations.
+  An occurrence of variable <m:math><m:ci>x</m:ci></m:math> is bound if it is in the body of
+  a quantifier <m:math><m:mo>∀</m:mo> <m:ci>x</m:ci></m:math> … or <m:math><m:mo>∃</m:mo> <m:ci>x</m:ci></m:math> ….
+  Otherwise, the occurrence is free.
+</para>
+
+<para id="para2">
+  For example, in
+  <m:math><m:apply><m:forall/><m:bvar><m:ci>x</m:ci></m:bvar>
+    <m:apply><m:ci type="function">likes</m:ci> <m:ci>x</m:ci> <m:ci>y</m:ci></m:apply>
+  </m:apply></m:math>,
+  the variable <m:math><m:ci>y</m:ci></m:math> is free but <m:math><m:ci>x</m:ci></m:math> is not. 
+  So this is a statement about <m:math><m:ci>y</m:ci></m:math>; 
+  we can't evaluate this to true/false until we get
+  some context for <m:math><m:ci>y</m:ci></m:math>.
+  It's useful as a subpart for some bigger formula.
+</para>
+
+
+<note type="A possible misunderstanding" id="idp2250944"><label>A possible misunderstanding</label>
+  The concept
+  “x free in <m:math><m:ci>φ</m:ci></m:math>”
+  does <emphasis>not</emphasis> talk about the context of <m:math><m:ci>φ</m:ci></m:math>.
+  So don't confuse it with 
+  “well, over on this part of the page, <m:math><m:ci>φ</m:ci></m:math> 
+    happens to occur as the sub-part of 
+    another formula containing
+    <m:math><m:apply><m:forall/>
+      <m:bvar><m:ci>x</m:ci></m:bvar>
+      <m:ci>…</m:ci>
+    </m:apply></m:math>,
+    so <m:math><m:ci>x</m:ci></m:math> really is bound.”
+  (Just as 7 is prime, even though people sometimes use 7 in the context
+   of 7+1.)
+  Whether <m:math><m:ci>x</m:ci></m:math> is free in a <m:math><m:ci>φ</m:ci></m:math> can be determined by a function 
+  <m:math><m:apply>
+    <m:ci type="function"><m:mtext>isFree</m:mtext></m:ci>
+    <m:ci>x</m:ci>
+    <m:ci>φ</m:ci>
+  </m:apply></m:math>,
+  needing no other information to produce an answer.
+</note>
+
+
+
+
+<para id="para3">
+  Looking back at our previous examples, we can see that many 
+  of the formulas we made
+  had no free variables  — all variables were bound by some quantifier
+  in the formula.
+  The truth of such formulas depends only on the interpretation
+  and not on any additional knowledge about what any free variables
+  refer to.
+  Thus, these formulas are common and important enough that we give them
+  a special name, <term>sentences</term>.
+</para>
+
+<para id="para4">
+  A given variable name can actually have <emphasis>both</emphasis>
+  bound and free occurrences within
+  the same formula, as in
+  <m:math><m:apply><m:and/>
+    <m:apply><m:ci type="function">R</m:ci><m:ci>x</m:ci></m:apply>
+    <m:apply><m:exists/><m:bvar><m:ci>x</m:ci></m:bvar>
+      <m:apply><m:not/><m:apply><m:ci type="function">R</m:ci> <m:ci>x</m:ci></m:apply></m:apply>
+    </m:apply>
+  </m:apply></m:math>.
+  (This formula about <m:math><m:ci>x</m:ci></m:math> <emphasis>is</emphasis> satisfiable:
+   it says that <m:math><m:ci type="function">R</m:ci></m:math> is true about <m:math><m:ci>x</m:ci></m:math>,
+   but isn't true about everything.)
+  In essence, there are two different underlying variables going on, but 
+  they each happen to have the same name; 
+  from scope it can be decided which one each occurence refers to.
+  In programming language terms, 
+  we'd say that the inner <m:math><m:ci>x</m:ci></m:math> (the local variable)
+  <term>shadows</term> the outer <m:math><m:ci>x</m:ci></m:math> (the enclosing variable).
+  In these terms, free variables in logic
+  correspond to global variables in programs.
+</para>
+
+
+<para id="alpha-renaming">
+  Clearly
+  <m:math><m:apply><m:forall/>
+    <m:bvar><m:ci>x</m:ci></m:bvar>
+    <m:apply><m:ci type="function">R</m:ci> <m:ci>x</m:ci></m:apply>
+  </m:apply></m:math>
+  is always equivalent to
+  <m:math><m:apply><m:forall/>
+    <m:bvar><m:ci>y</m:ci></m:bvar>
+    <m:apply><m:ci type="function">R</m:ci> <m:ci>y</m:ci></m:apply>
+  </m:apply></m:math>;
+  variable names are entirely arbitrary
+  (except maybe for their mnemonic value).
+  So the previous formula might be more clearly re-written as
+  <m:math><m:apply><m:and/>
+    <m:apply><m:ci type="function">R</m:ci><m:ci>x</m:ci></m:apply>
+    <m:apply><m:exists/><m:bvar><m:ci>y</m:ci></m:bvar>
+      <m:apply><m:not/>
+        <m:apply><m:ci type="function">R</m:ci> <m:ci>y</m:ci></m:apply>
+      </m:apply>
+    </m:apply>
+  </m:apply></m:math>.
+
+  (This careful re-writing while respecting a variable's scope
+   is called <term><m:math><m:ci>α</m:ci></m:math>-renaming</term>.)
+  Even if 17 quantifiers each used the same variable (name) <m:math><m:ci>x</m:ci></m:math>,
+  we could carefully <m:math><m:ci>α</m:ci></m:math>-renaming 17 times,
+  and end up with an equivalent formula
+  where all quantifiers use distinct variables.
+  This will be useful to avoid potential confusion, especially in
+  <link document="m10774" target-id="renaming-for-subst">the upcoming inference rules</link>,
+  where we'll be introducing and eliminating quantifiers.
+</para>
+
+<example id="example1">
+  <para id="para6">
+    The formula
+    <m:math><m:apply><m:and/>
+      <m:apply><m:forall/><m:bvar><m:ci>x</m:ci></m:bvar>
+        <m:apply><m:ci type="function">A</m:ci> <m:ci>x</m:ci></m:apply>
+      </m:apply>
+      <m:apply><m:exists/><m:bvar><m:ci>x</m:ci></m:bvar>
+        <m:apply><m:ci type="function">B</m:ci> <m:ci>x</m:ci></m:apply>
+      </m:apply>
+      <m:apply><m:forall/><m:bvar><m:ci>x</m:ci></m:bvar>
+        <m:apply><m:ci type="function">C</m:ci> <m:ci>x</m:ci></m:apply>
+      </m:apply>
+    </m:apply></m:math>
+    is equivalent to the more readable
+    <m:math><m:apply><m:and/>
+      <m:apply><m:forall/><m:bvar><m:ci>x</m:ci></m:bvar>
+        <m:apply><m:ci type="function">A</m:ci> <m:ci>x</m:ci></m:apply>
+      </m:apply>
+      <m:apply><m:exists/><m:bvar><m:ci>y</m:ci></m:bvar>
+        <m:apply><m:ci type="function">B</m:ci> <m:ci>y</m:ci></m:apply>
+      </m:apply>
+      <m:apply><m:forall/><m:bvar><m:ci>z</m:ci></m:bvar>
+        <m:apply><m:ci type="function">C</m:ci> <m:ci>z</m:ci></m:apply>
+      </m:apply>
+    </m:apply></m:math>.
+  </para>
+</example>
+
+</content>
+</document>

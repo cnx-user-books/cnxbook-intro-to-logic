@@ -1,0 +1,584 @@
+<document xmlns="http://cnx.rice.edu/cnxml" xmlns:m="http://www.w3.org/1998/Math/MathML" xmlns:md="http://cnx.rice.edu/mdml"> 
+
+<title>First-Order Logic: equivalences</title>
+<metadata><md:content-id>undefined</md:content-id><md:title/><md:uuid>be31ad46-2530-4cf4-9603-f20296a234b2</md:uuid>
+</metadata>
+
+
+<content>
+
+<para id="para1">
+  Now that we can express interesting concepts using the quantifiers
+  “<m:math><m:mo>∃</m:mo></m:math>” (“there exists”) and 
+  “<m:math><m:mo>∀</m:mo></m:math>” (“for all”),
+  how can we use them for the problem of
+  determining whether a formula is true?
+  Back in lowly propositional logic, we had three methods:
+  <list id="list1">
+    <item>
+      truth tables,
+    </item>
+    <item>
+      equivalences, and
+    </item>
+    <item>
+      formal proofs with inference rules.
+    </item>
+  </list>
+  How can we adapt these approaches, for first-order logic?
+</para>
+
+<para id="para2">
+  Well, truth tables have no analog approach.
+  With quantifiers, we don't have a finite set of propositions.
+  Furthermore, variables can't refer to specific items in the domain
+  until we try to interpret them.
+  And when we do, the domain may be of any size — possibly
+  even infinite.
+  Using a truth table on an infinite domain is clearly infeasible,
+  but the real problem stems from how we want to be able to discuss reasoning
+  without respect to a particular domain.
+</para>
+
+<para id="para3">
+  However, we can add equivalences and inference rules to cope with quantifiers.
+  After showing how to work with quantifiers,
+  we'll come back to examine our newly-augmented systems
+  for those desirable traits, soundness and completeness.
+</para>
+
+
+<section id="section1">
+<title>First-order Equivalences</title>
+
+<para id="para4">
+  When we upgrade from propositional logic to first-order logic, 
+  what changes do we need to make to the laws of boolean algebra?
+  Well first off, we can keep all the existing
+  <link document="m10540">propositional equivalences</link>.
+  For example,
+  <m:math><m:apply><m:equivalent/>
+    <m:apply><m:forall/><m:bvar><m:ci>x</m:ci></m:bvar>
+      <m:apply><m:not/> <m:apply><m:and/><m:ci>φ</m:ci> <m:ci>ψ</m:ci></m:apply> </m:apply>
+    </m:apply>
+    <m:apply><m:forall/><m:bvar><m:ci>x</m:ci></m:bvar>
+      <m:apply><m:or/>
+        <m:apply><m:not/><m:ci>φ</m:ci></m:apply>
+        <m:apply><m:not/><m:ci>ψ</m:ci></m:apply>
+      </m:apply>
+    </m:apply>
+  </m:apply></m:math>.
+  (Technically, we're even making those equivalences stronger,
+   since those meta-variables <m:math><m:ci>φ</m:ci></m:math>, <m:math><m:ci>ψ</m:ci></m:math>, <m:math><m:ci>θ</m:ci></m:math> can now stand for 
+   any <emphasis>first-order</emphasis> formula, rather than merely
+   propositional formulas.)
+</para>
+
+<para id="para5">
+  But, we also need <emphasis>additional</emphasis> identities
+  to deal with our new-fangled quantifiers.
+  What should these be?
+  The most interesting are those that relate the two kinds of quantifiers.
+  Universal quantification (<m:math><m:mo>∀</m:mo></m:math>) says that something holds for
+  all members of the domain, and existential quantification (<m:math><m:mo>∃</m:mo></m:math>)
+  says that something holds for at least one member.
+  Clearly, <m:math><m:apply><m:forall/><m:bvar><m:ci>x</m:ci></m:bvar> <m:ci>φ</m:ci> </m:apply></m:math> implies
+  <m:math><m:apply><m:exists/><m:bvar><m:ci>x</m:ci></m:bvar> <m:ci>φ</m:ci> </m:apply></m:math>, but the other direction doesn't
+  hold, so that is not an equivalence.
+  <note type="aside" id="idp3134912">
+    Wait just a minute!  That implication holds only if the domain
+    is non-empty, so that there is at least one member in it.
+    We'll see this restriction appear a few times.
+  </note>
+</para>
+
+<para id="para6">
+  What about
+  <m:math><m:apply><m:forall/>
+    <m:bvar><m:ci>x</m:ci></m:bvar>
+    <m:apply><m:not/><m:ci>φ</m:ci></m:apply>
+  </m:apply></m:math>?
+  In English,
+  “for all items <m:math><m:ci>x</m:ci></m:math>, <m:math><m:ci>φ</m:ci></m:math>(<m:math><m:ci>x</m:ci></m:math>) does not hold”.
+  A more natural way to say this is 
+  that there is <emphasis>no</emphasis> item <m:math><m:ci>x</m:ci></m:math>
+  such that <m:math><m:ci>φ</m:ci></m:math>(<m:math><m:ci>x</m:ci></m:math>) <emphasis>does</emphasis> hold  — that is,
+  <m:math><m:apply><m:not/>
+    <m:apply><m:exists/><m:bvar><m:ci>x</m:ci></m:bvar> <m:ci>φ</m:ci> </m:apply>
+  </m:apply></m:math>.
+  Indeed, this will be one of our new boolean algebra rules.
+</para>
+
+<para id="para7">
+  See
+  <link document="m11045">a list of equivalences with quantifiers</link>.
+  As before, we can use these to show other pairs of formulas equivalent,
+  as in the following examples.
+</para>
+
+<example id="example1">
+  <para id="para8">
+    Using these identities, we can simplify formulas such as
+    the following:
+    <m:math><m:apply><m:and/>
+      <m:apply><m:forall/><m:bvar><m:ci>y</m:ci></m:bvar>
+        <m:apply><m:forall/><m:bvar><m:ci>x</m:ci></m:bvar>
+          <m:apply><m:and/>
+            <m:apply><m:ci type="function">R</m:ci><m:ci>x</m:ci></m:apply>
+            <m:apply><m:ci type="function">Q</m:ci><m:ci>x</m:ci><m:ci>y</m:ci></m:apply>
+          </m:apply>
+        </m:apply>
+      </m:apply>
+      <m:apply><m:not/>
+        <m:apply><m:exists/><m:bvar><m:ci>z</m:ci></m:bvar>
+          <m:apply><m:not/>
+            <m:apply><m:ci type="function">R</m:ci><m:ci>z</m:ci></m:apply>
+          </m:apply>
+        </m:apply>
+      </m:apply>
+    </m:apply></m:math>.
+  </para>
+
+  <table id="proof1" summary="">
+
+<tgroup cols="3" align="center" colsep="1" rowsep="1">
+<colspec colwidth="*" colname="c1"/>
+<colspec colwidth="*" colname="c2"/>
+<colspec colwidth="*" colname="c3"/>
+
+<tbody>
+<row>
+<entry align="left">1</entry><entry namest="c2" nameend="c2"><m:math><m:apply><m:and/>
+             <m:apply><m:forall/><m:bvar><m:ci>y</m:ci></m:bvar>
+               <m:apply><m:forall/><m:bvar><m:ci>x</m:ci></m:bvar>
+                 <m:apply><m:and/>
+                   <m:apply><m:ci type="function">R</m:ci><m:ci>x</m:ci></m:apply>
+                   <m:apply><m:ci type="function">Q</m:ci><m:ci>x</m:ci><m:ci>y</m:ci></m:apply>
+                 </m:apply>
+               </m:apply>
+             </m:apply>
+             <m:apply><m:not/>
+               <m:apply><m:exists/><m:bvar><m:ci>z</m:ci></m:bvar>
+                 <m:apply><m:not/>
+                   <m:apply><m:ci type="function">R</m:ci><m:ci>z</m:ci></m:apply>
+                 </m:apply>
+               </m:apply>
+             </m:apply>
+           </m:apply></m:math></entry><entry colname="c3"/>
+</row>
+<row>
+<entry align="left">2</entry><entry namest="c2" nameend="c2"><m:math><m:mo>≡</m:mo><m:apply><m:and/>
+             <m:apply><m:forall/>
+               <m:bvar><m:ci>y</m:ci></m:bvar>
+               <m:apply><m:forall/>
+                 <m:bvar><m:ci>x</m:ci></m:bvar>
+                 <m:apply><m:and/>
+                   <m:apply><m:ci type="function">R</m:ci><m:ci>x</m:ci></m:apply>
+                   <m:apply><m:ci type="function">Q</m:ci><m:ci>x</m:ci><m:ci>y</m:ci></m:apply>
+                 </m:apply>
+               </m:apply>
+             </m:apply>
+             <m:apply><m:forall/>
+               <m:bvar><m:ci>z</m:ci></m:bvar>
+               <m:apply><m:not/>
+                 <m:apply><m:not/>
+                   <m:apply><m:ci type="function">R</m:ci><m:ci>z</m:ci></m:apply>
+                 </m:apply>
+               </m:apply>
+             </m:apply>
+           </m:apply></m:math></entry><entry colname="c3"> Complementation of <m:math><m:mo>∃</m:mo></m:math>
+           </entry>
+</row>
+<row>
+<entry align="left">3</entry><entry namest="c2" nameend="c2"><m:math><m:mo>≡</m:mo><m:apply><m:and/> <m:apply><m:forall/><m:bvar><m:ci>y</m:ci></m:bvar>
+                    <m:apply><m:forall/><m:bvar><m:ci>x</m:ci></m:bvar>
+                       <m:apply><m:and/> <m:apply><m:ci type="function">R</m:ci><m:ci>x</m:ci></m:apply>
+                             <m:apply><m:ci type="function">Q</m:ci><m:ci>x</m:ci><m:ci>y</m:ci></m:apply>
+                       </m:apply>
+                    </m:apply>
+                 </m:apply>
+                 <m:apply><m:forall/><m:bvar><m:ci>z</m:ci></m:bvar>
+                    <m:apply><m:ci type="function">R</m:ci><m:ci>z</m:ci></m:apply>
+                 </m:apply>
+           </m:apply></m:math></entry><entry colname="c3"> Double Complementation
+           </entry>
+</row>
+<row>
+<entry align="left">4</entry><entry namest="c2" nameend="c2"><m:math><m:mo>≡</m:mo><m:apply><m:and/> <m:apply><m:forall/><m:bvar><m:ci>x</m:ci></m:bvar>
+                    <m:apply><m:forall/><m:bvar><m:ci>y</m:ci></m:bvar>
+                       <m:apply><m:and/> <m:apply><m:ci type="function">R</m:ci><m:ci>x</m:ci></m:apply>
+                             <m:apply><m:ci type="function">Q</m:ci><m:ci>x</m:ci><m:ci>y</m:ci></m:apply>
+                       </m:apply>
+                    </m:apply>
+                 </m:apply>
+                 <m:apply><m:forall/><m:bvar><m:ci>z</m:ci></m:bvar>
+                    <m:apply><m:ci type="function">R</m:ci><m:ci>z</m:ci></m:apply>
+                 </m:apply>
+           </m:apply></m:math></entry><entry colname="c3"> Reordering <m:math><m:mo>∀</m:mo></m:math>s
+           </entry>
+</row>
+<row>
+<entry align="left">5</entry><entry namest="c2" nameend="c2"><m:math><m:mo>≡</m:mo><m:apply><m:and/> <m:apply><m:forall/><m:bvar><m:ci>x</m:ci></m:bvar>
+                    <m:apply><m:and/> <m:apply><m:forall/><m:bvar><m:ci>y</m:ci></m:bvar>
+                             <m:apply><m:ci type="function">R</m:ci><m:ci>x</m:ci></m:apply>
+                          </m:apply>
+                          <m:apply><m:forall/><m:bvar><m:ci>y</m:ci></m:bvar>
+                             <m:apply><m:ci type="function">Q</m:ci><m:ci>x</m:ci><m:ci>y</m:ci></m:apply>
+                          </m:apply>
+                    </m:apply>
+                 </m:apply>
+                 <m:apply><m:forall/><m:bvar><m:ci>z</m:ci></m:bvar>
+                    <m:apply><m:ci type="function">R</m:ci><m:ci>z</m:ci></m:apply>
+                 </m:apply>
+           </m:apply></m:math></entry><entry colname="c3"> Distribution of <m:math><m:mo>∀</m:mo></m:math> over <m:math><m:mo>∧</m:mo></m:math>
+           </entry>
+</row>
+<row>
+<entry align="left">6</entry><entry namest="c2" nameend="c2"><m:math><m:mo>≡</m:mo><m:apply><m:and/> <m:apply><m:forall/><m:bvar><m:ci>x</m:ci></m:bvar>
+                    <m:apply><m:and/> <m:apply><m:ci type="function">R</m:ci><m:ci>x</m:ci></m:apply>
+                          <m:apply><m:forall/><m:bvar><m:ci>y</m:ci></m:bvar>
+                             <m:apply><m:ci type="function">Q</m:ci><m:ci>x</m:ci><m:ci>y</m:ci></m:apply>
+                          </m:apply>
+                    </m:apply>
+                 </m:apply>
+                 <m:apply><m:forall/><m:bvar><m:ci>z</m:ci></m:bvar>
+                    <m:apply><m:ci type="function">R</m:ci><m:ci>z</m:ci></m:apply>
+                 </m:apply>
+           </m:apply></m:math></entry><entry colname="c3"> Simplification of <m:math><m:mo>∀</m:mo></m:math> (<m:math><m:ci>y</m:ci></m:math> not free in <m:math><m:apply><m:ci type="function">R</m:ci><m:ci>x</m:ci></m:apply></m:math>)
+           </entry>
+</row>
+<row>
+<entry align="left">7</entry><entry namest="c2" nameend="c2"><m:math><m:mo>≡</m:mo><m:apply><m:and/> <m:apply><m:forall/><m:bvar><m:ci>x</m:ci></m:bvar>
+                    <m:apply><m:and/> <m:apply><m:ci type="function">R</m:ci><m:ci>x</m:ci></m:apply>
+                          <m:apply><m:forall/><m:bvar><m:ci>y</m:ci></m:bvar>
+                             <m:apply><m:ci type="function">Q</m:ci><m:ci>x</m:ci><m:ci>y</m:ci></m:apply>
+                          </m:apply>
+                    </m:apply>
+                 </m:apply>
+                 <m:apply><m:forall/><m:bvar><m:ci>x</m:ci></m:bvar>
+                    <m:apply><m:ci type="function">R</m:ci><m:ci>x</m:ci></m:apply>
+                 </m:apply>
+           </m:apply></m:math></entry><entry colname="c3"> renaming
+           </entry>
+</row>
+<row>
+<entry align="left">8</entry><entry namest="c2" nameend="c2"><m:math><m:mo>≡</m:mo><m:apply><m:forall/><m:bvar><m:ci>x</m:ci></m:bvar>
+              <m:apply><m:and/> <m:apply><m:and/> <m:apply><m:ci type="function">R</m:ci><m:ci>x</m:ci></m:apply>
+                          <m:apply><m:forall/><m:bvar><m:ci>y</m:ci></m:bvar>
+                             <m:apply><m:ci type="function">Q</m:ci><m:ci>x</m:ci><m:ci>y</m:ci></m:apply>
+                          </m:apply>
+                    </m:apply>
+                    <m:apply><m:ci type="function">R</m:ci><m:ci>x</m:ci></m:apply>
+              </m:apply>
+           </m:apply></m:math></entry><entry colname="c3"> Distribution of <m:math><m:mo>∀</m:mo></m:math> over <m:math><m:mo>∧</m:mo></m:math>
+           </entry>
+</row>
+<row>
+<entry align="left">9</entry><entry namest="c2" nameend="c2"><m:math><m:mo>≡</m:mo><m:apply><m:forall/><m:bvar><m:ci>x</m:ci></m:bvar>
+              <m:apply><m:and/> <m:apply><m:and/> <m:apply><m:forall/><m:bvar><m:ci>y</m:ci></m:bvar>
+                             <m:apply><m:ci type="function">Q</m:ci><m:ci>x</m:ci><m:ci>y</m:ci></m:apply>
+                          </m:apply>
+                          <m:apply><m:ci type="function">R</m:ci><m:ci>x</m:ci></m:apply>
+                    </m:apply>
+                    <m:apply><m:ci type="function">R</m:ci><m:ci>x</m:ci></m:apply>
+              </m:apply>
+           </m:apply></m:math></entry><entry colname="c3"> Commutativity of <m:math><m:mo>∧</m:mo></m:math>
+           </entry>
+</row>
+<row>
+<entry align="left">10</entry><entry namest="c2" nameend="c2"><m:math><m:mo>≡</m:mo><m:apply><m:forall/><m:bvar><m:ci>x</m:ci></m:bvar>
+              <m:apply><m:and/> <m:apply><m:forall/><m:bvar><m:ci>y</m:ci></m:bvar>
+                       <m:apply><m:ci type="function">Q</m:ci><m:ci>x</m:ci><m:ci>y</m:ci></m:apply>
+                    </m:apply>
+                    <m:apply><m:and/> <m:apply><m:ci type="function">R</m:ci><m:ci>x</m:ci></m:apply>
+                          <m:apply><m:ci type="function">R</m:ci><m:ci>x</m:ci></m:apply>
+                    </m:apply>
+              </m:apply>
+           </m:apply></m:math></entry><entry colname="c3"> Associativity of <m:math><m:mo>∧</m:mo></m:math>
+           </entry>
+</row>
+<row>
+<entry align="left">11</entry><entry namest="c2" nameend="c2"><m:math><m:mo>≡</m:mo><m:apply><m:forall/><m:bvar><m:ci>x</m:ci></m:bvar>
+              <m:apply><m:and/> <m:apply><m:forall/><m:bvar><m:ci>y</m:ci></m:bvar>
+                       <m:apply><m:ci type="function">Q</m:ci><m:ci>x</m:ci><m:ci>y</m:ci></m:apply>
+                    </m:apply>
+                    <m:apply><m:ci type="function">R</m:ci><m:ci>x</m:ci></m:apply>
+              </m:apply>
+           </m:apply></m:math></entry><entry colname="c3"> Idempotency of <m:math><m:mo>∧</m:mo></m:math>
+           </entry>
+</row></tbody>
+</tgroup>
+</table>
+
+  <para id="para9">
+    Admittedly, some of these steps are rather small and obvious
+    (<foreign>e.g.</foreign>, our use of commutativity and associativity);
+    we include them to illustrate how the identities of propositional
+    logic are also used in first-order logic.
+  </para>
+</example>
+
+
+
+
+<example id="example2">
+  <para id="para10">
+    An example of 
+    <m:math><m:apply><m:equivalent/>
+      <m:apply><m:forall/><m:bvar><m:ci>x</m:ci></m:bvar><m:ci>ψ</m:ci></m:apply>
+      <m:ci>ψ</m:ci>
+    </m:apply></m:math>
+    where <m:math><m:ci>ψ</m:ci></m:math> doesn't contain <m:math><m:ci>x</m:ci></m:math> occurring free:
+    Let <m:math><m:ci>ψ</m:ci></m:math> be
+    <link document="m10728" target-id="exercise-even-and-prime">the formula we've seen before</link>,
+    asserting that a positive integer <m:math><m:ci>n</m:ci></m:math> was noncomposite:
+    <m:math><m:apply><m:forall/><m:bvar><m:ci>j</m:ci></m:bvar>
+      <m:apply><m:forall/><m:bvar><m:ci>k</m:ci></m:bvar>
+        <m:apply><m:implies/>
+          <m:apply>
+            <m:eq/>
+            <m:apply><m:times/> <m:ci>j</m:ci> <m:ci>k</m:ci></m:apply>
+            <m:ci>n</m:ci>
+          </m:apply> 
+          <m:apply><m:or/>
+            <m:apply><m:eq/> <m:ci>j</m:ci> <m:cn>1</m:cn></m:apply>
+            <m:apply><m:eq/> <m:ci>k</m:ci> <m:cn>1</m:cn></m:apply>
+          </m:apply>
+        </m:apply>
+      </m:apply>
+    </m:apply></m:math>.
+    Since <m:math><m:ci>n</m:ci></m:math> occurs free, the truth of this formula
+    depends on the value of <m:math><m:ci>n</m:ci></m:math>.
+    The formula
+    <m:math><m:apply><m:forall/><m:bvar><m:ci>x</m:ci></m:bvar><m:ci>ψ</m:ci></m:apply></m:math>
+    really is equivalent to <m:math><m:ci>ψ</m:ci></m:math>:
+    It's true for exactly the same values of <m:math><m:ci>n</m:ci></m:math>.
+    The use of <m:math><m:ci>x</m:ci></m:math> is essentially a bit of a rus, since <m:math><m:ci>x</m:ci></m:math> plays no part
+    of the meat of the <m:math><m:ci>ψ</m:ci></m:math>.
+  </para>
+
+  <para id="para11">
+    However, the following formula is certainly <emphasis>not</emphasis>
+    equivalent:
+    <m:math><m:apply><m:forall/><m:bvar><m:ci>n</m:ci></m:bvar><m:ci>ψ</m:ci></m:apply></m:math>.
+    This formula asserts that all elements of the domain are non-composite
+    (and it doesn't depend on choosing a particular interpretation for <m:math><m:ci>n</m:ci></m:math>).
+    Because <m:math><m:ci>n</m:ci></m:math> occurred free, we can't use the
+    “simplification of quantifiers” identity on it.
+  </para>
+
+  <para id="para12">
+    Finally, one more variant:
+    <m:math><m:apply><m:forall/><m:bvar><m:ci>j</m:ci></m:bvar><m:ci>ψ</m:ci></m:apply></m:math>.
+    This <emphasis>is</emphasis> equivalent to the original, just like 
+    <m:math><m:apply><m:forall/><m:bvar><m:ci>x</m:ci></m:bvar><m:ci>ψ</m:ci></m:apply></m:math> was.
+    Why?  The <m:math><m:ci>j</m:ci></m:math> that occurs inside <m:math><m:ci>ψ</m:ci></m:math> is a local variable,
+    and is different from any enclosing bindings' <m:math><m:ci>j</m:ci></m:math>.
+    As we saw, local variables shadow less-local ones, just as in most
+    
+    programming languages.
+  </para>
+</example>
+
+
+
+
+<exercise id="exercise1">
+  <problem id="idm554816">
+    <para id="para13">
+      The equivalences for distributing implication over equivalences seem
+      counterintuitive at first glance.  Show that the following one holds,
+      given all the identities which don't involve both implication and
+      quantifiers.
+    </para>
+
+    <para id="para14">
+      Assuming that <m:math><m:ci>ψ</m:ci></m:math> does not have any free occurrences of variable <m:math><m:ci>x</m:ci></m:math>,
+      <m:math><m:apply><m:equivalent/>
+        <m:apply><m:forall/><m:bvar><m:ci>x</m:ci></m:bvar> <m:apply><m:implies/> <m:ci>φ</m:ci> <m:ci>ψ</m:ci> </m:apply> </m:apply>
+        <m:apply><m:implies/> <m:apply><m:exists/><m:bvar><m:ci>x</m:ci></m:bvar> <m:ci>φ</m:ci> </m:apply> <m:ci>ψ</m:ci> </m:apply>
+      </m:apply></m:math>.
+    </para>
+  </problem>
+
+  <solution id="idm6033936">
+    <table id="proof2" summary="">
+
+<tgroup cols="3" align="center" colsep="1" rowsep="1">
+<colspec colwidth="*" colname="c1"/>
+<colspec colwidth="*" colname="c2"/>
+<colspec colwidth="*" colname="c3"/>
+
+<tbody>
+<row>
+<entry align="left">1</entry><entry namest="c2" nameend="c2"><m:math><m:apply><m:forall/><m:bvar><m:ci>x</m:ci></m:bvar> <m:apply><m:implies/> <m:ci>φ</m:ci> <m:ci>ψ</m:ci> </m:apply> </m:apply></m:math></entry><entry colname="c3"/>
+</row>
+<row>
+<entry align="left">2</entry><entry namest="c2" nameend="c2"><m:math><m:mo>≡</m:mo><m:apply><m:forall/><m:bvar><m:ci>x</m:ci></m:bvar> <m:apply><m:or/> <m:apply><m:not/><m:ci>φ</m:ci></m:apply> <m:ci>ψ</m:ci> </m:apply> </m:apply></m:math></entry><entry colname="c3">
+          Definition of <m:math><m:mo>⇒</m:mo></m:math>
+        </entry>
+</row>
+<row>
+<entry align="left">3</entry><entry namest="c2" nameend="c2"><m:math><m:mo>≡</m:mo><m:apply><m:or/> <m:apply><m:forall/><m:bvar><m:ci>x</m:ci></m:bvar> <m:apply><m:not/><m:ci>φ</m:ci></m:apply> </m:apply> <m:ci>ψ</m:ci> </m:apply></m:math></entry><entry colname="c3">
+           Distribution of <m:math><m:mo>∀</m:mo></m:math> over <m:math><m:mo>∨</m:mo></m:math>
+        </entry>
+</row>
+<row>
+<entry align="left">4</entry><entry namest="c2" nameend="c2"><m:math><m:mo>≡</m:mo><m:apply><m:or/> <m:apply><m:not/><m:apply><m:exists/><m:bvar><m:ci>x</m:ci></m:bvar> <m:ci>φ</m:ci> </m:apply></m:apply> <m:ci>ψ</m:ci> </m:apply></m:math></entry><entry colname="c3">
+          Complementation of <m:math><m:mo>∃</m:mo></m:math>
+        </entry>
+</row>
+<row>
+<entry align="left">5</entry><entry namest="c2" nameend="c2"><m:math><m:mo>≡</m:mo><m:apply><m:implies/> <m:apply><m:exists/><m:bvar><m:ci>x</m:ci></m:bvar> <m:ci>φ</m:ci> </m:apply> <m:ci>ψ</m:ci> </m:apply></m:math></entry><entry colname="c3">
+          Definition of <m:math><m:mo>⇒</m:mo></m:math>
+        </entry>
+</row></tbody>
+</tgroup>
+</table>
+  </solution>
+</exercise>
+
+
+
+<para id="para15">
+  Are the following two sentences true?
+  <list id="list2">
+    <item>
+      “All flying pigs wear top hats.”
+      <m:math><m:apply><m:forall/><m:bvar><m:ci>p</m:ci></m:bvar>
+         <m:apply><m:ci type="function">wears_top_hat</m:ci><m:ci>p</m:ci></m:apply>
+      </m:apply></m:math>
+      (over the domain of flying pigs).
+    </item>
+    <item>
+      “All numbers in the empty set are even.”
+      <m:math><m:apply><m:forall/><m:bvar><m:ci>x</m:ci></m:bvar>
+         <m:apply><m:ci type="function">even</m:ci><m:ci>x</m:ci></m:apply>
+      </m:apply></m:math>
+      (over the empty domain).
+    </item>
+    <item>
+      “Every Pulitzer prize winner I've met thinks I'm smart,
+             and cute, too!”
+      <m:math><m:apply><m:forall/><m:bvar><m:ci>x</m:ci></m:bvar>
+        <m:apply><m:ci type="function">thinksImSmartAndCute</m:ci><m:ci>x</m:ci></m:apply>
+      </m:apply></m:math>
+      (over the empty, since I haven't met any Pulitzer prize winners).
+  </item>
+  </list>
+  Each sentence states that some property holds for every member
+  of some set (flying pigs or the empty set), but there are no 
+  such members.
+  Such sentences are considered <term>vacuously true</term>.
+</para>
+
+<para id="para16">
+  Okay, maybe you believe that the sentences aren't false, but
+  you still want some reason to consider them true.
+  Well, think of their negations:
+  <list id="list3">
+    <item>
+       “There exists a flying pig not wearing a top hat.”
+       <m:math><m:apply><m:exists/><m:bvar><m:ci>p</m:ci></m:bvar>
+          <m:apply><m:not/><m:ci type="function">wears_top_hat</m:ci><m:ci>p</m:ci></m:apply>
+       </m:apply></m:math>,
+       over the (empty) domain of flying pigs.
+       You can't go off and find a flying pig which contradicts this,
+       since you can't find any flying pig at all.
+       (Note that the negation <emphasis>isn't</emphasis>
+        “No flying pigs wear top hats.”)
+    </item>
+    <item>
+       “There exists a number in the empty set that is even.”
+       <m:math><m:apply><m:exists/><m:bvar><m:ci>x</m:ci></m:bvar><m:apply><m:not/><m:ci type="function">even</m:ci><m:ci>x</m:ci></m:apply></m:apply></m:math>,
+       over the empty domain.
+       (The negation <emphasis>isn't</emphasis>
+        “No numbers in the empty set are even.”)
+    </item>
+  </list>
+  Since these negations are false, the original sentences must be true.
+
+  This is also similar to the fact that a simple propositional implication,
+  <m:math><m:apply><m:implies/><m:ci>a</m:ci> <m:ci>b</m:ci></m:apply></m:math> is true, if <m:math><m:ci>a</m:ci></m:math> is in fact false, regardless of
+  the truth of <m:math><m:ci>b</m:ci></m:math>;
+  in this crude analogy, <m:math><m:ci>a</m:ci></m:math> corresponds to “in the domain”.
+</para>
+
+<note type="aside" id="idm632688">
+  
+    In boolean algebra, we only allow the values <m:math><m:false/></m:math> and <m:math><m:true/></m:math>,
+    with no third option.  This is sometimes called 
+    <term>the law of the excluded middle</term>.
+    Philosophers <emphasis>have</emphasis> developed “trimodal”
+    logics which have a third option, but everything in those logics can
+    be translated into something in traditional logic; 
+    such logics might be more convenient in some cases, but they
+    aren't more expressive.
+  ¶
+
+  
+    <term>Fuzzy Logic</term>, on the other hand, 
+    is a variant where every proposition has
+    a <emphasis>degree</emphasis> of truth (from zero to one).
+    While this <emphasis>is</emphasis> different than propositional logic
+    (and, it is the right way to model many real-world problems),
+    as a logic it hasn't yielded interesting new mathematical results.
+  
+</note>
+
+<para id="para17">
+  Even more silliness can ensue when the domain is empty:
+  For example, not only is every member of the empty set even,
+  but every member is simultaneously odd!
+  That is,
+  <m:math><m:apply><m:forall/><m:bvar><m:ci>x</m:ci></m:bvar>
+    <m:apply><m:and/>
+      <m:apply><m:ci type="function">R</m:ci><m:ci>x</m:ci></m:apply>
+      <m:apply><m:not/><m:apply><m:ci type="function">R</m:ci><m:ci>x</m:ci></m:apply></m:apply>
+    </m:apply>
+  </m:apply></m:math>
+  is true (only) when the domain is the empty set.
+  Even more degnerately,
+  <m:math><m:apply><m:forall/><m:bvar><m:ci>x</m:ci></m:bvar><m:false/></m:apply></m:math>
+  is a true (only) on the emtpy domain.
+</para>
+
+
+</section> 
+
+
+<section id="section2">
+<title>Are we done yet?</title>
+
+<para id="para18">
+  While equivalences are very useful, we are often interested in
+  implications such as the one mentioned previously:
+  <m:math><m:apply><m:implies/>
+    <m:apply><m:forall/><m:bvar><m:ci>x</m:ci></m:bvar> <m:ci>φ</m:ci> </m:apply>
+    <m:apply><m:exists/><m:bvar><m:ci>x</m:ci></m:bvar> <m:ci>φ</m:ci> </m:apply>
+  </m:apply></m:math>.
+  We could rephrase that as an equivalence,
+  <m:math><m:apply><m:equivalent/>
+    <m:apply><m:implies/>
+      <m:apply><m:forall/><m:bvar><m:ci>x</m:ci></m:bvar> <m:ci>φ</m:ci> </m:apply>
+      <m:apply><m:exists/><m:bvar><m:ci>x</m:ci></m:bvar> <m:ci>φ</m:ci> </m:apply>
+    </m:apply>
+    <m:true/>
+  </m:apply></m:math>.
+  Informally, it should be clear that that is rather awkward, and
+  formally it is as well.
+</para>
+
+<para id="para19">
+  But such implications are exactly what inference rules are good for.
+  So, let's continue and consider what
+  <link document="m10774">first-order inference rules</link>
+  should be.
+</para>
+
+</section> 
+
+
+
+</content>
+</document>

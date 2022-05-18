@@ -1,0 +1,306 @@
+<document xmlns="http://cnx.rice.edu/cnxml" xmlns:m="http://www.w3.org/1998/Math/MathML" xmlns:md="http://cnx.rice.edu/mdml">
+
+<title>Propositional Logic: truth tables</title>
+<metadata><md:content-id>undefined</md:content-id><md:title/><md:uuid>1aa6632b-2b30-4be6-b39e-5ae8002f4526</md:uuid>
+</metadata>
+
+
+<content>
+<para id="para1">
+  Seeing how we can express some concepts as some formulas,
+  and how some formulas are tautologies
+  while others might be true or false depending on the truth assignment,
+  we come to a question:
+  <emphasis>how</emphasis> can we determine
+  when a formula is a tautology?  
+  How can we tell if two different formulas are equivalent
+  for all truth assignments?
+  We'll look at three different methods of answering these questions:
+</para>
+<list id="list1">
+  <item> reasoning with truth tables (this section),
+  </item>
+  <item> <link document="m10717">reasoning with equivalences</link>, and
+  </item>
+  <item> <link document="m10718">reasoning with inference rules</link>.
+  </item>
+</list>
+
+<section id="section1">
+<title>Using Truth Tables</title>
+
+<para id="para2">
+  Is <m:math><m:mo>⇒</m:mo></m:math> associative?  In other words, is 
+  <m:math><m:apply>
+    <m:implies/>
+    <m:ci>a</m:ci>
+    <m:apply><m:implies/><m:ci>b</m:ci> <m:ci>c</m:ci></m:apply>
+  </m:apply></m:math>
+  always equivalent to
+  <m:math><m:apply>
+    <m:implies/>
+    <m:apply><m:implies/><m:ci>a</m:ci> <m:ci>b</m:ci></m:apply>
+    <m:ci>c</m:ci>
+  </m:apply></m:math>?
+  What is a <emphasis>methodical</emphasis>
+  way of answering questions of this type?
+  We can make a 
+  <link document="m10715" target-id="truth-table">truth table</link>
+  with two output columns,
+  one for each formula in question,
+  and then just check whether those two columns are the same.
+</para>
+
+<exercise id="implies-associativity">
+  <problem id="idm4509216">
+    <para id="para3">
+      Use truth tables to show that
+      <m:math><m:apply>
+        <m:implies/>
+        <m:ci>a</m:ci>
+        <m:mfenced>     
+          <m:apply><m:implies/><m:ci>b</m:ci> <m:ci>c</m:ci></m:apply>
+        </m:mfenced>
+      </m:apply></m:math> and 
+      <m:math><m:apply>
+        <m:implies/>
+        <m:mfenced>     
+          <m:apply><m:implies/><m:ci>a</m:ci> <m:ci>b</m:ci></m:apply>
+        </m:mfenced>
+        <m:ci>c</m:ci>
+      </m:apply></m:math>
+      aren't equivalent.
+    </para>
+  </problem>
+
+  <solution id="idm5127920">
+    <table id="table1" summary="">
+<title>Truth table to check associativity of implication</title>
+<tgroup cols="5">
+<thead><row><entry><m:math><m:ci>a</m:ci></m:math></entry><entry><m:math><m:ci>b</m:ci></m:math></entry><entry><m:math><m:ci>c</m:ci></m:math></entry><entry><m:math><m:mrow><m:mo>(</m:mo><m:ci>a</m:ci><m:mo>⇒</m:mo><m:mrow><m:mo>(</m:mo><m:ci>b</m:ci><m:mo>⇒</m:mo><m:ci>c</m:ci><m:mo>)</m:mo></m:mrow><m:mo>)</m:mo></m:mrow></m:math></entry><entry><m:math><m:mrow><m:mo>(</m:mo><m:mrow><m:mo>(</m:mo><m:ci>a</m:ci><m:mo>⇒</m:mo><m:ci>b</m:ci><m:mo>)</m:mo></m:mrow><m:mo>⇒</m:mo><m:ci>c</m:ci><m:mo>)</m:mo></m:mrow></m:math></entry></row></thead>
+<tbody><row><entry><m:math><m:false/></m:math></entry><entry><m:math><m:false/></m:math></entry><entry><m:math><m:false/></m:math></entry><entry><m:math><m:true/></m:math></entry><entry><m:math><m:false/></m:math></entry></row>
+<row><entry><m:math><m:false/></m:math></entry><entry><m:math><m:false/></m:math></entry><entry><m:math><m:true/></m:math></entry><entry><m:math><m:true/></m:math></entry><entry><m:math><m:true/></m:math></entry></row>
+<row><entry><m:math><m:false/></m:math></entry><entry><m:math><m:true/></m:math></entry><entry><m:math><m:false/></m:math></entry><entry><m:math><m:true/></m:math></entry><entry><m:math><m:false/></m:math></entry></row>
+<row><entry><m:math><m:false/></m:math></entry><entry><m:math><m:true/></m:math></entry><entry><m:math><m:true/></m:math></entry><entry><m:math><m:true/></m:math></entry><entry><m:math><m:true/></m:math></entry></row>
+<row><entry><m:math><m:true/></m:math></entry><entry><m:math><m:false/></m:math></entry><entry><m:math><m:false/></m:math></entry><entry><m:math><m:true/></m:math></entry><entry><m:math><m:true/></m:math></entry></row>
+<row><entry><m:math><m:true/></m:math></entry><entry><m:math><m:false/></m:math></entry><entry><m:math><m:true/></m:math></entry><entry><m:math><m:true/></m:math></entry><entry><m:math><m:true/></m:math></entry></row>
+<row><entry><m:math><m:true/></m:math></entry><entry><m:math><m:true/></m:math></entry><entry><m:math><m:false/></m:math></entry><entry><m:math><m:false/></m:math></entry><entry><m:math><m:false/></m:math></entry></row>
+<row><entry><m:math><m:true/></m:math></entry><entry><m:math><m:true/></m:math></entry><entry><m:math><m:true/></m:math></entry><entry><m:math><m:true/></m:math></entry><entry><m:math><m:true/></m:math></entry></row></tbody>
+</tgroup>
+</table>
+
+    <para id="para4">
+      By inspecting the two right-most columns,
+      we see that the formulas are indeed not equivalent.
+      They have different values for two truth-settings,
+      those with
+      <m:math><m:apply><m:eq/><m:ci>a</m:ci> <m:false/></m:apply></m:math> and
+      <m:math><m:apply><m:eq/><m:ci>c</m:ci> <m:false/></m:apply></m:math>.
+    </para>
+  </solution>
+</exercise>
+
+<para id="para5">
+  Thus we see that truth tables are a method for answering
+  questions of the form
+  “Is formula <m:math><m:ci>φ</m:ci></m:math> equivalent to formula <m:math><m:ci>ψ</m:ci></m:math>?”
+  We make a truth table, with a column for each of <m:math><m:ci>φ</m:ci></m:math> and <m:math><m:ci>ψ</m:ci></m:math>,
+  and just inspect whether the two columns always agree.
+  A bit of a brute-force solution, but certainly correct.
+</para>
+
+<para id="para6">
+  What about the related question,
+  “Is formula <m:math><m:ci>θ</m:ci></m:math> a tautology?”.
+  Well, obviously truth tables can handle this as well:
+  make a truth table for the formula, and inspect whether all
+  entries are <m:math><m:true/></m:math>.
+  For example, in the
+  <link document="m10716" target-id="implies-associativity">above problem</link>,
+  we could have made a truth table for the single formula
+  <m:math><m:apply><m:mo>⇔</m:mo>
+    <m:apply>
+      <m:implies/>
+      <m:ci>a</m:ci>
+      <m:mfenced>     
+        <m:apply><m:implies/><m:ci>b</m:ci> <m:ci>c</m:ci></m:apply>
+      </m:mfenced>
+    </m:apply>
+    <m:apply>
+      <m:implies/>
+      <m:mfenced>     
+        <m:apply><m:implies/><m:ci>a</m:ci> <m:ci>b</m:ci></m:apply>
+      </m:mfenced>
+      <m:ci>c</m:ci>
+    </m:apply>
+  </m:apply></m:math>.
+  The original question of equivalence becomes,
+  is this new formula a tautology?
+</para>
+
+
+<para id="para7">
+  The first approach is probably a tad easier to do by hand,
+  though clearly the two approaches are equivalent.
+  Another handy trick is to have <emphasis>three</emphasis> output columns
+  you're computing:
+  one for
+  <m:math><m:apply>
+    <m:eq/>
+    <m:ci>φ</m:ci>
+    <m:apply>
+      <m:implies/>
+      <m:ci>a</m:ci>
+      <m:mfenced>     
+        <m:apply><m:implies/><m:ci>b</m:ci> <m:ci>c</m:ci></m:apply>
+      </m:mfenced>
+    </m:apply>
+  </m:apply></m:math>,
+  one for
+  <m:math><m:apply>
+    <m:eq/>
+    <m:ci>ψ</m:ci>
+    <m:apply>
+      <m:implies/>
+      <m:mfenced>     
+        <m:apply><m:implies/><m:ci>a</m:ci> <m:ci>b</m:ci></m:apply>
+      </m:mfenced>
+      <m:ci>c</m:ci>
+    </m:apply>
+  </m:apply></m:math>,
+  and one for
+  <m:math><m:apply><m:mo>⇔</m:mo> <m:ci>φ</m:ci> <m:ci>ψ</m:ci></m:apply></m:math>;
+  filling out the first two helper columns
+  makes it easier to fill out the last column.
+  <note type="tip" id="idm2549968">
+    When making a truth table for a large complicated WFF by hand,
+    it's helpful to make columns for sub-WFFs;
+    as you fill in a row, you can use the results of one column
+    to help you calculate the entry for a later column.
+  </note>
+</para>
+
+<exercise id="exercise2">
+  <problem id="idm2024304">
+    <para id="para8">
+    Is it valid to replace the conditional
+    </para>
+
+    <code display="block" id="idm4463424">
+int do_something(int value1, int value2)
+{
+   bool a = …;
+   bool b = …;
+
+   if (a &amp;&amp; b)
+      return value1;
+   else if (a || b)
+      return value2;
+   else
+      return value1;
+}
+    </code>
+
+    <para id="para9">
+    with this conditional?
+    </para>
+
+    <code display="block" id="idp2187760">
+int do_something(int value1, int value2)
+{
+   bool a = …;
+   bool b = …;
+
+   if ((a &amp;&amp; !b) || (!a &amp;&amp; b))
+      return value2;
+   else
+      return value1;
+}
+    </code>
+
+    <para id="para10">
+      After all, the latter seems easier to understand, since it
+      has only two cases, instead of three.
+    </para>
+  </problem>
+
+  <solution id="idm16050880">
+    <para id="para11">
+      In the original code, we return <code display="inline">value2</code>
+      when the first case is false, but the second case is true.
+      Using a WFF, when
+      <m:math><m:apply>
+        <m:and/>
+        <m:apply><m:not/><m:apply><m:and/><m:ci>a</m:ci> <m:ci>b</m:ci></m:apply></m:apply>
+        <m:apply><m:or/><m:ci>a</m:ci> <m:ci>b</m:ci></m:apply>
+      </m:apply></m:math>.
+      Is this equivalent to the WFF
+      <m:math><m:apply>
+        <m:or/>
+        <m:apply><m:and/><m:ci>a</m:ci> <m:apply><m:not/><m:ci>b</m:ci></m:apply></m:apply>
+        <m:apply><m:and/><m:apply><m:not/><m:ci>a</m:ci></m:apply> <m:ci>b</m:ci></m:apply>
+      </m:apply></m:math>?
+      Here is a truth table:
+    </para>
+
+    <table id="table2" summary="">
+<title>Truth table for comparing conditionals' equivalence</title>
+<tgroup cols="8">
+<thead><row><entry><m:math><m:ci>a</m:ci></m:math></entry><entry><m:math><m:ci>b</m:ci></m:math></entry><entry><m:math><m:mrow><m:mo>¬</m:mo><m:mrow><m:mo>(</m:mo><m:ci>a</m:ci><m:mo>∧</m:mo><m:ci>b</m:ci><m:mo>)</m:mo></m:mrow></m:mrow></m:math></entry><entry><m:math><m:mrow><m:mo>(</m:mo><m:ci>a</m:ci><m:mo>∨</m:mo><m:ci>b</m:ci><m:mo>)</m:mo></m:mrow></m:math></entry><entry><m:math><m:mrow><m:mo>(</m:mo><m:mrow><m:mo>¬</m:mo><m:mrow><m:mo>(</m:mo><m:ci>a</m:ci><m:mo>∧</m:mo><m:ci>b</m:ci><m:mo>)</m:mo></m:mrow></m:mrow><m:mo>∧</m:mo><m:mrow><m:mo>(</m:mo><m:ci>a</m:ci><m:mo>∨</m:mo><m:ci>b</m:ci><m:mo>)</m:mo></m:mrow><m:mo>)</m:mo></m:mrow></m:math></entry><entry><m:math><m:mrow><m:mo>(</m:mo><m:ci>a</m:ci><m:mo>∧</m:mo><m:mrow><m:mo>¬</m:mo><m:ci>b</m:ci></m:mrow><m:mo>)</m:mo></m:mrow></m:math></entry><entry><m:math><m:mrow><m:mo>(</m:mo><m:mrow><m:mo>¬</m:mo><m:ci>a</m:ci></m:mrow><m:mo>∧</m:mo><m:ci>b</m:ci><m:mo>)</m:mo></m:mrow></m:math></entry><entry><m:math><m:mrow><m:mo>(</m:mo><m:mrow><m:mo>(</m:mo><m:ci>a</m:ci><m:mo>∧</m:mo><m:mrow><m:mo>¬</m:mo><m:ci>b</m:ci></m:mrow><m:mo>)</m:mo></m:mrow><m:mo>∨</m:mo><m:mrow><m:mo>(</m:mo><m:mrow><m:mo>¬</m:mo><m:ci>a</m:ci></m:mrow><m:mo>∧</m:mo><m:ci>b</m:ci><m:mo>)</m:mo></m:mrow><m:mo>)</m:mo></m:mrow></m:math></entry></row></thead>
+<tbody><row><entry><m:math><m:false/></m:math></entry><entry><m:math><m:false/></m:math></entry><entry><m:math><m:true/></m:math></entry><entry><m:math><m:false/></m:math></entry><entry><m:math><m:false/></m:math></entry><entry><m:math><m:false/></m:math></entry><entry><m:math><m:false/></m:math></entry><entry><m:math><m:false/></m:math></entry></row>
+<row><entry><m:math><m:false/></m:math></entry><entry><m:math><m:true/></m:math></entry><entry><m:math><m:true/></m:math></entry><entry><m:math><m:true/></m:math></entry><entry><m:math><m:true/></m:math></entry><entry><m:math><m:false/></m:math></entry><entry><m:math><m:true/></m:math></entry><entry><m:math><m:true/></m:math></entry></row>
+<row><entry><m:math><m:true/></m:math></entry><entry><m:math><m:false/></m:math></entry><entry><m:math><m:true/></m:math></entry><entry><m:math><m:true/></m:math></entry><entry><m:math><m:true/></m:math></entry><entry><m:math><m:true/></m:math></entry><entry><m:math><m:false/></m:math></entry><entry><m:math><m:true/></m:math></entry></row>
+<row><entry><m:math><m:true/></m:math></entry><entry><m:math><m:true/></m:math></entry><entry><m:math><m:false/></m:math></entry><entry><m:math><m:true/></m:math></entry><entry><m:math><m:false/></m:math></entry><entry><m:math><m:false/></m:math></entry><entry><m:math><m:false/></m:math></entry><entry><m:math><m:false/></m:math></entry></row></tbody>
+</tgroup>
+</table>
+
+    <para id="para12">
+      Yes, looking at the appropriate two columns we see they are equivalent.
+    </para>
+  </solution>
+</exercise>
+
+<para id="para13">
+  So, how would do we use truth tables to reason about WaterWorld?
+  Suppose you wanted to show that <m:math><m:ci>G-safe</m:ci></m:math> was true on some particular
+  board.  Clearly a truth table with the single column <m:math><m:ci>G-safe</m:ci></m:math>
+  alone isn't enough (it would have only two rows — <m:math><m:false/></m:math> and
+  <m:math><m:true/></m:math> — and just sit there and stare at you).
+  We need some way to incorporate both 
+  the <link document="m10528">rules of WaterWorld</link>
+  and the parts of the board that we could see.
+</para>
+
+<para id="para14">
+  We can do that by 
+  starting with a <emphasis>huge</emphasis> formula
+  that was the conjunction of all
+  the WaterWorld domain axioms; call it <m:math><m:ci>ρ</m:ci></m:math>.
+  We would encode the board's observed state with another formula, <m:math><m:ci>ψ</m:ci></m:math>.
+  Using these, we can create the (rather unwieldy) formula that
+  we're interested in:
+  <m:math><m:apply>
+    <m:implies/>
+    <m:apply><m:and/><m:ci>ρ</m:ci> <m:ci>ψ</m:ci></m:apply>
+    <m:ci>G-safe</m:ci>
+  </m:apply></m:math>.
+  (Notice how this formula effectively ignores
+   all the rows of the the truth-table
+   that don't satisfy the rules <m:math><m:ci>ρ</m:ci></m:math>,
+   and the rows that don't correspond to the board we see <m:math><m:ci>ψ</m:ci></m:math>:
+   because of the semantics of <m:math><m:mo>⇒</m:mo></m:math>, whenever 
+   <m:math><m:apply><m:and/><m:ci>ρ</m:ci> <m:ci>ψ</m:ci></m:apply></m:math> is false, the overall formula 
+   <m:math><m:apply>
+     <m:implies/>
+     <m:apply><m:and/><m:ci>ρ</m:ci> <m:ci>ψ</m:ci></m:apply>
+     <m:ci>G-safe</m:ci>
+   </m:apply></m:math>
+   is true.)
+</para>
+
+</section> 
+
+
+</content>
+
+</document>

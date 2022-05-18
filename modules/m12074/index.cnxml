@@ -1,0 +1,212 @@
+<document xmlns="http://cnx.rice.edu/cnxml" xmlns:m="http://www.w3.org/1998/Math/MathML" xmlns:md="http://cnx.rice.edu/mdml">
+
+<title>Propositional Logic: limitations of truth tables</title>
+<metadata><md:content-id>undefined</md:content-id><md:title/><md:uuid>f5b7f3d8-971f-4fe7-a489-2e4d1efcf6d5</md:uuid>
+</metadata>
+
+
+<content>
+
+<section id="section1">
+<title>Are we done yet?</title>
+
+<para id="para1">
+  Are we done with propositional logic, now that we can test for
+  equivalence and tautologies, using truth tables?
+  Possibly.  Truth tables can answer any question about propositional
+  logic, but not always conveniently.
+</para>
+
+<para id="para2">
+  Consider the following code:
+</para>
+
+<code display="block" id="idm9346240">
+bool do_something(int value)
+{
+   bool a = …;
+   bool b = …;
+
+   if (a &amp;&amp; !b)
+      return true;
+   else if (!a &amp;&amp; !b)
+      return false;
+   else if (a)
+      return a;
+   else if (b)
+      return false;
+   else
+      return true;
+}
+</code>
+
+<para id="para3">
+  Clearly, this is very ugly and should be simplified.  But to what?
+  We could build a truth table for the corresponding WFF, but so far
+  we don't have any better way of finding a simpler equivalent formula
+  than testing equivalence with whatever comes to mind.
+  We need some way to generate formulas,
+  given either an equivalent formula or a truth table.
+</para>
+
+<para id="para4">
+  There is another practical difficulty with truth table:
+  they can get unwieldy.
+</para>
+
+<exercise id="exercise1">
+  <problem id="idp4186912">
+    <para id="para5">
+      How many rows are there in a truth table with 2 input variables?
+      3 variables? 5 variables? 10 variables? <m:math><m:ci>n</m:ci></m:math> variables?
+    </para>
+  </problem>
+
+  <solution id="idm9381680">
+    <list id="list1">
+      <item> 2 variables: As we're seen, 4 rows.
+      </item>
+      <item> 3 variables: 8 rows.
+      </item>
+      <item> 5 variables: 32 rows.
+      </item>
+      <item> 10 variables: 1024 rows.
+      </item>
+      <item> <m:math><m:ci>n</m:ci></m:math> variables:
+             <m:math>
+               <m:apply>
+                 <m:power/>
+                 <m:cn>2</m:cn>
+                 <m:ci>n</m:ci>
+               </m:apply>
+             </m:math> rows.
+      </item>
+    </list>
+  </solution>
+</exercise>
+
+<exercise id="exercise2">
+  <problem id="idm2066704">
+    <para id="para6">
+      (<emphasis>Optional</emphasis>)
+      Now, how many such boolean
+      <emphasis>functions</emphasis> are possible, with 2 inputs? With 3?
+      For fun, sit down and name all the possible two-input functions.
+      You'll find that some of them are rather boring, such as the 
+      constant function <m:math><m:true/></m:math>, and many are just permutations on <m:math><m:mo>⇒</m:mo></m:math>.
+    </para>
+  </problem>
+
+  <solution id="idp4172016">
+    <list id="list2">
+      <item> With 2 variables, we have 4 rows.
+             How many different ways can we assign
+             <m:math><m:true/></m:math> and <m:math><m:false/></m:math> to those 4 positions?
+             If you write them all out, you should get 16 combinations.
+      </item>
+      <item> With 3 variables, we have 8 rows and a total of 256
+             different functions.
+      </item>
+      <item> With <m:math><m:ci>n</m:ci></m:math> variables, we have
+             <m:math>
+               <m:apply>
+                 <m:power/>
+                 <m:cn>2</m:cn>
+                 <m:ci>n</m:ci>
+               </m:apply>
+             </m:math>
+             rows and a total of
+             <m:math>
+               <m:apply>
+                 <m:power/>
+                 <m:cn>2</m:cn>
+                 <m:apply>
+                   <m:power/>
+                   <m:cn>2</m:cn>
+                   <m:ci>n</m:ci>
+                 </m:apply>
+               </m:apply>
+             </m:math>
+             different functions.  That's a lot!
+      </item>
+    </list>
+  </solution>
+</exercise>
+
+<para id="para7">
+  When discussing a circuit with 100 wires
+  (each corresponding to a single proposition),
+  truth tables are  clearly 
+  <link url="http://www.cs.rice.edu/~ian/Misc/exponential-is-big.shtml">infeasible</link>.
+  
+  Modern processors have <emphasis>millions</emphasis>
+  of wires and transistors.
+  It is still an area of active research 
+  to cope with such a huge number of possibilities.
+  (The key idea is to break things down into small sections,
+  prove things about the small sections,
+  and hopefully have a small set of sentences
+  formally capturing the interface between sections.)
+</para>
+
+<para id="para8">
+  So truth tables are intractable for analyzing circuits of more than
+  a few wires.
+  But will they suffice for answering WaterWorld questions?
+  Image a (large) table with all the neighbor propositions:
+  <m:math><m:ci>A-has-0</m:ci></m:math>, <m:math><m:ci>B-has-0</m:ci></m:math>, …,
+  <m:math><m:ci>A-has-1</m:ci></m:math>, <m:math><m:ci>B-has-1</m:ci></m:math>, …
+  Now, determine which rows which entail <m:math><m:ci>B-safe</m:ci></m:math>.
+  To answer this, we end up looking at rows involving
+  many clearly-irrelevant propositions such as <m:math><m:ci>Z-has-2</m:ci></m:math>.
+  <note type="aside" id="idm9546992">
+    Hmm, considering every possible board and then counting what proportion
+    of boards entail
+    <m:math><m:ci>B-safe</m:ci></m:math>  — hmm, this is the brute-force definition of probability!
+    Since such truth tables enumerates all possible boards,
+    it's like looking for probability 1 the brute-force way.
+  </note>
+</para>
+
+<para id="para9">
+  Also, this method of playing WaterWorld via huge truth tables
+  would be unsatisfying for another reason:
+  it doesn't actually reflect our own reasoning.
+  As a general principle of programming, your
+  program should always reflect 
+  how <emphasis>you</emphasis> conceive of the problem.
+  The same applies to logic.
+
+  <note type="aside" id="idm14107504">
+    Consider the difference between using truth tables and actually reasoning.
+    The philosopher
+    <link url="http://www.humanities.mcmaster.ca/~bertrand/">Bertrand Russell</link>,
+    trying to pin down what exactly constitutes “knowledge”,
+    suggested that he knows
+    that the last name of Britain's prime minister begins with a 'B'.
+    While Gordon Brown is prime minister, making Bertrand is correct,
+    we hesitate to say he actually <emphasis>knows</emphasis>
+    the fact  — he 
+    wrote his example when  the prime minister was
+    <link url="http://www.britannia.com/gov/primes/prime39.html">Arthur Balfour</link> (1902-1905).
+    So while he is correct in a truth-table sense, his reasoning isn't,
+    and we tend to say that he does not actually <emphasis>know</emphasis>
+    the prime minister's last initial.
+  </note>
+</para>
+
+<para id="para10">
+  So, no: we're not yet finished with propositional logic.
+  We want to look for (hopefully) more feasible ways to determine whether 
+  a formula is a tautology (or, whether two formulas are equivalent).
+  As a clue, we'll try to discover methods which are
+  based on the way we naively approach this.
+  We'll look first at
+  <link document="m10717">equivalences</link>,
+  and then at
+  <link document="m10718">inference rules</link>.
+</para>
+</section> 
+
+</content>
+</document>

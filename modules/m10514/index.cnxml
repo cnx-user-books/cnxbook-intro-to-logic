@@ -1,0 +1,1471 @@
+<document xmlns="http://cnx.rice.edu/cnxml" xmlns:m="http://www.w3.org/1998/Math/MathML" xmlns:md="http://cnx.rice.edu/mdml">
+  
+<title>Exercises for Propositional Logic I</title>
+<metadata>
+  <md:content-id>m10514</md:content-id><md:title>Exercises for Propositional Logic I</md:title>
+  <md:abstract>Problems on propositional logic,
+including truth-tables, boolean algebra, and inference rules.</md:abstract>
+  <md:uuid>b2229047-28e2-4eb8-b151-565322983191</md:uuid>
+</metadata>
+
+
+<content>
+
+<para id="imp-id11368838">
+  Please write logic formulas using the syntax
+  <link document="m10715" target-id="wff-defn">previously defined</link>,
+  using <m:math><m:false/></m:math> (or for brevity, <quote display="inline">F</quote>),
+  <m:math><m:true/></m:math> (or <quote display="inline">T</quote>),
+  ¬, ∧, ∨, and ⇒.
+  Except where directed, use only these connectives.
+</para>
+
+<para id="imp-id12696523">
+  <note id="imp-id24730725" type="aside">
+    You can
+    <link url="http://www.teachlogic.org/WaterWorld/">download WaterWorld</link> if you like.
+    At Rice University, WaterWorld is installed on OwlNet, in
+    <code>/home/comp280/bin/waterworld</code>.
+  </note>
+</para>
+
+
+<section id="imp-id26859378">  
+<title>Propositional Logic</title>
+
+<exercise id="argument-interpretations-1">
+  <problem id="imp-id26819699"><para id="imp-id26819700">[Practice problem<m:math><m:mo>—</m:mo></m:math>solution provided.]</para>
+    <para id="imp-id6181153">
+      Your friend Tracy argues:
+      <quote display="inline">
+        It is bad to be depressed.
+        Watching the news makes me feel depressed. 
+        Thus, it's good to avoid watching the news.
+      </quote>
+    </para>
+
+    <para id="imp-id26682190">
+      Regardless of whether the premises and conclusion are true,
+      show that the <emphasis>argument</emphasis> is not,
+      by showing it doesn't hold for all domains.
+      Replace <quote display="inline">depressed</quote> and
+      <quote display="inline">watching news</quote> with
+      expressions which leave the premises true,
+      but the conclusion false
+      (or at least, what most reasonable people would consider false).
+    </para>
+  </problem>
+
+  <solution id="imp-id22718276">
+   <para id="imp-id26873997">
+      Lots of possible counterexamples.
+      <quote display="inline">
+        It is bad to be depressed.
+        Doing homework makes me depressed;
+        so it's good to not do my homework.
+      </quote>
+      Or,
+      <quote display="inline">
+        It is bad for people to be in physical pain.
+        Childbirth causes pain.
+        Therefore childbirth needs be avoided by all people.
+      </quote>
+      If the original conclusion is really correct,
+      Tracy needs to elucidate some of his unspoken assumptions.
+    </para>
+
+    <para id="imp-id25784590">
+      The flaw seems to be along the lines of,
+      <quote display="inline">
+        avoiding bad in the short run
+        may not always be good in the long run
+      </quote>
+      (or equivalently, sometimes you have to
+      choose the lesser of two evils).
+      No, you weren't asked to name a specific flaw,
+      and reasonable people can differ on precisely what the flaw is.
+      (And, formal logic is not particularly helpful here.)
+      Nonetheless, uncovering hidden assumptions
+      in arguments often helps understand the real issues involved.
+    </para>
+
+    <para id="imp-id6528822">
+    <note id="imp-id26819576" type="aside">
+      For fun,
+      pick up the front page of the daily newspaper,
+      and see how many arguments use faulty rules of inference and/or
+      rely on unspoken premises (which not all might agree with).
+      In particular, political issues as spun to the mainstream press
+      are often riddled with error,
+      even though there are usually reasonable arguments on
+      both sides which policy-makers and courts debate.
+    </note>
+    </para>
+  </solution>
+</exercise>
+
+
+<exercise id="exercise2">
+  <problem id="imp-id26013639"><para id="imp-id10968257">[Practice problem<m:math><m:mo>—</m:mo></m:math>solution provided.]</para>
+    <para id="imp-id25848294">
+      An acquaintance says the following to you:
+      <quote display="inline">
+        Chris claims knowledge is more important than grades.
+        But she spent yesterday doing an extra-credit assignment
+        which she already knew how to do.
+        Therefore, she's a hypocrite and deserves no respect.
+      </quote>
+    </para>
+
+    <para id="imp-id12320447">
+      Regardless of whether the premises and conclusion are true,
+      show that the <emphasis>argument</emphasis> is not,
+      by showing it doesn't hold for all domains.
+      Replace <quote display="inline">knowledge</quote> and <quote display="inline">grades</quote>
+      with expressions which 
+      give you true premises, but a false conclusion
+      (or at least, what most reasonable people would consider false).
+      <note id="imp-id25849198" type="hint">
+        Exaggerate <quote display="inline">knowledge</quote> to something more important,
+        and <quote display="inline">grades</quote> to something less important.
+      </note>
+    </para>
+  </problem>
+
+  <solution id="imp-id26636862">
+    <para id="imp-id26835151">
+      <quote display="inline">
+        Terry claims that encouraging human-rights 
+        is more important than playing Tetris.
+        But Terry played Tetris yesterday 
+        rather than volunteering with
+        <link url="http://www.amnesty.org/">Amnesty International</link>.
+      </quote>
+      Most people wouldn't condemn Terry as a hypocrite just
+      because of this; even the most dedicated of people are
+      entitled to <emphasis>some</emphasis> free time.
+      If your friend wants to prove Terry hypocritical,
+      they'll have to provide further evidence or arguments.
+    </para>
+
+    <para id="imp-id24281728">
+      Or similarly,
+      <quote display="inline">
+        Politician X <emphasis>claims</emphasis> to support science funding,
+        but voted against a proposal to shift all Medicare funds to NASA.
+      </quote>
+    </para>
+  </solution>
+</exercise>
+
+
+<exercise id="argument-interpretations-2">
+<problem id="imp-id26922532"><para id="imp-id11658897">[Practice problem<m:math><m:mo>—</m:mo></m:math>solution provided.]</para>
+    <para id="imp-id23829138">
+      While the following argument may sound plausible initially,
+      give a particular situation where the conclusion doesn't hold (even
+      though the premises do).
+      Then, in a sentence or two, sketch why your counterexample
+      may still represent rational
+      behavior by pointing out a real-world
+      subtlety that the initial argument ignored.
+    </para>
+  
+<list id="imp-id13659456" list-type="enumerated">
+<item>
+      <para id="imp-id25938193">
+        If a certain outfit meets a dress code,
+        then <foreign>per force</foreign> all less-revealing outfits 
+        also meet that dress code.
+      </para>
+    </item>
+<item>
+      <para id="imp-id9062255">
+        In public transportation projects,
+        out of two alternatives, 
+        the cheaper one which gets the job done is the better choice.
+      </para>
+    </item>
+</list>
+</problem>
+
+<solution id="imp-id8570894">
+<list id="imp-id23289551" list-type="enumerated">
+<item>
+      <para id="imp-id25821049">
+        It can be socially acceptable to wear my swimsuit into a
+        fast-food restaurant.
+        My underwear is less revealing than my swimsuit,
+        and yet it would still raise many more eyebrows to go to that
+        restaurant in my underwear, than my swimsuit.
+      </para>
+      <para id="imp-id12854878">
+        Clothes (and style in general) somehow encompass a form of
+        communication,
+        and people may object to an outfit's mood or message without
+        actually objecting to how much the outfit reveals.
+        (Other examples of communication-through-style include team logos,
+         t-shirts with humorous slogans,
+         and arm bands.) 
+      </para>
+    </item>
+<item>
+      <para id="imp-id10826445">
+        Buses are a lot cheaper than light rail.
+        Yet, the light-rail here in Houston demonstrates that many people
+        who wouldn't routinely take a bus <emphasis>are</emphasis>
+        willing to take light rail.
+        (Only after we recognize this, can we try to
+         figure out what <emphasis>why</emphasis> the difference exists,
+         and then brainstorm to find a better overall solution.)
+      </para>
+    </item>
+</list>
+</solution>
+</exercise>
+
+
+
+<exercise id="argument-interpretations-3">
+<problem id="imp-id10441376">
+    <para id="imp-id10441378">
+      Choose <emphasis>just one</emphasis> of the following informal arguments.
+      While the argument sounds plausible initially,
+      give a particular situation where the conclusion doesn't hold (even
+      though the premises do).
+      Then, briefly state why your counterexample may still represent rational
+      behavior by pointing out a real-world
+      subtlety that the initial argument ignored.
+    </para>
+  
+<list id="imp-id8824673" list-type="enumerated">
+<item>
+      <para id="imp-id12641787">
+        [cell phone]
+        Talking on a cell phone while driving 
+        increases the likelihood of an accident.
+        Interestingly, 
+        <link url="http://www.sciencedaily.com/releases/2003/01/030129080944.htm">hands-free phones do not significantly help</link>.
+        It's just the distraction of a phone conversation
+        that causes the problem.
+      </para>
+    </item>
+<item>
+      <para id="imp-id23700552">
+        [equivalent products]
+        If two companies offer two materially equivalent products,
+        then most everybody will buy the cheaper one.
+      </para>
+    </item>
+<item>
+      <para id="imp-id6878916">
+        [service]
+        In a free market, 
+        if a company doesn't offer good service,
+        individual customers will become fed up and take their business
+        elsewhere.
+      </para>
+    </item>
+<item>
+      <para id="imp-id26074262">
+        [web browser]
+        If there are two versions of a free web browser,
+        and they run equally quickly,
+        users will use the one with better features/interface.
+      </para>
+    </item>
+<item>
+      <para id="imp-id25759689">
+        [door-locking]
+        Anybody who really wants to break into your house while you're gone
+        will be able to.
+        (For instance, using a towel to muffle sound,
+        break the corner of a back window, reach in and
+        unlatch the window, and climb through.)
+        So there's no point in locking your front door.
+      </para>
+    </item>
+</list>
+</problem>
+
+
+</exercise>
+
+
+<exercise id="exercise5">
+<problem id="imp-id22845736"><para id="imp-id22845737">[Practice problem<m:math><m:mo>—</m:mo></m:math>solution provided.]</para>
+    <para id="imp-id24158409">
+      Let <m:math><m:ci>p</m:ci></m:math>, <m:math><m:ci>q</m:ci></m:math>, and <m:math><m:ci>r</m:ci></m:math>
+      be the following propositions:
+      <list id="imp-id23309225">
+        <item>
+          <m:math><m:ci>p</m:ci></m:math>: You get an A on the final exam
+        </item>
+        <item>
+          <m:math><m:ci>q</m:ci></m:math>: You do every exercise in the book.
+        </item>
+        <item>
+          <m:math><m:ci>r</m:ci></m:math>: You get an A in this class.
+        </item>
+      </list>
+      Write the following formulas using <m:math><m:ci>p</m:ci></m:math>,
+      <m:math><m:ci>q</m:ci></m:math>, and <m:math><m:ci>r</m:ci></m:math> and logical connectives.
+    </para>
+  
+<list id="imp-id7950893" list-type="enumerated">
+<item>
+      <para id="imp-id11194600">
+        You get an A in this class, but you do not do every exercise
+        in the book.
+      </para>
+    </item>
+<item>
+      <para id="imp-id12445278">
+        To get an A in this class, it is necessary for you
+        to get an A on the final.
+      </para>
+    </item>
+<item>
+      <para id="imp-id3387090">
+        Getting an A on the final and doing every exercise in
+        the book is sufficient for getting an A in this class.
+      </para>
+    </item>
+</list>
+</problem>
+
+<solution id="imp-id7019284">
+<list id="imp-id22717244" list-type="enumerated">
+<item>
+      <para id="imp-id6307697">
+        <m:math><m:apply><m:and/><m:ci>r</m:ci> <m:apply><m:not/><m:ci>q</m:ci></m:apply></m:apply></m:math>
+      </para>
+    </item>
+<item>
+      <para id="imp-id11119854">
+        <m:math><m:apply><m:implies/><m:ci>r</m:ci> <m:ci>p</m:ci></m:apply></m:math>
+      </para>
+
+      <para id="imp-id26768635">
+        Think of the English being reworded to
+        <quote display="inline">
+          If you got an A in this class,
+          you must have gotten an A on the final.
+        </quote>
+      </para>
+    </item>
+<item>
+      <para id="imp-id24582318">
+        <m:math><m:apply><m:implies/>
+          <m:apply><m:and/><m:ci>p</m:ci> <m:ci>q</m:ci></m:apply>
+          <m:ci>r</m:ci>
+        </m:apply></m:math>
+      </para>
+    </item>
+</list>
+</solution>
+</exercise>
+
+<exercise id="exercise6">
+<problem id="imp-id26638563">
+    <para id="imp-id10232583">
+      Translate the following English sentences into propositional logic.
+      Your answers should be
+      <link document="m10715" target-id="wff-defn">WFF</link>s.
+    </para>
+  
+<list id="imp-id12415262" list-type="enumerated">
+<item>
+      <para id="imp-id8322221">
+        If the Astros win the series (<quote display="inline"><m:math><m:ci>AW</m:ci></m:math></quote>),
+        then pigs will fly (<quote display="inline"><m:math><m:ci>PF</m:ci></m:math></quote>).
+      </para>
+    </item>
+<item>
+      <para id="imp-id25796289">
+        Pigs will not fly, and/or 
+        bacon will be free (<quote display="inline"><m:math><m:ci>BF</m:ci></m:math></quote>).
+      </para>
+    </item>
+<item>
+      <para id="imp-id13911011">
+        The Astros will win the series, or bacon will be
+        free, but not both.
+      </para>
+    </item>
+</list>
+</problem>
+
+
+</exercise>
+
+<exercise id="exercise7">
+  <problem id="imp-id25282067"><para id="imp-id25282068">[Practice problem<m:math><m:mo>—</m:mo></m:math>solution provided.]</para>
+    <para id="imp-id7401103">
+      It just so happens that all the web pages in Logiconia 
+      which contain the word
+      <quote display="inline">Poppins</quote> also contain the word <quote display="inline">Mary</quote>.
+      Write a formula (a query) expressing this.
+      Use the proposition <m:math><m:ci>Poppins</m:ci></m:math> to represent the concept
+      <quote display="inline">the web page contains 'Poppins'</quote>
+      (and similar for <m:math><m:ci>Mary</m:ci></m:math>).
+    </para>
+
+    
+  </problem>
+
+  <solution id="imp-id24558793">
+    <para id="imp-id24558795">
+      <m:math><m:apply><m:implies/> <m:ci>Poppins</m:ci> <m:ci>Mary</m:ci> </m:apply></m:math>
+    </para>
+  </solution>
+</exercise>
+
+
+<exercise id="exercise8">
+  <problem id="imp-id18777509">
+    
+
+    <list id="imp-id21385742">
+      <item>
+        If a Logicanian page contains the word <quote display="inline">weasel</quote>,
+        then it also contains either <quote display="inline">words</quote> or
+        <quote display="inline">eyed</quote>; 
+        and
+      </item>
+      <item>
+        Whenever a Logiconian page contains the word <quote display="inline">mongoose</quote>,
+        it does <emphasis>not</emphasis> also contain
+        the word <quote display="inline">weasel</quote>; 
+        and
+      </item>
+      <item>
+        Finally, all Logiconian pages contain the word
+        <quote display="inline">Logiconia</quote>, rather patriotically.
+      </item>
+    </list>
+   
+    <para id="imp-id23385330">
+      Write a formula expressing all this.
+      (Your formula will involve five propositions:
+      <m:math><m:ci>weasel</m:ci></m:math>, <m:math><m:ci>words</m:ci></m:math>, …
+      Try to find a formula which
+      mirrors the wording of the English above.)
+    </para>
+
+    <para id="imp-id25938176">
+      Given the above statements,
+      if a web page in Logiconia does not contain <quote display="inline">weasel</quote>,
+      does it contain <quote display="inline">mongoose</quote>?
+    </para>
+
+    <para id="imp-id14293819">
+      Let's go meta for a moment:
+      Is <emphasis>this</emphasis> web page Logiconian?
+      (Yes, this one you're looking at now,
+       the one with the homework problems.)
+      Explain why or why not.
+    </para>
+  </problem>
+
+  
+</exercise>
+
+
+<exercise id="exercise9">
+<problem id="imp-id20974700">
+    <para id="imp-id20974702">
+      Different search engines on the web have their own syntax for
+      specifying searches.
+      <note id="imp-id23768464" type="aside">
+        Note that a formula may be true for some web pages,
+        and false for others.
+        The search engine is concerned with finding all web pages which
+        satisfy the formula.
+        This is called a <term>query</term>, in database lingo.
+      </note>
+      <link url="http://www.exalead.com/search/">Only a few</link> allow full Boolean queries.
+      Some interpret a list of several words in a row 
+      as an implicit conjunction,
+      others as an implicit disjunctions.
+    </para>
+  
+<list id="imp-id10168349" list-type="enumerated">
+<item>
+      <para id="imp-id25873322">
+        Read about the search syntax for
+        <link url="http://pages.ebay.com/help/search/search-commands.html">the search language of eBay®</link>.
+        Write an eBay query for auctions which contain <quote display="inline">border</quote>, 
+        do not contain <quote display="inline">common</quote>, and contain at least one of 
+        <quote display="inline">foreign</quote> or <quote display="inline">foriegn</quote>
+        [<foreign>sic</foreign>,
+         misspellings are a great way to find underexposed auctions].
+      </para>
+    </item>
+<item>
+      <para id="imp-id25839949">
+        <link url="http://www.google.com/advanced_search?hl=en">Google£'s advanced search</link>
+        is typical for the online search engines.
+        In particular, you can search for results containing
+        <emphasis>all of</emphasis> <m:math><m:ci>a</m:ci></m:math>, <m:math><m:ci>b</m:ci></m:math>, …,
+        <emphasis>at least one of</emphasis> <m:math><m:ci>c</m:ci></m:math>, <m:math><m:ci>d</m:ci></m:math>, …, and
+        <emphasis>none of</emphasis> <m:math><m:ci>e</m:ci></m:math>, <m:math><m:ci>f</m:ci></m:math>, ….
+        Describe how that corresponds to a Boolean formula.
+      </para>
+    </item>
+<item>
+      <para id="imp-id25234548">
+        Give an example of a Boolean formula which cannot be rewritten
+        to conform to Google's advanced search interface.
+      </para>
+    </item>
+</list>
+</problem>
+
+
+</exercise>
+
+
+<exercise id="exercise10">
+<problem id="imp-id24482818"><para id="imp-id24482820">[Practice problem<m:math><m:mo>—</m:mo></m:math>solution provided.]</para>
+    <figure id="sample-board1">
+      <media id="imp-id24474336" alt="" display="block">
+        <image mime-type="image/png" src="../../media/hwA-1.png"/>
+      </media>
+
+      <caption>A sample WaterWorld board</caption>
+    </figure>
+
+    <para id="imp-id25220621">
+      Consider the particular board shown in the
+      <link document="m10514" target-id="sample-board1">above figure</link>.
+    </para>
+  
+<list id="imp-id22341601" list-type="enumerated">
+<item>
+      <para id="imp-id25961272">
+        <m:math><m:ci>Y-safe</m:ci></m:math>, <m:math><m:ci>Y-has-0</m:ci></m:math>, and
+        <m:math><m:apply><m:not/><m:ci>Y-has-2</m:ci></m:apply></m:math>
+        are among the formulas which are true for this board
+        but not for all boards.
+        That is, they are neither domain axioms nor tautologies.
+        Give two other such formulas.
+      </para>
+    </item>
+<item>
+      <para id="imp-id11516813">
+        <m:math><m:ci>V-safe</m:ci></m:math> might or might not
+        be true for this board.
+        Give two other such formulas.
+      </para>
+    </item>
+</list>
+</problem>
+
+<solution id="imp-id24507262">
+<list id="imp-id12938446" list-type="enumerated">
+<item>
+      <para id="imp-id13651601">
+        There are many simple answers, such as
+        <m:math><m:ci>Y-has-1</m:ci></m:math>, <m:math><m:apply><m:not/><m:ci>W-has-1</m:ci></m:apply></m:math>,
+        …
+      </para>
+    </item>
+<item>
+      <para id="imp-id23791952">
+        There are many simple answers, such as
+        <m:math><m:ci>a</m:ci></m:math>, <m:math><m:ci>N-has-1</m:ci></m:math>, <m:math><m:ci>J-has-3</m:ci></m:math>, …
+      </para>
+    </item>
+</list>
+
+    <para id="imp-id7345384">
+      For each, there are also many such formulas composed
+      with connectives such as ∧ and ∨.
+    </para>
+  </solution>
+</exercise>
+
+
+<exercise id="exercise11">
+  <problem id="imp-id23904171">
+    <para id="imp-id25550843">
+      In that
+      <link document="m10514" target-id="sample-board1">same board</link>, is location <m:math><m:ci>W</m:ci></m:math> safe?
+      What is your informal reasoning?  (List all your small steps.)
+      Similarly for location <m:math><m:ci>P</m:ci></m:math>.
+    </para>
+  </problem>
+
+  
+</exercise>
+
+<exercise id="exercise12">
+  <problem id="imp-id26635382">
+    <para id="imp-id26635384">
+      Give a domain axiom of WaterWorld which was omitted in the ellipses in the
+      <link document="m10528">WaterWorld domain axioms</link>.
+    </para>
+  </problem>
+
+  
+</exercise>
+
+<exercise id="ww-incomplete">
+  <problem id="imp-id25209625">
+    <para id="imp-id23006366">
+      Even allowing for ellision, the list of
+      <link document="m10528">WaterWorld domain axioms</link>
+      is incomplete, in a sense.
+      The game reports how many pirates exist in total, but
+      that global information is not reflected in the propositions or
+      axioms.
+    </para>
+
+    <para id="imp-id26109379">
+      First, assume we only use the default
+      WaterWorld board size and number of pirates,
+      <foreign>i.e.</foreign>, five.
+      Give samples of the additional axioms that we need.
+    </para>
+
+    <para id="imp-id13636259">
+      Next, generalize your answer to model the program's ability to
+      play the game with a different number of pirates.
+    </para>
+  </problem>
+
+  
+</exercise>
+
+<exercise id="exercise14">
+  <problem id="imp-id10169199">
+    <para id="imp-id24614464">
+      Give one WFF which meets all three conditions:
+      <list id="imp-id26065050">
+        <item> 
+          true in all WaterWorld boards
+          (<quote display="inline">A <term>theorem</term> of WaterWorld</quote>)
+        </item>
+        <item>
+          not already listed as one of the 
+          <link document="m10528">WaterWorld domain axioms</link>, and
+        </item>
+        <item>
+          not a tautology of propositional logic
+          (can be made false in some truth assignment,
+           though it may not be a truth assignment
+           which satisfies the waterworld axioms).
+        </item>
+      </list>
+    </para>
+  </problem>
+
+  
+</exercise>
+
+
+</section> 
+
+
+<section id="imp-id26637436">
+<title>Reasoning with Truth Tables</title>
+
+<para id="imp-id20938791">
+  When writing truth tables, please list rows
+  in the order used in all examples:
+  FF, FT, TF, TT.  
+  For three-input tables, use the above four lines preceded by F,
+  then the above four lines preceded by T.
+</para>
+
+<exercise id="exercise15">
+  <problem id="imp-id20065078">
+    <para id="imp-id25842783">
+      In a truth table for two inputs, provide a column for
+      each of the sixteen possible distinct functions.  Give a
+      <emphasis>small</emphasis> formula
+      for each of these functions.
+      <note id="imp-id11119835" type="hint">
+        These functions will include those for ∧, ∨, and
+        the other connectives whose truth tables you've
+        <link document="m10715" target-id="connectives">already seen</link>.
+      </note>
+    </para>
+  </problem>
+
+  
+</exercise>
+
+<exercise id="exercise16">
+  <problem id="imp-id13358561"><para id="imp-id13358562">[Practice problem<m:math><m:mo>—</m:mo></m:math>solution provided.]</para>
+    <para id="imp-id13522198">
+      Write the truth table for <term>xnor</term>, 
+      the negation of exclusive-or,
+      What is a more common name for this Boolean function?
+    </para>
+  </problem>
+
+  <solution id="imp-id12940140">
+    <table id="table1" summary="Truth table for xnor">
+<title>Truth table for xnor</title>
+<tgroup cols="3">
+<thead><row>
+        <entry><m:math><m:ci>φ</m:ci></m:math></entry>
+        <entry><m:math><m:ci>ψ</m:ci></m:math></entry>
+        <entry>
+          <m:math>
+            <m:declare nargs="2" occurrence="infix" type="fn">
+              <m:mo>xnor</m:mo>
+            </m:declare>
+            <m:apply>
+              <m:mo>xnor</m:mo>
+              <m:ci>φ</m:ci>
+              <m:ci>ψ</m:ci>
+            </m:apply>
+          </m:math>
+        </entry>
+      </row></thead>
+<tbody><row>
+        <entry><m:math><m:false/></m:math></entry>
+        <entry><m:math><m:false/></m:math></entry>
+        <entry><m:math><m:true/></m:math></entry>
+      </row>
+<row>
+        <entry><m:math><m:false/></m:math></entry>
+        <entry><m:math><m:true/></m:math></entry>
+        <entry><m:math><m:false/></m:math></entry>
+      </row>
+<row>
+        <entry><m:math><m:true/></m:math></entry>
+        <entry><m:math><m:false/></m:math></entry>
+        <entry><m:math><m:false/></m:math></entry>
+      </row>
+<row>
+        <entry><m:math><m:true/></m:math></entry>
+        <entry><m:math><m:true/></m:math></entry>
+        <entry><m:math><m:true/></m:math></entry>
+      </row></tbody>
+</tgroup>
+</table>
+
+    <para id="imp-id25282763">
+      This is the <quote display="inline">equals</quote> for Booleans.
+      It is also represented by the connective
+      <link document="m10715" target-id="iff">if-and-only-if</link>.
+    </para>
+
+    <para id="imp-id12868474">
+      If you said something like
+      <quote display="inline">the both-or-neither function</quote>,
+      that's not quite good enough,
+      as it's a roundabout way of expressing the simple idea
+      of equivalence.
+      Granted, it takes some practice to internalize Booleans as values,
+      and that equality is as valid for them as for any other value.
+    </para>
+  </solution>
+</exercise>
+
+<exercise id="exercise17">
+  <problem id="imp-id26638614">
+    <para id="imp-id6385905">
+      How many years would it take to build a truth table for a formula
+      with 1000 propositions?
+      Assume it takes 1 nanosecond to evaluate each formula.
+    </para>
+
+    <para id="imp-id25052491">
+      A formula with 1000 propositions clearly isn't something you
+      would create by hand.  However, such formulas easily arise when
+      modeling the behavior of a program with a 1000-element data
+      structure.
+    </para>
+  </problem>
+
+  
+</exercise>
+
+<exercise id="exercise18">
+<problem id="imp-id11905360">
+    <para id="imp-id24487916">
+      Use truth tables to answer each of the following.  Showing whether
+      the connectives obey such properties via truth tables is one way of
+      establishing which equivalences or inference rules we should use.
+    </para>
+
+    
+  
+<list id="imp-id24872457" list-type="enumerated">
+<item>
+      <para id="imp-id5443382">
+        Show whether ⇒ is commutative.
+      </para>
+    </item>
+<item>
+      <para id="imp-id17268500">
+        Show whether ⊕ is commutative.
+      </para>
+    </item>
+<item>
+      <para id="imp-id25218753">
+        Show whether ⊕ is associative.
+      </para>
+    </item>
+<item>
+      <para id="imp-id26570822">
+        Prove that ∧ distributes over ∨:
+        <m:math><m:apply><m:equivalent/>
+          <m:apply><m:and/>
+            <m:ci>φ</m:ci>
+            <m:apply><m:or/>
+              <m:ci>ψ</m:ci>
+              <m:ci>θ</m:ci>
+            </m:apply>
+          </m:apply>
+          <m:apply><m:or/>
+            <m:apply><m:and/>
+              <m:ci>φ</m:ci>
+              <m:ci>ψ</m:ci>
+            </m:apply>
+            <m:apply><m:and/>
+              <m:ci>φ</m:ci>
+              <m:ci>θ</m:ci>
+            </m:apply>
+          </m:apply>
+        </m:apply></m:math>
+      </para>
+
+      <note id="imp-id25189738">
+        This version is left-distributivity.
+        Right-distributivity follows from this plus the commutativity
+        of ∧.
+      </note>
+    </item>
+<item>
+      <para id="imp-id25052716">
+        Prove that ∨ distributes over ∧:
+        <m:math><m:apply><m:equivalent/>
+          <m:apply><m:or/>
+            <m:ci>φ</m:ci>
+            <m:apply><m:and/>
+              <m:ci>ψ</m:ci>
+              <m:ci>θ</m:ci>
+            </m:apply>
+          </m:apply>
+          <m:apply><m:and/>
+            <m:apply><m:or/>
+              <m:ci>φ</m:ci>
+              <m:ci>ψ</m:ci>
+            </m:apply>
+            <m:apply><m:or/>
+              <m:ci>φ</m:ci>
+              <m:ci>θ</m:ci>
+            </m:apply>
+          </m:apply>
+        </m:apply></m:math>
+      </para>
+    </item>
+<item>  
+      <para id="imp-id6589733">
+        Show whether ∧ or ∨ distribute over ⇒.
+      </para>
+    </item>
+<item>
+      <para id="imp-id24876749">
+        Show whether ⇒ distributes over ∧ or ∨.
+      </para>
+    </item>
+<item>  
+      <para id="imp-id24159412">
+        Show whether ∧ or ∨ distribute over ⊕.
+      </para>
+    </item>
+<item>
+      <para id="imp-id13630262">
+        Show whether ⊕ distributes over ∧ or ∨.
+      </para>
+    </item>
+</list>
+</problem>
+
+
+</exercise>
+
+<exercise id="exercise19">
+<problem id="imp-id20891654">
+    <para id="imp-id20891656">
+      For each of the following, find a satisfying truth assignment,
+      (values of the propositions which make the formula true),
+      if any exists.
+    </para>
+  
+<list id="imp-id13816561" list-type="enumerated">
+<item>
+      <m:math><m:apply><m:and/>
+        <m:apply><m:implies/>
+          <m:ci>a</m:ci>
+          <m:apply><m:not/><m:ci>b</m:ci></m:apply>
+        </m:apply>
+        <m:ci>a</m:ci>
+      </m:apply></m:math>
+    </item>
+<item>
+      <m:math><m:apply><m:and/>
+        <m:apply><m:implies/>
+          <m:apply><m:implies/><m:ci>a</m:ci> <m:ci>c</m:ci></m:apply>
+          <m:apply><m:not/><m:ci>b</m:ci></m:apply>
+        </m:apply>
+        <m:apply><m:or/><m:ci>a</m:ci> <m:ci>b</m:ci></m:apply>
+      </m:apply></m:math>
+    </item>
+</list>
+</problem>
+
+
+</exercise>
+
+<exercise id="exercise20">
+<problem id="imp-id14320408">
+    <para id="imp-id14320411">
+      For each of the following, find a falsifying truth assignment,
+      (values of the propositions which make the formula false),
+      if any exists.
+    </para>
+  
+<list id="imp-id14222398" list-type="enumerated">
+<item>
+      <m:math><m:apply><m:or/>
+        <m:apply><m:implies/>
+          <m:ci>a</m:ci>
+          <m:apply><m:not/><m:ci>b</m:ci></m:apply>
+        </m:apply>
+        <m:ci>a</m:ci>
+      </m:apply></m:math>
+    </item>
+<item>
+      <m:math><m:apply><m:or/>
+        <m:apply><m:implies/>
+          <m:apply><m:not/><m:ci>b</m:ci></m:apply>
+          <m:apply><m:implies/><m:ci>a</m:ci> <m:ci>c</m:ci></m:apply>
+        </m:apply>
+        <m:apply><m:and/><m:ci>a</m:ci> <m:ci>b</m:ci></m:apply>
+      </m:apply></m:math>
+    </item>
+</list>
+</problem>
+
+
+</exercise>
+
+<exercise id="exercise21">
+<problem id="imp-id21138666">
+    <para id="imp-id21138669">
+      Formula <m:math><m:ci>φ</m:ci></m:math> is <term>stronger</term> than
+      formula <m:math><m:ci>ψ</m:ci></m:math> if <m:math><m:ci>ψ</m:ci></m:math> is true
+      whenever <m:math><m:ci>φ</m:ci></m:math> is true (<foreign>i.e.</foreign>,
+      <m:math><m:ci>φ</m:ci></m:math> is <term>at least a strong</term> as
+      <m:math><m:ci>ψ</m:ci></m:math>), but not conversely.
+      Equivalently, this means that
+      <m:math><m:apply><m:implies/>
+        <m:ci>φ</m:ci>
+        <m:ci>ψ</m:ci>
+      </m:apply></m:math>
+      is always true, but
+      <m:math><m:apply><m:implies/>
+        <m:ci>ψ</m:ci>
+        <m:ci>φ</m:ci>
+      </m:apply></m:math>
+      is not always true.
+    </para>
+
+    <para id="imp-id26633617">
+      As one important use of this concept, if we know that
+      <m:math><m:apply><m:implies/>
+        <m:ci>ψ</m:ci>
+        <m:ci>θ</m:ci>
+      </m:apply></m:math>,
+      and that <m:math><m:ci>φ</m:ci></m:math> is stronger than
+      <m:math><m:ci>ψ</m:ci></m:math>, then we also know that
+      <m:math><m:apply><m:implies/>
+        <m:ci>φ</m:ci>
+        <m:ci>θ</m:ci>
+      </m:apply></m:math>.
+      That holds simply by transitivity.
+      Another important use, which is outside the scope of this module,
+      is the idea of strengthening an inductive hypothesis.
+    </para>
+
+    <para id="imp-id26085621">
+      Similarly, <m:math><m:ci>φ</m:ci></m:math> is <term>weaker</term>
+      than formula <m:math><m:ci>ψ</m:ci></m:math>
+      whenever <m:math><m:ci>ψ</m:ci></m:math> is stronger than <m:math><m:ci>φ</m:ci></m:math>.
+    </para>
+
+    <para id="imp-id19083163">
+      Show which of the following hold.
+      When true, show
+      <m:math><m:apply><m:implies/>
+        <m:ci>φ</m:ci>
+        <m:ci>ψ</m:ci>
+      </m:apply></m:math>
+      is true by a truth table,
+      and show a falsifying truth assignment for
+      <m:math><m:apply><m:implies/>
+        <m:ci>ψ</m:ci>
+        <m:ci>φ</m:ci>
+      </m:apply></m:math>.
+      When false, give a truth table and truth assignment the other way
+      around.
+    </para>
+  
+<list id="imp-id25805192" list-type="enumerated">
+<item>
+      <para id="imp-id24543999">
+        <m:math><m:apply><m:and/><m:ci>a</m:ci> <m:ci>b</m:ci></m:apply></m:math>
+        is stronger than <m:math><m:apply><m:or/><m:ci>a</m:ci> <m:ci>b</m:ci></m:apply></m:math>.
+      </para>
+    </item>
+<item>
+      <para id="imp-id25713711">
+        <m:math><m:apply><m:or/><m:ci>a</m:ci> <m:ci>b</m:ci></m:apply></m:math> is stronger than <m:math><m:ci>a</m:ci></m:math>.
+      </para>
+    </item>
+<item>
+      <para id="imp-id23072945">
+        <m:math><m:ci>a</m:ci></m:math> is stronger than <m:math><m:apply><m:implies/><m:ci>a</m:ci> <m:ci>b</m:ci></m:apply></m:math>.
+      </para>
+    </item>
+<item>
+      <para id="imp-id23274470">
+        <m:math><m:ci>b</m:ci></m:math> is stronger than <m:math><m:apply><m:implies/><m:ci>a</m:ci> <m:ci>b</m:ci></m:apply></m:math>.
+      </para>
+    </item>
+</list>
+</problem>
+
+
+</exercise>
+
+<exercise id="tt-show-equiv">
+  <problem id="imp-id12825933">
+    <para id="imp-id12825935">
+      Using truth tables, show that
+      <m:math><m:apply><m:and/>
+        <m:apply><m:or/><m:ci>a</m:ci> <m:ci>c</m:ci></m:apply>
+        <m:apply><m:implies/><m:ci>b</m:ci> <m:ci>c</m:ci></m:apply>
+        <m:apply><m:implies/><m:ci>c</m:ci> <m:ci>a</m:ci></m:apply>
+      </m:apply></m:math>
+      is equivalent to
+      <m:math><m:apply><m:and/>
+        <m:apply><m:implies/><m:ci>b</m:ci> <m:ci>c</m:ci></m:apply>
+        <m:ci>a</m:ci>
+      </m:apply></m:math>.
+      but not equivalent to
+      <m:math><m:apply><m:and/>
+        <m:apply><m:or/><m:ci>a</m:ci> <m:ci>c</m:ci></m:apply>
+        <m:apply><m:implies/><m:ci>b</m:ci> <m:ci>c</m:ci></m:apply>
+      </m:apply></m:math>.
+    </para>
+  </problem>
+
+  
+</exercise>
+
+<exercise id="exercise23">
+  <problem id="imp-id21455106"><para id="imp-id21455107">[Practice problem<m:math><m:mo>—</m:mo></m:math>solution provided.]</para>
+    <para id="imp-id13359640">
+      When writing a complicated conditional that involves multiple
+      pieces of data, it is easy to incorrectly oversimplify.
+      One strategy for avoid mistakes is to write such code in
+      a two-step process.
+      First, write a conditional with a case for <emphasis>every</emphasis>
+      possible combination, as in a truth table.
+      Second, simplify the conditional.
+    </para>
+
+    <para id="imp-id25888761">
+      Using this approach, we might obtain the following code after
+      the first step.  Simplify this code.
+    </para>
+
+    <code id="imp-id25703077" display="block">
+list merge_sorted_lists(list list1, list list2)
+{
+   if (is_empty(list1) &amp;&amp; is_empty(list2))
+      return empty_list;
+   else if (is_empty(list1) &amp;&amp; !is_empty(list2))
+      return list2;
+   else if (!is_empty(list1) &amp;&amp; is_empty(list2))
+      return list1;
+   else if (!is_empty(list1) &amp;&amp; !is_empty(list2)) {
+      if (first_element(list1) &lt; first_element(list2))
+         return make_list(first_element(list1),
+                          merge_sorted_lists(rest_elements(list1),list2));
+      else if (first_element(list1) &gt;= first_element(list2))
+         return make_list(first_element(list2),
+                          merge_sorted_lists(list1,rest_elements(list2)));
+   }
+}
+    </code>
+  </problem>
+
+  <solution id="imp-id25156632">
+    <code id="imp-id23008805" display="block">
+list merge_sorted_lists(list list1, list list2)
+{
+   if (is_empty(list1))
+      return list2;
+   else if (is_empty(list2))
+      return list1;
+   else {
+      if (first_element(list1) &lt; first_element(list2))
+         return make_list(first_element(list1),
+                          merge_sorted_lists(rest_elements(list1),list2));
+      else
+         return make_list(first_element(list2),
+                          merge_sorted_lists(list1,rest_elements(list2)));
+   }
+}
+    </code>
+
+    <para id="imp-id25054903">
+    Alternatively, we could test the emptiness of the lists in the
+    other order.
+    </para>
+  </solution>
+</exercise>
+
+<exercise id="exercise24">
+  <problem id="imp-id25937039">
+    <para id="imp-id14810496">
+      Consider the following conditional code, which returns a boolean value.
+    </para>
+    <code id="imp-id10052038" display="block">
+int  i;
+bool a,b;
+
+…
+
+if (a &amp;&amp; (i &gt; 0))
+   return b;
+else if (a &amp;&amp; i &lt;= 0)
+   return false;
+else if (a || b)
+   return a;
+else
+   return (i &gt; 0);
+    </code>
+
+    <para id="imp-id25458492">
+      Simplify it by filling in the following blank with a single
+      Boolean expression.
+      Do not use a conditional
+      (such as <code>if</code> or <code>?:</code>).
+
+      
+    </para>
+
+    <code id="imp-id25723413" display="block">
+int  i;
+bool a,b;
+
+…
+
+return ________________;
+    </code>
+
+    <para id="imp-id24484646">
+      Use either Java/C++ or Scheme syntax.
+      In the former case, please fully parenthesize to make your
+      formula unambiguous, rather than relying on
+       <link url="http://java.sun.com/docs/books/tutorial/java/nutsandbolts/expressions.html">Java's</link> or
+       <link url="http://www.cppreference.com/operator_precedence.html">C++'s</link> many levels of operator precedence.
+    </para>
+  </problem>
+
+  
+</exercise>
+
+</section> 
+
+
+
+
+<section id="imp-id26833527">
+<title>Reasoning with Equivalences</title>
+
+
+<exercise id="exercise25">
+  <problem id="imp-id23416035"><para id="imp-id23416036">[Practice problem<m:math><m:mo>—</m:mo></m:math>solution provided.]</para>
+    <para id="imp-id24885256">
+      Using 
+      <link document="m10540">algebraic identities</link>,
+      and the definition or <term>nor</term> (mnemonic: <quote display="inline">not or</quote>),
+      written <m:math><m:mo>↓</m:mo></m:math>,
+      <m:math><m:apply><m:equivalent/>
+        <m:apply><m:mo>↓</m:mo><m:ci>φ</m:ci><m:ci>ψ</m:ci></m:apply>
+        <m:apply><m:not/><m:apply><m:or/><m:ci>φ</m:ci> <m:ci>ψ</m:ci></m:apply></m:apply>
+      </m:apply></m:math>,
+      express the function ∧ in terms of <m:math><m:mo>↓</m:mo></m:math> only.
+      That is, give a formula which doesn't use ∧, ∨, ¬, but
+      instead only uses <m:math><m:mo>↓</m:mo></m:math> and which has the same truth table as
+      <m:math><m:apply><m:and/><m:ci>φ</m:ci><m:ci>ψ</m:ci></m:apply></m:math>.
+    </para>
+  </problem>
+
+  <solution id="imp-id23330911">
+    <para id="imp-id23330913">
+      First we show that we can write negation in terms of <m:math><m:mo>↓</m:mo></m:math>, or
+      more specifically,
+      <m:math><m:apply><m:equivalent/>
+        <m:apply><m:not/><m:ci>θ</m:ci></m:apply>
+        <m:apply><m:mo>↓</m:mo><m:ci>θ</m:ci> <m:ci>θ</m:ci></m:apply>
+      </m:apply></m:math>.
+      Checking this on a truth table is pretty easy
+      (there are only two rows to check).
+      But for this question we need to use algebraic manipulation.
+      This can be derived in a couple of simple steps:
+    </para>
+
+    <table id="proof1" summary="A proof">
+
+<tgroup cols="3" align="center" colsep="1" rowsep="1">
+<colspec colwidth="*" colname="c1"/>
+<colspec colwidth="*" colname="c2"/>
+<colspec colwidth="*" colname="c3"/>
+
+<tbody>
+<row>
+<entry align="left">1</entry><entry namest="c2" nameend="c2"><m:math><m:apply><m:not/><m:ci>θ</m:ci></m:apply></m:math></entry><entry colname="c3"/>
+</row>
+<row>
+<entry align="left">2</entry><entry namest="c2" nameend="c2"><m:math><m:mo>≡</m:mo><m:apply><m:and/>
+          <m:apply><m:not/><m:ci>θ</m:ci></m:apply>
+          <m:apply><m:not/><m:ci>θ</m:ci></m:apply>
+        </m:apply></m:math></entry><entry colname="c3">
+          Idempotency of ∧
+        </entry>
+</row>
+<row>
+<entry align="left">3</entry><entry namest="c2" nameend="c2"><m:math><m:mo>≡</m:mo><m:apply><m:not/><m:apply><m:or/><m:ci>θ</m:ci> <m:ci>θ</m:ci></m:apply></m:apply></m:math></entry><entry colname="c3">
+          DeMorgan's law
+        </entry>
+</row>
+<row>
+<entry align="left">4</entry><entry namest="c2" nameend="c2"><m:math><m:mo>≡</m:mo><m:apply><m:mo>↓</m:mo><m:ci>θ</m:ci> <m:ci>θ</m:ci></m:apply></m:math></entry><entry colname="c3">
+          Definition of nor
+        </entry>
+</row></tbody>
+</tgroup>
+</table>
+
+    <para id="imp-id23276809">
+      We use this lemma to show our ultimate goal:
+    </para>
+
+    <table id="proof2" summary="A proof">
+
+<tgroup cols="3" align="center" colsep="1" rowsep="1">
+<colspec colwidth="*" colname="c1"/>
+<colspec colwidth="*" colname="c2"/>
+<colspec colwidth="*" colname="c3"/>
+
+<tbody>
+<row>
+<entry align="left">1</entry><entry namest="c2" nameend="c2"><m:math><m:apply><m:and/><m:ci>δ</m:ci> <m:ci>ε</m:ci></m:apply></m:math></entry><entry colname="c3"/>
+</row>
+<row>
+<entry align="left">2</entry><entry namest="c2" nameend="c2"><m:math><m:mo>≡</m:mo><m:apply><m:not/><m:apply><m:not/><m:apply><m:and/><m:ci>δ</m:ci> <m:ci>ε</m:ci></m:apply></m:apply></m:apply></m:math></entry><entry colname="c3">
+          Double Complementation
+        </entry>
+</row>
+<row>
+<entry align="left">3</entry><entry namest="c2" nameend="c2"><m:math><m:mo>≡</m:mo><m:apply><m:not/><m:apply><m:or/><m:apply><m:not/><m:ci>δ</m:ci></m:apply> <m:apply><m:not/><m:ci>ε</m:ci></m:apply></m:apply></m:apply></m:math></entry><entry colname="c3">
+          DeMorgan's law
+        </entry>
+</row>
+<row>
+<entry align="left">4</entry><entry namest="c2" nameend="c2"><m:math><m:mo>≡</m:mo><m:apply><m:not/>
+          <m:apply><m:or/>
+            <m:apply><m:mo>↓</m:mo><m:ci>δ</m:ci> <m:ci>δ</m:ci></m:apply>
+            <m:apply><m:not/><m:ci>ε</m:ci></m:apply>
+          </m:apply>
+        </m:apply></m:math></entry><entry colname="c3">
+          Lemma,
+          with <m:math><m:mtext>[</m:mtext><m:ci>θ</m:ci><m:mtext>↦</m:mtext><m:ci>δ</m:ci><m:mtext>]</m:mtext></m:math>
+        </entry>
+</row>
+<row>
+<entry align="left">5</entry><entry namest="c2" nameend="c2"><m:math><m:mo>≡</m:mo><m:apply><m:not/>
+          <m:apply><m:or/>
+            <m:apply><m:mo>↓</m:mo><m:ci>δ</m:ci> <m:ci>δ</m:ci></m:apply>
+            <m:apply><m:mo>↓</m:mo><m:ci>ε</m:ci> <m:ci>ε</m:ci></m:apply>
+          </m:apply>
+         </m:apply></m:math></entry><entry colname="c3">
+           Lemma, with <m:math><m:apply><m:eq/><m:ci>θ</m:ci> <m:ci>ε</m:ci></m:apply></m:math>
+         </entry>
+</row>
+<row>
+<entry align="left">6</entry><entry namest="c2" nameend="c2"><m:math><m:mo>≡</m:mo><m:apply><m:mo>↓</m:mo>
+          <m:apply><m:mo>↓</m:mo><m:ci>δ</m:ci> <m:ci>δ</m:ci></m:apply>
+          <m:apply><m:mo>↓</m:mo><m:ci>ε</m:ci> <m:ci>ε</m:ci></m:apply>
+        </m:apply></m:math></entry><entry colname="c3">
+          Definition of nor,
+          where <m:math><m:apply><m:eq/>
+                  <m:ci>φ</m:ci>
+                  <m:apply><m:mo>↓</m:mo><m:ci>δ</m:ci> <m:ci>δ</m:ci></m:apply>
+                </m:apply></m:math>,
+          and   <m:math><m:apply><m:eq/>
+                  <m:ci>ψ</m:ci>
+                  <m:apply><m:mo>↓</m:mo><m:ci>ε</m:ci> <m:ci>ε</m:ci></m:apply>
+                </m:apply></m:math>
+        </entry>
+</row></tbody>
+</tgroup>
+</table>
+
+    <para id="imp-id23328359">
+      Note that we judiciously used new meta-variables <m:math><m:ci>δ</m:ci></m:math> and <m:math><m:ci>ε</m:ci></m:math>
+      rather than re-using <m:math><m:ci>φ</m:ci></m:math> and <m:math><m:ci>ψ</m:ci></m:math>
+      (which would still be correct, but would make the graders need
+      to pay much closer attention to the scope of those variables).
+    </para>
+  </solution>
+</exercise>
+
+<exercise id="exercise26">
+<problem id="imp-id19958191">
+    <para id="imp-id19958193">
+      Similar to the previous exercise, express each of the following
+      using <link document="m10715" target-id="nand">nand</link> only,
+      and prove correctness using the
+      <link document="m10540">algebraic identities</link>.
+    </para>
+
+    <para id="imp-id11203376">
+      This operation is particularly interesting, since making a NAND
+      gate in hardware requires only two transistors.
+    </para>
+  
+<list id="imp-id23827659" list-type="enumerated">
+<item>
+      ¬
+    </item>
+<item>
+      ∧
+    </item>
+<item>
+      ∨
+    </item>
+</list>
+</problem>
+
+
+</exercise>
+
+<exercise id="id-show-equiv">
+  <problem id="imp-id24174644">
+    <para id="imp-id11287510">
+      Using 
+      <link document="m10540">algebraic identities</link>,
+      show that 
+      <m:math><m:apply><m:and/>
+        <m:apply><m:or/><m:ci>a</m:ci> <m:ci>c</m:ci></m:apply>
+        <m:apply><m:implies/><m:ci>b</m:ci> <m:ci>c</m:ci></m:apply>
+        <m:apply><m:implies/><m:ci>c</m:ci> <m:ci>a</m:ci></m:apply>
+      </m:apply></m:math>
+      is equivalent to
+      <m:math><m:apply><m:and/>
+        <m:apply><m:implies/><m:ci>b</m:ci> <m:ci>c</m:ci></m:apply>
+        <m:ci>a</m:ci>
+      </m:apply></m:math>.
+    </para>
+
+    <para id="imp-id25238068">
+      This is an algebraic hand-evaluation:
+      a series of formulas joined by <m:math><m:mo>≡</m:mo></m:math>.
+      Don't write just portions of previous formulas
+      and mysteriously re-introduce the dropped parts later.
+      For each step, mention which identity you used.
+      It is also helpful if you underline the formula
+      you are rewriting in the next step.  
+      You can use commutativity and associativity without using 
+      a separate line, but mention when you use it.
+    </para>
+  </problem>
+
+  
+</exercise>
+
+<exercise id="exercise28">
+<problem id="imp-id20674236">
+    <para id="imp-id23682088">
+      In two exercises, you've shown the same equivalence
+      <link document="m10514" target-id="tt-show-equiv">by truth tables</link> and
+      <link document="m10514" target-id="id-show-equiv">by algebraic identities</link>.
+    </para>
+  
+<list id="imp-id20239042" list-type="enumerated">
+<item>
+      <para id="imp-id22881205">
+        What is an advantage of using truth tables?
+        What is an advantage of using identities?
+      </para>
+    </item>
+<item>
+      <para id="imp-id26638708">
+        In that
+        <link document="m10514" target-id="tt-show-equiv">truth table exercise</link>,
+        you also showed two
+        formulas <m:math><m:ci>φ</m:ci></m:math> and <m:math><m:ci>ψ</m:ci></m:math> <emphasis>non</emphasis>-equivalent.
+        It is also possible to do so with Boolean algebra rather
+        than truth tables.  How?
+      </para>
+    </item>
+<item>
+      <para id="imp-id24488689">
+        Describe a hybrid approach, combining truth tables and Boolean
+        algebra, to prove the equivalence and non-equivalence of formulas.
+      </para>
+    </item>
+<item>
+      <para id="imp-id24332151">
+        To ponder on your own without turning it in:
+        Which approach appeals more to you?  
+      </para>
+    </item>
+</list>
+</problem>
+
+
+</exercise>
+
+
+<exercise id="exercise29">
+  <problem id="imp-id14852418">
+    <para id="imp-id14852421">
+      Using 
+      <link document="m10540">algebraic identities</link>,
+      rewrite the formula
+      <m:math><m:apply><m:and/>
+        <m:apply><m:implies/>
+          <m:ci>a</m:ci>
+          <m:apply><m:or/><m:ci>b</m:ci> <m:ci>c</m:ci></m:apply>
+        </m:apply>
+        <m:apply><m:not/><m:ci>b</m:ci></m:apply>
+      </m:apply></m:math>
+      to one with fewer connectives.
+      
+    </para>
+  </problem>
+
+  
+</exercise>
+
+
+</section> 
+
+
+</content>
+</document>

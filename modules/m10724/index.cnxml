@@ -1,0 +1,148 @@
+<document xmlns="http://cnx.rice.edu/cnxml" xmlns:m="http://www.w3.org/1998/Math/MathML" xmlns:md="http://cnx.rice.edu/mdml">
+
+<title>Relations and Logic: using relations</title>
+<metadata><md:content-id>undefined</md:content-id><md:title/><md:uuid>4a8f7a9f-6f1e-4e3f-b168-5724ac9b4794</md:uuid>
+</metadata>
+<content>
+
+<section id="section1">
+<title>Relations: Building a better (representation of) WaterWorld</title>
+
+<para id="para1">
+  So far, we have represented WaterWorld boards using
+  propositions like <m:math><m:ci>A-has-2</m:ci></m:math> and <m:math><m:ci>B-unsafe</m:ci></m:math>.
+  You've probably already felt that this is unwieldy, having hundreds
+  
+  propositional variables running around,
+  with only our naming convention implying
+  any relation between them.
+  Worse, this zoo of propositions doesn't reflect how we actually
+  think about WaterWorld.
+  For instance, the only way the rules recognize that locations
+  <m:math><m:ci>A</m:ci></m:math> and <m:math><m:ci>B</m:ci></m:math> are near each other is because of several
+  axioms which simultaneously involve <m:math><m:ci>A-has-2</m:ci></m:math> and  <m:math><m:ci>B-unsafe</m:ci></m:math>,
+  <foreign>etc.</foreign>,
+  in just the right way to result in our idea of the concept
+  “neighbor”.
+  In fact, there is no way of talking about the location <m:math><m:ci>A</m:ci></m:math> directly;
+  we only had propositions which dealt with its properties, such as
+  whether or not it neighbored exactly two pirates.
+</para>
+
+<para id="para2">
+
+  If writing a program about WaterWorld,
+  our program should reflect our conception of the problem.
+  However, as it stands, our conception corresponds
+  to having many many Boolean variables named  <m:math><m:ci>A-has-2</m:ci></m:math>, <m:math><m:ci>B-unsafe</m:ci></m:math>,
+  <foreign>etc.</foreign>
+  Even worse, the rules would be encodings of the hundreds of axioms.
+  A long enumeration of the axioms is probably <emphasis>not</emphasis> how 
+  you think of the rules.
+  In other words, when explaining the game to your friend, you probably 
+  say “if a location contains a 2,
+  then two of its neighbors are pirates”,
+  rather than droning on for half an hour about how 
+  “if location <m:math><m:ci>A</m:ci></m:math> contains a 2, then either
+    location <m:math><m:ci>B</m:ci></m:math> is unsafe or …”.
+</para>
+
+<para id="para3">
+  Moreover, the original rules only pertained to a
+  fixed-size board; inventing a new game played on a 50×50 grid
+  would require a whole new set of rules!
+  That is clearly <emphasis>not</emphasis> how we humans
+  conceptualize the game!
+  What we want, when discussing the rules, is a generic way to
+  discussing neighboring locations, so that 
+  we can have one single rule, saying that if a (generic) location has
+  a zero, then any neighboring location is safe.
+  Thus, we allow the exact details of “neighboring location” 
+  to change from game to game as we play on different boards
+  (just as which locations contain pirates changes from game to game).
+</para>
+
+<para id="para4">
+  In a program, you'd probably represent the board as a collection
+  (matrix, list, whatever) of Booleans.
+  In our logic, to correspond to this data structure, we'll introduce
+  <term>binary relations</term>.
+  <note type="aside" id="idp2925648">
+    By including relations (rather than sticking entirely with propositions),
+    we are leaving the realm of propositional logic;
+    we'll soon reach <term>first-order logic</term> once 
+    we also 
+    <link document="m10728">introduce quantifiers</link>
+    — corresponding to aspects of program control-flow (loops).
+  </note>
+  We'll start by adding a way to express whether any two locations
+  are adjacent: a relation <m:math><m:ci type="function">nhbr</m:ci></m:math>,
+  which will encode the board's geography as follows:
+  <m:math><m:apply><m:ci type="function">nhbr</m:ci> <m:ci>A</m:ci> <m:ci>B</m:ci></m:apply></m:math>
+  and
+  <m:math><m:apply><m:ci type="function">nhbr</m:ci> <m:ci>Z</m:ci> <m:ci>Y</m:ci></m:apply></m:math>
+  are true, while
+  <m:math><m:apply><m:ci type="function">nhbr</m:ci> <m:ci>A</m:ci> <m:ci>D</m:ci></m:apply></m:math>
+  and
+  <m:math><m:apply><m:ci type="function">nhbr</m:ci> <m:ci>M</m:ci> <m:ci>Z</m:ci></m:apply></m:math>
+  are false.
+</para>
+
+<para id="para5">
+  What, exactly, do we mean by “relation”?
+  We'll see 
+  <link document="m10725">momentarily</link>,
+  that we can represent <m:math><m:ci type="function">nhbr</m:ci></m:math> as a set of pairs-of-locations
+  (or equivalently, a
+   <link document="m10725" target-id="relations-as-functions">function</link>
+   which takes in two locations, and returns either true or false.)
+</para>
+
+<para id="para6">
+  This relation "<m:math><m:ci type="function">nhbr</m:ci></m:math>" entirely encodes the board's geography.
+  Giving somebody the relation is every bit as good as to showing
+  them a picture of the board
+  (in some ways, better — the relation makes it perfectly clear whether 
+  two locations which just barely touch at a single point,
+  like <m:math><m:ci>B</m:ci></m:math> and <m:math><m:ci>G</m:ci></m:math>, are meant to be considered neighbors.)
+  
+</para>
+
+<exercise id="exercise1">
+  <problem id="idm13609184">
+    <para id="para7">
+      We used a binary (two-input) relation to describe neighboring
+      locations.
+      How can we use a relation to capture the notion 
+      “location <m:math><m:ci>A</m:ci></m:math> is safe”?
+    </para>
+  </problem>
+
+  <solution id="idp425920">
+    <para id="para8">
+      We'll use a <term>unary</term> (one-input) relation:
+      <m:math><m:ci type="function">safe</m:ci></m:math>(<m:math><m:ci>A</m:ci></m:math>) is true if and only if
+      (“iff”) location <m:math><m:ci>A</m:ci></m:math> is safe.
+    </para>
+  </solution>
+</exercise>
+
+<para id="para9">
+  After defining relations and discussing their properties,
+  we'll talk about
+  <link document="m10726">interpreting logic formulas</link>
+  relative to particular relations.
+</para>
+
+<para id="para10">
+  Using relations gives us additional flexibility in modeling our domain,
+  so that our formal logical model more closely corresponds to our
+  intuition.
+  Relations help separate the WaterWorld domain axioms (code) from
+  the data, <foreign>i.e.</foreign>, the particular board we're playing on.
+</para>
+
+</section> 
+
+</content>
+</document>

@@ -1,0 +1,816 @@
+<document xmlns="http://cnx.rice.edu/cnxml" xmlns:md="http://cnx.rice.edu/mdml">  
+
+<title>Introduction: logic definition</title>
+<metadata><md:content-id>undefined</md:content-id><md:title/><md:uuid>ec726bb9-5227-4822-bfa7-844116aa785f</md:uuid>
+</metadata>
+
+
+<content>
+
+<section id="section1">
+<title>What are proofs? (informal)</title>
+
+<example id="watch-as-compass">
+  <para id="para1">
+    The following submission from an anonymous engineer to the January,
+    1902 edition of Popular Mechanics caught my eye.  Seems like something
+    every Boy/Girl Scout and Architect should know.
+  </para>
+
+  <para id="para2">
+    “HOW TO USE THE WATCH AS A COMPASS:
+
+      Very few people are aware of the fact that in a watch they are always
+      provided with a compass, with which, when the sun is shining, the
+      cardinal points can be determined.  All one has to do is to point the
+      hour hand to the sun and south is exactly half way between the hour
+      and the figure 12 on the watch.  This may seem strange to the average
+      reader, but it is easily explained.  While the sun is passing over 180
+      degrees (east to west) the hour hand of the watch passes over 360
+      degrees (from 6 o'clock to 6 o'clock).  Therefore the angular movement
+      of the sun in one hour corresponds to the angular movement of the hour
+      hand in half an hour; hence, if we point the hour hand toward the sun
+      the line from the point midway between the hour hand and 12 o'clock to
+      the pivot of the hands will point to the south.  — Engineer.”
+  </para>
+</example>
+
+<para id="para3">
+  They give an argument of correctness; is that really a proof?
+  Well, there are some ambiguities: Do I hold the watch vertically,
+  or, in the plane of the sun's arc?  Certainly I can't hold it up-side down,
+  even though this isn't explicitly stated.
+
+  Furthermore, the correctness of the reasoning relies on 
+  some unstated assumptions. 
+  <foreign>E.g.</foreign>, 
+  the sun is at its highest (northernmost) point of its transit at noon.  
+  Is this actually true?
+  Does it depend on the time of year?
+  I'm not exactly sure (and will have to sit down and scratch my head
+  and draw pictures of orbits, to convince myself).
+  Certainly there are at least a couple of caveats:
+  even beyond account for Daylight Savings Time,
+  the solar-time and clock-time only align at time-zone boundaries,
+  and they drift up to an hour apart, 
+  before the next boundary rectifies the difference.
+  Is this presuming I'm in the northern hemisphere?
+  What if I'm <emphasis>on</emphasis> the equator?
+</para>
+
+<para id="para4">
+  To be fair, the intent of this anecdote
+  was to give enough evidence to convince you,
+  not necessarily to be a complete, stand-alone self-contained proof.
+  But in writing out a careful proof, one is forced to consider all the
+  points just made;
+  being forced to understand these can lead you to better understand
+  the procedure yourself.
+  But be careful to distinguish between something which sounds reasonable,
+  and something that you're certain of.
+</para>
+
+
+<section id="section2">
+<title>An argument by form</title>
+
+<para id="para5">
+  How can we tell true proofs from false ones?
+  What, exactly, are the rules of a proof?
+  These are the questions which will occupy us.
+</para>
+
+<para id="para6">
+  Proofs are argument by form.
+  We'll illustrate this with three parallel examples of 
+  a particular proof form called <term>syllogism</term>.
+</para>
+
+<example id="example2">
+  <table id="proof1" summary="">
+
+<tgroup cols="3" align="center" colsep="1" rowsep="1">
+<colspec colwidth="*" colname="c1"/>
+<colspec colwidth="*" colname="c2"/>
+<colspec colwidth="*" colname="c3"/>
+
+<tbody>
+<row>
+<entry align="left">1</entry><entry namest="c2" nameend="c2">All people are mortal.</entry><entry colname="c3">Premise</entry>
+</row>
+<row>
+<entry align="left">2</entry><entry namest="c2" nameend="c2">Socrates is a person.</entry><entry colname="c3">Premise</entry>
+</row>
+<row>
+<entry align="left">3</entry><entry namest="c2" nameend="c2">Therefore, Socrates is mortal.</entry><entry colname="c3">Syllogism, lines 1,2</entry>
+</row></tbody>
+</tgroup>
+</table>
+</example>
+
+
+<example id="example3">
+  <table id="proof2" summary="">
+
+<tgroup cols="3" align="center" colsep="1" rowsep="1">
+<colspec colwidth="*" colname="c1"/>
+<colspec colwidth="*" colname="c2"/>
+<colspec colwidth="*" colname="c3"/>
+
+<tbody>
+<row>
+<entry align="left">1</entry><entry namest="c2" nameend="c2">All [substitution ciphers] are [vulnerable to brute-force attacks].</entry><entry colname="c3">Premise</entry>
+</row>
+<row>
+<entry align="left">2</entry><entry namest="c2" nameend="c2">The [Julius Caesar cipher] is a [substitution cipher].</entry><entry colname="c3">Premise</entry>
+</row>
+<row>
+<entry align="left">3</entry><entry namest="c2" nameend="c2">Therefore, the [Julius Caesar cipher] is 
+      [vulnerable to brute-force attacks].</entry><entry colname="c3">Syllogism, lines 1,2</entry>
+</row></tbody>
+</tgroup>
+</table>
+
+  <para id="para7">
+    Note that you don't need to know anything about cryptography
+    to know that the conclusion follows from the two premises.
+    (Are the premises indeed true?  That's a different question.)
+  </para>
+</example>
+
+
+<example id="example4">
+  <table id="proof3" summary="">
+
+<tgroup cols="3" align="center" colsep="1" rowsep="1">
+<colspec colwidth="*" colname="c1"/>
+<colspec colwidth="*" colname="c2"/>
+<colspec colwidth="*" colname="c3"/>
+
+<tbody>
+<row>
+<entry align="left">1</entry><entry namest="c2" nameend="c2">All griznoxes chorble happily.</entry><entry colname="c3">Premise</entry>
+</row>
+<row>
+<entry align="left">2</entry><entry namest="c2" nameend="c2">A floober is a type of griznox.</entry><entry colname="c3">Premise</entry>
+</row>
+<row>
+<entry align="left">3</entry><entry namest="c2" nameend="c2">Therefore, floobers chorble happily.</entry><entry colname="c3">Syllogism, lines 1,2</entry>
+</row></tbody>
+</tgroup>
+</table>
+
+  <para id="para8">
+    You don't need to be a world-class floober expert
+    to evaluate this argument, either.
+  </para>
+</example>
+
+
+<para id="para9">
+  <note type="aside" id="idp988384">
+    Lewis Carroll, a logician, has developed
+    <link url="http://home.earthlink.net/~lfdean/carroll/puzzles/logic.html">many whimsical examples</link> of syllogisms and simple reasoning.
+    (Relatedly,
+    note how the social context of Carroll's examples demonstrates some
+    <link url="http://www.indiana.edu/~koertge/rfemlog.html">feminist 
+    issues in teaching logic</link>.)
+  </note>
+</para>
+
+<para id="para10">
+  As you've noticed,
+  the <emphasis>form</emphasis> of the argument
+  is the same in all these.
+  If you are assured that the first two premises are true,
+  then, without any true understanding,
+  you (or a computer) can automatically come up with the conclusion.
+  A syllogism is one example of a <term>inference rule</term>
+  — that is, a rule form that a computer can use to deduce 
+  new facts from known ones.
+</para>
+
+</section> 
+
+
+<section id="section3">
+<title>Some non-proofs</title>
+
+<para id="para11">
+  Of course, not all arguments are valid proofs.
+  Identifying invalid proofs is just as interesting as identifying valid ones.
+  <note type="Logic in (?)Culture" id="idp306320"><label>Logic in (?)Culture</label>
+    <code display="block" id="idm6201312">
+Homer: Ah, not a bear in sight.  The Bear Patrol must be working.
+Lisa:  That's <link url="http://education.yahoo.com/reference/dictionary/entry/specious">specious</link> reasoning, Dad.
+Homer: Thank you, honey.
+Lisa:  By your logic, this rock keeps tigers away.
+Homer: Oh?  How does it work?
+Lisa:  It doesn't work.
+Homer: Uh-huh.
+Lisa:  It's just a stupid rock.
+Homer: Uh-huh.
+Lisa:  But I don't see any tigers around here, do you?
+  [pause]
+Homer: Lisa, I want to buy your rock!
+  [A moment's hesitation … and money changes hands.]
+    </code>
+    (From <link url="http://snpp.com/">The Simpsons</link>
+    <cite><cite-title><link url="http://www.snpp.com/episodeguide/season7.html">Much 
+    Apu About Nothing</link></cite-title></cite>.)
+  </note>
+</para>
+
+
+<para id="para12">
+  If Lisa isn't around, who will identify specious reasoning for us?
+  We can certainly use her approach of finding other particular examples
+  that follow the same argument, yet lead to a clearly erroneous conclusion.
+</para>
+
+<example id="example5">
+  <para id="para13">
+    Suppose that my friend makes the following argument:
+
+    <table id="proof4" summary="">
+
+<tgroup cols="3" align="center" colsep="1" rowsep="1">
+<colspec colwidth="*" colname="c1"/>
+<colspec colwidth="*" colname="c2"/>
+<colspec colwidth="*" colname="c3"/>
+
+<tbody>
+<row>
+<entry align="left">1</entry><entry namest="c2" nameend="c2">Warm cola tastes bad.</entry><entry colname="c3">Premise</entry>
+</row>
+<row>
+<entry align="left">2</entry><entry namest="c2" nameend="c2">Warm salt-water tastes bad.</entry><entry colname="c3">Premise</entry>
+</row>
+<row>
+<entry align="left">3</entry><entry namest="c2" nameend="c2">Therefore, mixing them together tastes bad.</entry><entry colname="c3">
+          “Common-sense conclusion”, lines 1,2
+        </entry>
+</row></tbody>
+</tgroup>
+</table>
+
+    I'm skeptical, so I have a sip; sure enough, the conclusion is indeed true.
+    But is the <emphasis>proof</emphasis> correct  — 
+    does the “common-sense conclusion” rule actually hold?
+    In order to refute the form of the argument, we can try
+    similar arguments which have the same form but a false conclusion
+    (as Lisa did).
+
+    <table id="proof5" summary="">
+
+<tgroup cols="3" align="center" colsep="1" rowsep="1">
+<colspec colwidth="*" colname="c1"/>
+<colspec colwidth="*" colname="c2"/>
+<colspec colwidth="*" colname="c3"/>
+
+<tbody>
+<row>
+<entry align="left">1</entry><entry namest="c2" nameend="c2">Ice-cold coke tastes good.</entry><entry colname="c3">Premise</entry>
+</row>
+<row>
+<entry align="left">2</entry><entry namest="c2" nameend="c2">Ice coffee tastes good.</entry><entry colname="c3">Premise</entry>
+</row>
+<row>
+<entry align="left">3</entry><entry namest="c2" nameend="c2">Therefore, mixing them together tastes good.</entry><entry colname="c3">
+          “Common-sense conclusion”, lines 1 and 2.
+        </entry>
+</row></tbody>
+</tgroup>
+</table>
+
+    After another unfortunate sip, I verify that this conclusion is not true,
+    and therefore my friend's reasoning is at fault.
+  </para>
+
+  <para id="para14">
+    My friend responds by claiming that the
+    “common-sense conclusion” is too valid;
+    the rule is that bad-taste is preserved upon mixing, 
+    not that any taste is preserved.
+    While I'm inclined to believe that, we realize we can still
+    test this more refined rule:
+    can you come up with an instance of mixing together bad-tasting things
+    and ever getting a yummy result?  (Say, salt and flour, which
+    can be mixed and baked to get delicious saltines!
+    The argument continues, about whether the form of the argument
+    precludes baking, and so on.)
+  </para>
+
+  <para id="para15">
+    The end result (after I take some antacid)
+    is that we have a clearer understanding of
+    the initially vague “common-sense conclusion”, and stricter
+    rules about when it applies.  
+    Thus, refining the argument has led us to a greater understanding.
+  </para>
+</example>
+
+<para id="para16">
+  The above examples are a bit frivolous,
+  but the procedure of looking for counterexamples
+  applies to many real-world dilemmas.
+  It also highlights the difference between a correct proof,
+  and a faulty proof that might still happen to lead to a true result.
+  (By the way, this is the exact same skill used
+   when trying to come up with an algorithm for a problem:
+   “well, the algorithm works for this input, but can I find a something
+     that makes one of the steps fail?”  If so, you then try refining
+     your algorithm “well, I can add a test to take care of that problem;
+     is that enough so that it always works?”)
+</para>
+
+
+<exercise id="legalizing-X">
+  <problem id="idp3084176">
+    <para id="para17">
+      Solve this statement for [X]:
+      
+
+      <quote display="inline" class="no-marks">It is wrong to ban [X].  
+        Such a ban would punish those reasonable citizens who would
+        use [X] responsibly,
+        while those who really want to abuse [X] will be able to get it anyway,
+        through a black market which will only subsidize other
+        criminal activities.</quote>
+    </para>
+  </problem>
+
+  <solution id="idm4812480">
+    <para id="para18">
+      This argument is or has been commonly used for varying topics —
+
+      <list id="list1">
+        <item>
+          marijuana,
+        </item>
+        <item>
+          alcohol,
+        </item>
+        <item>
+          all drugs,
+        </item>
+        <item>
+          handguns,
+        </item>
+        <item>
+          birth control,
+        </item>
+        <item>
+          prostitution,
+        </item>
+        <item>
+          encryption technology.
+        </item>
+      </list>
+
+      The interesting part, is that the traditional Left and Right political
+      positions <emphasis>each</emphasis> use this argument for some
+      of these items, while rejecting the argument when used for other items.
+    </para>
+
+    <para id="para19">
+      A more rational response is to either accept all the above,
+      or none of the above,
+      <emphasis>or</emphasis> to realize that the stated argument wasn't 
+      everything  — that there might be implicit assumptions
+      or arguments which actually do distinguish between these cases
+      (the different interpretations of “[X]”). 
+      Being able to articulate the differences is essential.
+      The more refined arguments may be more nuanced, and less able to fit
+      into a sound-bite, but lead to a better understanding of
+      one's own values.
+      And sometimes, upon reflection, one may realize that some of the
+      implicit values or premises
+      are things they actually disagree with, 
+      once they are precisely spelled out.
+    </para>
+  </solution>
+</exercise>
+
+<para id="para20">
+  In real-world issues, there are often many subtleties,
+  and short arguments that sound airtight might be glossing
+  over factors which are important in practice.
+</para>
+
+<example id="example6">
+  <para id="para21">
+    <quote display="inline" class="no-marks">During daylight, there is no need to have headlights
+      (or running lights) on:
+      there's already plenty of light for everybody to see each other by.</quote>
+    Even during the day, headlights slightly increase how quickly other 
+    drivers see you during (say) a routine, tenth-of-a-second glance 
+    in their mirror.
+  </para>
+</example>
+
+<example id="example7">
+  <para id="para22">
+    <quote display="inline" class="no-marks">When in a turn-only lane, there is absolutely no need to signal — 
+      since there's only one way to turn, 
+      a signal can't communicating any information to other drivers!</quote>
+
+    Glib, but not true:
+    Other defensive drivers presumably know you have only one legal option,
+    but they don't know that <emphasis>you</emphasis> know that, and they are
+    planning reactions in case you surprise them with a sudden
+    illegal maneuver.
+    By signaling, you give them information which helps them better plan for
+    yet other contingencies.
+    Furthermore, it also gives you more confidence that 
+    other drivers are expecting your turn, reducing your suspicion
+    that they're about to pull a surprise maneuver on you.
+    (True, these are all low-probability events which almost always turn out
+     to be unnecessary.
+     But avoiding accidents is all about 
+     minimizing risks for the one moment events do spiral out of control.)
+  </para>
+</example>
+
+<example id="example8">
+  <para id="para23">
+    
+    “You'll lose weight if and only if you burn more
+      calories than you take in.
+      All those diet-plan books can never get around this,
+      and all their details are pointless.”
+  </para>
+
+  <para id="para24">
+    True, calorie intake and expenditure solely determine weight loss/gain.
+    But after some thought, we can get examples where the above logic
+    overlooks some relevant differences:
+    If your friend told you they were switching from a diet of
+    2000 calories of balanced short-term and long-term energy sources
+    (sugars, proteins, and carbs) to a diet of
+    2000 calories worth of Pixy Stix at breakfast
+    plus a Flintstones multivitamin,
+    would you be optimistic that they would have the willpower
+    to strictly follow the new plan?
+    The two plans are equal when counting calories, but in actuality 
+    one really is a better plan.
+    (Even more exaggeratedly, consider a daily plan of
+     2000 calories of sugar while never drinking any water—since
+     water has no calories, it can't affect your calorie count,
+     according to the above claim.)
+  </para>
+
+  <para id="para25">
+    These contrived counterexamples help illustrate that 
+    it's conceivable that there <emphasis>can</emphasis> be a difference 
+    between diet plans, so the initial claim isn't technically true.
+  </para>
+</example>
+
+
+<para id="para26">
+  The point illustrated
+  is that often real-world arguments incorrectly
+  imply that their result follows from the <emphasis>form</emphasis>
+  of the argument, when in fact 
+  the form is not valid in the way a syllogism is.
+  This fallacy can be illuminated by finding
+  a different domain in which the argument fails.
+  The practice of searching for domains which invalidate
+  the argument can help both sides of a debate hone in
+  on bringing the unspoken assumptions to light.
+  The original argument, if its conclusion is indeed true,
+  must be patched either by adding the unspoken assumptions
+  or fixing the invalid form.
+</para>
+
+<exercise id="exercise2">
+  <problem id="idm938080">
+    <para id="para27">
+    Mistakes in syllogisms are hard to make:
+    what are the only two ways to have an error in a syllogism?
+    </para>
+  </problem>
+
+  <solution id="idp5145216">
+    
+
+    <list id="list2" list-type="enumerated">
+      <item>
+        The argument isn't actually in syllogism form.
+        For example, the following is an
+        <emphasis>incorrect</emphasis> syllogism:
+
+        <table id="proof6" summary="">
+
+<tgroup cols="3" align="center" colsep="1" rowsep="1">
+<colspec colwidth="*" colname="c1"/>
+<colspec colwidth="*" colname="c2"/>
+<colspec colwidth="*" colname="c3"/>
+
+<tbody>
+<row>
+<entry align="left">1</entry><entry namest="c2" nameend="c2">All people don't know my file's password.</entry><entry colname="c3">
+              Premise
+              (Equivalent to
+              “Nobody knows my file's password”, but reworded
+              to be of the required form 
+              “All somethings have some property.”.)
+            </entry>
+</row>
+<row>
+<entry align="left">2</entry><entry namest="c2" nameend="c2">All hackers are people.</entry><entry colname="c3">
+              Premise
+            </entry>
+</row>
+<row>
+<entry align="left">3</entry><entry namest="c2" nameend="c2">Therefore, my file is secure from hackers.</entry><entry colname="c3">
+              <emphasis>Incorrect</emphasis> syllogism, lines 1,2
+            </entry>
+</row></tbody>
+</tgroup>
+</table>
+
+        To be a syllogism, the conclusion would have to be
+        “all hackers don't know my file's password.”
+        The file might or might not be secure, but the above doesn't prove it.
+      </item>
+
+      <item>
+        One of the two premises is wrong.
+
+        <table id="proof7" summary="">
+
+<tgroup cols="3" align="center" colsep="1" rowsep="1">
+<colspec colwidth="*" colname="c1"/>
+<colspec colwidth="*" colname="c2"/>
+<colspec colwidth="*" colname="c3"/>
+
+<tbody>
+<row>
+<entry align="left">1</entry><entry namest="c2" nameend="c2">All people don't know my file's password.</entry><entry colname="c3">
+              Premise,
+              <emphasis>but possibly false</emphasis>
+            </entry>
+</row>
+<row>
+<entry align="left">2</entry><entry namest="c2" nameend="c2">All hackers are people.</entry><entry colname="c3">
+              Premise,
+              <emphasis>but possibly false</emphasis>
+            </entry>
+</row>
+<row>
+<entry align="left">3</entry><entry namest="c2" nameend="c2">Therefore, all hackers don't know my file's password.</entry><entry colname="c3">
+              Syllogism, lines 1,2
+            </entry>
+</row></tbody>
+</tgroup>
+</table>
+
+        This proof fails, of course, if some hackers are
+        non-people (<foreign>e.g.</foreign>, programs),
+        or if some people know the password.
+        (In fact, presumably <emphasis>you</emphasis> know the password!)
+      </item>
+    </list>
+
+    <para id="para28">
+    Of course, even if a proof fails,
+    the conclusion might be true for other reasons. 
+    An incorrect argument doesn't prove the conclusion's opposite!
+    </para>
+  </solution>
+</exercise>
+
+</section> 
+
+
+<section id="section4">
+<title>Other Inference Rules</title>
+
+<para id="para29">
+  Of course, there are more ways to deduce things, beyond a syllogism.
+
+  <list id="list3">
+    <item>
+      Who decides what the valid inference rules are?
+    </item>
+    <item>
+      Is it always clear when people have used the inference rules correctly?
+    </item>
+  </list>
+</para>
+
+
+<figure id="figure1">
+  <subfigure id="board-snippet1">
+    <media id="idp4876800" alt=""><image src="../../media/ww-board-snippet1-partI.png" mime-type="image/png"/></media>
+  </subfigure>
+
+  <subfigure id="board-snippet2">
+    <media id="idm3884608" alt=""><image src="../../media/ww-board-snippet2-partI.png" mime-type="image/png"/></media>
+  </subfigure>
+
+  <caption>Glimpses of two different WaterWorld boards</caption>
+</figure>
+
+<para id="para30">
+  Consider the following argument about WaterWorld boards:
+
+  <table id="proof8" summary="">
+
+<tgroup cols="3" align="center" colsep="1" rowsep="1">
+<colspec colwidth="*" colname="c1"/>
+<colspec colwidth="*" colname="c2"/>
+<colspec colwidth="*" colname="c3"/>
+
+<tbody>
+<row>
+<entry align="left">1</entry><entry namest="c2" nameend="c2">(A) is next to exactly onepirate.</entry><entry colname="c3">
+        Premise, from either subfigure
+      </entry>
+</row>
+<row>
+<entry align="left">2</entry><entry namest="c2" nameend="c2">(A) has only one unexplored neighbor.</entry><entry colname="c3">
+        Premise, from either subfigure
+      </entry>
+</row>
+<row>
+<entry align="left">3</entry><entry namest="c2" nameend="c2">If you are an unexpected location next to (A),
+      then you contain apirate.</entry><entry colname="c3">
+        Incorrect conclusion
+      </entry>
+</row></tbody>
+</tgroup>
+</table>
+
+  This conclusion is not valid; 
+  while it is correct for the
+  <link target-id="board-snippet1">first board shown</link>,
+  it is incorrect for the
+  <link target-id="board-snippet2">second</link>.
+  (I make this mistake all the time
+  when playing WaterWorld too quickly, arrggh! — The Author.)
+</para>
+
+<para id="para31">
+  The problem is that the author of the argument
+  presumably meant to conclude 
+  “all <emphasis>explored</emphasis> neighbors of (A) contain a pirate”.
+</para>
+
+<para id="para32">
+  <emphasis>
+    Before we can study exact proofs,
+    we need a way of writing exactly what we mean.
+  </emphasis>
+  This will occupy us for the next section.
+</para>
+
+</section> 
+
+
+<section id="section5">
+<title>The need for a precise language</title>
+
+<para id="para33">
+  These previous glitches in the WaterWorld arguments
+  both arise, of course, because
+  we were sloppy about what each sentence meant exactly.
+  We used informal English  — a fine language for humans,
+  who can cope with remarkable amounts of ambiguity --
+  but not a good language for specifying arguments.
+  <note type="aside" id="idm3159648">
+    Laws and contracts are really written in a separate language
+    from English  — legalese  — full of technical terms with
+    specific meanings.
+    This is done because, while some ambiguity is tolerable in 99% of
+    human interaction, the remaining 1% can be very problematic.
+    Even so, legalese still contains <emphasis>intentionally</emphasis>
+    ambiguous terms:
+    When, exactly, is a punishment “cruel and unusual”?
+    What exactly is the “community standard” of indecency?
+    The legal system tries to simultaneously be formal about laws,
+    yet also be flexible to allow for unforeseen situations and
+    situation-specific latitude.
+    (The result of this tension is the position of Judge.)
+  </note>
+  <note type="aside" id="idp2859072">
+    <link url="http://caselaw.lp.findlaw.com/scripts/getcase.pl?court=us&amp;navby=year&amp;year=recent">Court decisions</link>, while dense reading,
+    are often the model of well-presented arguments.
+  </note>
+</para>
+
+<para id="para34">
+  Consider, from a 
+  <link document="m12072" target-id="watch-as-compass">previous example</link>, the statement
+  “…[this is something] every Boy/Girl Scout and Architect should know”.
+  Does this mean all people who are <emphasis>both</emphasis> a scout
+  and architect, or everybody who is at least one or the other?
+  Genuinely ambiguous, in English!
+  (Often, “and/or” is used
+   to mean “one or the other or possibly both”.)
+</para>
+
+<para id="para35">
+  We'll next look at a way to specify some concepts non-ambiguously,
+  at least for WaterWorld.
+  We need to be more careful about how we state our facts
+  and how we use these known facts to deduce other facts.
+  Remember, faulty reasoning might not just mean losing a silly game.
+  Hardware and software bugs can lead to significant bodily harm
+  (Imagine software bugs in an airplane autopilot or surgical robot system),
+  security loopholes 
+  (<foreign>e.g.</foreign>, in
+   <link url="http://www.mozilla.org/projects/security/known-vulnerabilities.html">Mozilla</link> or
+   <link url="http://www.microsoft.com/technet/security/current.aspx">IE</link>),
+  or expensive 
+  <link document="m10714" target-id="intel-bug">recalls</link>.
+</para>
+
+<para id="para36">
+  One reaction to the above arguments is
+  “Well, big deal  — somebody made a mistake (mis-interpreting
+    or mis-stating a claim); that's their problem.
+    (And sheesh, they sure are dolts!)” 
+  But as a programmer, that's not true:
+  Writing large systems, human programmers <emphasis>will</emphasis> err,
+  no matter how smart or careful or skilled they are.
+  Type-checkers catch some errors upon compilation, 
+  and test suites catch their share of bugs,
+  but many still remain in real-world software.
+  Thus we are looking for systemic ways to reduce 
+  and catch errors, with the ultimate ideal of 
+  being able to prove programs correct.
+  <note type="aside" id="idp1233440">
+    Other professions have checklists, protocols, and regulations to minimize
+    human error; 
+    programming is no different, except that the industry is still working
+    on exactly what the checklists or training should be.
+    Someday, a license will be required for practicing software,
+    at least for software involved with life-safety.
+  </note>
+</para>
+
+<para id="para37">
+  In our study of formal logic, we'll need three things:
+  <list id="list4">
+    <item>
+      Syntax (language) —
+      a precise syntax and vocabulary for expressing
+      concepts without ambiguity,
+      <list id="list5">
+        <item>
+          Propositional logic,
+        </item>
+        <item>
+          First-order logic (propositional logic,
+          plus relations and quantifiers)
+        </item>
+      </list>
+    </item>
+
+    <item>
+      Semantics (meaning) and modeling —
+      how to connect these formal languages to whatever topic
+      we want to reason about (including our software).
+    </item>
+  
+    <item>
+      Reasoning (proofs) —
+      methods of deducing new facts from old.
+      We'll see three types of reasoning, and how to use
+      them for each of our two logics:
+      <list id="list6">
+        <item>
+          Truth tables
+        </item>
+        <item>
+          Boolean Algebra
+        </item>
+        <item>
+          Inference Rules
+        </item>
+      </list>
+    </item>
+  </list>
+  We'll visit these topics in an interleaved manner — 
+  first propositional logic (immediately with its semantics)
+  and three methods of reasoning for it;
+  then first-order logic and an in-depth look at its interpretations, 
+  and finally the methods of reasoning for first-order logic.
+</para>
+
+<para id="para38">
+  We'll begin with a particular syntax — propositional logic
+  for the game of WaterWorld — before using this syntax
+  to formally deduce safe moves.
+</para>
+
+</section> 
+
+</section> 
+
+</content>
+
+</document>

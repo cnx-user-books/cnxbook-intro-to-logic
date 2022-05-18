@@ -1,0 +1,111 @@
+<document xmlns="http://cnx.rice.edu/cnxml" xmlns:m="http://www.w3.org/1998/Math/MathML" xmlns:md="http://cnx.rice.edu/mdml">
+
+<title>Propositional Logic: conclusions</title>
+<metadata><md:content-id>undefined</md:content-id><md:title/><md:uuid>7c349723-1677-4e25-82b3-512afd3b0d7e</md:uuid>
+</metadata>
+
+
+<content>
+
+<section id="section1">
+<title>Are we done yet?</title>
+
+<para id="para1">
+  These inference rules may seem limited, and you may have some more general
+  ones in mind.
+  Soon, we'll see additional inference rules in the context of first-order logic,
+  which will give us a richer set of proofs.
+  In general, a hard problem is finding a language that
+  is both expressive enough to describe the domain succinctly,
+  but also limited enough to automate reasoning.
+  This is a very practical issue in type checking and other program analysis.
+  While it can be easy to find some program errors automatically, it
+  is very difficult or impossible to <emphasis>guarantee</emphasis> that you
+  can find <emphasis>all</emphasis> errors (of some specific kind, 
+  like type errors).
+</para>
+
+<para id="para2">
+  One thing we would like to eliminate is the need (at least technically)
+  to restate structurally identical proofs, as discussed for
+  <link document="m10718" target-id="commutativity">commutativity</link>.
+  We will be able to add the idea of generalizing such proofs directly
+  into the logic and inference rules.
+</para>
+
+<para id="para3">
+  Despite the desire for more flexible reasoning,
+  we'd also like to consider whether we have 
+  more inference rules than are necessary.  Are some of them redundant?
+  This is similar to the software rule that we should have a single
+  point of control, or the similar idea that
+  libraries should provide exactly one way of doing something.
+  In general, this is not easy to ensure.
+  We have shown that some potential additional inference rules, like commutativity
+  and associativity, weren't necessary.
+  But we haven't shown our core inference rules to be minimal.
+  What do you think?
+  (See the homework exercise problems on the redundancy of
+   <link document="m12352" target-id="not-elim-redundant">not-elimination</link>,
+   <link document="m12352" target-id="not-intro-redundant">not-introduction</link>, and
+   <link document="m12352" target-id="case-elim-redundant">case-elimination</link>.)
+</para>
+
+</section> 
+
+
+
+<section id="section2">
+<title>Distinctness of the approaches (optional)</title>
+
+<para id="para4">
+  You might be wondering — can we use propositional equivalences as
+  axioms when using inference rules?
+  The short answer is no.
+  First, Boolean equivalences are <emphasis>pairs</emphasis> of formulas,
+  whereas axioms are individual formulas.
+  Second, none of our inference rules mention equivalences.
+</para>
+
+<para id="para5">
+  However, let's reword the question — could we use propositional
+  equivalences when using inference rules?
+  It would make sense to add an inference rule to allow this.
+  One possibility would be an inference rule that turns an equivalence into an
+  implication:
+  “if we know
+    <m:math><m:apply><m:equivalent/><m:ci>φ</m:ci> <m:ci>ψ</m:ci></m:apply></m:math>,
+    then we know
+    <m:math><m:apply><m:implies/><m:ci>φ</m:ci> <m:ci>ψ</m:ci></m:apply></m:math>.”
+  Another possibility would be an inference rule that allows us to substitute
+  equivalence subterms, as we do in equivalence proofs:
+  “if we know
+    <m:math><m:apply><m:equivalent/><m:ci>φ</m:ci> <m:ci>ψ</m:ci></m:apply></m:math> and
+    <m:math><m:ci>θ</m:ci></m:math>,
+    then we know <m:math><m:ci>θ</m:ci><m:mtext>[</m:mtext><m:ci>φ</m:ci><m:mtext>↦</m:mtext><m:ci>ψ</m:ci><m:mtext>]</m:mtext></m:math>,
+    <foreign>i.e.</foreign>, <m:math><m:ci>θ</m:ci></m:math>, except with instances of <m:math><m:ci>φ</m:ci></m:math>
+    replaced by <m:math><m:ci>ψ</m:ci></m:math>.”
+  With either, we would also have to allow equivalence proofs as subproofs
+  or lemmas in inference proofs.
+</para>
+
+<para id="para6">
+  Traditionally, and in our presentation, we <emphasis>do not</emphasis>
+  combine equivalences and inference rules in any such way.
+  The disadvantage of combining them is that instead of two relatively
+  simple proof systems, you would have one more complicated proof system.
+  It would be harder to learn all that you could do in such a system,
+  and for theorists, it would be harder to prove things such as
+  soundness and completeness for the combined system.
+  In learning and describing proofs, it is best to keep them separate.
+  However, the advantage would be shorter proofs.  When
+  <emphasis>using</emphasis> the combined system, you'd have
+  flexibility to use whichever technique suited the current step best.
+  In practice, people commonly combine these and other proof techniques.
+</para>
+
+</section>
+
+</content>
+
+</document>

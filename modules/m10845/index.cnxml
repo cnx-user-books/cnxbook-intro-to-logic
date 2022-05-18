@@ -1,0 +1,85 @@
+<document xmlns="http://cnx.rice.edu/cnxml" xmlns:md="http://cnx.rice.edu/mdml">
+  <title>Browser support</title>
+  <metadata><md:content-id>undefined</md:content-id><md:title/><md:uuid>8b386e15-27aa-4cca-a1da-4b3d9d3da2e6</md:uuid>
+</metadata>
+
+<content>
+    <para id="para1">
+      <note type="warning" id="idp811456">The information in this module is
+      outdated. Please see <link document="col10154">my
+      course</link> for a table of contents.</note>
+
+      <note type="browser note" id="idm384512"><label>Browser note</label>This page meant to be viewed with a MathML-enabled browser.
+If you see 
+(∀x. (P(<emphasis>x</emphasis>) → (∃y. (P(<emphasis>y</emphasis>) ∨ φ))))
+as a nice version of
+(forall x . (P(x) -&gt; (exists y . (P(y) v phi))))
+you're doing okay;
+If you further see 
+𝒜 ⊢ ℬ
+as a nice version of
+(scriptA |- scriptB)
+you're set!
+  If not, see our description of <link document="m10845" strength="2">browser support</link> .
+</note></para>
+
+
+
+<para id="para2">
+At Rice on the CSNet, use <code>mozilla</code>.
+Preferably, use version 1.1, as currently available on Solaris 8 machines.
+On frosty.cs, version 1.1 is the default.
+On other Solaris 8 machines, version 1.1 is not yet the default, but
+available via <code>/opt1/mozilla-1.1/sunos5/bin/mozilla</code>.
+</para>
+
+<para id="para3">
+In general, to view TeachLogic web pages,
+you'll need a browser that supports the following features:
+</para>
+
+<list id="list1">
+<item> <link url="http://www.w3.org/Style/CSS/">
+       Cascading Style Sheets (CSS)</link>
+       -- Most recent browsers support CSS sufficiently well.
+</item>
+<item> <link url="http://www.w3.org/Math/">
+       MathML</link>
+       -- Some browsers support MathML sufficiently well.
+          However, most (all?) do not fully support Unicode Plane 1
+          numerical entity references, which includes most
+          mathematical alphanumeric characters.
+</item>
+<item> <link url="http://www.mozilla.org/projects/mathml/fonts/">
+       Math-oriented fonts</link>
+</item>
+</list>
+<para id="para4">
+Which browsers support these features?
+The above links provide more details, but here's a summary of
+some browsers.
+</para> 
+<list id="list2">
+<item> <link url="http://www.mozilla.org/">
+       Mozilla</link> and
+       <link url="http://channels.netscape.com/ns/browsers/download_other.jsp/">
+       Netscape</link> (version 7.0)
+       -- Both work, except some characters (Unicode Plane 1)
+          don't appear correctly.
+</item>
+<item> <link url="http://www.microsoft.com/windows/ie/">
+       Internet Explorer</link> is not yet an option,
+       even with the
+       <link url="http://www.dessci.com/webmath/mathplayer/">
+       MathPlayer plug-in</link> to view MathML.
+       IE won't display pages with some characters (Unicode Plane 1).
+</item>
+</list>
+
+<para id="para5">
+Alternatively, PDF versions of the web pages are also provided via
+<link document="m10773" strength="2">the Base module's index</link> .
+</para>
+
+</content>
+</document>

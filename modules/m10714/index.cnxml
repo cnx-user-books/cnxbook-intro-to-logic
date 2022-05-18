@@ -1,0 +1,293 @@
+<document xmlns="http://cnx.rice.edu/cnxml" xmlns:md="http://cnx.rice.edu/mdml">  
+
+<title>Introduction: logic motivation</title>
+<metadata><md:content-id>undefined</md:content-id><md:title/><md:uuid>68315191-3eac-4217-9a33-67f433880c4b</md:uuid>
+</metadata>
+
+
+<content>
+
+<section id="section1">
+
+<para id="para1">
+  The ancient Greeks loved to hang around on the 
+  <link url="http://education.yahoo.com/reference/dictionary/entry/stoa">stoa</link>, 
+  sip some wine, and debate.
+  But at the end of the day, they wanted to sit back and
+  decide who had won the argument.
+  When Socrates <emphasis>claims</emphasis> that one statement
+  follows from another, is it actually so?
+  Shouldn't there be some set of rules to officially determine
+  when an argument is correct?
+  Thus began the formal study of logic.
+  <note type="aside" id="idp8306960">
+    The three fundamental studies were the <foreign>Trivium</foreign>  — 
+    grammar (words), logic (reasoning), and rhetoric (effective communication).
+    These allowed study of the <foreign>Quadrivium</foreign>  — 
+    arithmetic (patterns in number),
+    geometry (patterns in space), 
+    music (patterns in tone), and
+    astronomy (patterns in time).
+    All together, these subjects comprise 
+    <link url="http://members.aol.com/oldenwilde/members/diu/quadriv.html">the seven liberal arts</link>.
+  </note>
+</para>
+
+<para id="para2">
+  These issues are of course still with us today.
+  And while it might be difficult to codify real-world
+  arguments about (say) gun-control laws,
+  programs <emphasis>can</emphasis> be
+  fully formalized, and correctness can be specified.
+  We'll look at three examples where formal proofs are applicable:
+  <list id="list1">
+    <item> playing a simple game, WaterWorld;
+    </item>
+    <item> checking a program for type errors;
+    </item>
+    <item> circuit verification.
+    </item>
+  </list>
+  Many other areas of computer science routinely involve proofs, although
+  we won't explore them here.
+  Manufacturing robots first prove that they can twist and move to
+  where they need to go before doing so, in order to avoid crashing into
+  what they're building.
+  When programming a collection of client and server computers,
+  we usually want to prove that the manner in which they communicate guarantees
+  that no clients are always ignored.
+  Optimizing compilers prove that, within your program, some faster piece of
+  code behaves the same as and can replace what you wrote.
+  With software systems controlling more and more life-critical applications, 
+  it's important to be able to <emphasis>prove</emphasis>
+  that a program always does what it claims.
+</para>
+
+
+<section id="section2">
+<title>WaterWorld</title>
+
+
+<para id="para3">
+  Consider a game called WaterWorld, where each location is either
+  empty sea or contains a pirate.
+  When you enter a location, you must <emphasis>correctly</emphasis>
+  anticipate whether or not it contains pirates.
+  <list id="list2">
+    <item>
+      If you correctly anticipate open sea, you are able to enter and
+      determine how many of the (up to 3) adjacent locations contain
+      a pirate.
+    </item>
+    <item>
+      If you correctly anticipate a pirate, the location
+      is tagged as dangerous, and you gather no further information.
+    </item>
+  </list>
+  Furthermore, there are really two types of moves:
+  guesses, and assertions.
+  If you make an assertion, then even if you happen to be correct but
+  it is possible you could have been wrong, then it is an error.
+  Also, it is an error if you make a guess about a location
+  if it is actually possible to assert a location's contents.
+  The interesting fact about these types of games is that while
+  sometimes guesses are necessary (when?),
+  surprisingly often an assertion can be made.
+</para>
+
+
+<para id="para4">
+  (You can freely
+   <link url="http://www.teachlogic.org/WaterWorld/download.shtml">download WaterWorld</link>.)
+</para>
+
+<figure id="figure1">
+  <subfigure id="subfigure1">
+    <media id="idp4888944" alt=""><image src="../../media/ww-board-snippet1-partI.png" mime-type="image/png"/></media>
+  </subfigure>
+
+  <subfigure id="subfigure2">
+    <media id="idp11600160" alt=""><image src="../../media/ww-board-snippet2-partI.png" mime-type="image/png"/></media>
+  </subfigure>
+
+  <caption>Glimpses of two different WaterWorld boards</caption>
+</figure>
+
+<para id="para5">
+  For instance, in the first board, what assertions can we be sure of?
+  What, exactly, is your reasoning?
+  How about in the second board?
+  You can certainly envision wanting a computer player that
+  can deduce certain moves, an make those for you automatically.
+</para>
+</section> 
+
+
+<section id="section3">
+<title>Type Checking</title> 
+
+<para id="para6">
+  When writing a program, we'd like to simply look at the program and
+  determine whether it has any bugs, without having to run it.
+  We'll see in the future, however, that such a general problem cannot be
+  solved.  Instead, we focus on finding more limited kinds of errors.
+  <term>Type checking</term> determines whether
+  all functions are called with the correct
+  <emphasis>type</emphasis> of inputs.
+  <foreign>E.g.</foreign>, the function <code display="inline">+</code> should be
+  called with numbers, not Booleans,
+  and a function which a programmer has declared
+  to return an integer really should always return an integer.
+  Consider the following program:
+</para>
+
+
+<code display="block" id="idp452480">
+// average: 
+// Simply divide sum by N, but guard against dividing by 0.
+//
+real-or-false average( real sum, natNum N ) {
+  if (N != 0)
+    return sum / N;
+  else
+    return false;
+}
+</code>
+
+
+
+<para id="para7">
+  One reason programmers are required to declare the intended
+  type of each variable
+  is so that the computer (the compiler) can <emphasis>prove</emphasis> that 
+  certain errors won't occur.
+  How can you or the compiler prove, in the above,
+  that <code display="inline">average</code> returns a real number or false,
+  but never returns (say) a string, and doesn't raise an exception?
+  Deductions are made based on premises about the types that are passed in,
+  along with axioms about the input and return types of the built-in functions
+  <code display="inline">if</code>, 
+  <code display="inline">!=</code>, and
+  <code display="inline">/</code>,
+  as well as which exceptions those built-ins might raise.
+</para>
+
+<para id="para8">
+  Consider this variant:
+</para>
+<code display="block" id="idp5551360">
+// augment-average:
+// Given an old sum and N, compute the average if one more
+// datum were included.
+// 
+real augment_average( real old_sum, natNum old_N, real new_datum ) {
+  return average( old_sum + new_datum, old_N + 1 );
+}
+</code>
+
+<para id="para9">
+  Most compilers will reject <code display="inline">augment-average</code>, claiming
+  that it may actually return <code display="inline">false</code>.
+  However, we're able prove that it really will
+  only return a <code display="inline">real</code>,
+  by using some knowledge about natural numbers and adding 1,
+  plus some knowledge of what <code display="inline">average</code> returns.
+  (Note that our reasoning uses aspects of 
+   <code display="inline">average</code>'s interface which aren't explicitly stated; 
+   <link url="http://download.plt-scheme.org/doc/300/html/mzlib/mzlib-Z-H-13.html#node_chap_13">most</link>
+   type systems aren't expressive enough to allow more detailed type contracts,
+   for reasons we'll allude to later.)
+
+  So we see that many compilers have overly conservative type-checkers,
+  rejecting code which is perfectly safe,
+  because they are reasoning with only a narrow set of type-rules.
+</para>
+
+<para id="para10">
+  This example alludes to another use of logic:
+  Not only is it the foundation of writing proofs 
+  (ones that can be created or checked by computers),
+  but logic can also be used as 
+  an <emphasis>unambiguous specification language</emphasis>.
+  Observe that while a function's implementation is always specified
+  formally and unambiguously  — in a programming language  —
+  the interface is 
+  specified entirely English, aside from a few type declarations.
+  Many bugs stem from ambiguities in the English, that different humans
+  interpret differently (or, don't think about).
+  Being able to use logic to specify an interface
+  (and cannot be modified even if the somebody later tunes the implementation)
+  is an important skill for programmers, 
+  even when those logic formulas aren't used in proofs.
+</para>
+
+
+</section> 
+
+
+
+
+<section id="section4">
+<title>Circuit Verification</title>
+
+<para id="intel-bug">
+  Given a circuit's blueprints, will it work as advertised?
+  In 1994, Intel had to recall
+  five million of its Pentium processors, due to a 
+  <link target-id="http.//www.maa.org/mathland/mathland_5_12.html">bug in
+  the arithmetic circuitry</link>:
+  This cost Intel nearly <emphasis>half a billion</emphasis> dollars, 
+  <link url="http://www.netfunny.com/rhf/jokes/95q1/pentiumd3.html">lots</link> of
+  <link url="http://www.netfunny.com/rhf/jokes/94q4/pentiumd2.html">bad publicity</link>,
+  and it happened <emphasis>after</emphasis> intensive testing.
+  Might it have been possible to have a <emphasis>program</emphasis> try to
+  prove the chip's correctness or uncover an error, before casting
+  it in silicon?
+</para>
+
+
+
+<para id="para12">
+  Software and hardware companies are increasingly turning
+  to the use of automated proofs, rather than semi-haphazard testing,
+  to verify (parts of) large products correct.
+  However, it is a formidable task, 
+  and how to do this is also an active area of research.
+</para>
+
+
+
+</section> 
+
+
+<para id="para13">
+  There are of course many more examples;
+  one topical popular concern is verifying certain
+  security properties of electronic voting machines
+  (often provided by vendors who keep their
+  source software a proprietary secret).
+</para>
+
+<para id="para14">
+  Having proofs of correctness is not just comforting;
+  it allows us to save effort (less time testing,
+  and also able to make better optimizations),
+  and prevent recall of faulty products.
+  But: who decides a proof is correct  —
+  the employee with best SAT scores?!?
+  Is there some trusted way to verify proofs,
+  besides careful inspection by a skilled,
+  yet still error-prone, professional?
+</para>
+</section> 
+
+
+<para id="para15">
+  <quote display="inline" class="no-marks">Many highly intelligent people are poor thinkers.
+    Many people of average intelligence are skilled thinkers.
+    The power of the car is separate from the way the car is driven.</quote>
+  <cite><cite-title>Edward De Bono, consultant, writer, and speaker (1933- )</cite-title></cite>
+</para>
+
+</content>
+</document>

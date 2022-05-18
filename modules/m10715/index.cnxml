@@ -1,0 +1,577 @@
+<document xmlns="http://cnx.rice.edu/cnxml" xmlns:m="http://www.w3.org/1998/Math/MathML"> 
+ 
+<title>propositions</title> 
+<metadata xmlns:md="http://cnx.rice.edu/mdml">
+  <md:content-id>m10715</md:content-id>
+  <md:title>propositions</md:title>
+  <md:abstract>(Blank Abstract)</md:abstract>
+  <md:uuid>2e6285b9-2fd1-476a-a45e-288951f43fcf</md:uuid>
+</metadata>
+
+
+<content>
+
+<para id="para1">
+  Recall examples of where we'd like proofs:
+  <list id="list1">
+    <item>
+      WaterWorld
+      (Is a certain location guaranteed safe?)
+    </item>
+    <item>
+      type checking
+      (Does a program call functions in the proper way?)
+    </item>
+    <item>
+      circuit verification
+      (Does a circuit always work as advertised?)
+    </item>
+  </list>
+  After seeing the reasons why proofs are important,
+  we ended with a call for first needing a precise language
+  for writing down statements without the ambiguity of English.
+</para>
+
+<para id="para2">
+  <note id="id1170143505976" type="aside">
+    Might a programming language be a good way to specify
+    formal concepts without ambiguity?
+    Programming languages are usually motivated by specifying
+    <emphasis>how</emphasis> to do something (implementation),
+    rather than formally specifying
+    <emphasis>what</emphasis> is being done (interface).
+    While there is a deep relation between these two,
+    logic is more appropriate for specifying the “what”.
+  </note>
+</para>
+
+<section id="section1">
+<title>A formal vocabulary</title>
+
+<para id="para3">
+  Imagine an offer where, for a mere $6.99, you can get:
+  <quote display="inline" class="no-marks"><m:math><m:ci>EE</m:ci></m:math>, (<m:math><m:ci>FF</m:ci></m:math> or <m:math><m:ci>CF</m:ci></m:math> or
+    <m:math><m:ci>OB</m:ci></m:math> or <m:math><m:ci>HB</m:ci></m:math>) or <m:math><m:ci>CC</m:ci></m:math> and
+    <m:math><m:ci>PH</m:ci></m:math> and <m:math><m:ci>BR</m:ci></m:math> and <m:math><m:ci>GR</m:ci></m:math> or
+    <m:math><m:ci>WB</m:ci></m:math> and <m:math><m:ci>PJ</m:ci></m:math>.  
+    Some fine print clarifies for us that <m:math><m:ci>BR</m:ci></m:math> includes
+    <m:math><m:ci>T</m:ci></m:math>
+    (<m:math><m:ci>Whi</m:ci></m:math>, <m:math><m:ci>Whe</m:ci></m:math>, <m:math><m:ci>Ra</m:ci></m:math>, or
+    <m:math><m:ci>Hb</m:ci></m:math>), <m:math><m:ci>FT</m:ci></m:math>, <m:math><m:ci>HM</m:ci></m:math> (<m:math><m:ci>Bb</m:ci></m:math>,
+    <m:math><m:ci>Ba</m:ci></m:math>, or <m:math><m:ci>Ca</m:ci></m:math>), <m:math><m:ci>EM</m:ci></m:math>, <m:math><m:ci>B</m:ci></m:math>
+    with <m:math><m:ci>CrCh</m:ci></m:math>, <m:math><m:ci>BB</m:ci></m:math> (<m:math><m:ci>GR</m:ci></m:math> from 6-11am).</quote>
+  Unfortunately, it's not clear at all how the
+  “and” and “or”s relate.
+  Fundamentally, is “<m:math><m:ci>x</m:ci></m:math> and <m:math><m:ci>y</m:ci></m:math> or <m:math><m:ci>z</m:ci></m:math>”
+  meant to be interpreted as “(<m:math><m:ci>x</m:ci></m:math> and <m:math><m:ci>y</m:ci></m:math>) or <m:math><m:ci>z</m:ci></m:math>”,
+  or as “<m:math><m:ci>x</m:ci></m:math> and (<m:math><m:ci>y</m:ci></m:math> or <m:math><m:ci>z</m:ci></m:math>)”?
+  With some context, we might be able to divine what the author intended:
+  the above offer is the direct translation from the menu of a
+  <link url="http://www.houseofpies.com/Breakfast.html">local diner</link>:
+  <quote display="inline" class="no-marks">2 eggs, potatoes (french fries, cottage fries, O'Brien or hashed
+    brown) or cottage cheese and peach half (grits before 11am) and
+    choice of bread with gravy or whipped butter and premium jam.
+    Bread choices include toast (white, wheat ,raisin or herb), hot flour
+    tortillas, homemade muffin (blueberry, banana or carrot), English
+    muffin, bagel with cream cheese, homemade buttermilk
+    biscuits. Grits available from 6:00am to 11:00am.</quote>
+  (In a brazen display of understatement,
+   this meal was called “Eggs Alone”.)
+  Even given context, this offer still isn't necessarily clear to everybody:
+  can I get both french fries and a peach half?
+  Happily, coffee is available before having to decipher the menu.
+  
+  In this example, parentheses would have clarified how we should
+  interpret “and”, “or”.
+  
+  But before we discuss how to connect statements,
+  we will consider the statements themselves.
+</para>
+
+<definition id="definition1">
+  <term>proposition</term>
+
+  <meaning id="id1170167784840">
+    A statement which can be either true or false.
+  </meaning>
+
+  <example id="example1">
+    <para id="para4">
+      “Your meal will include hashbrowns.”
+    </para>
+  </example>
+</definition>
+
+<definition id="definition2">
+  <term>propositional variable</term>
+
+  <meaning id="id1170155053024">
+    A variable that can either be true or false,
+    representing whether a certain proposition is true or not.
+  </meaning>
+
+  <example id="example2">
+    <para id="para5">
+      <m:math><m:ci>HB</m:ci></m:math>
+    </para>
+  </example>
+</definition>
+
+<para id="para6">
+  We will often refer to “propositional variables” as just plain 
+  ol' “propositions”, since our purpose in studying logic
+  is to abstract away from individual statements
+  and encapsulate them in a single variable,
+  thereon only studying how to work with the variable.
+</para>
+
+<para id="para7">
+  For a proposition or propositional variable <m:math><m:ci>X</m:ci></m:math>,
+  rather than write “<m:math><m:ci>X</m:ci></m:math> is true”,
+  it is more succinct to simply write “<m:math><m:ci>X</m:ci></m:math>”.
+  Likewise, “<m:math><m:ci>X</m:ci></m:math> is false” is indicated as
+  “<m:math><m:apply><m:not/><m:ci>X</m:ci></m:apply></m:math>”.
+  <note id="id1170162844645" type="aside">
+    Compare this with Boolean variables in a programming language.
+    Rather than <code display="inline">(x == true)</code> 
+    or <code display="inline">(x == false)</code>, 
+    it's idiomatic to instead write 
+    <code display="inline">x</code> or <code display="inline">!x</code>.
+  </note>
+</para>
+
+<para id="para8">Observe that not all English sentences are propositions,
+  since they aren't true/false issues.
+  Which of the following do you think might qualify
+  as propositions?
+  If not, how might you phrase similar statements that are propositions?
+  
+  <list id="list2">
+    <item>
+      “Crocodiles are smaller than Alligators.”
+    </item>
+    
+    <item>
+      “What time is it?”
+    </item>
+    <item>
+      “Pass the salt, please.”
+    </item>
+    <item>
+      “Hopefully, the Rice Owls will win tomorrow's game.”
+    </item>
+    <item>
+      “Mr. Burns is filthy rich.”
+    </item>
+    
+    <item>
+      “Fresca® is the bee's knees.”
+    </item>
+  </list>
+</para>
+
+
+<section id="section2">
+<title>A particular vocabulary for WaterWorld</title>
+
+<para id="para9">
+  When playing WaterWorld, what particular propositions are involved?
+  To consider this, we think of a generic board, and
+  wonder what the underlying statements are.
+  They are statements like
+  “location <m:math><m:ci>A</m:ci></m:math> contains a pirate”
+  (“<m:math><m:ci>A-unsafe</m:ci></m:math>”), 
+  “location <m:math><m:ci>G</m:ci></m:math> has 2 adjacent pirates”
+  (“<m:math><m:ci>G-has-2</m:ci></m:math>”)
+  and so on.
+  Each of these statements may be true or false,
+  depending on the particular board in question.
+</para>
+
+<para id="para10">
+  Here are
+  <link document="m10528">all the WaterWorld propositions</link>
+  that we'll use.
+</para>
+
+<para id="para11">
+  Remember that <m:math><m:ci>B-unsafe</m:ci></m:math> doesn't mean
+  “I'm not sure whether or not <m:math><m:ci>B</m:ci></m:math> is safe”;
+  rather it means “<m:math><m:ci>B</m:ci></m:math> is unsafe” —
+  it contains a pirate.
+  You may not be sure whether 
+  (the truth of) this proposition follows what you see,
+  but in any given board the variable has one of two values, <m:math><m:true/></m:math> or <m:math><m:false/></m:math>.
+</para>
+
+<para id="para12">
+  Every WaterWorld board has the same set of
+  propositions to describe it:  <m:math><m:ci>A-unsafe</m:ci></m:math>, <m:math><m:ci>B-has-2</m:ci></m:math>, <foreign>etc.</foreign>
+  However, different boards
+  will have different underlying values of those propositions.
+</para>
+
+</section> 
+
+
+<section id="connectives">
+<title>Connectives</title>
+
+<para id="para13">
+  Some statements in the above proof were simple,
+  <foreign>e.g.</foreign>, the single proposition “<m:math><m:ci>A-has-2</m:ci></m:math>”.
+  Some statements had several parts, though, <foreign>e.g.</foreign>,
+  “(<m:math><m:ci>F-unsafe</m:ci></m:math> and <m:math><m:ci>G-unsafe</m:ci></m:math>)”.
+  We build these more complicated statements out of propositions.
+  If you know both <m:math><m:ci>F-unsafe</m:ci></m:math> is false, and <m:math><m:ci>G-unsafe</m:ci></m:math> is false,
+  what can you deduce about the truth of the statement
+  “(<m:math><m:ci>F-unsafe</m:ci></m:math> and <m:math><m:ci>G-unsafe</m:ci></m:math>)”?
+  Clearly, it is also false.
+  What about when <m:math><m:ci>F-unsafe</m:ci></m:math> is false, but <m:math><m:ci>G-unsafe</m:ci></m:math> is true?
+  What about when both propositions are true?
+  In fact, we can fill in the following table:
+</para>
+
+<table id="table1" summary="">
+<title>Truth table for ∧ (AND)</title>
+<tgroup cols="3">
+<thead><row><entry><m:math><m:ci>a</m:ci></m:math></entry><entry><m:math><m:ci>b</m:ci></m:math></entry><entry><m:math><m:mrow><m:mo>(</m:mo><m:ci>a</m:ci><m:mo>∧</m:mo><m:ci>b</m:ci><m:mo>)</m:mo></m:mrow></m:math></entry></row></thead>
+<tbody><row><entry><m:math><m:false/></m:math></entry><entry><m:math><m:false/></m:math></entry><entry><m:math><m:false/></m:math></entry></row>
+<row><entry><m:math><m:false/></m:math></entry><entry><m:math><m:true/></m:math></entry><entry><m:math><m:false/></m:math></entry></row>
+<row><entry><m:math><m:true/></m:math></entry><entry><m:math><m:false/></m:math></entry><entry><m:math><m:false/></m:math></entry></row>
+<row><entry><m:math><m:true/></m:math></entry><entry><m:math><m:true/></m:math></entry><entry><m:math><m:true/></m:math></entry></row></tbody>
+</tgroup>
+</table>
+
+<definition id="truth-table">
+  <term>truth table</term> 
+
+  <meaning id="id1170161011043">
+    A truth table for an expression has a column for each of its
+    propositional variables.
+    It has a row for each different <m:math><m:true/></m:math>/<m:math><m:false/></m:math> combination of
+    its propositional variables.
+    It has one more column for the expression itself, showing the
+    truth of the entire expression for that row.
+  </meaning>
+</definition>
+
+<exercise id="exercise1">
+  <problem id="id1170149671561">
+    <para id="para14">
+      What do you think the truth table for
+      “<m:math><m:ci>a</m:ci></m:math> or <m:math><m:ci>b</m:ci></m:math>” looks like?
+      Hint: To fill out one row of the table,
+      say, for
+      <m:math><m:apply><m:eq/><m:ci>a</m:ci> <m:true/></m:apply></m:math> and
+      <m:math><m:apply><m:eq/><m:ci>b</m:ci> <m:false/></m:apply></m:math>, ask yourself
+      “For this row, is it true that (<m:math><m:ci>a</m:ci></m:math> is true, or <m:math><m:ci>b</m:ci></m:math> is true)?”
+    </para>
+  </problem>
+
+  <solution id="id1170153199446">
+    <table id="table2" summary="">
+<title>Truth table for ∨ (OR)</title>
+<tgroup cols="3">
+<thead><row><entry><m:math><m:ci>a</m:ci></m:math></entry><entry><m:math><m:ci>b</m:ci></m:math></entry><entry><m:math><m:mrow><m:mo>(</m:mo><m:ci>a</m:ci><m:mo>∨</m:mo><m:ci>b</m:ci><m:mo>)</m:mo></m:mrow></m:math></entry></row></thead>
+<tbody><row><entry><m:math><m:false/></m:math></entry><entry><m:math><m:false/></m:math></entry><entry><m:math><m:false/></m:math></entry></row>
+<row><entry><m:math><m:false/></m:math></entry><entry><m:math><m:true/></m:math></entry><entry><m:math><m:true/></m:math></entry></row>
+<row><entry><m:math><m:true/></m:math></entry><entry><m:math><m:false/></m:math></entry><entry><m:math><m:true/></m:math></entry></row>
+<row><entry><m:math><m:true/></m:math></entry><entry><m:math><m:true/></m:math></entry><entry><m:math><m:true/></m:math></entry></row></tbody>
+</tgroup>
+</table>
+  </solution>
+</exercise>
+
+<exercise id="exercise2">
+  <problem id="id1170152984045">
+    <para id="para15">
+      The above proof
+      also used subexpressions of the form “not <m:math><m:ci>b</m:ci></m:math>-unsafe”.
+      What is the truth table for “not <m:math><m:ci>a</m:ci></m:math>”?
+    </para>
+  </problem>
+
+  <solution id="id1170148587550">
+    <table id="table3" summary="">
+<title>Truth table for ¬ (NOT)</title>
+<tgroup cols="2">
+<thead><row><entry><m:math><m:ci>a</m:ci></m:math></entry><entry><m:math><m:mrow><m:mo>¬</m:mo><m:ci>a</m:ci></m:mrow></m:math></entry></row></thead>
+<tbody><row><entry><m:math><m:false/></m:math></entry><entry><m:math><m:true/></m:math></entry></row>
+<row><entry><m:math><m:true/></m:math></entry><entry><m:math><m:false/></m:math></entry></row></tbody>
+</tgroup>
+</table>
+  </solution>
+</exercise>
+
+<exercise id="exercise3">
+  <problem id="id1170149398206">
+    <para id="para16">
+      What is the truth table for the expression
+      “(not <m:math><m:ci>a</m:ci></m:math>) or <m:math><m:ci>b</m:ci></m:math>”?
+    </para>
+  </problem>
+
+  <solution id="id1170143278199">
+    <table id="table4" summary="">
+<title>Truth table for ⇒ (IMPLIES)</title>
+<tgroup cols="3">
+<thead><row><entry><m:math><m:ci>a</m:ci></m:math></entry><entry><m:math><m:ci>b</m:ci></m:math></entry><entry><m:math><m:mrow><m:mo>(</m:mo><m:ci>a</m:ci><m:mo>⇒</m:mo><m:ci>b</m:ci><m:mo>)</m:mo></m:mrow></m:math></entry></row></thead>
+<tbody><row><entry><m:math><m:false/></m:math></entry><entry><m:math><m:false/></m:math></entry><entry><m:math><m:true/></m:math></entry></row>
+<row><entry><m:math><m:false/></m:math></entry><entry><m:math><m:true/></m:math></entry><entry><m:math><m:true/></m:math></entry></row>
+<row><entry><m:math><m:true/></m:math></entry><entry><m:math><m:false/></m:math></entry><entry><m:math><m:false/></m:math></entry></row>
+<row><entry><m:math><m:true/></m:math></entry><entry><m:math><m:true/></m:math></entry><entry><m:math><m:true/></m:math></entry></row></tbody>
+</tgroup>
+</table>
+  </solution>
+</exercise>
+
+<definition id="definition4">
+  <term>connective</term>
+
+  <meaning id="id1170149495815">
+    The syntactic operator combining one or more logical expressions into
+    a larger expression.
+  </meaning>
+
+  <example id="example3">
+    <para id="para17">
+      Two operators are <m:math><m:mo>∧</m:mo></m:math> and <m:math><m:mo>∨</m:mo></m:math>.
+    </para>
+  </example>
+
+  <meaning id="id1170148483934">
+    A function with one or more Boolean inputs and a Boolean result.
+    <foreign>I.e.</foreign>, the meaning of a syntactic operator.
+  </meaning>
+
+  <example id="example4">
+    <para id="para18">
+      The meaning of <m:math><m:mo>∧</m:mo></m:math> and <m:math><m:mo>∨</m:mo></m:math>, <foreign>e.g.</foreign>,
+      as described by their truth tables.
+    </para>
+  </example>
+
+  <example id="nand">
+    <para id="para19">
+      <term>nand</term> (mnemonic: “not and”), written <m:math><m:mo>↑</m:mo></m:math>,
+      takes in two Boolean values <m:math><m:ci>a</m:ci></m:math> and <m:math><m:ci>b</m:ci></m:math>,
+      and returns true exactly when <m:math><m:apply><m:and/><m:ci>a</m:ci> <m:ci>b</m:ci></m:apply></m:math> is
+      <emphasis>not</emphasis> true  — that is,
+      <m:math><m:apply><m:equivalent/>
+        <m:apply><m:mo>↑</m:mo> <m:ci>a</m:ci> <m:ci>b</m:ci></m:apply>
+        <m:apply><m:not/><m:apply><m:and/><m:ci>a</m:ci> <m:ci>b</m:ci></m:apply></m:apply>
+      </m:apply></m:math>.
+    </para>
+  </example>
+</definition>
+
+<para id="para20">
+  The following are the connectives we will use most often.
+  At least some of these should already be familiar from
+  Boolean conditional expressions.
+</para>
+
+<table id="table5" summary="">
+<title>Connectives</title>
+<tgroup cols="4">
+<thead><row>
+      <entry> Connective </entry>
+      <entry> Pronunciation </entry>
+      <entry> Meaning </entry>
+      <entry> Alternative pronunciations / notations </entry>
+    </row></thead>
+<tbody><row>
+      <entry> <m:math><m:mo>¬</m:mo></m:math> </entry>
+      <entry> not </entry>
+      <entry> <m:math><m:apply><m:not/><m:ci>a</m:ci></m:apply></m:math>:
+              <m:math><m:ci>a</m:ci></m:math> is false </entry>
+      <entry> -<m:math><m:ci>a</m:ci></m:math>;
+              !<m:math><m:ci>a</m:ci></m:math> </entry>
+    </row>
+<row>
+      <entry> <m:math><m:mo>∧</m:mo></m:math> </entry>
+      <entry> and </entry>
+      <entry> <m:math><m:apply><m:and/><m:ci>a</m:ci> <m:ci>b</m:ci></m:apply>
+              <m:ci>a</m:ci></m:math> and <m:math><m:ci>b</m:ci></m:math> are both true </entry>
+      <entry> <m:math><m:ci>a</m:ci></m:math>*<m:math><m:ci>b</m:ci></m:math>;
+              <m:math><m:ci>a</m:ci><m:ci>b</m:ci></m:math>;
+              <m:math><m:ci>a</m:ci></m:math>&amp;&amp;<m:math><m:ci>b</m:ci></m:math>;
+              <m:math><m:ci>a</m:ci></m:math>&amp;<m:math><m:ci>b</m:ci></m:math> </entry>
+    </row>
+<row>
+      <entry> <m:math><m:mo>∨</m:mo></m:math> </entry>
+      <entry> or </entry>
+      <entry> <m:math><m:apply><m:or/><m:ci>a</m:ci> <m:ci>b</m:ci></m:apply></m:math>:
+              at least one of
+              <m:math><m:set><m:ci>a</m:ci> <m:ci>b</m:ci></m:set></m:math> is true </entry>
+      <entry> <m:math><m:ci>a</m:ci></m:math>+<m:math><m:ci>b</m:ci></m:math>;
+              <m:math><m:ci>a</m:ci></m:math>||<m:math><m:ci>b</m:ci></m:math>;
+              <m:math><m:ci>a</m:ci></m:math>|<m:math><m:ci>b</m:ci></m:math>
+              </entry>
+    </row>
+<row>
+      <entry> <m:math><m:mo>⇒</m:mo></m:math> </entry>
+      <entry> implies </entry>
+      <entry> <m:math><m:apply><m:implies/><m:ci>a</m:ci> <m:ci>b</m:ci></m:apply></m:math>:
+              equivalent to
+              <m:math><m:apply><m:or/><m:apply><m:not/><m:ci>a</m:ci></m:apply><m:ci>b</m:ci></m:apply></m:math>
+      </entry>
+      <entry> <m:math><m:ci>a</m:ci></m:math>→<m:math><m:ci>b</m:ci></m:math>;
+              <m:math><m:ci>a</m:ci></m:math>⊃<m:math><m:ci>b</m:ci></m:math>;
+              if <m:math><m:ci>a</m:ci></m:math> then <m:math><m:ci>b</m:ci></m:math>;
+              <m:math><m:ci>a</m:ci></m:math> only if <m:math><m:ci>b</m:ci></m:math>;
+              <m:math><m:ci>b</m:ci></m:math> if <m:math><m:ci>a</m:ci></m:math>;
+              <m:math><m:ci>b</m:ci></m:math> is necessary for <m:math><m:ci>a</m:ci></m:math>;
+              <m:math><m:ci>a</m:ci></m:math> is sufficient for <m:math><m:ci>b</m:ci></m:math> </entry> 
+    </row></tbody>
+</tgroup>
+</table>
+
+<para id="para21">
+  Many other connectives can also be defined.
+  In fact, it turns out that
+  any connective for propositional logic can be defined
+  in terms of those above.
+</para> 
+
+<example id="iff">
+  <para id="para22">
+    Another connective is <term>if-and-only-if</term> or <term>iff</term>,
+    written as
+    <m:math><m:apply>
+      <m:mo>⇔</m:mo>
+      <m:ci>a</m:ci>
+      <m:ci>b</m:ci>
+    </m:apply></m:math>,
+    which is true when <m:math><m:ci>a</m:ci></m:math> and <m:math><m:ci>b</m:ci></m:math> have the same truth value.
+    So, as its name implies, it can be defined as
+    <m:math><m:apply>
+      <m:and/>
+      <m:apply><m:implies/><m:ci>a</m:ci><m:ci>b</m:ci></m:apply>
+      <m:apply><m:implies/><m:ci>b</m:ci><m:ci>a</m:ci></m:apply>
+    </m:apply></m:math>.
+    It is also commonly known as
+    “<m:math><m:ci>a</m:ci></m:math> is equivalent to <m:math><m:ci>b</m:ci></m:math>” and
+    “<m:math><m:ci>a</m:ci></m:math> is necessary and sufficient for <m:math><m:ci>b</m:ci></m:math>”.
+  </para>
+</example>
+
+<exercise id="xor">
+  <problem id="id1170143439113">
+    <para id="para23">
+      Another connective is “exactly-one-of”,
+      which is more traditionally
+      called <term>exclusive-or</term> or <term>xor</term>
+      (since it excludes both <m:math><m:ci>a</m:ci></m:math> and <m:math><m:ci>b</m:ci></m:math> holding, unlike the
+       traditional “inclusive” or.)
+      How would you define <m:math><m:ci>a</m:ci></m:math> “xor” <m:math><m:ci>b</m:ci></m:math>
+      in terms of the above connectives?
+    </para>
+  </problem>
+
+  <solution id="id1170162676958">
+    <para id="para24">
+      Exactly one is true if either (<m:math><m:ci>a</m:ci></m:math> is true, and <m:math><m:ci>b</m:ci></m:math> is false) or
+      (<m:math><m:ci>a</m:ci></m:math> is false, and <m:math><m:ci>b</m:ci></m:math> is true).  So, one way to define it is
+      <m:math><m:apply>
+        <m:equivalent/>
+        <m:apply>
+          <m:mo>⊕</m:mo>
+          <m:ci>a</m:ci>
+          <m:ci>b</m:ci>
+        </m:apply>
+        <m:apply>
+          <m:or/>
+          <m:apply><m:and/><m:ci>a</m:ci> <m:apply><m:not/><m:ci>b</m:ci></m:apply></m:apply>
+          <m:apply><m:and/><m:apply><m:not/><m:ci>a</m:ci></m:apply> <m:ci>b</m:ci></m:apply>
+        </m:apply>
+      </m:apply></m:math>.
+    </para>
+
+    <para id="para25">
+      The two halves of that formula also correspond to the two true
+      rows of xor's truth table:
+    </para>
+
+    <table id="table6" summary="">
+<title>Truth table for xor</title>
+<tgroup cols="3">
+<thead><row><entry><m:math><m:ci>a</m:ci></m:math></entry><entry><m:math><m:ci>b</m:ci></m:math></entry><entry><m:math><m:mrow><m:mo>(</m:mo><m:ci>a</m:ci><m:mo>⊕</m:mo><m:ci>b</m:ci><m:mo>)</m:mo></m:mrow></m:math></entry></row></thead>
+<tbody><row><entry><m:math><m:false/></m:math></entry><entry><m:math><m:false/></m:math></entry><entry><m:math><m:false/></m:math></entry></row>
+<row><entry><m:math><m:false/></m:math></entry><entry><m:math><m:true/></m:math></entry><entry><m:math><m:true/></m:math></entry></row>
+<row><entry><m:math><m:true/></m:math></entry><entry><m:math><m:false/></m:math></entry><entry><m:math><m:true/></m:math></entry></row>
+<row><entry><m:math><m:true/></m:math></entry><entry><m:math><m:true/></m:math></entry><entry><m:math><m:false/></m:math></entry></row></tbody>
+</tgroup>
+</table>
+  </solution>
+</exercise>
+
+<para id="para26">
+  Note that the conventional <m:math><m:apply><m:or/><m:ci>a</m:ci><m:ci>b</m:ci></m:apply></m:math>
+  is sometimes called
+  <term>inclusive-or</term>, to stress that it includes the case
+  where both <m:math><m:ci>a</m:ci></m:math> and <m:math><m:ci>b</m:ci></m:math> hold.
+</para>
+
+<para id="para27">
+  In English, the word “or” may sometimes
+  mean inclusive-or, and other times mean exclusive-or, depending
+  on context.
+  Sometimes the term “and/or” is used
+  to emphasize that the inclusive-or really is intended.
+</para>
+
+<exercise id="exercise5">
+<problem id="id1170152074864">
+    <para id="para28">
+      For each of the following English sentences, 
+      does “or”
+      mean inclusive-or or exclusive-or?
+    </para>
+  
+<list id="list3" list-type="enumerated">
+<item>
+      “Whether you are tired or lazy,
+        caffeine is just the drug for you!”
+    </item>
+<item>
+      “Whether you win a dollar or lose a dollar,
+        the difference in your net worth will be noticed.”
+    </item>
+<item>
+      “If you own a house or a car, then
+        you have to pay property tax.”
+    </item>
+<item>
+      “Give me your lunch money, or you'll never see your precious
+        <link url="http://www.niftycool.com/hotawhoma.html">hoppy taw</link> again!”
+    </item>
+</list>
+</problem>
+
+<solution id="id1170150966903">
+<list id="list4" list-type="enumerated">
+<item>
+      Inclusive.
+    </item>
+<item>
+       Exclusive.
+    </item>
+<item>
+      Inclusive.
+    </item>
+<item>
+      Exclusive (hopefully).
+    </item>
+</list>
+</solution>
+</exercise>
+
+
+</section> 
+
+</section> 
+
+</content>
+</document>

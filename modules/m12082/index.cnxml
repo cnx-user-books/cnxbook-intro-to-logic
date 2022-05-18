@@ -1,0 +1,60 @@
+<document xmlns="http://cnx.rice.edu/cnxml" xmlns:m="http://www.w3.org/1998/Math/MathML" xmlns:md="http://cnx.rice.edu/mdml">
+
+<title>First-Order Logic: normal forms, revisited</title>
+<metadata><md:content-id>undefined</md:content-id><md:title/><md:uuid>68370842-65ab-408e-bbf6-a269a58bbc03</md:uuid>
+</metadata>
+
+
+<content>
+
+<section id="section1">
+<title>CNF and DNF revisited (Optional)</title>
+
+<para id="para1">
+In first-order logic, normal forms are still useful for providing
+a notion of a canonical form.  However, their other benefit of
+corresponding closely to truth tables does not apply here, since
+truth tables aren't useful for first-order logic.
+</para>
+
+<para id="para2">
+A formula in <term>Prenex Conjunctive Normal Form</term>,
+or <term>Prenex CNF</term>, has a body in CNF preceded by a series
+of quantifiers.
+Similarly,
+a formula in <term>Prenex Disjunctive Normal Form</term>,
+or <term>Prenex DNF</term>, has a body in DNF preceded by a series
+of quantifiers.
+</para>
+
+<example id="example1">
+  <para id="para3">
+  Assuming <m:math><m:ci>φ</m:ci></m:math> is in CNF, then the following are each in prenex CNF.
+  On the other hand, if <m:math><m:ci>φ</m:ci></m:math> is in DNF, these are in prenex DNF.
+  <list id="list1">
+    <item> <m:math><m:ci>φ</m:ci></m:math>
+    </item>
+    <item> <m:math><m:mo>∀</m:mo><m:ci>x</m:ci><m:mtext>.</m:mtext> <m:ci>φ</m:ci></m:math> 
+    </item>
+    <item> <m:math><m:mo>∃</m:mo><m:ci>x</m:ci><m:mtext>.</m:mtext>
+              <m:mo>∀</m:mo><m:ci>y</m:ci><m:mtext>.</m:mtext>
+                 <m:mo>∃</m:mo><m:ci>z</m:ci><m:mtext>.</m:mtext>
+                    <m:ci>φ</m:ci></m:math>
+                 
+              
+           
+    </item>
+  </list>
+  </para>
+</example>
+
+<para id="para4">
+Every formula has an equivalent prenex CNF formula and
+equivalent prenex CNF formula.
+For brevity, we'll skip proving this.
+</para>
+
+</section>
+
+</content>
+</document>

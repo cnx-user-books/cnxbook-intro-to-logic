@@ -1,0 +1,384 @@
+<document xmlns="http://cnx.rice.edu/cnxml" xmlns:m="http://www.w3.org/1998/Math/MathML" xmlns:md="http://cnx.rice.edu/mdml">
+
+<title>interpretations</title>
+
+<metadata>
+  <md:content-id>m10726</md:content-id><md:title>interpretations</md:title>
+  <md:abstract>Interpretations map relation-symbols to an actual relation.</md:abstract>
+  <md:uuid>052a7f1c-48b2-4801-92eb-c19857f043e2</md:uuid>
+</metadata>
+
+<content>
+
+
+<section id="section1">
+<title>Needing Interpretations to Evaluate Formulas</title>
+
+<para id="para1">
+  You might have noticed something funny:
+  we said
+  <m:math><m:apply>
+    <m:ci type="fn">safe</m:ci>
+    <m:ci>a</m:ci>
+  </m:apply></m:math>
+  depended on the board, but that
+  <m:math><m:apply>
+    <m:ci type="fn">prime</m:ci>
+    <m:cn>18</m:cn>
+  </m:apply></m:math>
+  was false.
+  Why are some some relations different than others?
+  To add to the puzzling, there was a caveat in some fine-print
+  from the previous section:
+  <quote display="inline">
+    <m:math><m:apply>
+      <m:ci type="fn">prime</m:ci>
+      <m:cn>18</m:cn>
+    </m:apply></m:math>
+    is false 
+    <emphasis>under the standard interpretation of prime</emphasis>
+  </quote>.
+  Why these weasel-words?  Everybody knows what prime is, don't they?
+  Well, if our domain is matrices of integers (instead of just integers),
+  we might suddenly want a different idea
+  <quote display="inline">prime</quote>.
+</para>
+
+
+<para id="para2">
+  Consider the formula
+  <m:math><m:apply><m:ci type="fn">E</m:ci> <m:ci>x</m:ci> <m:ci>x</m:ci></m:apply></m:math>
+  true for all <m:math><m:ci>x</m:ci></m:math> in a domain?
+  Well, it depends not only on the domain,
+  but also on the specific binary relation <m:math><m:ci type="fn">E</m:ci></m:math> 
+  actually stands for:
+  <list id="list1">
+    <item>
+      for the domain of integers where 
+      <m:math><m:ci type="fn">E</m:ci></m:math> is interpreted as
+      <quote display="inline">both are even numbers</quote>,
+      <m:math><m:apply>
+        <m:ci type="fn">E</m:ci>
+        <m:ci>x</m:ci>
+        <m:ci>x</m:ci>
+      </m:apply></m:math>
+      is false for some <m:math><m:ci>x</m:ci></m:math>.  
+    </item>
+    <item>
+      for the domain 
+      <m:math>
+        <m:set>
+          <m:cn>2</m:cn>
+          <m:cn>4</m:cn>
+          <m:cn>6</m:cn>
+          <m:cn>8</m:cn>
+        </m:set>
+      </m:math>
+      where <m:math><m:ci type="fn">E</m:ci></m:math> is interpreted as
+      <quote display="inline">sum to an even number</quote>, 
+      <m:math><m:apply><m:ci type="fn">E</m:ci> <m:ci>x</m:ci> <m:ci>x</m:ci></m:apply></m:math>
+      is true for every <m:math><m:ci>x</m:ci></m:math>.  
+    </item>
+    <item>
+      for the domain of integers where 
+      <m:math><m:ci type="fn">E</m:ci></m:math> is interpreted as
+      <quote display="inline">greater than</quote>,
+      <m:math><m:apply><m:ci type="fn">E</m:ci> <m:ci>x</m:ci> <m:ci>x</m:ci></m:apply></m:math>
+      is false for some <m:math><m:ci>x</m:ci></m:math>
+      (indeed, it's false for <emphasis>every</emphasis> <m:math><m:ci>x</m:ci></m:math>).  
+    </item>
+    <item>
+      for the domain of people where 
+      <m:math><m:ci type="fn">E</m:ci></m:math> is interpreted as 
+      <quote display="inline">is at least as tall as</quote>, 
+      <m:math><m:apply><m:ci type="fn">E</m:ci> <m:ci>x</m:ci> <m:ci>x</m:ci></m:apply></m:math>
+      is true for every <m:math><m:ci>x</m:ci></m:math>.  
+    </item>
+  </list>
+</para>
+
+<para id="para3">
+  Thus a formula's truth depends on the interpretation of
+  the (syntactic, meaning-free) relation symbols in the formula.
+
+  <definition id="definition1">
+    <term>Interpretation</term>
+    <meaning id="imp-id26437050">
+      The interpretation of a formula is a domain, together with a mapping
+      from the formula's relation symbols to specific relations
+      on the domain.
+    </meaning>
+  </definition>
+
+  One analogy is
+  <quote display="inline">
+    Programs are to data, as formulas are to interpretations
+  </quote>.
+  (In particular, the formula is a like a boolean function:
+   it takes its input (interpretation), and returns <m:math><m:true/></m:math> or <m:math><m:false/></m:math>.)
+</para>
+
+
+<section id="section2">
+<title>Using Truth Tables to Summarize Interpretations (Optional)</title>
+
+<para id="para4">
+  Consider the formula
+  <m:math><m:apply><m:eq/>
+    <m:ci>ϕ</m:ci>
+    <m:apply><m:implies/>
+      <m:apply>
+        <m:ci type="fn">R</m:ci>
+        <m:ci>x</m:ci>
+        <m:ci>y</m:ci>
+      </m:apply>
+      <m:apply><m:and/>
+        <m:apply>
+          <m:ci type="fn">S</m:ci><m:ci>x</m:ci>
+          <m:ci>y</m:ci>
+        </m:apply>
+        <m:apply><m:not/>
+          <m:apply>
+            <m:ci type="fn">T</m:ci>
+            <m:ci>x</m:ci>
+            <m:ci>y</m:ci>
+          </m:apply>
+        </m:apply>
+      </m:apply>
+    </m:apply>
+  </m:apply></m:math>.
+  As yet, we haven't said anything about the interpretations of these
+  three relations.  But, we do know that each of
+  <m:math><m:apply><m:ci type="fn">R</m:ci><m:ci>x</m:ci> <m:ci>y</m:ci></m:apply></m:math>,
+  <m:math><m:apply><m:ci type="fn">S</m:ci><m:ci>x</m:ci> <m:ci>y</m:ci></m:apply></m:math>, and
+  <m:math><m:apply><m:ci type="fn">T</m:ci><m:ci>x</m:ci> <m:ci>y</m:ci></m:apply></m:math>
+  can either be true or false.  Thus, treating each of those as a
+  proposition, we can describe the formula's
+  truth under different interpretations.
+</para>
+
+<table id="truth-table-interpretations" summary="Truth table for the example formula">
+
+<tgroup cols="4">
+<thead><row>
+        <entry>
+          <m:math><m:apply>
+            <m:ci type="fn">R</m:ci>
+            <m:ci>x</m:ci>
+            <m:ci>y</m:ci>
+          </m:apply></m:math>
+        </entry>
+        <entry>
+          <m:math><m:apply>
+            <m:ci type="fn">S</m:ci>
+            <m:ci>x</m:ci>
+            <m:ci>y</m:ci>
+          </m:apply></m:math>
+        </entry>
+        <entry>
+          <m:math><m:apply>
+            <m:ci type="fn">R</m:ci>
+            <m:ci>x</m:ci>
+            <m:ci>y</m:ci>
+          </m:apply></m:math>
+        </entry>
+        <entry>
+          ϕ
+        </entry>
+      </row></thead>
+<tbody><row>
+        <entry><m:math><m:false/></m:math></entry>
+        <entry><m:math><m:false/></m:math></entry>
+        <entry><m:math><m:false/></m:math></entry>
+        <entry><m:math><m:true/></m:math></entry>
+      </row>
+<row>
+        <entry><m:math><m:false/></m:math></entry>
+        <entry><m:math><m:false/></m:math></entry>
+        <entry><m:math><m:true/></m:math></entry>
+        <entry><m:math><m:true/></m:math></entry>
+      </row>
+<row>
+        <entry><m:math><m:false/></m:math></entry>
+        <entry><m:math><m:true/></m:math></entry>
+        <entry><m:math><m:false/></m:math></entry>
+        <entry><m:math><m:true/></m:math></entry>
+      </row>
+<row>
+        <entry><m:math><m:false/></m:math></entry>
+        <entry><m:math><m:true/></m:math></entry>
+        <entry><m:math><m:true/></m:math></entry>
+        <entry><m:math><m:true/></m:math></entry>
+      </row>
+<row>
+        <entry><m:math><m:true/></m:math></entry>
+        <entry><m:math><m:false/></m:math></entry>
+        <entry><m:math><m:false/></m:math></entry>
+        <entry><m:math><m:false/></m:math></entry>
+      </row>
+<row>
+        <entry><m:math><m:true/></m:math></entry>
+        <entry><m:math><m:false/></m:math></entry>
+        <entry><m:math><m:true/></m:math></entry>
+        <entry><m:math><m:false/></m:math></entry>
+      </row>
+<row>
+        <entry><m:math><m:true/></m:math></entry>
+        <entry><m:math><m:true/></m:math></entry>
+        <entry><m:math><m:false/></m:math></entry>
+        <entry><m:math><m:true/></m:math> </entry>
+      </row>
+<row>
+        <entry><m:math><m:true/></m:math></entry>
+        <entry><m:math><m:true/></m:math></entry>
+        <entry><m:math><m:true/></m:math></entry>
+        <entry><m:math><m:false/></m:math></entry>
+      </row></tbody>
+</tgroup>
+</table>
+
+
+
+</section>
+
+
+<section id="section3">
+<title>Using Formulas to Classify Interpretations (Optional)</title>
+
+<para id="para5">
+  In
+  <link document="m10726" target-id="non-standard-interp">the previous section</link>,
+  having a formula was rather useless until we had a particular
+  interpretation for it.
+  But we can view that same idea backwards:
+  Given a formula, what are all the interpretations for which
+  the formula is true?
+</para>
+
+<para id="para6">
+  For instance, consider a formula expressing that an array
+  is sorted ascendingly:
+  For all numbers <m:math><m:ci>i</m:ci></m:math>,<m:math><m:ci>j</m:ci></m:math>,
+  <m:math><m:apply><m:implies/>
+    <m:apply><m:lt/> <m:ci>i</m:ci> <m:ci>j</m:ci></m:apply>
+    <m:apply><m:leq/>
+      <m:apply><m:ci type="fn">element</m:ci><m:ci>i</m:ci></m:apply> 
+      <m:apply><m:ci type="fn">element</m:ci><m:ci>j</m:ci></m:apply>
+    </m:apply>
+  </m:apply></m:math>.
+  
+  
+  But if we now broaden our mind about what relations/functions
+  the symbols <m:math><m:ci type="fn">element</m:ci></m:math>,
+  <m:math><m:ci type="fn">&lt;</m:ci></m:math>, and
+  <m:math><m:ci type="fn">≤</m:ci></m:math> represent
+  and then wonder about the set of all structures/interpretations
+  which make this formula true,
+  we might find that our notion of sorting is broader than we first thought.
+  Or equivalently, we might decide that the notion
+  <quote display="inline">ascending</quote> 
+  applies to more structures than we first suspected.
+</para>
+
+<para id="para7">
+  Similarly, mathematicians create some formulas
+  about functions being associative, having an identity element, and such,
+  and then look at all structures which have those properties;
+  this is how they define notions such as groups, rings, fields, and
+  algebras.
+</para>
+
+
+</section>  
+
+
+
+<section id="section4">
+<title>Encoding Functions as Relations</title>
+
+<para id="para8">
+  What about adding functions, to our language, in addition to relations?
+  Well, functions are just a way of relating input(s) to an output.
+  For example, 3 and 9 are related by the square function,
+  as are 9 and 81, and 0,0.
+  Is any binary relation a function?
+  No, for instance
+  <m:math><m:set>
+    <m:mfenced><m:cn>9</m:cn> <m:cn>81</m:cn></m:mfenced>
+    <m:mfenced><m:cn>9</m:cn> <m:cn>17</m:cn></m:mfenced>
+  </m:set></m:math>
+  is not a function, because there is no <emphasis>unique</emphasis>
+  output related to the input 9.
+</para>
+
+<para id="para9">
+  How can we enforce uniqueness?
+  The following sentence asserts that for each element <m:math><m:ci>x</m:ci></m:math> of
+  the domain, <m:math><m:ci type="fn">R</m:ci></m:math>
+  associates at most one value with <m:math><m:ci>x</m:ci></m:math>:
+  For all <m:math><m:ci>x</m:ci></m:math>, <m:math><m:ci>y</m:ci></m:math> and <m:math><m:ci>z</m:ci></m:math> of the domain,
+  <equation id="equation1">
+    <m:math><m:apply><m:implies/>
+      <m:apply><m:and/>
+        <m:apply><m:ci type="fn">R</m:ci> <m:ci>x</m:ci> <m:ci>y</m:ci></m:apply>
+        <m:apply><m:ci type="fn">R</m:ci> <m:ci>x</m:ci> <m:ci>z</m:ci></m:apply>
+      </m:apply>
+    <m:apply><m:eq/><m:ci>y</m:ci><m:ci>z</m:ci></m:apply>
+    </m:apply></m:math>
+  </equation>
+  This is a common trick, for to describe uniqueness:
+  if <m:math><m:ci>y</m:ci></m:math> and <m:math><m:ci>z</m:ci></m:math> each have some property, then they must be equal.
+  (We have not yet specified that for every element of the domain,
+  there is <emphasis>at least</emphasis> one element associated with it;
+  we'll get to that later.)
+</para>
+
+<exercise id="exercise1">
+  <problem id="imp-id28605175">
+    <para id="para10">
+      We just used a binary relation to model a unary function.
+      Carry on this idea, by using a ternary relation to
+      start to model a binary function.
+      In particular, write a formula stating that
+      for every pair of elements <m:math><m:ci>w</m:ci></m:math>, <m:math><m:ci>x</m:ci></m:math> in the domain,
+      the relation <m:math><m:ci type="fn">S</m:ci></m:math>
+      associates at most one value with that pair.
+    </para>
+  </problem>
+
+  <solution id="imp-id27407172">
+    <para id="para11">
+      For all <m:math><m:ci>w</m:ci></m:math>, <m:math><m:ci>x</m:ci></m:math>, <m:math><m:ci>y</m:ci></m:math>,
+      and <m:math><m:ci>z</m:ci></m:math> of the domain,
+      <equation id="equation2">
+        <m:math><m:apply><m:implies/>
+          <m:apply><m:and/>
+            <m:apply>
+              <m:ci type="fn">S</m:ci>
+              <m:ci>w</m:ci>
+              <m:ci>x</m:ci>
+              <m:ci>y</m:ci>
+            </m:apply>
+            <m:apply>
+              <m:ci type="fn">S</m:ci>
+              <m:ci>w</m:ci>
+              <m:ci>x</m:ci>
+              <m:ci>z</m:ci>
+            </m:apply>
+          </m:apply>
+          <m:apply><m:eq/><m:ci>y</m:ci> <m:ci>z</m:ci> </m:apply>
+        </m:apply></m:math>
+      </equation>
+    </para>
+  </solution>
+</exercise>
+
+</section> 
+
+
+</section> 
+
+
+
+</content>
+</document>

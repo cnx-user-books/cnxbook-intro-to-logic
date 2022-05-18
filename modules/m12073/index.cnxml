@@ -1,0 +1,676 @@
+<document xmlns="http://cnx.rice.edu/cnxml" xmlns:m="http://www.w3.org/1998/Math/MathML" xmlns:md="http://cnx.rice.edu/mdml">
+ 
+<title>formulas</title>
+<metadata>
+  <md:content-id>m12073</md:content-id><md:title>formulas</md:title>
+  <md:abstract/>
+  <md:uuid>44ae23f3-d839-4f1a-a97f-0d1d278b157c</md:uuid>
+</metadata>
+
+
+<content>
+
+<section id="imp-id12992599">
+<title>Well-Formed Formulas</title>
+
+<para id="imp-id14359402">
+  If we want to develop complicated expressions about breakfast foods like
+  eggs, hashbrowns, and so on, we will want an exact grammar telling
+  us how to connect the propositions, what connections are allowed,
+  and when parentheses are necessary (if at all).
+  We will choose a grammar so that all our formulas are fully parenthesized:
+</para>
+
+
+<definition id="wff-defn">
+  <term>Well-Formed formula (WFF)</term>
+
+  <meaning id="imp-id6707428">
+    A constant: <m:math><m:true/></m:math> or <m:math><m:false/></m:math>.
+    (If you prefer brevity, you can write <quote display="inline">T</quote> or
+    <quote display="inline">F</quote>.)
+  </meaning>
+
+  <meaning id="imp-id9051238">
+    A propositional variable.
+  </meaning>
+  <example id="imp-id13048691">
+    <para id="imp-id14300984">
+      <m:math><m:ci>a</m:ci></m:math>
+    </para>
+  </example> 
+  <meaning id="imp-id13146795">
+    A negation
+    <m:math><m:apply><m:not/><m:ci>φ</m:ci></m:apply></m:math>,
+    where <m:math><m:ci>φ</m:ci></m:math> is a WFF.
+  </meaning>
+  <example id="imp-id14072136">
+    <para id="imp-id13054241">
+      <m:math><m:apply><m:not/><m:ci>c</m:ci></m:apply></m:math>
+    </para>
+  </example>
+
+  <meaning id="imp-id13192708">
+    A conjunction
+    <m:math><m:apply><m:and/><m:ci>φ</m:ci> <m:ci>ψ</m:ci></m:apply></m:math>,
+    where <m:math><m:ci>φ</m:ci></m:math> and <m:math><m:ci>ψ</m:ci></m:math> are WFFs.
+  </meaning>
+  <example id="imp-id13422912">
+    <para id="imp-id13192948">
+      <m:math><m:apply><m:and/><m:ci>a</m:ci> <m:apply><m:not/><m:ci>c</m:ci></m:apply></m:apply></m:math>
+    </para>
+  </example>
+
+  <meaning id="imp-id14300606">
+    A disjunction
+    <m:math><m:apply><m:or/><m:ci>φ</m:ci> <m:ci>ψ</m:ci></m:apply></m:math>,
+    where <m:math><m:ci>φ</m:ci></m:math> and <m:math><m:ci>ψ</m:ci></m:math> are WFFs.
+  </meaning>
+  <example id="imp-id14058853">
+    <para id="imp-id12999344">
+      <m:math><m:apply>
+        <m:or/>
+        <m:apply><m:not/><m:ci>c</m:ci></m:apply>
+        <m:apply><m:and/><m:ci>a</m:ci> <m:apply><m:not/><m:ci>c</m:ci></m:apply></m:apply>
+      </m:apply></m:math>,
+      or equivalently,
+      <m:math><m:apply>
+        <m:or/>
+        <m:mfenced>
+          <m:apply><m:not/><m:ci>c</m:ci></m:apply>
+        </m:mfenced>
+        <m:mfenced>
+          <m:apply><m:and/><m:ci>a</m:ci> <m:apply><m:not/><m:ci>c</m:ci></m:apply></m:apply>
+        </m:mfenced>
+      </m:apply></m:math>
+    </para>
+  </example>
+
+  <meaning id="imp-id13393902">
+    An implication
+    <m:math><m:apply><m:implies/><m:ci>φ</m:ci> <m:ci>ψ</m:ci></m:apply></m:math>,
+    where <m:math><m:ci>φ</m:ci></m:math> and <m:math><m:ci>ψ</m:ci></m:math> are WFFs.
+  </meaning>
+  <example id="imp-id13239584">
+    <para id="imp-id10071364">
+      <m:math><m:apply>
+        <m:implies/>
+        <m:apply>
+          <m:or/>
+          <m:apply><m:not/><m:ci>c</m:ci></m:apply>
+          <m:apply><m:and/><m:ci>a</m:ci> <m:apply><m:not/><m:ci>c</m:ci></m:apply></m:apply>
+        </m:apply>
+        <m:ci>b</m:ci>
+      </m:apply></m:math>,
+      or equivalently,
+      <m:math><m:apply>
+        <m:implies/>
+        <m:mfenced>
+          <m:apply>
+            <m:or/>
+            <m:mfenced>
+              <m:apply><m:not/><m:ci>c</m:ci></m:apply>
+            </m:mfenced>
+            <m:mfenced>
+              <m:apply><m:and/><m:ci>a</m:ci> <m:apply><m:not/><m:ci>c</m:ci></m:apply></m:apply>
+            </m:mfenced>
+          </m:apply>
+        </m:mfenced>
+        <m:ci>b</m:ci>
+      </m:apply></m:math>
+    </para>
+  </example>
+</definition>
+
+<para id="imp-id13193248">
+  The last two examples illustrate that we can add parentheses
+  to formulas to make the precedence explicit.
+  While some parentheses may be unnecessary, over-parenthesizing often
+  improves clarity.
+  We introduced the basic connectives in the order of their precedence:
+  ¬ has the highest precedence, while ⇒ has the lowest.
+  Furthermore, ∧ and ∨ group left-to-right:
+  <m:math><m:apply>
+    <m:equivalent/>
+    <m:apply><m:and/>
+      <m:apply><m:and/> <m:ci>a</m:ci> <m:ci>b</m:ci> </m:apply>
+      <m:ci>c</m:ci>
+    </m:apply>
+    <m:apply><m:and/>
+      <m:mfenced>
+        <m:apply><m:and/> <m:ci>a</m:ci> <m:ci>b</m:ci> </m:apply>
+      </m:mfenced>      
+      <m:ci>c</m:ci>
+    </m:apply>
+  </m:apply></m:math>,
+  whereas ⇒ groups right-to-left.
+  
+</para>
+
+<example id="imp-id13368472">
+  <para id="imp-id4513024">
+    We can combine these ways of forming WFFs in arbitrarily
+    complex ways, for example,
+  </para>
+
+  <para id="imp-id13262522">
+    <m:math><m:apply><m:not/>
+      <m:apply><m:and/>
+        <m:apply><m:or/>
+          <m:apply><m:and/> <m:apply><m:not/><m:ci>a</m:ci></m:apply> <m:ci>c</m:ci> </m:apply>
+          <m:apply><m:implies/>
+            <m:apply><m:implies/> <m:ci>b</m:ci> <m:ci>a</m:ci></m:apply>
+            <m:ci>c</m:ci>
+          </m:apply>
+        </m:apply>
+        <m:apply><m:not/>
+          <m:apply><m:implies/>
+            <m:ci>a</m:ci>
+            <m:apply><m:not/><m:ci>b</m:ci></m:apply>
+          </m:apply>
+        </m:apply>
+      </m:apply>
+    </m:apply></m:math>
+  </para>
+
+  <para id="imp-id14301914">
+    While <emphasis>large</emphasis> WFFs are common, and we will
+    use some, ones with this much nesting are not.
+  </para>
+</example>
+
+<para id="imp-id13193829">
+  <note id="imp-id10050768" type="A Technicality">
+    <m:math><m:ci>φ</m:ci></m:math>, <m:math><m:ci>ψ</m:ci></m:math>, and <m:math><m:ci>θ</m:ci></m:math>
+    are <term>meta-variables</term>
+    standing for any WFF.
+    The literal character <quote display="inline"><m:math><m:ci>φ</m:ci></m:math></quote>
+    doesn't actually show up inside some WFF;
+    but instead, any particular formula can be used where we write
+    <quote display="inline"><m:math><m:ci>φ</m:ci></m:math></quote>.
+    It is a variable which you the reader must substitute with 
+    some particular WFF, such as
+    <quote display="inline">
+      <m:math><m:apply><m:implies/><m:ci>a</m:ci><m:ci>b</m:ci></m:apply></m:math>
+    </quote>.
+
+    Similarly, <m:math><m:ci>a</m:ci></m:math>, <m:math><m:ci>b</m:ci></m:math>, and <m:math><m:ci>c</m:ci></m:math>
+    are meta-variables to be replaced with a proposition, such as
+    <quote display="inline"><m:math><m:ci>b</m:ci></m:math></quote>.
+  </note>
+</para>
+
+<para id="imp-id10131914">
+  Variations of well-formed formulas occur routinely in writing programs.
+  While different languages might vary in 
+  details of what connectives are allowed, how to express them, and
+  whether or not all parentheses are required,
+  all languages use WFFs.
+</para>
+
+<example id="imp-id12677620">
+<para id="imp-id8083371">
+  When creating the homeworks' web pages, 
+  the authors keep the problems and solutions together in one file.
+  Then, a program reads that file, and creates a new one which
+  either excludes the solution (for the problem set),
+  or includes it (for the solution set, and for practice-problems).
+  The condition for deciding whether to include the solutions
+  is a WFF.
+</para>
+
+<code id="imp-id12356449" display="block">
+;; is-a-solution?: paragraph -&gt; boolean
+;; A function to tell if we are looking at a "solution" paragraph.
+;; Assume this is provided.
+
+;; is-in-a-practice-prob?: paragraph -&gt; boolean
+;; A function to tell if Is the current problem a practice problem?
+;; Assume this is provided.
+
+;; include-all-solutions?: boolean
+;; A variable for the entire file.
+;; Assume this is provided.
+
+
+;; show-or-hide-soln: paragraph -&gt; paragraph
+;; Either return the given paragraph,
+;; or (if it shouldn't be revealed) return a string saying so.
+;;
+(define (show-or-hide-soln a-para)
+   (if (and (is-a-solution? a-para)
+            (not (or include-all-solns? (is-in-a-practice-prob? a-para)))
+       "(see solution set)"
+       a-para))
+</code>
+
+<para id="imp-id12834455">
+  Note that the Boolean variable <code>include-all-solutions?</code>
+  and Boolean values of <code>(is-a-solution? a-para)</code>
+  and <code>(is-in-a-practice-prob? a-para)</code>
+  play the part of propositions
+  (<m:math><m:ci>is-soln</m:ci></m:math>,
+   <m:math><m:ci>include-solns</m:ci></m:math>,
+   <m:math><m:ci>is-practice</m:ci></m:math>),
+  respectively.  The <code>if</code>'s condition boils down to
+  the WFF
+  <m:math><m:apply>
+    <m:and/>
+    <m:ci>is-soln</m:ci>
+    <m:apply>
+      <m:not/>
+      <m:apply>
+        <m:or/>
+        <m:ci>include-solns</m:ci> 
+        <m:ci>is-practice</m:ci>
+      </m:apply>
+    </m:apply>
+  </m:apply></m:math>.
+</para>
+</example>
+
+<para id="imp-id13403878">
+  Keep in mind that a WFF is purely a syntactic entity.  We'll
+  introduce rules later for re-writing or reasoning with WFFs,
+  but it's those rules that will be contrived to preserve our
+  meaning of connectives like ∧ or ¬.
+  The truth value of a WFF depends on the truth values
+  we assign to the propositions it involves.
+</para>
+
+<para id="imp-id13205766">
+  When writing a program about WFFs, verifying syntactic property,
+  calculating a value, counting the number of negations or <m:math><m:ci>b</m:ci></m:math>s,
+  <foreign>etc.</foreign>,
+  such programs exactly follow the definition of WFF given.
+</para>
+</section> 
+
+
+<section id="imp-id13458508">
+<title>Some formulas are truer than others</title>
+
+<para id="imp-id13346373">
+  Is the formula <m:math><m:apply><m:or/><m:ci>A-unsafe</m:ci> <m:ci>A-has-2</m:ci></m:apply></m:math> true?
+  Your response should be that it depends
+  on the particular board in question.
+  But some formulas are true regardless of the board.
+  For instance, <m:math><m:apply><m:or/><m:ci>A-unsafe</m:ci> <m:apply><m:not/><m:ci>A-unsafe</m:ci></m:apply></m:apply></m:math>:
+  this holds no matter what.
+  Similarly,
+  <m:math><m:apply><m:and/><m:ci>A-unsafe</m:ci> <m:apply><m:not/><m:ci>A-unsafe</m:ci></m:apply></m:apply></m:math>
+  can never be satisfied (made true), no matter how you
+  try to set the variable <m:math><m:ci>A-unsafe</m:ci></m:math>.
+</para>
+
+<definition id="definition2">
+  <term>truth assignment</term>
+
+  <meaning id="imp-id13422745">
+    An assignment of a value <m:math><m:true/></m:math> or <m:math><m:false/></m:math> to each proposition
+    being used.
+  </meaning>
+
+  <example id="imp-id13403772">
+    <para id="imp-id13403764">
+      For the formula 
+      <m:math><m:apply>
+        <m:implies/>
+        <m:ci>a</m:ci>
+        <m:apply><m:and/><m:ci>a</m:ci> <m:ci>b</m:ci></m:apply>
+      </m:apply></m:math>,
+      one possible truth assignment is
+      <m:math><m:apply><m:eq/><m:ci>a</m:ci> <m:true/></m:apply></m:math> and
+      <m:math><m:apply><m:eq/><m:ci>b</m:ci> <m:false/></m:apply></m:math>.
+      With that truth assignment, the formula is false.
+    </para>
+  </example>
+</definition>
+
+<para id="imp-id12487027">
+  <note id="imp-id14303170" type="aside">
+    <para id="imp-id6444730">
+      We've used three different symbols to describe
+      <quote display="inline">equality</quote>
+      in some sense:
+      <list id="imp-id13508682">
+        <item>
+          
+          <m:math>
+            <m:declare nargs="2" occurrence="infix" type="fn">
+              <m:mo>⇔</m:mo>
+            </m:declare>
+            <m:apply>
+              <m:mo>⇔</m:mo>
+              <m:ci>a</m:ci>
+              <m:ci>b</m:ci>
+            </m:apply>
+          </m:math>
+          is a formula.
+          The symbol
+          <quote display="inline">⇔</quote>
+          is a logical connective.
+        </item>
+        <item>
+          <m:math><m:apply><m:equivalent/>
+            <m:ci>φ</m:ci>
+            <m:ci>ψ</m:ci>
+          </m:apply></m:math>
+          is a statement that two formulas are <term>equivalent</term> <m:math><m:mo>—</m:mo></m:math>
+          that is, the same for all truth assignments.
+        </item>
+        <item>
+          <m:math><m:apply><m:eq/><m:ci>a</m:ci> <m:true/></m:apply></m:math>
+          defines the value of a proposition.
+          We also use the symbol for defining variables,
+          <m:math><m:apply><m:eq/><m:ci>b</m:ci> <m:ci>ψ</m:ci></m:apply></m:math>,
+          and meta-variables,
+          <m:math><m:apply><m:eq/><m:ci>φ</m:ci> <m:ci>ψ</m:ci></m:apply></m:math>.
+        </item>
+      </list>
+      Of these, only <quote display="inline">⇔</quote> occurs
+      <emphasis>within</emphasis> a formula.
+    </para>
+
+    <para id="imp-id13007369">
+      Commonly, people use symbols such as
+      <quote display="inline">≡</quote>
+      for <emphasis>multiple</emphasis> purposes.
+      This is problematic when part of what we
+      are studying are the syntactic formulas themselves.
+    </para>
+  </note>
+</para>
+
+<definition id="definition3">
+  <term>tautology</term> 
+
+  <meaning id="imp-id13349685">
+    A WFF which is true under any truth assignment
+    (any way of assigning <m:math><m:true/></m:math>/<m:math><m:false/></m:math> to the propositions).
+  </meaning>
+
+  <example id="imp-id13452065">
+    <para id="imp-id13146110">
+      <m:math><m:apply><m:implies/>
+        <m:ci>A-unsafe</m:ci>
+        <m:ci>A-unsafe</m:ci>
+      </m:apply></m:math>
+    </para>
+  </example>
+
+  <example id="imp-id13351123">
+    <para id="imp-id11069643">
+      <m:math><m:apply><m:implies/>
+        <m:ci>a</m:ci>
+        <m:apply><m:or/><m:ci>a</m:ci> <m:ci>b</m:ci></m:apply> 
+      </m:apply></m:math>
+    </para>
+  </example>
+</definition>
+
+
+<definition id="definition4">
+  <term>unsatisfiable</term>
+
+  <meaning id="imp-id14071453">
+    A WFF which is false under any truth assignment.
+  </meaning>
+
+  <example id="imp-id12356462">
+    <para id="imp-id11094118">
+      <m:math><m:apply><m:not/>
+        <m:apply><m:implies/>
+          <m:ci>A-unsafe</m:ci>
+          <m:ci>A-unsafe</m:ci>
+        </m:apply>
+      </m:apply></m:math>
+    </para>
+  </example>
+
+  <example id="imp-id13142368">
+    <para id="imp-id13346870">
+      <m:math><m:apply><m:implies/>
+        <m:ci>a</m:ci>
+        <m:apply><m:not/><m:ci>a</m:ci></m:apply>
+      </m:apply></m:math>
+    </para>
+  </example>
+</definition>
+
+<para id="imp-id14072131">
+  Note that in algebra, there are certainly formulas which
+  are true (or similarly, false) for all values,
+  but they don't get special names.
+  For example, over the real numbers,
+  <emphasis>any</emphasis> assignment to <m:math><m:ci>x</m:ci></m:math> makes the formula
+  <m:math>
+    <m:apply>
+      <m:geq/>
+      <m:apply><m:power/><m:ci>x</m:ci><m:cn>2</m:cn></m:apply>
+      <m:cn>0</m:cn>
+    </m:apply>
+  </m:math>
+  true, so it's similar to a tautology.
+  Similarly,
+  <m:math>
+    <m:apply>
+      <m:eq/>
+      <m:ci>x</m:ci>
+      <m:apply><m:plus/><m:ci>x</m:ci><m:cn>1</m:cn></m:apply>
+    </m:apply>
+  </m:math>
+  is unsatisfiable, since it
+  can't be made true for any assignment to <m:math><m:ci>x</m:ci></m:math>.
+</para>
+
+<para id="imp-id6265703">
+  Some people use the term <term>contingency</term> to mean
+  formulas in between: things which can be either true or false,
+  depending on the truth assignment.
+  
+  Really, tautologies and unsatisfiable formulas are boring.
+  However, trying to determine whether or not a formula is
+  a tautology (or, unsatisfiable) <emphasis>is</emphasis> of interest.
+  That's what proofs are all about!
+</para>
+
+<figure id="imp-id14029886">
+  <media id="imp-id14347365" alt="" display="block">
+    <image mime-type="image/png" src="../../media/jackvenn.png"/>
+  </media>
+  
+  <caption>
+    Kinds of formulas:
+    tautologies, contingencies, unsatisfiables
+  </caption>
+</figure>
+
+
+<para id="imp-id7710021">
+  Identify the following Yogi Berra quotes either as
+  tautologies, unsatisfiable, or neither.
+  (Take these exercises with a grain of salt,
+  since the English statements are open to some interpretation.)
+</para>
+
+<exercise id="exercise1">
+  <problem id="imp-id13516146">
+    <para id="imp-id13517518">
+      <quote display="inline">
+        Pitching always beats batting  <m:math><m:mo>—</m:mo></m:math> and vice-versa.
+      </quote>
+    </para>
+  </problem>
+
+  <solution id="imp-id10307959">
+    <para id="imp-id14346192">
+      Unsatisfiable.
+    </para>
+  </solution>
+</exercise>
+
+<exercise id="exercise2">
+  <problem id="imp-id12893302">
+    <para id="imp-id13157711">
+      You can observe a lot just by watchin'.
+    </para>
+  </problem>
+
+  <solution id="imp-id13145574">
+    <para id="imp-id12677314">
+      Tautology, arguably.
+    </para>
+  </solution>
+</exercise>
+
+
+
+<exercise id="exercise3">
+  <problem id="imp-id9741816">
+    <para id="imp-id13171760">
+      Nobody goes there anymore… it's too crowded.
+    </para>
+  </problem>
+
+  <solution id="imp-id13349812">
+    <para id="imp-id7718917">
+      Unsatisfiable, 
+      unless of course you interpret <quote display="inline">nobody</quote>
+      as <quote display="inline">nobody of note</quote>.
+    </para>
+  </solution>
+</exercise>
+
+<exercise id="exercise4">
+  <problem id="imp-id13118035">
+    <para id="imp-id14044959">
+      It sure gets late early out here.
+    </para>
+  </problem>
+
+  <solution id="imp-id14072043">
+    <para id="imp-id13452443">
+      Neither.
+      If you interpret <quote display="inline">gets late</quote> as a social issue
+      but <quote display="inline">early</quote> as a clock issue, then the statement
+      might be true, depending on where <quote display="inline">here</quote> is.
+    </para>
+  </solution>
+</exercise>
+
+<exercise id="exercise5">
+  <problem id="imp-id13008084">
+    <para id="imp-id12833993">
+      Always go to other people's funerals;
+      otherwise they won't come to yours.
+    </para>
+  </problem>
+
+  <solution id="imp-id13209622">
+    <para id="imp-id13191406">
+      Unsatisfiable, except perhaps in a
+      <link url="http://www.cs.rice.edu/~ian/Rants/karmaIsReal.shtml">karmic</link> sense.
+    </para>
+  </solution>
+</exercise>
+
+
+
+
+
+</section> 
+
+
+
+<section id="imp-id7720170">
+<title>Finding Truth</title>
+
+<para id="imp-id13256614">
+  Now that we've seen how to express concepts as precise formulas;
+  we would like to reason with them.
+  By <quote display="inline">reason</quote>, we mean some <emphasis>automated</emphasis> way
+  of ascertaining or verifying statements  <m:math><m:mo>—</m:mo></m:math> some procedure that
+  can be carried out on an unthinking computer that 
+  can only push around symbols.
+  In particular, for propositional logic, we'll restrict our attention
+  to some (closely related) problems:
+</para>
+
+<list id="imp-id13492208">
+  <item>
+    <term>TAUTOLOGY</term>:
+    given a formula <m:math><m:ci>φ</m:ci></m:math>, is it a tautology?
+    
+  </item>
+  <item>
+    <term>SAT</term>isfiability:
+    Give a formula <m:math><m:ci>φ</m:ci></m:math>, is it satisfiable? 
+    (Is there some truth assignment to its variables, that makes it true?)
+  </item>
+  <item>
+    <term>EQUIV</term>:
+    Given two WFFs <m:math><m:ci>φ</m:ci></m:math> and <m:math><m:ci>ψ</m:ci></m:math>, are they equivalent?
+    (Do they give the same result 
+    for all possible truth assignments to their variables?  
+    
+  </item>
+</list>
+</section>
+
+
+
+<section id="imp-id12370922">
+<title>Game-specific rules</title>
+
+<para id="imp-id14303502">
+  Is <m:math><m:apply><m:or/><m:ci>x</m:ci> <m:ci>y</m:ci> <m:ci>z</m:ci></m:apply></m:math> a tautology?
+  Clearly not.  Setting the three propositions each to <m:math><m:false/></m:math>,
+  the formula is false.
+  But now consider:
+  Is <m:math><m:apply><m:or/><m:ci>A-has-0</m:ci> <m:ci>A-has-1</m:ci> <m:ci>A-has-2</m:ci></m:apply></m:math> a tautology?
+  The answer here is
+  <quote display="inline">
+    yes of course, … well, as long we're interpreting those
+    propositions to refer to a WaterWorld board.
+  </quote>
+  We'll capture this notion
+  by listing a bunch of <term>domain axiom</term>s for WaterWorld:
+  formulas which are true for all WaterWorld boards.
+</para>
+
+<para id="imp-id14082563">
+  There are a myriad of domain axioms which express the rules of WaterWorld.
+  Here are a few of them:
+</para>
+<list id="imp-id12906732">
+  <item>
+    <m:math><m:apply>
+      <m:implies/>
+      <m:ci>A-has-0</m:ci>
+      <m:apply><m:and/> <m:ci>B-safe</m:ci> <m:ci>G-safe</m:ci></m:apply>
+    </m:apply></m:math>
+  </item>
+  <item>
+    <m:math><m:apply>
+      <m:implies/>
+      <m:ci>A-has-2</m:ci>
+      <m:apply><m:and/> <m:ci>B-unsafe</m:ci> <m:ci>G-unsafe</m:ci></m:apply>
+    </m:apply></m:math>
+  </item>
+  <item>
+    …
+  </item>
+</list>
+
+<para id="imp-id13253704">
+  A more complete list is
+  <link document="m10528" target-id="waterworld-rules">here</link>.
+  Whenever we deal with WaterWorld, we implicitly take all these domain
+  axioms as given.
+</para>
+
+</section> 
+
+</content>
+</document>

@@ -1,0 +1,346 @@
+<document xmlns="http://cnx.rice.edu/cnxml" xmlns:m="http://www.w3.org/1998/Math/MathML" xmlns:md="http://cnx.rice.edu/mdml">
+  <title>Relations and Logic: Non-standard Interpretations</title>
+  <metadata><md:content-id>undefined</md:content-id><md:title/><md:uuid>f3968f7d-5191-4ff2-8fc7-f438b21a2b1a</md:uuid>
+</metadata>
+
+<content>
+
+<section id="section1">
+<title>Prime factorization</title>
+
+<para id="para1">
+  Note that there are other possible interpretations of 
+  “<m:math><m:ci type="function">prime</m:ci></m:math>”.
+  For example, since one can multiply integer matrices,
+  there might be a useful concept of “prime matrices”.
+</para>
+
+<para id="para2">
+  For example: Consider <emphasis>only</emphasis> the numbers 
+  <m:math><m:apply><m:eq/>
+    <m:ci>F</m:ci>
+    <m:set>
+      <m:cn>1</m:cn>
+      <m:cn>5</m:cn>
+      <m:cn>9</m:cn>
+      <m:cn>13</m:cn>
+      <m:ci>…</m:ci>
+    </m:set>
+  </m:apply></m:math>
+  — that is,
+  <m:math><m:apply><m:eq/>
+    <m:ci>F</m:ci>
+    <m:set>
+      <m:bvar><m:ci>k</m:ci></m:bvar>
+      <m:condition>
+        <m:apply><m:in/>
+          <m:ci>k</m:ci>
+          <m:naturalnumbers/>
+        </m:apply>
+      </m:condition>
+      <m:apply><m:plus/>
+        <m:apply><m:times/>
+          <m:cn>4</m:cn>
+          <m:ci>k</m:ci>
+        </m:apply>
+        <m:cn>1</m:cn>
+      </m:apply>
+    </m:set>
+  </m:apply></m:math>.
+  It's easy to verify that multiplying two of these numbers still results
+  in a number of the form
+  <m:math><m:apply><m:plus/>
+    <m:apply><m:times/>
+      <m:cn>4</m:cn>
+      <m:ci>k</m:ci>
+    </m:apply>
+    <m:cn>1</m:cn>
+  </m:apply></m:math>.
+  Thus it makes sense to talk of factoring such numbers: 
+  We'd say that 45 factors into
+  <m:math><m:apply><m:times/><m:ci>5</m:ci> <m:ci>9</m:ci></m:apply></m:math>,
+  but 9 is considered
+  prime since it doesn't factor into smaller elements of
+  <m:math><m:ci>F</m:ci></m:math>.
+</para>
+
+<para id="para3">
+  Interestingly, within <m:math><m:ci>F</m:ci></m:math>,
+  we lose <emphasis>unique</emphasis> factorization:
+  <m:math><m:apply><m:eq/>
+    <m:cn>441</m:cn>
+    <m:apply><m:times/> <m:cn>9</m:cn> <m:cn>49</m:cn> </m:apply>
+    <m:apply><m:times/> <m:cn>21</m:cn> <m:cn>21</m:cn> </m:apply>
+  </m:apply></m:math>,
+  where each of 9, 21, and 49 are prime, relative to <m:math><m:ci>F</m:ci></m:math>!
+  (Mathematicians will then go and look for exactly what
+   property of a multiplication function are needed,
+   to guarantee unique factorization.)
+</para>
+
+<para id="para4">
+  The point is, that all relations in logical formula
+  need to be interpreted.  Usually, for numbers, we use
+  a standard interpretation, but one can consider those
+  formulas in different, non-standard interpretations!
+  
+</para>
+
+</section>
+
+
+
+<section id="section2">
+<title>The Poincaré Disc</title>
+
+<para id="para5">
+  A long outstanding problem was that of Euclid's parallel postulate:
+  Given a line and a point not on the line,
+  how many lines parallel to the first go through that point?
+  Euclid took this as an axiom 
+  (unable to prove that it followed from his other axioms).
+  Non-Euclidean geometries of Lobachevsky and Riemann took different
+  postulates, and got different geometries.
+  However, it was not clear whether these geometries 
+  were <emphasis>sound</emphasis>  — whether one could derive two
+  different results that were inconsistent with each other.
+  
+</para>
+
+<para id="para6">
+  Henri Poincaré developed an ingenious method for
+  showing that certain non-Euclidean geometries
+  <emphasis>are</emphasis> consistent — or at least, as consistent
+  as Euclidean geometry.
+  Remember that in Euclidean geometry, the concepts 
+  “point”
+  and
+  “line”
+  are left undefined, and axioms are built on top of them
+  (<foreign>e.g.</foreign>,
+  “two different lines have at most one point in common”).
+  While it's usually left to common sense to interpret
+  “point”,
+  “line”,
+  and 
+  “a point is on a line”,
+  any interpretation which satisfies the axioms 
+  means that all theorems of geometry will hold.
+  
+</para>
+
+<para id="para7">
+  The Poincaré disc is one such interpretation:
+  “point” is taken to mean
+  “a point in the interior of the unit disc”,
+  and
+  “line” is taken to mean
+  “a circular arc which meets the unit disc at right angles”.
+  So a statement like 
+  “two points determine a line”
+  can be interpreted as 
+  <quote display="inline" class="no-marks">[*]
+    For any two points 
+    inside the disc, there is exactly one circular arc which
+    meets the disc at right angles.</quote>
+  Indeed,
+  <link url="http://mcs.open.ac.uk/tcl2/nonE/CABRI2001/PDiscMod.html">this 
+  interpretation</link>
+  preserves all of Euclid's postulates
+  <emphasis>except</emphasis> for the parallel postulate.
+  You can see that
+  for a given line and a point not on it,
+  there are an infinite number of parallel (that is, non-intersecting) lines.
+</para>
+
+<figure id="poincare-lines">
+  <media id="idp3499792" alt=""><image src="../../media/poincare-lines.png" mime-type="image/png"/></media>
+  <caption>
+    Some lines in the Poincaré disc,
+    including several lines parallel to a line L through a point p.
+  </caption>
+</figure>
+
+<para id="para8">
+  (Note that the distance function is very different within the
+   Poincaré disc;
+   in fact the perimeter of the disc is off at infinity.
+   Angles, however, do happen to be preserved.)
+</para>
+
+<para id="para9">
+  The critical point of his interpretation of a non-Euclidean geometry is this:
+  <emphasis>it is embedded in Euclidean geometry!</emphasis>
+  So we are able to prove (within the embedding Euclidean geometry) that
+  the disc-postulates hold (<foreign>e.g.</foreign>,
+  we can prove the statement [*] above as a theorem about
+  circular arcs in Euclidean geometry).
+  Therefore, 
+  if there is any inconsistency in non-Euclidean geometry,
+  then that could be parlayed into some inconsistency of Euclidean geometry.
+  Thus, his interpretation gives a proof that 
+  the strange non-Euclidean geometry
+  is as sound as our familiar Euclidean geometry.
+</para>
+
+</section>
+
+
+
+<section id="section3">
+<title>P vs. NP and Oracles</title>
+
+<para id="para10">
+  A well-known problem in computer 
+  science  — “P vs. NP”  — asks 
+  whether (for a given problem) it is truly more 
+  difficult to find a short solution (when one exists) 
+  (“NP”),
+  than it is to verify a short purported solution handed to you
+  (“P”).
+  For example, 
+  “Given a set of people and how strong person is,
+    can you partition them into two tug-of-war teams 
+    which are exactly evenly matched?”
+  Certainly it <emphasis>seems</emphasis> easier to check 
+  that a pair of proposed rosters has equal strength
+  (and, verify that everybody really is
+  on one team or the other)
+  than to have to come up with two perfectly-matched teams.
+  But conceivably, the two tasks might be equally-difficult
+  up to some acceptable (polynomial time) overhead.
+  While every assumes that P is easier than NP,
+  nobody has been able to prove it.
+</para>
+
+<para id="para11">
+  An interesting variant of the problem lets both the 
+  problem-solver and the purported-answer-verifier each have access to
+  a particular <term>oracle</term>  — a program that will gives
+  instant yes/no answers <emphasis>to some other</emphasis> problem
+  (say, “given any set of numbers, yes or no: 
+  is there an even-sized subset 
+  whose total is exactly the same as some odd sized subset?”).
+</para>
+
+<para id="para12">
+  It <emphasis>has</emphasis> been shown that there is some oracle which 
+  makes the 
+  problem-solver's job provably tougher than the proof-verifier's job,
+  and also there is some other oracle 
+  problem-solver's job provably no-tougher than the proof-verifier's job.
+  
+</para>
+
+<para id="para13">
+  This means that any proof of P being different from NP 
+  has to be subtle enough so that
+  when P and NP are re-interpreted as 
+  “P and NP with respect to a particular oracle”,
+  the proof will no longer go through.
+  Unfortunately, this eliminates all the routine methods of proof;
+  we know that solving this problem will take some new attack.
+</para>
+
+</section>
+
+
+<section id="section4">
+<title>Löwenheim-Skolem and the real numbers</title>
+
+<para id="para14">
+  The Löwenheim-Skolem theorem of logic states that
+  if a set of (countable) domain axioms has a model at all,
+  then it has a <emphasis>countable</emphasis> model.
+  This is a bit surprising when applied to the axioms of
+  arithmetic for the real numbers:
+  even though the real numbers are uncountable,
+  there is some <emphasis>countable</emphasis> model which meets all 
+  our (finite) axioms of the real numbers!
+</para>
+
+</section>
+
+
+<section id="section5">
+<title>Object-oriented programming</title>
+
+<para id="para15">
+  Note that object-oriented programming is founded on the
+  possibility for nonstandard interpretations:
+  perhaps you have some code which is given a list of <code display="inline">Object</code>s,
+  and you proceed to call the method <code display="inline">toString</code> on each of them.
+  Certainly there is a standard interpretation for the function
+  <code display="inline">Object.toString</code>,
+  but your code is built to work even when you call this function and
+  some nonstandard, custom, overridden method is called instead.
+</para>
+
+<para id="para16">
+  It can become very difficult to reason about programs when
+  the run-time method invoked might be different from the one being called.
+  We're used to specifying <emphasis>type</emphasis> constratins which 
+  any interpretation must satisfy;
+  wouldn't it be nice to specify more complicated constraints,
+  <foreign>e.g.</foreign> “this function returns 
+  an <code display="inline">int</code> which is a valid index into [some array]”?
+  And if we can describe the constraint <emphasis>formally</emphasis>
+  (rather than in English comments, which is how most code works),
+  then we could have the computer enforce that contract! 
+  (for every interpretation which gets executed, including non-static ones).
+</para>
+
+<para id="para17">
+  An obvious formal specification language is code itself — 
+  have code which verifies pre-conditions before calling a function,
+  and then runs code verifying the post-condition before leaving the function.
+  Indeed,
+  there are several such tools about
+  (<link url="http://www.javaworld.com/javaworld/jw-02-2001/jw-0216-cooltools.html">Java</link>,
+  <link url="http://download.plt-scheme.org/doc/209/html/mzlib/mzlib-Z-H-13.html#node_chap_13">Scheme</link>).
+  In the presence of inheritance, it's harder than you might initially think to
+  do this
+  <link url="http://people.cs.uchicago.edu/~robby/pubs/index-abstracts.html#9">correctly</link>.
+</para>
+
+<para id="para18">
+  It is still a research goal to
+  be able to (sometimes) optimize away such run-time verifications;
+  this requires <emphasis>proving</emphasis> that some code is correct
+  (at least, with respect to its post-condition).
+  The fact that the code might call a function which will be later overridden
+  (our “non-standard interpretations”)
+  exacerbates this difficulty.
+  (And proving correctness in the presence of 
+   <link document="m12312">concurrency</link> 
+   
+   is even tougher!)
+</para>
+
+<para id="para19">
+  Even if not proving programs correct,
+  being able to specify contracts in a formal
+  language (code or logic) is a valuable skill.
+</para>
+</section>
+
+
+<section id="section6">
+<title>Real-World Arguments</title>
+
+<para id="para20">
+  Finally, it is worth noting that many 
+  <link document="m12072" target-id="legalizing-X">rebuttles of real world arguments</link>
+  (see also some
+   <link document="m10514" target-id="argument-interpretations-1">exercises</link>)
+  amount to showing that 
+  the argument's form can't be valid since it doesn't
+  hold under other interpretations, and thus there must
+  be some unstated assumptions in the original.
+</para>
+
+</section>
+
+
+</content> 
+</document>

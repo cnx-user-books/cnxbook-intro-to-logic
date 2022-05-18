@@ -1,0 +1,75 @@
+<document xmlns="http://cnx.rice.edu/cnxml" xmlns:m="http://www.w3.org/1998/Math/MathML" xmlns:md="http://cnx.rice.edu/mdml">
+
+<title>Propositional Logic: type checking</title>
+<metadata><md:content-id>undefined</md:content-id><md:title/><md:uuid>4a71d5a0-2747-4ba3-a4e6-bdc87e2181b5</md:uuid>
+</metadata>
+
+
+<content>
+
+<section id="programming">
+<title>Proofs and programming</title>
+
+<para id="para1">
+  Proofs are organized a lot like programs.  Based on some
+  premises (inputs), we obtain some conclusion (output)
+  after using a series of inference rules (basic computation like addition
+  and other operations).
+  Using subproofs, especially when citing previous proofs,
+  is just like organizing our program into functions that can be
+  used many times.
+</para>
+
+<para id="para2">
+  Naturally, since using inference rules is not only how people prove things,
+  but also computers.
+  A clear example is in type checking.
+  The core idea of type checking a function application is
+  “If function <code display="inline">f</code> takes an argument of
+  type <m:math><m:ci>α</m:ci></m:math> and producing an output of type <m:math><m:ci>β</m:ci></m:math>, and
+  expression <code display="inline">exp</code> is of type <m:math><m:ci>α</m:ci></m:math>, then
+  <code display="inline">f(exp)</code> is of type <m:math><m:ci>β</m:ci></m:math>.”
+  This type rule closely resembles <m:math><m:mo>⇒</m:mo></m:math>Elim:
+  “If a proven formula is
+    <m:math><m:apply><m:implies/><m:ci>a</m:ci> <m:ci>b</m:ci></m:apply></m:math>
+    and other proven formula is <m:math><m:ci>a</m:ci></m:math>,
+    then together, <m:math><m:ci>b</m:ci></m:math> is a proven formula.”
+  Furthermore, this similarity is highlighted by notation in many programming
+  languages which would write the type of <code display="inline">f</code> as
+  <m:math><m:ci>α</m:ci></m:math> → <m:math><m:ci>β</m:ci></m:math>.
+  Type rules are simply inference rules for proving results about the
+  types of programs, and in most typical programming languages
+  these rules closely correspond to those we are using for logic.
+  This correspondence is known as the Curry-Howard Isomorphism.
+</para>
+
+<para id="para3">
+  As with logic, we want type checkers to be sound and complete.
+  Soundness here means that if the program passes type checking, 
+  when we execute the program (or single function) and get a value,
+  that value is of the stated type.  In other words, if our program
+  type checks, then we are guaranteed that some kinds of errors
+  will not happen at run-time.
+  That also means that if our program would have a run-time type
+  error, the type checker will correctly report that our program
+  is erroneous.
+  Completeness here means that if we execute the program (or single
+  function) and get a value of a certain type, then our type checker
+  indeed tells us that type.
+</para>
+
+<para id="para4">
+  Note that type checking is still an area of active research,
+  since the job is made difficult in the presence of language features
+  such as inheritance, multiple inheritance, 
+  dynamic class loading, <foreign>etc.</foreign>
+  When people introduce new computer languages with new features,
+  and want to claim that their new language is <term>type safe</term>
+  (that no function ever will be applied to the wrong type at run-time),
+  then the paper which introduces the language will contain such a proof.
+</para>
+
+</section> 
+
+</content>
+</document>

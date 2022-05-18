@@ -1,0 +1,686 @@
+<document xmlns="http://cnx.rice.edu/cnxml" xmlns:m="http://www.w3.org/1998/Math/MathML" xmlns:md="http://cnx.rice.edu/mdml"> 
+
+<title>Propositional Logic: equivalences</title>
+<metadata><md:content-id>undefined</md:content-id><md:title/><md:uuid>80228183-5288-4279-9dba-7d9259dae9d1</md:uuid>
+</metadata>
+
+
+<content>
+
+<section id="section1">
+<title>Propositional Equivalences</title>
+
+<para id="para1">
+  What are the roots of
+  <m:math>
+    <m:apply>
+      <m:minus/>
+      <m:apply> <m:power/> <m:ci>x</m:ci> <m:cn>3</m:cn> </m:apply>
+      <m:apply> <m:times/> <m:cn>4</m:cn> <m:ci>x</m:ci> </m:apply>
+    </m:apply>
+  </m:math>?
+  Well, in high-school algebra you learned how to deal
+  with such numeric formulas:
+</para>
+
+<table id="table1" summary="">
+
+<tgroup cols="3">
+
+<tbody><row>
+    <entry/>
+    <entry>
+      <m:math>
+        <m:apply>
+          <m:minus/>
+          <m:apply> <m:power/> <m:ci>x</m:ci> <m:cn>3</m:cn> </m:apply>
+          <m:apply> <m:times/> <m:cn>4</m:cn> <m:ci>x</m:ci> </m:apply>
+        </m:apply>
+      </m:math>
+    </entry>
+    <entry/>
+  </row>
+<row>
+    <entry><m:math><m:mo>=</m:mo></m:math></entry>
+    <entry>
+      <m:math>
+        <m:apply>
+          <m:times/>
+          <m:ci>x</m:ci>
+          <m:apply>
+            <m:minus/>
+            <m:apply> <m:power/> <m:ci>x</m:ci> <m:cn>2</m:cn> </m:apply>
+            <m:mn>4</m:mn>
+          </m:apply>
+        </m:apply>
+      </m:math>
+    </entry>
+    <entry>factor out <m:math><m:ci>x</m:ci></m:math></entry>
+  </row>
+<row>
+    <entry><m:math><m:mo>=</m:mo></m:math></entry>
+    <entry>
+      <m:math>
+        <m:apply>
+          <m:times/>
+          <m:ci>x</m:ci>
+          <m:apply> <m:minus/> <m:ci>x</m:ci> <m:cn>2</m:cn> </m:apply>
+          <m:apply> <m:plus/> <m:ci>x</m:ci> <m:cn>2</m:cn> </m:apply>
+        </m:apply>
+      </m:math>
+    </entry>
+
+    <entry>
+      The identity
+      <m:math>
+        <m:apply>
+          <m:eq/>
+          <m:apply>
+            <m:minus/>
+            <m:apply> <m:power/> <m:ci>a</m:ci> <m:cn>2</m:cn> </m:apply>
+            <m:apply> <m:power/> <m:ci>b</m:ci> <m:cn>2</m:cn> </m:apply>
+          </m:apply>
+          <m:apply>
+            <m:times/>
+            <m:apply> <m:plus/> <m:ci>a</m:ci> <m:ci>b</m:ci> </m:apply>
+            <m:apply> <m:minus/> <m:ci>a</m:ci> <m:ci>b</m:ci> </m:apply>
+          </m:apply>
+        </m:apply>
+      </m:math>
+      with <m:math><m:ci>a</m:ci></m:math> being <m:math><m:ci>x</m:ci></m:math>, and <m:math><m:ci>b</m:ci></m:math> being 2.
+    </entry>
+  </row></tbody>
+</tgroup>
+</table>
+
+<para id="para2">
+  This last expression happens to be useful since it 
+  is in a form which lets us read off the roots 0, +2, -2.
+  The rules of algebra tell us that these three <emphasis>different</emphasis>
+  formulas are all equivalent.
+  In fact, our very definition of two formulas being <term>equivalent</term>
+  is that for any value of <m:math><m:ci>x</m:ci></m:math> the two formulas return the same value.
+  We are distinguishing 
+  between <term>syntax</term> (the expression itself, as data),
+  and <term>semantics</term> (what the expression means).
+  Usually, when presented with syntax, one is supposed to 
+  bypass that and focus on its meaning
+  (<foreign>e.g.</foreign>, reading a textbook).
+  However, in logic and post-modern literature alike,
+  we are actually studying the interplay between syntax and semantics.
+  The general gist is that in each step, you rewrite
+  subparts of your formula
+  according to certain rules (“replacing equals with equals”).
+</para>
+
+<para id="bool-vs-Zmod2">
+  Well, we can use a similar set of rules about
+  rewriting formulas with equivalent ones,
+  to answer the questions of whether two formulas are equal,
+  or whether a formula is a tautology.
+  <link url="http://kerryr.net/pioneers/boole.htm">George Boole</link>
+  was the first to realize that 
+  <m:math><m:true/></m:math> and <m:math><m:false/></m:math> are just values in the way that numbers are,
+  and he first codified the rules for manipulating them;
+  thus <term>Boolean algebra</term> is named in his honor.
+  <note type="aside" id="idm12615072">
+    The term
+    “<link url="http://planetmath.org/encyclopedia/Algebra.html">algebra</link>”
+    comes from the values <m:math><m:true/></m:math>, <m:math><m:false/></m:math> and operators <m:math><m:mo>∧</m:mo></m:math>, <m:math><m:mo>∨</m:mo></m:math>
+    having some very specific
+    properties similar to those of numbers with ×, +.
+  </note>
+</para>
+
+<figure id="figure1">
+  <media id="idm10797616" alt=""><image src="../../media/boole.png" mime-type="image/png"/></media>
+
+  <caption>George Boole (1815-1864)</caption>
+</figure>
+
+<para id="para4">
+  Again, each individual step consists of rewriting a formula
+  according to certain rules.
+  So, just what are the rules for manipulating Boolean values?
+  We'll start with an example.
+</para>
+
+<example id="example1">
+  <table id="proof1" summary="">
+
+<tgroup cols="3" align="center" colsep="1" rowsep="1">
+<colspec colwidth="*" colname="c1"/>
+<colspec colwidth="*" colname="c2"/>
+<colspec colwidth="*" colname="c3"/>
+
+<tbody>
+<row>
+<entry align="left">1</entry><entry namest="c2" nameend="c2"><m:math><m:apply>
+        <m:or/>
+        <m:apply><m:and/><m:ci>a</m:ci> <m:false/></m:apply>
+        <m:apply><m:and/><m:ci>b</m:ci> <m:true/></m:apply>
+      </m:apply></m:math></entry><entry colname="c3"/>
+</row>
+<row>
+<entry align="left">2</entry><entry namest="c2" nameend="c2"><m:math><m:mo>≡</m:mo><m:apply>
+        <m:or/>
+        <m:false/>
+        <m:apply><m:and/><m:ci>b</m:ci> <m:true/></m:apply>
+      </m:apply></m:math></entry><entry colname="c3">Dominance of <m:math><m:false/></m:math> over <m:math><m:mo>∧</m:mo></m:math></entry>
+</row>
+<row>
+<entry align="left">3</entry><entry namest="c2" nameend="c2"><m:math><m:mo>≡</m:mo><m:apply>
+        <m:or/>
+        <m:apply><m:and/><m:ci>b</m:ci> <m:true/></m:apply>
+        <m:false/>
+      </m:apply></m:math></entry><entry colname="c3">Commutativity of <m:math><m:mo>∨</m:mo></m:math></entry>
+</row>
+<row>
+<entry align="left">4</entry><entry namest="c2" nameend="c2"><m:math><m:mo>≡</m:mo><m:apply><m:and/><m:ci>b</m:ci> <m:true/></m:apply></m:math></entry><entry colname="c3">Identity element for <m:math><m:mo>∨</m:mo></m:math> is <m:math><m:false/></m:math></entry>
+</row>
+<row>
+<entry align="left">5</entry><entry namest="c2" nameend="c2"><m:math><m:mo>≡</m:mo><m:ci>b</m:ci></m:math></entry><entry colname="c3">Identity element for <m:math><m:mo>∧</m:mo></m:math> is <m:math><m:true/></m:math></entry>
+</row></tbody>
+</tgroup>
+</table>
+</example>
+
+<para id="para5">
+  Thus we have a series of equivalent formulas,
+  with each step justified by citing a 
+  <link document="m10540">propositional equivalence</link>.
+  By and large, the equivalences are rather mundane.
+  A couple are surprisingly handy;
+  take a moment to consider <term>DeMorgan's laws</term>.
+</para>
+
+<table id="table2" summary="">
+
+<tgroup cols="2">
+
+<tbody><row>
+    <entry>
+      <m:math><m:apply>
+        <m:equivalent/>
+        <m:apply>
+          <m:not/>
+          <m:apply><m:and/><m:ci>φ</m:ci> <m:ci>ψ</m:ci></m:apply>
+        </m:apply>
+        <m:apply>
+          <m:or/>
+          <m:apply><m:not/><m:ci>φ</m:ci></m:apply>
+          <m:apply><m:not/><m:ci>ψ</m:ci></m:apply>
+        </m:apply>
+      </m:apply></m:math>
+    </entry>
+    <entry>
+      <m:math><m:apply>
+        <m:equivalent/>
+        <m:apply>
+          <m:not/>
+          <m:apply><m:or/><m:ci>φ</m:ci> <m:ci>ψ</m:ci></m:apply>
+        </m:apply>
+        <m:apply>
+          <m:and/>
+          <m:apply><m:not/><m:ci>φ</m:ci></m:apply>
+          <m:apply><m:not/><m:ci>ψ</m:ci></m:apply>
+        </m:apply>
+      </m:apply></m:math>
+    </entry>
+  </row></tbody>
+</tgroup>
+</table>
+
+<para id="para6">
+  (Try <m:math><m:ci>φ</m:ci></m:math> being “Leprechauns are green”,
+   and <m:math><m:ci>ψ</m:ci></m:math> being “Morgana Le Fay likes gold”.
+   Do these laws make sense,
+   for each of the four possible truth assignments?)
+  <link url="http://www-gap.dcs.st-and.ac.uk/~history/Mathematicians/De_Morgan.html">Augustus DeMorgan</link>
+  was also an important figure in the formalization of logic.
+</para>
+
+<figure id="figure2">
+  <media id="idm3694480" alt=""><image src="../../media/demorgan.jpg" mime-type="image/jpeg"/></media>
+  <caption>Augustus DeMorgan (1806-1871)</caption>
+</figure>
+
+<para id="para7">
+  Here is another example.
+  For a statement <m:math><m:apply><m:implies/><m:ci>φ</m:ci><m:ci>ψ</m:ci></m:apply></m:math>,
+  the <term>contrapositive</term> of that formula is
+  <m:math><m:apply>
+    <m:implies/>
+    <m:apply><m:not/><m:ci>ψ</m:ci></m:apply>
+    <m:apply><m:not/><m:ci>φ</m:ci></m:apply>
+  </m:apply></m:math>.
+  We can show that a formula is equivalent to its contrapositive:
+</para>
+
+<example id="example2">
+  <para id="para8">
+    <emphasis>Contrapositive</emphasis>
+    <table id="proof2" summary="">
+
+<tgroup cols="3" align="center" colsep="1" rowsep="1">
+<colspec colwidth="*" colname="c1"/>
+<colspec colwidth="*" colname="c2"/>
+<colspec colwidth="*" colname="c3"/>
+
+<tbody>
+<row>
+<entry align="left">1</entry><entry namest="c2" nameend="c2"><m:math><m:apply><m:implies/> <m:ci>φ</m:ci> <m:ci>ψ</m:ci> </m:apply></m:math></entry><entry colname="c3"/>
+</row>
+<row>
+<entry align="left">2</entry><entry namest="c2" nameend="c2"><m:math><m:mo>≡</m:mo><m:apply>
+          <m:or/>
+          <m:apply><m:not/><m:ci>φ</m:ci></m:apply>
+          <m:ci>ψ</m:ci>
+        </m:apply></m:math></entry><entry colname="c3">Definition of <m:math><m:mo>⇒</m:mo></m:math></entry>
+</row>
+<row>
+<entry align="left">3</entry><entry namest="c2" nameend="c2"><m:math><m:mo>≡</m:mo><m:apply>
+          <m:or/>
+          <m:ci>ψ</m:ci>
+          <m:apply><m:not/><m:ci>φ</m:ci></m:apply>
+        </m:apply></m:math></entry><entry colname="c3">Commutativity of <m:math><m:mo>∨</m:mo></m:math></entry>
+</row>
+<row>
+<entry align="left">4</entry><entry namest="c2" nameend="c2"><m:math><m:mo>≡</m:mo><m:apply>
+          <m:or/>
+          <m:apply><m:not/><m:apply><m:not/><m:ci>ψ</m:ci></m:apply></m:apply>
+          <m:apply><m:not/><m:ci>φ</m:ci></m:apply>
+        </m:apply></m:math></entry><entry colname="c3">Double Complementation</entry>
+</row>
+<row>
+<entry align="left">5</entry><entry namest="c2" nameend="c2"><m:math><m:mo>≡</m:mo><m:apply>
+          <m:implies/>
+          <m:apply><m:not/><m:ci>ψ</m:ci></m:apply>
+          <m:apply><m:not/><m:ci>φ</m:ci></m:apply>
+        </m:apply></m:math></entry><entry colname="c3">Definition of <m:math><m:mo>⇒</m:mo></m:math></entry>
+</row></tbody>
+</tgroup>
+</table>
+  </para>
+</example>
+
+<para id="para9">
+  Don't confuse  the contrapositive of a statement
+  with the <term>converse</term> of a formula:
+  The converse of
+  <m:math><m:apply><m:implies/><m:ci>φ</m:ci><m:ci>ψ</m:ci></m:apply></m:math>
+  is the formula
+  <m:math><m:apply><m:implies/><m:ci>ψ</m:ci><m:ci>φ</m:ci></m:apply></m:math>;
+  in general 
+  <emphasis>a formula is not equivalent to its converse</emphasis>!
+</para>
+
+<para id="para10">
+  This next example is actually a proof of one of the laws
+  from the given list, using (only) others from the list.
+</para>
+<example id="example3">
+  <para id="para11">
+    <emphasis>Absorption of <m:math><m:mo>∨</m:mo></m:math></emphasis>
+    <table id="proof3" summary="">
+
+<tgroup cols="3" align="center" colsep="1" rowsep="1">
+<colspec colwidth="*" colname="c1"/>
+<colspec colwidth="*" colname="c2"/>
+<colspec colwidth="*" colname="c3"/>
+
+<tbody>
+<row>
+<entry align="left">1</entry><entry namest="c2" nameend="c2"><m:math><m:apply>
+          <m:or/>
+          <m:apply><m:and/><m:ci>φ</m:ci> <m:ci>ψ</m:ci></m:apply>
+          <m:ci>ψ</m:ci>
+        </m:apply></m:math></entry><entry colname="c3"/>
+</row>
+<row>
+<entry align="left">2</entry><entry namest="c2" nameend="c2"><m:math><m:mo>≡</m:mo><m:apply>
+          <m:or/>
+          <m:apply><m:and/><m:ci>φ</m:ci> <m:ci>ψ</m:ci></m:apply>
+          <m:apply><m:and/><m:ci>ψ</m:ci> <m:true/></m:apply>
+        </m:apply></m:math></entry><entry colname="c3">Identity of <m:math><m:mo>∧</m:mo></m:math></entry>
+</row>
+<row>
+<entry align="left">3</entry><entry namest="c2" nameend="c2"><m:math><m:mo>≡</m:mo><m:apply>
+          <m:or/>
+          <m:apply><m:and/><m:ci>ψ</m:ci> <m:ci>φ</m:ci></m:apply>
+          <m:apply><m:and/><m:ci>ψ</m:ci> <m:true/></m:apply>
+        </m:apply></m:math></entry><entry colname="c3">Commutativity of <m:math><m:mo>∨</m:mo></m:math></entry>
+</row>
+<row>
+<entry align="left">4</entry><entry namest="c2" nameend="c2"><m:math><m:mo>≡</m:mo><m:apply>
+          <m:and/>
+          <m:ci>ψ</m:ci>
+          <m:apply><m:or/><m:ci>φ</m:ci> <m:true/></m:apply>
+        </m:apply></m:math></entry><entry colname="c3">Distributivity of <m:math><m:mo>∧</m:mo></m:math> over <m:math><m:mo>∨</m:mo></m:math></entry>
+</row>
+<row>
+<entry align="left">5</entry><entry namest="c2" nameend="c2"><m:math><m:mo>≡</m:mo><m:apply><m:and/><m:ci>ψ</m:ci> <m:true/></m:apply></m:math></entry><entry colname="c3">Dominance of <m:math><m:mo>∨</m:mo></m:math></entry>
+</row>
+<row>
+<entry align="left">6</entry><entry namest="c2" nameend="c2"><m:math><m:mo>≡</m:mo><m:ci>ψ</m:ci></m:math></entry><entry colname="c3">Identity of <m:math><m:mo>∧</m:mo></m:math></entry>
+</row></tbody>
+</tgroup>
+</table>
+  </para>
+</example>
+
+<exercise id="exercise1">
+  <problem id="idm4799744">
+    <para id="para12">
+      Show that the “Absorption of <m:math><m:mo>∧</m:mo></m:math>” equivalence holds, 
+      given the other equivalences.
+      <foreign>I.e.</foreign>, show
+      <m:math><m:apply>
+        <m:equivalent/>
+        <m:apply><m:and/><m:apply><m:or/><m:ci>a</m:ci> <m:ci>b</m:ci></m:apply> <m:ci>b</m:ci></m:apply>
+        <m:ci>b</m:ci>
+      </m:apply></m:math>.
+    </para>
+  </problem>
+
+  <solution id="idp876576">
+    <table id="proof4" summary="">
+
+<tgroup cols="3" align="center" colsep="1" rowsep="1">
+<colspec colwidth="*" colname="c1"/>
+<colspec colwidth="*" colname="c2"/>
+<colspec colwidth="*" colname="c3"/>
+
+<tbody>
+<row>
+<entry align="left">1</entry><entry namest="c2" nameend="c2"><m:math><m:apply>
+          <m:and/>
+          <m:apply><m:or/><m:ci>a</m:ci> <m:ci>b</m:ci></m:apply>
+          <m:ci>b</m:ci>
+        </m:apply></m:math></entry><entry colname="c3"/>
+</row>
+<row>
+<entry align="left">2</entry><entry namest="c2" nameend="c2"><m:math><m:mo>≡</m:mo><m:apply>
+          <m:and/>
+          <m:apply><m:or/><m:ci>a</m:ci> <m:ci>b</m:ci></m:apply>
+          <m:apply><m:or/><m:ci>b</m:ci> <m:false/></m:apply>
+        </m:apply></m:math></entry><entry colname="c3">Identity of <m:math><m:mo>∨</m:mo></m:math></entry>
+</row>
+<row>
+<entry align="left">3</entry><entry namest="c2" nameend="c2"><m:math><m:mo>≡</m:mo><m:apply>
+          <m:and/>
+          <m:apply><m:or/><m:ci>b</m:ci> <m:ci>a</m:ci></m:apply>
+          <m:apply><m:or/><m:ci>b</m:ci> <m:false/></m:apply>
+        </m:apply></m:math></entry><entry colname="c3">Commutativity of <m:math><m:mo>∨</m:mo></m:math></entry>
+</row>
+<row>
+<entry align="left">4</entry><entry namest="c2" nameend="c2"><m:math><m:mo>≡</m:mo><m:apply>
+          <m:or/>
+          <m:ci>b</m:ci>
+          <m:apply><m:and/><m:ci>a</m:ci> <m:false/></m:apply>
+        </m:apply></m:math></entry><entry colname="c3">Distributivity of <m:math><m:mo>∨</m:mo></m:math> over <m:math><m:mo>∧</m:mo></m:math></entry>
+</row>
+<row>
+<entry align="left">5</entry><entry namest="c2" nameend="c2"><m:math><m:mo>≡</m:mo><m:apply><m:or/><m:ci>b</m:ci> <m:false/></m:apply></m:math></entry><entry colname="c3">Dominance of <m:math><m:mo>∧</m:mo></m:math></entry>
+</row>
+<row>
+<entry align="left">6</entry><entry namest="c2" nameend="c2"><m:math><m:mo>≡</m:mo><m:ci>b</m:ci></m:math></entry><entry colname="c3">Identity of <m:math><m:mo>∨</m:mo></m:math></entry>
+</row></tbody>
+</tgroup>
+</table>
+  </solution>
+</exercise>
+
+<para id="para13">
+  Compared to proofs using truth tables, Boolean algebra gives us
+  much shorter proofs.  But, determining <emphasis>which</emphasis>
+  equivalence to use in the next step of a proof can be difficult.
+  In this case, compare the solution for this exercise to
+  the previous absorption proof.  These two proofs have a special
+  <emphasis>dual</emphasis> relationship described in the next section.
+</para>
+
+<exercise id="exercise2">
+  <problem id="idm9727888">
+    <para id="para14">
+      Show that the <term>modus ponens</term> rule,
+      <m:math><m:apply>
+        <m:implies/>
+        <m:apply>
+          <m:and/>
+          <m:ci>a</m:ci>
+          <m:apply><m:implies/><m:ci>a</m:ci> <m:ci>b</m:ci></m:apply>
+        </m:apply>
+        <m:ci>b</m:ci>
+      </m:apply></m:math>
+      always holds.  <foreign>I.e.</foreign>, show that it is a tautology,
+      and thus equivalent to <m:math><m:true/></m:math>.
+    </para>
+  </problem>
+
+  <solution id="idm1911408">
+    <table id="proof5" summary="">
+
+<tgroup cols="3" align="center" colsep="1" rowsep="1">
+<colspec colwidth="*" colname="c1"/>
+<colspec colwidth="*" colname="c2"/>
+<colspec colwidth="*" colname="c3"/>
+
+<tbody>
+<row>
+<entry align="left">1</entry><entry namest="c2" nameend="c2"><m:math><m:apply>
+          <m:implies/>
+          <m:apply>
+            <m:and/>
+            <m:ci>a</m:ci>
+            <m:apply><m:implies/><m:ci>a</m:ci> <m:ci>b</m:ci></m:apply>
+          </m:apply>
+          <m:ci>b</m:ci>
+        </m:apply></m:math></entry><entry colname="c3"/>
+</row>
+<row>
+<entry align="left">2</entry><entry namest="c2" nameend="c2"><m:math><m:mo>≡</m:mo><m:apply>
+          <m:implies/>
+          <m:apply>
+            <m:and/>
+            <m:ci>a</m:ci>
+            <m:apply><m:or/> <m:apply><m:not/><m:ci>a</m:ci></m:apply> <m:ci>b</m:ci></m:apply>
+          </m:apply>
+          <m:ci>b</m:ci>
+        </m:apply></m:math></entry><entry colname="c3">Definition of <m:math><m:mo>⇒</m:mo></m:math></entry>
+</row>
+<row>
+<entry align="left">3</entry><entry namest="c2" nameend="c2"><m:math><m:mo>≡</m:mo><m:apply>
+          <m:implies/>
+          <m:apply>
+            <m:or/>
+            <m:apply><m:and/> <m:ci>a</m:ci> <m:apply><m:not/><m:ci>a</m:ci></m:apply> </m:apply>
+            <m:apply><m:and/> <m:ci>a</m:ci> <m:ci>b</m:ci> </m:apply>
+          </m:apply>
+          <m:ci>b</m:ci>
+        </m:apply></m:math></entry><entry colname="c3">Distributivity of <m:math><m:mo>∨</m:mo></m:math> over <m:math><m:mo>∧</m:mo></m:math></entry>
+</row>
+<row>
+<entry align="left">4</entry><entry namest="c2" nameend="c2"><m:math><m:mo>≡</m:mo><m:apply>
+          <m:implies/>
+          <m:apply>
+            <m:or/>
+            <m:false/>
+            <m:apply><m:and/> <m:ci>a</m:ci> <m:ci>b</m:ci> </m:apply>
+          </m:apply>
+          <m:ci>b</m:ci>
+        </m:apply></m:math></entry><entry colname="c3">Complement</entry>
+</row>
+<row>
+<entry align="left">5</entry><entry namest="c2" nameend="c2"><m:math><m:mo>≡</m:mo><m:apply>
+          <m:implies/>
+          <m:apply>
+            <m:or/>
+            <m:apply><m:and/> <m:ci>a</m:ci> <m:ci>b</m:ci> </m:apply>
+            <m:false/>
+          </m:apply>
+          <m:ci>b</m:ci>
+        </m:apply></m:math></entry><entry colname="c3">Commutativity of <m:math><m:mo>∨</m:mo></m:math></entry>
+</row>
+<row>
+<entry align="left">6</entry><entry namest="c2" nameend="c2"><m:math><m:mo>≡</m:mo><m:apply>
+          <m:implies/>
+          <m:apply><m:and/><m:ci>a</m:ci> <m:ci>b</m:ci></m:apply>
+          <m:ci>b</m:ci>
+        </m:apply></m:math></entry><entry colname="c3">Identity of <m:math><m:mo>∨</m:mo></m:math></entry>
+</row>
+<row>
+<entry align="left">7</entry><entry namest="c2" nameend="c2"><m:math><m:mo>≡</m:mo><m:apply>
+          <m:or/>
+          <m:apply><m:not/> <m:apply><m:and/><m:ci>a</m:ci> <m:ci>b</m:ci></m:apply> </m:apply>
+          <m:ci>b</m:ci>
+        </m:apply></m:math></entry><entry colname="c3">Definition of <m:math><m:mo>⇒</m:mo></m:math></entry>
+</row>
+<row>
+<entry align="left">8</entry><entry namest="c2" nameend="c2"><m:math><m:mo>≡</m:mo><m:apply>
+          <m:or/>
+          <m:apply>
+            <m:or/>
+            <m:apply><m:not/><m:ci>a</m:ci></m:apply>
+            <m:apply><m:not/><m:ci>b</m:ci></m:apply>
+          </m:apply>
+          <m:ci>b</m:ci>
+        </m:apply></m:math></entry><entry colname="c3">DeMorgan's law</entry>
+</row>
+<row>
+<entry align="left">9</entry><entry namest="c2" nameend="c2"><m:math><m:mo>≡</m:mo><m:apply>
+          <m:or/>
+          <m:apply><m:not/><m:ci>a</m:ci></m:apply>
+          <m:apply>
+            <m:or/>
+            <m:apply><m:not/><m:ci>b</m:ci></m:apply>
+            <m:ci>b</m:ci>
+          </m:apply>
+        </m:apply></m:math></entry><entry colname="c3">Associativity of <m:math><m:mo>∨</m:mo></m:math></entry>
+</row>
+<row>
+<entry align="left">10</entry><entry namest="c2" nameend="c2"><m:math><m:mo>≡</m:mo><m:apply>
+          <m:or/>
+          <m:apply><m:not/><m:ci>a</m:ci></m:apply>
+          <m:apply>
+            <m:or/>
+            <m:ci>b</m:ci>
+            <m:apply><m:not/><m:ci>b</m:ci></m:apply>
+          </m:apply>
+        </m:apply></m:math></entry><entry colname="c3">Commutativity of <m:math><m:mo>∨</m:mo></m:math></entry>
+</row>
+<row>
+<entry align="left">11</entry><entry namest="c2" nameend="c2"><m:math><m:mo>≡</m:mo><m:apply>
+          <m:or/>
+          <m:apply><m:not/><m:ci>a</m:ci></m:apply>
+          <m:true/>
+        </m:apply></m:math></entry><entry colname="c3">Complement</entry>
+</row>
+<row>
+<entry align="left">12</entry><entry namest="c2" nameend="c2"><m:math><m:mo>≡</m:mo><m:true/></m:math></entry><entry colname="c3">Dominance of <m:math><m:mo>∨</m:mo></m:math></entry>
+</row></tbody>
+</tgroup>
+</table>
+  </solution>
+</exercise>
+
+<para id="para15">
+  So, what would it mean to use Boolean algebra as reasoning for WaterWorld?
+  That is, if you wanted to show that <m:math><m:ci>G-safe</m:ci></m:math> was true,
+  how would you do that using Boolean algebra?
+  As with truth-tables, we would take
+  the conjunction of all the WaterWorld domain axioms (call it <m:math><m:ci>ρ</m:ci></m:math>),
+  <emphasis>and</emphasis> the board's observed state (<m:math><m:ci>ψ</m:ci></m:math>).
+  We would then want to show that asserting <m:math><m:ci>G-safe</m:ci></m:math> was already equivalent
+  to the rules-and-observed-state:
+  <m:math><m:apply>
+    <m:equivalent/>
+    <m:apply><m:and/><m:ci>ρ</m:ci> <m:ci>ψ</m:ci></m:apply>
+    <m:apply><m:and/><m:ci>ρ</m:ci> <m:ci>ψ</m:ci> <m:ci>G-safe</m:ci></m:apply>
+  </m:apply></m:math>.
+</para>
+
+
+<section id="section2">
+<title>Duals (optional)</title>
+
+<para id="para16">
+  <emphasis>Duals</emphasis>:
+  a symmetry between <m:math><m:mo>∧</m:mo></m:math>, <m:math><m:mo>∨</m:mo></m:math> mediated by <m:math><m:mo>¬</m:mo></m:math>.
+</para>
+
+<para id="para17">
+  Looking at the provided
+  <link document="m10540">propositional equivalences</link>,
+  you should notice a strong similarity between those for <m:math><m:mo>∨</m:mo></m:math>
+  and those for <m:math><m:mo>∧</m:mo></m:math>.
+  Take any equivalence, swap <m:math><m:mo>∨</m:mo></m:math>s and <m:math><m:mo>∧</m:mo></m:math>s, swap <m:math><m:true/></m:math>s and <m:math><m:false/></m:math>s,
+  and you'll have another equivalence!
+  For instance, there are two flavors of DeMorgan's law,
+  which are just duals of each other:
+</para>
+
+<table id="table3" summary="">
+
+<tgroup cols="2">
+
+<tbody><row>
+    <entry>
+      <m:math><m:apply>
+        <m:equivalent/>
+        <m:apply><m:not/><m:apply><m:and/><m:ci>φ</m:ci> <m:ci>ψ</m:ci></m:apply></m:apply>
+        <m:apply>
+          <m:or/>
+          <m:apply><m:not/><m:ci>φ</m:ci></m:apply>
+          <m:apply><m:not/><m:ci>ψ</m:ci></m:apply>
+        </m:apply>
+      </m:apply></m:math>
+    </entry>
+    <entry>
+      <m:math><m:apply>
+        <m:equivalent/>
+        <m:apply><m:not/><m:apply><m:or/><m:ci>φ</m:ci> <m:ci>ψ</m:ci></m:apply></m:apply>
+        <m:apply>
+          <m:and/>
+          <m:apply><m:not/><m:ci>φ</m:ci></m:apply>
+          <m:apply><m:not/><m:ci>ψ</m:ci></m:apply>
+        </m:apply>
+       </m:apply></m:math>
+    </entry>
+  </row></tbody>
+</tgroup>
+</table>
+
+<para id="para18">
+  <note type="aside" id="idp240048">
+    In terms of circuit diagrams, we can
+    change each AND gate to an OR gate and add negation-bubbles
+    to each gate's inputs and outputs.
+    The principle of duality asserts that this
+    operation yields an equivalent circuit.
+  </note>
+</para>
+
+
+
+<para id="para19">
+  The idea of
+  
+  <link url="http://carbon.cudenver.edu/~hgreenbe/glossary/duals.html">duality is more general</link> 
+  than this.  For example,
+  <link url="http://www.georgehart.com/virtual-polyhedra/duality.html">polyhedra have a natural dual</link>
+  of interchanging the role of vertices and faces.
+</para>
+
+</section> 
+
+
+
+
+
+</section> 
+
+
+
+</content>
+</document>

@@ -1,0 +1,417 @@
+<document xmlns="http://cnx.rice.edu/cnxml" xmlns:m="http://www.w3.org/1998/Math/MathML" xmlns:md="http://cnx.rice.edu/mdml">
+
+<title>Logic: Looking Back</title>
+<metadata>
+  <md:content-id>m10775</md:content-id><md:title>Logic: Looking Back</md:title>
+  <md:abstract>A recap of where we've been,
+and why we traveled there.</md:abstract>
+  <md:uuid>1ef0fbb6-65d8-4343-bee0-58d1972066e2</md:uuid>
+</metadata>
+
+<content>
+
+<section id="imp-id9088726">
+<title>Why didn't we begin with quantifiers all along?</title>
+
+<para id="imp-id6580753">
+  We saw three stages of logics:
+  <list id="imp-id9089768">
+    <item>
+      Propositional logic, with formulas like
+      <m:math><m:apply><m:implies/>
+        <m:ci>DickLikesJane</m:ci>
+        <m:apply><m:not/><m:ci>JaneLikesDick</m:ci></m:apply>
+      </m:apply></m:math>.
+      While the propositions are named suggestively, nothing in the logic
+      enforces a relation among these; it is equivalent to
+      <m:math><m:apply><m:implies/>
+        <m:ci>A</m:ci>
+        <m:apply><m:not/><m:ci>B</m:ci></m:apply>
+      </m:apply></m:math>.
+    </item>
+    <item>
+      Predicate logic,
+      where variables (and constants) can express a connection between 
+      different parts of the formula:
+      <m:math><m:apply><m:implies/>
+        <m:apply>
+          <m:ci type="fn">likes</m:ci>
+          <m:ci>y</m:ci>
+          <m:ci>x</m:ci>
+        </m:apply>
+        <m:apply><m:not/>
+          <m:apply>
+            <m:ci type="fn">likes</m:ci>
+            <m:ci>x</m:ci>
+            <m:ci>y</m:ci>
+          </m:apply>
+        </m:apply>
+      </m:apply></m:math>
+      Predicate logic introduced the idea of variables,
+      and required domains and interpretations to determine truth.
+      But it can't bind variables, and thus requires an interpretation
+      of <m:math><m:ci>x</m:ci></m:math> and <m:math><m:ci>y</m:ci></m:math> to evaluate.
+    </item>
+    <item>
+      First-order logic, which included two quantifiers to bind variables:
+      <m:math><m:apply><m:forall/><m:bvar><m:ci>y</m:ci></m:bvar>
+        <m:apply><m:exists/><m:bvar><m:ci>x</m:ci></m:bvar>
+          <m:apply><m:implies/>
+            <m:apply>
+              <m:ci type="fn">likes</m:ci>
+              <m:ci>y</m:ci>
+              <m:ci>x</m:ci>
+            </m:apply>
+            <m:apply><m:not/>
+              <m:apply>
+                <m:ci type="fn">likes</m:ci>
+                <m:ci>x</m:ci>
+                <m:ci>y</m:ci>
+              </m:apply>
+            </m:apply>
+          </m:apply>
+        </m:apply>
+      </m:apply></m:math>
+    </item>
+  </list>
+  So why, you might ask, didn't we just start out with first-order logic
+  in the first lecture?
+  One reason, clearly, is to introduce concepts one at a time:
+  everything you needed to know about one level was needed in the
+  next, and then some.
+  But there's more:
+  by restricting our formalisms, we can't express all the concepts
+  of the bigger formalism, but we <emphasis>can</emphasis> have automated
+  ways of checking statements or finding proofs.
+</para>
+
+<para id="imp-id9524950">
+  In general, this is a common theme in the theory of any subject:
+  determining when and where you can (or, need to) trade off
+  expressibility for predictive value.
+  For example, …
+  <list id="imp-id9188579">
+    <item>
+      Linguistics:
+      Having a set of precise rules for (say) Tagalog grammar
+      allows you to determine what is and isn't a valid sentence;
+      details of the formal grammar can reveal
+      relations to other languages which aren't otherwise so apparent.
+      On the other hand, a grammar for any natural language is unlikely to
+      exactly capture all things which native speakers say and understand.
+
+      
+
+      If working with a formal grammar, one needs to know what is being lost
+      and what is being gained.
+
+      <list id="imp-id9673132">
+        <item>
+          Dismissing a grammar as irrelevant because it
+          doesn't entirely reflect usage
+          is missing the point of the grammar;
+        </item>
+        <item>
+          Conversely, condemning some real-life utterances as
+          ungrammatical (and ignoring them) forgets that the
+          grammar is a model which captures
+          many (if not all) important properties.
+        </item>
+      </list>
+      Of course, any reasonable debate on this topic respects
+      these two poles and is actually about where the best
+      trade-off between them lies.
+    </item>
+
+    <item>
+      Psychology:
+      Say,
+      <link url="http://www.piaget.org/biography/biog.html">Piaget</link> might propose four stages of learning in children.
+      It may not trade off total accuracy, for (say) clues of what to look
+      for in brain development.
+    </item>
+
+    <item>
+      Physics:
+      Modern pedagogy must trade off quantum accuracy for
+      Newtonian approximations.
+      Researchers exploring fields like particle physics must
+      trade off exact simulations for statistical
+      (<quote display="inline">stochastic</quote>)
+      approximations.
+    </item>
+  </list>
+  Understanding the theoretical foundations of a field
+  is often critical for knowing how to apply various techniques in practice.
+</para>
+
+</section> 
+
+
+
+<section id="imp-id9692939">
+<title>Logic and everyday reasoning</title>
+
+
+
+<para id="imp-id9227965">
+  We've looked at the impreciseness and ambiguity of natural language
+  statements, but these are not the only problems hidden in natural language
+  arguments.
+  The following illustrates a common form of hidden assumption:
+  saying
+  <quote display="inline">the tenth reindeer of Santa Claus is …</quote>
+  implies the existence some tenth reindeer.
+  More subtly, humans use much more information than what is spoken in
+  a conversation.  Even aside from body language, consider
+  a friend asking you
+  <quote display="inline">Hey, are you hungry?</quote>
+  While as a formal statement this doesn't have any information, in real life
+  it highly suggests that your friend <emphasis>is</emphasis> hungry.
+</para>
+
+<para id="imp-id9577765">
+  A much more blatant form of missing information is when the speaker
+  simply chooses to omit it.  When arguing for a cause it is standard
+  practice to simply describe its advantages, without any of its
+  disadvantages or alternatives.
+  <note id="imp-id8440994" type="aside">
+    Economists measure things not in cost, but
+    <term>opportunity cost</term>,
+    the price of something minus the benefits of what you'd get using
+    the price for something else.
+    <foreign>E.g.</foreign>, for $117 million the university can build
+    a new research center.
+    But what else could you do on campus with $117m?
+  </note>
+  Historically, logic and <term>rhetoric</term>, the art of persuasion
+  through language, are closely linked.
+</para>
+
+</section> 
+
+
+<section id="other-logics">
+<title>Other logics</title>
+
+<para id="imp-id9183090">
+  You've now been introduced to two logics: propositional and first-order.
+  But, the story does not have to end here.
+  There are many other logics, each with their uses.
+</para>
+
+
+<section id="imp-id9326228">
+<title>Limitations of first-order logic's expressiveness</title>
+
+<para id="imp-id8386130">
+  We can make first-order sentences to express concepts as
+  <quote display="inline">
+    vertices <m:math><m:ci>a</m:ci></m:math> and <m:math><m:ci>b</m:ci></m:math> are connected by a
+    path of length 2
+  </quote>,
+  as well as
+  <quote display="inline">…by a path of length 3</quote>,
+  <quote display="inline">
+    <m:math><m:apply><m:leq/>
+      <m:ci>length</m:ci>
+      <m:cn>4</m:cn>
+    </m:apply></m:math>
+  </quote>,
+  <foreign>etc.</foreign>
+  <note id="imp-id9583242" type="Exercise"> Write a couple of these sentences! </note>
+  But trying to write
+  <quote display="inline">
+    vertices <m:math><m:ci>a</m:ci></m:math> and <m:math><m:ci>b</m:ci></m:math> are connected
+    [by a path of any length]
+  </quote>
+  isn't obvious … in fact, it can be proven that
+  <emphasis>no</emphasis> first-order sentence can express this property!
+  Nor can it express the closely-related property
+  <quote display="inline">the graph is connected</quote>
+  (without reference to two named vertices <m:math><m:ci>a</m:ci></m:math> and <m:math><m:ci>b</m:ci></m:math>).
+</para>
+
+<para id="imp-id9231100">
+  Hmm, what about <emphasis>second</emphasis>-order logic?
+  It has a bigger name;
+  whatever it means, perhaps it can express more properties?
+</para>
+
+<para id="imp-id9545359">
+  What exactly is <term>second-order logic</term>?
+  In first-order logic, quantifiers range over elements of the domain:
+   <quote display="inline">
+     there exist numbers <m:math><m:ci>x</m:ci></m:math> and <m:math><m:ci>y</m:ci></m:math>, …
+   </quote>.
+  In second-order logic, you can additionally quantify over
+  <emphasis>sets</emphasis> of elements of the domain:
+  <quote display="inline">
+    there is a set of numbers, such that …
+  </quote>.
+</para>
+
+<example id="imp-id8932580">
+  <para id="imp-id8932582">
+    For instance,
+    <quote display="inline">
+      for all vertices <m:math><m:ci>x</m:ci></m:math> and <m:math><m:ci>y</m:ci></m:math>, there exists a 
+      set of vertices (call the set <quote display="inline">Red</quote>),
+      the red vertices include a path from <m:math><m:ci>x</m:ci></m:math> to <m:math><m:ci>y</m:ci></m:math>
+    </quote>.
+    More precisely,
+    <quote display="inline">
+      every Red vertex has exactly two Red neighbors,
+      or it is <m:math><m:ci>x</m:ci></m:math> or <m:math><m:ci>y</m:ci></m:math>
+      (which each have exactly 1 red neighbor)
+    </quote>.
+    Is this sentence true exactly when the graph is connected?
+    Why does this description of <quote display="inline">red vertices</quote>
+    not <emphasis>quite</emphasis> correspond to
+    <quote display="inline">
+      just the vertices on a path from <m:math><m:ci>x</m:ci></m:math> to <m:math><m:ci>y</m:ci></m:math>
+    </quote>?
+  </para>
+</example>
+
+<para id="imp-id9246176">
+  An interesting phenomenon:
+  There are some relations between how difficult it
+  is to write down a property, and how difficult to compute it!
+  How might you try to formalize the statement
+  <quote display="inline">there is a winning strategy for chess</quote>?
+</para>
+
+<para id="imp-id9245286">
+  A shortcoming of first-order logic is that
+  it is <emphasis>impossible</emphasis> to express the concept
+  <quote display="inline">path</quote>.
+  (This can be proven, though we won't do so here.)
+</para>
+
+
+
+</section> 
+
+
+<para id="imp-id9106091">
+  Thus, some other logics used to formalize certain systems include:
+  <list id="imp-id9030342">
+    <item>
+      As mentioned, 
+      second-order logic is like first-order logic, but it also allows
+      quantification over entire <emphasis>relations</emphasis>.
+      Thus, you can make formulas that state things like
+      <quote display="inline">
+        For all relations <m:math><m:ci type="fn">R</m:ci></m:math>,
+        if <m:math><m:ci type="fn">R</m:ci></m:math> is symmetric and transitive, 
+        then …
+      </quote>.
+      While less common, we could continue with third-order, fourth-order,
+      <foreign>etc.</foreign>
+    </item>
+
+    <item>
+      <term>Temporal logic</term> is based on quantification over time.
+      This is useful to describe how a program's state changes over time.
+      In particular, it is used for describing 
+      concurrent program specifications and communication protocols,
+      sequences of communications steps used in security or networking.
+      See, for example,
+      <link url="http://cnx.org/content/col10294/latest">TeachLogic's Model-Checking module</link>.
+    </item>
+
+    <item>
+      <term>Linear logic</term> is a
+      <quote display="inline">resource-aware</quote> logic.
+      Every premise must be used, but it may be used only once.
+      This models, for example, how keyboard input is usually handled:
+      reading an input also removes it from the input stream, so that
+      it can't be read again.
+    </item>
+  </list>
+</para>
+
+</section> 
+
+
+<section id="imp-id9031865">
+<title>Logic in computer science</title>
+
+<para id="imp-id9048213">
+  Logics provide us with a formal language useful for
+  <list id="imp-id9230988">
+    <item>
+      specifying properties unambiguously,
+    </item>
+    <item>
+      proving that programs and systems do (or don't) have the
+      claimed properties, and
+    </item>
+    <item>
+      gaining greater insight into other languages such as
+      <link url="http://www.cs.rice.edu/~tlogic/Database/all-lectures.pdf">database queries</link>.
+    </item>
+  </list>
+</para>
+
+<para id="imp-id9513741">
+  Programming language type systems are a great example of these first two
+  points.  The connectives allow us to talk about pairs and structures
+  (<m:math><m:ci>x</m:ci></m:math> <emphasis>and</emphasis> <m:math><m:ci>y</m:ci></m:math>), unions
+  (<m:math><m:ci>x</m:ci></m:math> <emphasis>or</emphasis> <m:math><m:ci>y</m:ci></m:math>),
+  and functions (<emphasis>if</emphasis>
+  you give the program a <m:math><m:ci>x</m:ci></m:math>, it produces a <m:math><m:ci>y</m:ci></m:math>).
+  The <quote display="inline">generics</quote> in Java, C++, and C#
+  are based upon
+  universal quantification, while <quote display="inline">wildcards</quote>
+  in Java are
+  based upon existential quantification.
+  One formalization of this strong link between logic and types is called the
+  <term>Curry-Howard isomorphism</term>.
+</para>
+
+<para id="imp-id9644648">
+  Compilers have very specific logics built into them.  In order to
+  optimize your code, analyses check what properties your code has
+  <foreign>e.g.</foreign>, are variables <m:math><m:ci>b</m:ci></m:math> and <m:math><m:ci>c</m:ci></m:math>
+  needed at the same time, or can they be stored in the same hardware register?
+</para>
+
+<para id="imp-id9655776">
+  More generally, it would be great to be able to verify that our
+  hardware and software designs were correct.
+  First, specifying what
+  <quote display="inline">correct</quote> means requires providing
+  the appropriate logical formulas.
+  With hardware, automated verification is now part of the regular practice.
+  However, it is so computationally expensive that it can only be done
+  on pieces of a design, but not, say, a whole microprocessor.
+  With software, we also frequently work with smaller pieces of code,
+  proving individual functions or algorithms correct.
+  However, there are two big inter-related problems.  Many of the
+  properties we'd like to prove about our software are
+  <quote display="inline">undecidable</quote> <m:math><m:mo>—</m:mo></m:math>
+  it is <emphasis>impossible</emphasis>
+  to check the property accurately for every input.  Also,
+  specifying full correctness typically requires extensions
+  to first-order logic, most of which are incomplete.
+  <footnote id="incomplete">
+    Even something as
+    simple as first-order logic using the integers as our domain and
+    addition and multiplication as relations is undecidable.
+    <cite>Kurt Gödel, 1931</cite>
+  </footnote>
+  As we've seen,
+  that means that we <emphasis>cannot</emphasis> prove everything we want.
+  While proving hardware and software correct has its limitations, logic
+  provides us with tools that are still quite useful.
+  For an introduction to one approach used in verification, see
+  <link url="http://cnx.org/content/col10294/latest">TeachLogic's Model-Checking module</link>.
+</para>
+
+
+</section> 
+
+</content>
+</document>

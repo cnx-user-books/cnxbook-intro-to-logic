@@ -1,0 +1,271 @@
+<document xmlns="http://cnx.rice.edu/cnxml" xmlns:m="http://www.w3.org/1998/Math/MathML" xmlns:md="http://cnx.rice.edu/mdml">
+
+<title>soundness and completeness</title>
+<metadata>
+  <md:content-id>m12076</md:content-id><md:title>soundness and completeness</md:title>
+  <md:abstract>The soundness and completeness of a system.</md:abstract>
+  <md:uuid>983617a6-446d-42c2-b696-34ff24e39b1e</md:uuid>
+</metadata>
+
+
+<content>
+
+<section id="imp-id12248481">
+<title>Are we done yet?</title>
+
+<para id="imp-id16149911">
+  We have shown procedures, using both truth tables and equivalences,
+  for solving two different logic problems:
+</para>
+<list id="imp-id10838689">
+  <item>
+    <term>Equivalence</term>: Show whether or not two WFFs
+    <m:math><m:ci>φ</m:ci></m:math> and <m:math><m:ci>ψ</m:ci></m:math>
+    are equivalent (the same under any truth assignment);
+  </item>
+  <item>
+    <term>Tautology</term>:
+    Show whether or not a given WFF <m:math><m:ci>φ</m:ci></m:math> is a tautology
+    (true under all truth assignments).
+  </item>
+</list>
+
+<exercise id="exercise1">
+  <problem id="imp-id14177099">
+    <para id="imp-id17152117">
+      Which of these two logic problems seems harder than the other?
+      That is,  suppose you have a friend who can solve
+      <emphasis>any</emphasis> Equivalence problem efficiently.
+      But you want to open a business which will solve 
+      <emphasis>any</emphasis> Tautology problem efficiently.
+      Can you open your business and,
+      by subcontracting out specific Equivalence problems to your friend,
+      really solve any Tautology problem brought to you?
+      This question is sometimes phrased as 
+      <quote display="inline">
+        Does Tautology <term>reduce</term> to Equivalence?
+      </quote>
+      Or, does it work the other way: does Equivalence
+      reduce to Tautology?
+    </para>
+  </problem>
+
+  <solution id="imp-id9994109">
+    <para id="imp-id16180141">
+      We can indeed reduce the question of Tautology to the question
+      of Equivalence:
+      if somebody asks you whether <m:math><m:ci>φ</m:ci></m:math> is true,
+      you can just turn around and ask your friend whether the following
+      two formulas are equivalent: <m:math><m:ci>φ</m:ci></m:math>, and true.
+      Your friend's answer for this variant question
+      will be your answer to your customer's question about
+      <m:math><m:ci>φ</m:ci></m:math>.
+      Thus, the Tautology problem isn't particularly harder than the
+      Equivalence problem.
+    </para>
+
+    <para id="imp-id9167466">
+      But also, Equivalence can be reduced to Tautology:
+      if somebody asks you whether φ is equivalent to ψ,
+      you can construct a new formula
+      <m:math><m:apply><m:and/>
+        <m:apply><m:implies/>
+          <m:ci>φ</m:ci>
+          <m:ci>ψ</m:ci>
+        </m:apply>
+        <m:apply><m:implies/>
+          <m:ci>ψ</m:ci>
+          <m:ci>φ</m:ci>
+        </m:apply>
+      </m:apply></m:math>.
+      This formula is true exactly when φ and ψ are equivalent.
+      So, you ask your friend whether this bigger formula is a tautology,
+      and you then have your answer to whether the two original formulas
+      were equivalent.
+      Thus, the Equivalence problem isn't particularly harder than the
+      Tautology problem!
+    </para>
+
+    <para id="imp-id17108944">
+      Given these two facts (that each problem reduces to the other),
+      we realize that really they are essentially the same problem,
+      in disguise.
+    </para>
+  </solution>
+</exercise>
+
+<para id="imp-id17081178">
+  But we have a more fundamental question to ask,
+  about the method of using Boolean algebra (propositional equivalences)
+  to prove something:
+  Where does the initial list of allowable equivalences come from, and
+  how do we know they're valid?
+  The answer is easy <m:math><m:mo>—</m:mo></m:math> each equivalence can be verified by a truth table!
+</para>
+
+<exercise id="exercise2">
+  <problem id="imp-id11455208">
+    <para id="imp-id16090316">
+      Using a truth table,
+      show the validity of conjunctive Redundancy:
+      <m:math><m:apply>
+        <m:equivalent/>
+        <m:apply><m:and/>
+          <m:ci>φ</m:ci>
+          <m:apply><m:or/>
+            <m:apply><m:not/><m:ci>φ</m:ci></m:apply>
+            <m:ci>ψ</m:ci>
+          </m:apply>
+        </m:apply>  
+        <m:apply><m:and/><m:ci>φ</m:ci> <m:ci>ψ</m:ci></m:apply>
+      </m:apply></m:math>
+    </para>
+  </problem>
+
+  <solution id="imp-id17359502">
+    <para id="imp-id17359837">
+      Compare the last two columns in the following:
+    </para>
+
+    <table id="table1" summary="Truth table to prove validity of conjunctive Redundancy">
+<title>Truth table to prove validity of conjunctive Redundancy</title>
+<tgroup cols="5">
+<thead><row>
+        <entry><m:math><m:ci>a</m:ci></m:math></entry>
+        <entry><m:math><m:ci>b</m:ci></m:math></entry>
+        <entry>
+          <m:math>
+            <m:apply><m:or/>
+              <m:apply><m:not/><m:ci>a</m:ci></m:apply>
+              <m:ci>b</m:ci>
+            </m:apply>
+          </m:math>
+        </entry>
+        <entry>
+          <m:math>
+            <m:apply><m:and/>
+              <m:ci>a</m:ci>
+              <m:apply><m:or/>
+                <m:apply><m:not/><m:ci>a</m:ci></m:apply>
+                <m:ci>b</m:ci>
+              </m:apply>
+            </m:apply>
+          </m:math>
+        </entry>
+        <entry>
+          <m:math>
+            <m:apply><m:and/>
+              <m:ci>a</m:ci>
+              <m:ci>b</m:ci>
+            </m:apply>
+          </m:math>
+        </entry>
+      </row></thead>
+<tbody><row>
+        <entry><m:math><m:false/></m:math></entry>
+        <entry><m:math><m:false/></m:math></entry>
+        <entry><m:math><m:true/></m:math></entry>
+        <entry><m:math><m:false/></m:math></entry>
+        <entry><m:math><m:false/></m:math></entry>
+      </row>
+<row>
+        <entry><m:math><m:false/></m:math></entry>
+        <entry><m:math><m:true/></m:math></entry>
+        <entry><m:math><m:true/></m:math></entry>
+        <entry><m:math><m:false/></m:math></entry>
+        <entry><m:math><m:false/></m:math></entry>
+      </row>
+<row>
+        <entry><m:math><m:true/></m:math></entry>
+        <entry><m:math><m:false/></m:math></entry>
+        <entry><m:math><m:false/></m:math></entry>
+        <entry><m:math><m:false/></m:math></entry>
+        <entry><m:math><m:false/></m:math></entry>
+      </row>
+<row>
+        <entry><m:math><m:true/></m:math></entry>
+        <entry><m:math><m:true/></m:math></entry>
+        <entry><m:math><m:true/></m:math></entry>
+        <entry><m:math><m:true/></m:math></entry>
+        <entry><m:math><m:true/></m:math></entry>
+      </row></tbody>
+</tgroup>
+</table>
+  </solution>
+</exercise>
+
+<para id="imp-id16635218">
+  This is called <term>soundness</term> of Boolean algebra:
+  If, using our propositional equivalence rules,
+  we derive that φ and ψ are
+  equivalent, then truly they are equivalent.
+  (Whew!)
+</para>
+
+<para id="imp-id16883440">
+  By the way, there is one subtle point:
+  our truth table tells us that 
+  <m:math><m:apply><m:and/><m:ci>a</m:ci> <m:ci>b</m:ci></m:apply></m:math> and
+  <m:math><m:apply><m:and/><m:ci>b</m:ci> <m:ci>a</m:ci></m:apply></m:math> are equivalent.
+  But then suddenly we generalize this to saying that
+  for <emphasis>any</emphasis> formulas φ and ψ,
+  <m:math><m:apply><m:and/><m:ci>φ</m:ci> <m:ci>ψ</m:ci></m:apply></m:math> and
+  <m:math><m:apply><m:and/><m:ci>ψ</m:ci> <m:ci>φ</m:ci></m:apply></m:math>
+  are also equivalent.
+  What lets us justify that step?
+  It's because any given formula will be either true or false,
+  so we can reduce the entire formula to a single true/false proposition.
+</para>
+
+<para id="completeness">
+  Is Boolean algebra enough?
+  Does our list of allowable propositional equivalences include
+  everything you'll need?
+  That is, could I have asked as a homework problem  to show some
+  two formulas equivalent (using Boolean algebra),
+  and even though they really are equivalent,
+  there aren't enough rules to on our list to let you finish the homework?
+  Hmm, good question!
+  The property we desire here is called the <term>completeness</term>
+  of Boolean algebra: any equivalence which is true can be proved.
+</para>
+
+<para id="imp-id4467239">
+  It turns out that, given any two formulas which really are equivalent,
+  Boolean algebra <emphasis>is</emphasis> indeed sufficiently powerful
+  to show that.
+  Put both formulas into CNF (or, DNF); if the truth
+  tables are equal then the CNF formulas will be equal.
+  (Well, there are a few details to take care of: you have to 
+  order the clauses alphabetically, eliminate any duplicate
+  clauses, and include all variables in each clause.
+  This might be tedious, but not difficult.)
+  Thus, Boolean algebra is complete, since (we state without proof)
+  this procedure can always be carried out.
+</para>
+
+<para id="imp-id16047535">
+  The concepts of soundness and completeness can be generalized to 
+  any system.
+</para>
+
+<definition id="definition1">
+  <term>soundness</term> 
+
+  <meaning id="imp-id4567464">
+    If the system (claims to) prove something is true, it really is true.
+  </meaning>
+</definition>
+<definition id="definition2">
+  <term>completeness</term> 
+
+  <meaning id="imp-id17302560">
+    If something really is true,  the system is capable of proving it.
+  </meaning>
+</definition>
+
+</section> 
+
+
+</content>
+</document>

@@ -1,0 +1,246 @@
+<document xmlns="http://cnx.rice.edu/cnxml" xmlns:md="http://cnx.rice.edu/mdml">
+  <title>90 = 100: A Proof</title>
+  <metadata><md:content-id>undefined</md:content-id><md:title/><md:uuid>e604c459-f0cc-4c16-b462-d41fcf7be90c</md:uuid>
+</metadata>
+
+
+
+  <content>
+    <para id="para1">   
+Construct a four-sided figure ABED as follows:
+<list id="list1">
+  <item>
+    |∠ABE| =  90°
+  </item>
+  <item>
+    |∠DEB| = 100°
+  </item>
+  <item>
+    |AB|   = |ED|
+  </item>
+</list>
+Using that as a starting point, we now tinker a bit to show that 90=100:
+<list id="list2">
+  <item>
+    Draw the perpendicular bisectors to BE and AD; 
+    call the point where they meet “C”.
+  </item>
+</list>
+
+<note type="Wait -- does C really exist?" id="idp8528528"><label>Wait -- does C really exist?</label>
+  Actually, we must prove that those two perpendicular bisectors really
+  do meet at all (<foreign>i.e.</foreign>, that the point C even exists). 
+  In this case, it turns out to be pretty clear  — 
+  it's not hard to argue that lines AD and BE aren't parallel,
+  and therefore their perpendicular bisectors aren't parallel,
+  and so they must intersect (in Euclidean geometry).
+  Still, be alert for people making glib assertions in proofs.
+</note>
+</para>
+
+<figure id="figure1">
+  <media id="idp12755632" alt=""><image src="../../media/90-equals-100.png" mime-type="image/png"/></media>
+  <caption>A construction to help prove that 90=100</caption>
+</figure>
+
+<para id="para2">
+Looking at this figure, some warning flags should be going up:
+How do we know C lies <emphasis>below</emphasis> BD?
+Might it lie above BD?  Or exactly on BD?
+It turns out that the argument below is the same in all of these cases,
+though you'll certainly want to verify this to yourself later.
+</para>
+
+<table id="proof1" summary="">
+
+<tgroup cols="3" align="center" colsep="1" rowsep="1">
+<colspec colwidth="*" colname="c1"/>
+<colspec colwidth="*" colname="c2"/>
+<colspec colwidth="*" colname="c3"/>
+
+<tbody>
+<row>
+<entry align="left">1</entry><entry namest="c2" nameend="c2">|AB|  = |ED|</entry><entry colname="c3">By construction.</entry>
+</row>
+<row>
+<entry align="left">2</entry><entry namest="c2" nameend="c2">|BC|  = |EC|</entry><entry colname="c3">
+      C is on the perpendicular bisector of BE
+      (thus △BEC is isosceles).
+    </entry>
+</row>
+<row>
+<entry align="left">3</entry><entry namest="c2" nameend="c2">∠CBE≅∠BEC</entry><entry colname="c3">
+      Base angles of isosceles triangle BEC are congruent.
+    </entry>
+</row>
+<row>
+<entry align="left">4</entry><entry namest="c2" nameend="c2">|∠CBE| = |∠BEC|</entry><entry colname="c3">
+      Congruent angles have equal measures; line 3.
+    </entry>
+</row>
+<row>
+<entry align="left">5</entry><entry namest="c2" nameend="c2">|AC|  = |DC|</entry><entry colname="c3">
+      C is on the perpendicular bisector of AD
+      (thus △ADC is isosceles).
+    </entry>
+</row>
+<row>
+<entry align="left">6</entry><entry namest="c2" nameend="c2">△ABC≅△DEC (!!)</entry><entry colname="c3">
+      Triangles with three congruent sides are congruent
+      (Euclid's Side-Side-Side congruence theorem); lines 1,2,5.
+    </entry>
+</row>
+<row>
+<entry align="left">7</entry><entry namest="c2" nameend="c2">(From here, it's just routine steps to conclude 90=100:)</entry><entry colname="c3"/>
+</row>
+<row>
+<entry align="left">8</entry><entry namest="c2" nameend="c2">∠ABC≅∠DEC</entry><entry colname="c3">
+      Corresponding parts of congruent triangles are congruent; line 6.
+    </entry>
+</row>
+<row>
+<entry align="left">9</entry><entry namest="c2" nameend="c2">|∠ABC| = |∠DEC|</entry><entry colname="c3">
+      Congruent angles have equal measures; line 8.
+    </entry>
+</row>
+<row>
+<entry align="left">10</entry><entry namest="c2" nameend="c2">|∠ABC| = |∠ABE| + |∠CBE|</entry><entry colname="c3">
+      By construction.
+    </entry>
+</row>
+<row>
+<entry align="left">11</entry><entry namest="c2" nameend="c2">|∠DEC| = |∠DEB| + |∠BEC|</entry><entry colname="c3">
+      By construction.
+    </entry>
+</row>
+<row>
+<entry align="left">12</entry><entry namest="c2" nameend="c2">|∠DEC| = |∠DEB| + |∠CBE|</entry><entry colname="c3">
+      Substituting equals with equals; lines 11 and 4.
+    </entry>
+</row>
+<row>
+<entry align="left">13</entry><entry namest="c2" nameend="c2">|∠ABC| = |∠DEB| + |∠CBE|</entry><entry colname="c3">
+      Substituting equals with equals; lines 12 and 9.
+    </entry>
+</row>
+<row>
+<entry align="left">14</entry><entry namest="c2" nameend="c2">|∠ABE| + |∠CBE| = |∠DEB| + |∠CBE|</entry><entry colname="c3">
+      Substituting equals with equals; lines 13 and 10.
+    </entry>
+</row>
+<row>
+<entry align="left">15</entry><entry namest="c2" nameend="c2">|∠ABE| = |∠DEB|</entry><entry colname="c3">
+      Subtracting equals from equals remains equal.
+    </entry>
+</row>
+<row>
+<entry align="left">16</entry><entry namest="c2" nameend="c2">90 = |∠DEB|</entry><entry colname="c3">
+      By construction, and substituting equals with equals; line 15.
+    </entry>
+</row>
+<row>
+<entry align="left">17</entry><entry namest="c2" nameend="c2">90 = 100</entry><entry colname="c3">
+      By construction, and substituting equals with equals; line 16.
+    </entry>
+</row></tbody>
+</tgroup>
+</table>
+
+<para id="para3">
+A useful corollary: 0=1.
+<table id="proof2" summary="">
+
+<tgroup cols="3" align="center" colsep="1" rowsep="1">
+<colspec colwidth="*" colname="c1"/>
+<colspec colwidth="*" colname="c2"/>
+<colspec colwidth="*" colname="c3"/>
+
+<tbody>
+<row>
+<entry align="left">1</entry><entry namest="c2" nameend="c2">90 = 100</entry><entry colname="c3">
+      Previous theorem.
+    </entry>
+</row>
+<row>
+<entry align="left">2</entry><entry namest="c2" nameend="c2">0 = 10</entry><entry colname="c3">
+      Subtracting equals (90) from equals remains equal.
+    </entry>
+</row>
+<row>
+<entry align="left">3</entry><entry namest="c2" nameend="c2">0 = 1</entry><entry colname="c3">
+      Dividing equals by non-zero equals (10) remains equal.
+    </entry>
+</row></tbody>
+</tgroup>
+</table>
+</para>   
+
+
+<exercise id="exercise1">
+<problem id="idp5903728">
+<para id="para4">
+If you feel this result is incorrect,
+then the challenge for you is to find the first line which is false.
+</para>
+</problem>
+
+<solution id="idp6645440">
+<para id="para5">
+The flaw is extremely hard to find.
+We won't actually give the solution, but here's a hint on 
+how to go about attacking the puzzle:
+</para>
+
+<para id="para6">
+Note that finding the bug in the proof is the
+same skill as debugging a program.
+A good approach is to try various degenerate inputs.
+In this case, there are a couple of “inputs” to 
+the construction—the length of CD is arbitrary; no matter
+how long or short the proof should apply equally well.
+Similarly, the angle 100° seems arbitrary;
+fiddling with inputs like these (making them very small or very large)
+might give you some clues as to where the bug is.
+A <emphasis>very</emphasis> careful drawing will clear things up.
+</para>
+
+</solution>
+</exercise>
+
+
+<para id="para7">
+You may have noticed that the proof given here has some very minuscule 
+steps—<foreign>e.g.</foreign> “Congruent angles have equal measure.”
+Usually such simple steps can be omitted, since they are obvious to any reader.
+We include them for a few reasons:
+<list id="list3">
+<item>
+As a careful thinker, you should recognize that such small steps
+really are part of the complete reasoning, 
+even if they're not worth mentioning continually.
+</item>
+<item>
+If a computer is checking a proof, it needs to actually include
+those steps.  
+</item>
+<item>
+Programmers do need to be concerned with distinctions about (abstract) 
+types—the difference
+between angles and their measures, in this case.
+</item>
+<item>
+Sometimes a line's justification is glibly given 
+as “by construction”, when
+that may not even be correct <code display="inline">!-)</code>.
+</item>
+</list>
+In this course, we'll spend a few weeks working with proofs which 
+<emphasis>do</emphasis> include all the small, pedantic steps,
+to instill a mental framework for what a rigorous proof is.
+But after that, you can relax your proofs to leave out 
+such low-level
+steps, once you appreciate that they are being omitted.
+</para>
+</content>
+  
+</document>

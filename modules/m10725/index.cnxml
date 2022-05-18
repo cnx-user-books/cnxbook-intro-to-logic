@@ -1,0 +1,681 @@
+<document xmlns="http://cnx.rice.edu/cnxml" xmlns:m="http://www.w3.org/1998/Math/MathML" xmlns:md="http://cnx.rice.edu/mdml">
+
+<title>properties of relations</title>
+
+<metadata>
+  <md:content-id>m10725</md:content-id><md:title>properties of relations</md:title>
+  <md:abstract>Relations are subsets.
+Binary relations might be reflexive, symmetric, antisymmetric, or transitive.</md:abstract>
+  <md:uuid>44bb9b71-e323-4dd8-97c6-32505a6aaa40</md:uuid>
+</metadata>
+
+<content>
+
+<para id="imp-id20327161">
+  When using relations in logic formulas,
+  there are two things going on:
+  <list id="imp-id18684060">
+    <item>
+      relations themselves, as mathematical entities, and
+    </item>
+    <item>
+      formulas involving symbols, which must be interpreted as
+      specific relations.
+    </item>
+  </list>
+  First things first: we'll just discuss relations for now,
+  and later tackle using relations in logic formulas.
+</para>
+
+<para id="imp-id21837659">
+  We'll start with a couple of equivalent ways of defining relations,
+  and then discuss a common subclass of relations: binary relations.
+</para>
+
+<section id="relations-as-subsets">
+<title>Relations as subsets</title>
+
+<para id="imp-id20128007">
+  Consider the set of WaterWorld locations
+  <m:math><m:apply><m:eq/>
+    <m:ci>Loc</m:ci>
+    <m:set>
+      <m:ci>A</m:ci>
+      <m:ci>B</m:ci>
+      <m:mtext>…</m:mtext>
+      <m:ci>Z</m:ci>
+    </m:set>
+  </m:apply></m:math>.
+  For this <term>domain</term> (also known as a <term>universe</term>),
+  we'll say a <term>binary relation</term> is
+  a set of (ordered) pairs of the domain.
+</para>
+
+<example id="imp-id18695818">
+  <para id="imp-id20410216">
+    For instance, the <m:math><m:ci type="fn">nhbr</m:ci></m:math> relation of the previous section is the set
+    <m:math>
+      <m:set>
+        <m:mfenced><m:ci>A</m:ci> <m:ci>B</m:ci></m:mfenced>
+        <m:mfenced><m:ci>A</m:ci> <m:ci>G</m:ci></m:mfenced>
+        <m:mfenced><m:ci>B</m:ci> <m:ci>A</m:ci></m:mfenced>
+        <m:mfenced><m:ci>B</m:ci> <m:ci>C</m:ci></m:mfenced>
+        <m:mtext>…</m:mtext>
+        <m:mfenced><m:ci>Y</m:ci> <m:ci>X</m:ci></m:mfenced>
+        <m:mfenced><m:ci>Y</m:ci> <m:ci>Z</m:ci></m:mfenced>
+        <m:mfenced><m:ci>Z</m:ci> <m:ci>Y</m:ci></m:mfenced>
+      </m:set>
+    </m:math>.
+  </para>
+
+  <para id="imp-id17659685">
+    That is, <m:math><m:ci>x</m:ci></m:math> is related to <m:math><m:ci>y</m:ci></m:math> if 
+    <m:math><m:mfenced><m:ci>x</m:ci> <m:ci>y</m:ci></m:mfenced></m:math> is in the set <m:math><m:ci type="fn">nhbr</m:ci></m:math>.
+  </para>
+</example>
+
+
+<example id="imp-id20460625">
+  <para id="imp-id20310187">
+    
+    For the domain
+    <m:math>
+      <m:apply>
+        <m:eq/>
+        <m:ci>D</m:ci>
+        <m:set>
+          <m:ci>Object</m:ci>
+          <m:ci>String</m:ci>
+          <m:ci>MutableString</m:ci>
+        </m:set>
+      </m:apply>
+    </m:math>,
+    the relation <m:math><m:ci type="fn">subclass-of</m:ci></m:math> might be
+    <m:math>
+      <m:set>
+        <m:mfenced><m:ci>String</m:ci> <m:ci>Object</m:ci> </m:mfenced>
+        <m:mfenced><m:ci>MutableString</m:ci> <m:ci>Object</m:ci> </m:mfenced>
+        <m:mfenced><m:ci>MutableString</m:ci> <m:ci>String</m:ci> </m:mfenced>
+      </m:set>
+    </m:math>.
+  </para>
+
+  <para id="imp-id20403184">
+    In general, a binary relation over the domain <m:math><m:ci>D</m:ci></m:math>
+    is a subset of
+    <m:math>
+      <m:apply>
+        <m:cartesianproduct/>
+        <m:ci>D</m:ci>
+        <m:ci>D</m:ci>
+      </m:apply>
+    </m:math>.
+    Note that these are <emphasis>ordered</emphasis> pairs;
+    just because <m:math><m:ci>x</m:ci></m:math> is related to <m:math><m:ci>y</m:ci></m:math> doesn't mean <m:math><m:ci>y</m:ci></m:math> has the same
+    relation to <m:math><m:ci>x</m:ci></m:math>.  For example, while 
+    <m:math><m:mfenced><m:ci>MutableString</m:ci> <m:ci>Object</m:ci> </m:mfenced></m:math>
+    is in the relation <m:math><m:ci type="fn">subclass-of</m:ci></m:math>, the pair
+    <m:math><m:mfenced><m:ci>Object</m:ci> <m:ci>MutableString</m:ci> </m:mfenced></m:math>
+    most certainly is not.
+  </para>
+</example>
+
+<example id="imp-id21833999">
+  <para id="imp-id20971272">
+    You can consider the relation <m:math><m:ci type="fn">hasStarredWith</m:ci></m:math>,
+    over the domain of Hollywood actors.  We won't list all the elements of
+    the relation, but some related pairs are:
+    <list id="imp-id20333051">
+      <item>
+        <m:math><m:apply>
+          <m:ci type="fn">hasStarredWith</m:ci>
+          <m:ci>Ewan McGregor</m:ci>
+          <m:ci>Cameron Diaz</m:ci>
+        </m:apply></m:math>,
+        as witnessed by the movie <cite>A Life Less Ordinary</cite>, 1997.
+      </item>
+      <item>
+        <m:math><m:apply><m:ci type="fn">hasStarredWith</m:ci>
+          <m:ci>Cameron Diaz</m:ci>
+          <m:ci>John Cusack</m:ci>
+        </m:apply></m:math>,
+        as witnessed by the movie <cite>Being John Malkovich</cite>, 1999.
+      </item>
+    </list>
+  </para>
+</example>
+
+
+<para id="imp-id20461209">
+  If binary relations are subsets of pairs of the domain,
+  what might a <term>unary</term> relation be?
+  Simply, subsets of the domain.
+</para>
+
+<example id="imp-id20773434">
+  <para id="imp-id20461405">
+    For the domain of vegetables,
+    Ian defines the relation <m:math><m:ci type="fn">yummy?</m:ci></m:math> as
+    <m:math>
+      <m:set>
+        <m:mtext>tomatoes</m:mtext>
+        <m:mtext>okra</m:mtext>
+        <m:mtext>cucumbers</m:mtext>
+        <m:mtext>carrots</m:mtext>
+        <m:mtext>potatoes</m:mtext>
+      </m:set>
+    </m:math>
+    and nothing else.
+  </para>
+</example>
+
+<example id="imp-id17072069">
+  <para id="imp-id21447688">
+    In one particular game of WaterWorld,
+    the relation <m:math><m:ci type="fn">hasPirate</m:ci></m:math> turned out to be
+    <m:math>
+      <m:set>
+        <m:ci>K</m:ci>
+        <m:ci>T</m:ci>
+        <m:ci>R</m:ci>
+        <m:ci>U</m:ci>
+        <m:ci>E</m:ci>
+      </m:set>
+    </m:math>.
+  </para>
+</example>
+
+<para id="imp-id16537721">
+  If unary and binary relations make sense,
+  what about ternary, <foreign>etc.</foreign>, relations?  Sure!
+  In general, a <term><m:math><m:ci>k</m:ci></m:math>-ary</term> relation
+  (or, <quote display="inline">relation of <term>arity</term> <m:math><m:ci>k</m:ci></m:math></quote>)
+  over the domain <m:math><m:ci>D</m:ci></m:math> is a subset of
+  <m:math>
+    <m:apply>
+      <m:power/>
+      <m:ci>D</m:ci>
+      <m:ci>k</m:ci>
+    </m:apply>
+  </m:math>.
+  However, any given relation has a fixed arity.
+  That is, a relation may be binary or ternary, but not both.
+</para>
+
+<para id="imp-id18814369">
+  As with propositions, rather than writing
+  <quote display="inline">
+    <m:math><m:apply><m:ci type="fn">R</m:ci><m:ci>x</m:ci> <m:ci>y</m:ci></m:apply></m:math> is true
+  </quote>,
+  we'll simply write 
+  <quote display="inline">
+    <m:math><m:apply><m:ci type="fn">R</m:ci><m:ci>x</m:ci> <m:ci>y</m:ci></m:apply></m:math>
+  </quote>.
+  In fact, notice that once you choose some particular pair of
+  <m:math><m:ci>x</m:ci></m:math> and <m:math><m:ci>y</m:ci></m:math>, then
+  <m:math><m:apply><m:ci type="fn">R</m:ci><m:ci>x</m:ci> <m:ci>y</m:ci></m:apply></m:math> can be treated
+  as a single true/false proposition.
+  (We'll soon extend the idea of propositions to include
+   such relation symbols,
+   and then allow formulas to include these <term>terms</term>.)
+</para>
+
+<example id="imp-id19144814">
+  <para id="imp-id22063515">
+    <quote display="inline">
+      <m:math><m:apply><m:ci type="fn">prime</m:ci><m:cn>18</m:cn></m:apply></m:math>
+    </quote>
+    is a proposition that's false,
+    assuming the standard
+    <link document="m10726">interpretation</link>
+    of <m:math><m:ci type="fn">prime</m:ci></m:math>.
+  </para>
+</example>
+
+<example id="imp-id21763615">
+  <para id="imp-id19850134">
+    <quote display="inline">
+      <m:math><m:apply><m:ci type="fn">safe</m:ci> <m:ci>A</m:ci></m:apply></m:math>
+    </quote>
+    is a proposition that is true on some boards and not others.
+  </para>
+</example>
+</section>  
+
+
+
+
+<section id="imp-id18783626">
+<title>Relations as functions</title>
+
+<para id="imp-id20304666">
+  The relation <m:math><m:ci type="fn">nhbr</m:ci></m:math>, which we're defining as a set (of pairs),
+  could also be thought of being a function.  
+  We say that the
+  <term>indicator function</term> of a set is
+  a Boolean function indicating whether its input 
+  is in the set or not.
+
+  So instead of being given the set <m:math><m:ci type="fn">nhbr</m:ci></m:math>,
+  you would have been equally happy with 
+  its indicator function
+  <m:math><m:apply><m:selector/><m:ci>f</m:ci><m:ci type="fn">nhbr</m:ci></m:apply></m:math>,
+  where (for example) 
+    <m:math><m:apply><m:eq/>
+      <m:apply>
+        <m:apply><m:selector/><m:ci>f</m:ci><m:ci type="fn">nhbr</m:ci></m:apply>
+        <m:ci>B</m:ci> <m:ci>C</m:ci>
+      </m:apply>
+      <m:true/>
+      </m:apply></m:math>
+    and
+    <m:math><m:apply><m:eq/>
+      <m:apply>
+        <m:apply><m:selector/><m:ci>f</m:ci><m:ci type="fn">nhbr</m:ci></m:apply>
+        <m:ci>B</m:ci> <m:ci>Q</m:ci>
+      </m:apply>
+      <m:false/>
+      </m:apply></m:math>.
+  Similarly, if you know that
+  <m:math><m:apply><m:eq/>
+    <m:apply>
+      <m:apply><m:selector/><m:ci>f</m:ci><m:ci type="fn">hasPirate</m:ci></m:apply>
+      <m:ci>K</m:ci>
+    </m:apply>
+    <m:true/>
+  </m:apply></m:math>
+  and that
+  <m:math><m:apply><m:eq/>
+    <m:apply>
+      <m:apply><m:selector/><m:ci>f</m:ci><m:ci type="fn">hasPirate</m:ci></m:apply>
+      <m:ci>L</m:ci>
+    </m:apply>
+    <m:false/>
+  </m:apply></m:math>,
+  then this is enough information to conclude that
+  <m:math><m:apply><m:in/>
+    <m:ci>K</m:ci>
+    <m:ci type="fn">hasPirate</m:ci>
+  </m:apply></m:math>
+  and 
+  <m:math><m:apply><m:notin/>
+    <m:ci>L</m:ci>
+    <m:ci type="fn">hasPirate</m:ci>
+  </m:apply></m:math>.
+  <emphasis>The set and the function are equivalent ways of
+  modeling the same underlying relation.</emphasis>
+</para>
+
+<para id="imp-id20074687">
+  The next two exercises aren't meant to be difficult,
+  but rather to illustrate that, while we've sketched these two
+  approaches and suggested they are equivalent,
+  we still need an exact definition.
+</para>
+
+<exercise id="exercise1">
+  <problem id="imp-id18696941">
+    <para id="imp-id19923250">
+      For the indicator function 
+        <m:math><m:apply>
+          <m:eq/>
+          <m:apply><m:ci>f</m:ci> <m:ci>x</m:ci> <m:ci>y</m:ci></m:apply>
+          <m:piecewise>
+            <m:piece>
+                <m:true/>
+                <m:apply>
+                  <m:eq/>
+                  <m:ci>y</m:ci>
+                  <m:apply>
+                    <m:power/>
+                    <m:ci>x</m:ci>
+                    <m:cn>2</m:cn>
+                  </m:apply>
+                </m:apply>
+              </m:piece>
+            <m:otherwise>
+               <m:false/>
+            </m:otherwise>
+          </m:piecewise>
+        </m:apply></m:math>
+      on the domain of (pairs of) natural numbers,
+      write down the set-of-pairs representation
+      for the corresponding binary relation.  
+      It's insightful to give the answer both by listing the elements,
+      possibly with ellipses,
+      and also by using set-builder notation.
+    </para>
+
+    <para id="imp-id18842899">
+      <emphasis>In general</emphasis>, 
+      for a binary indicator function <m:math><m:ci type="fn">f</m:ci></m:math>,
+      what, exactly, is the corresponding set?
+    </para>
+  </problem>
+
+  <solution id="imp-id21132491">
+    <para id="imp-id18025454">
+      <m:math><m:set>
+        <m:mfenced><m:cn>0</m:cn><m:cn>0</m:cn></m:mfenced>
+        <m:mfenced><m:cn>1</m:cn><m:cn>1</m:cn></m:mfenced>
+        <m:mfenced><m:cn>2</m:cn><m:cn>4</m:cn></m:mfenced>
+        <m:mfenced><m:cn>3</m:cn><m:cn>9</m:cn></m:mfenced>
+        <m:mtext>…</m:mtext>
+        <m:mfenced><m:ci>i</m:ci> <m:apply><m:power/><m:ci>i</m:ci><m:cn>2</m:cn></m:apply> </m:mfenced>
+        <m:mtext>…</m:mtext>
+      </m:set></m:math>
+      In set-builder notation, this is
+      <m:math><m:set>
+        <m:bvar><m:mfenced><m:ci>x</m:ci><m:ci>y</m:ci></m:mfenced></m:bvar>
+        <m:condition>
+          <m:apply>
+            <m:eq/>
+            <m:ci>y</m:ci>
+            <m:apply><m:power/><m:ci>x</m:ci><m:cn>2</m:cn></m:apply>
+          </m:apply>
+        </m:condition>
+      </m:set></m:math>
+    </para>
+
+    <para id="imp-id18664476">
+      In general, for an indicator function <m:math><m:ci type="fn">f</m:ci></m:math>,
+      the corresponding set would be
+      <m:math><m:set>
+        <m:bvar><m:mfenced><m:ci>x</m:ci><m:ci>y</m:ci></m:mfenced></m:bvar>
+        <m:condition>
+          <m:apply><m:ci type="fn">f</m:ci> <m:ci>x</m:ci><m:ci>y</m:ci></m:apply>
+        </m:condition>
+      </m:set></m:math>
+      (Note that we don't need to write 
+       <quote display="inline">
+         …
+         <m:math><m:apply><m:eq/>
+           <m:apply><m:ci type="fn">f</m:ci> <m:ci>x</m:ci><m:ci>y</m:ci></m:apply>
+           <m:true/>
+         </m:apply></m:math>
+       </quote>;
+       as computer scientists comfortable with Booleans
+       as values, we see this is redundant.)
+    </para>
+    
+  </solution>
+</exercise>
+
+<exercise id="exercise2">
+  <problem id="imp-id17901877">
+    <para id="imp-id18702951">
+      For the relation
+      <m:math><m:apply>
+        <m:eq/>
+        <m:ci type="fn">hasPirate</m:ci> 
+        <m:set><m:ci>K</m:ci> <m:ci>T</m:ci> <m:ci>R</m:ci> <m:ci>U</m:ci> <m:ci>E</m:ci> </m:set>
+      </m:apply></m:math>
+      on the set of  (individual) WaterWorld locations,
+      write down the indicator-function representation
+      for the corresponding unary relation.
+      <emphasis>In general</emphasis>, how would you write down
+      this translation?
+    </para>
+  </problem>
+
+  <solution id="imp-id17820858">
+    <para id="imp-id17968244">
+      <m:math><m:apply><m:eq/>
+        <m:apply>
+          <m:apply><m:selector/>
+            <m:ci type="fn">f</m:ci>
+            <m:ci type="fn">hasPirate</m:ci>
+          </m:apply>
+          <m:ci>x</m:ci>
+        </m:apply>
+        <m:piecewise>
+           <m:piece><m:true/> <m:apply><m:eq/><m:ci>x</m:ci> <m:ci>K</m:ci></m:apply></m:piece>
+           <m:piece><m:true/> <m:apply><m:eq/><m:ci>x</m:ci> <m:ci>T</m:ci></m:apply></m:piece>
+           <m:piece><m:true/> <m:apply><m:eq/><m:ci>x</m:ci> <m:ci>R</m:ci></m:apply></m:piece>
+           <m:piece><m:true/> <m:apply><m:eq/><m:ci>x</m:ci> <m:ci>U</m:ci></m:apply></m:piece>
+           <m:piece><m:true/> <m:apply><m:eq/><m:ci>x</m:ci> <m:ci>E</m:ci></m:apply></m:piece>
+           <m:otherwise><m:false/></m:otherwise>
+        </m:piecewise>
+      </m:apply></m:math>.
+    </para>
+
+    <para id="imp-id21324906">
+      In general, for a (unary) relation <m:math><m:ci type="fn">R</m:ci></m:math>,
+      <m:math><m:apply><m:eq/>
+        <m:apply>
+          <m:apply><m:selector/>
+            <m:ci type="fn">f</m:ci>
+            <m:ci type="fn">R</m:ci>
+          </m:apply>
+          <m:ci>x</m:ci>
+        </m:apply>
+        <m:piecewise>
+          <m:piece>
+            <m:true/>
+            <m:apply><m:in/>   <m:ci>x</m:ci> <m:ci type="fn">R</m:ci></m:apply>
+          </m:piece>
+          <m:piece>
+            <m:false/>
+            <m:apply><m:notin/><m:ci>x</m:ci> <m:ci type="fn">R</m:ci></m:apply>
+          </m:piece>
+        </m:piecewise>
+      </m:apply></m:math>.
+    </para>
+  </solution>
+</exercise>
+
+<para id="imp-id18205204">
+  Since these two formulations of a relation,
+  sets and indicator functions,
+  are so close, we'll often switch between them (a very slight abuse
+  of terminology).
+</para>
+
+<para id="imp-id22185120">
+  Think about when you write a program that uses the
+  abstract data type <code>Set</code>.  Its main operation is
+  <code>elementOf</code>.
+  When might you use an explicit enumeration to encode a set,
+  and when an indicator function?
+  Which would you use for the set of WaterWorld locations?
+  Which for the set of prime numbers?
+</para>
+
+</section> 
+
+
+<section id="imp-id21111987">
+<title>Functions as Relations</title>
+
+<para id="imp-id21940762">
+  Some binary relations have a special property:
+  each element of the domain occurs as the first item
+  in exactly one tuple.
+  For example,
+  <m:math><m:apply>
+    <m:eq/>
+    <m:ci>isPlanet</m:ci>
+    <m:set>
+      <m:mfenced><m:ci>Earth</m:ci> <m:true/></m:mfenced>
+      <m:mfenced><m:ci>Venus</m:ci> <m:true/></m:mfenced>
+      <m:mfenced><m:ci>Sol</m:ci>   <m:false/></m:mfenced>
+      <m:mfenced><m:ci>Ceres</m:ci> <m:false/></m:mfenced>
+      <m:mfenced><m:ci>Mars</m:ci>  <m:true/></m:mfenced>
+    </m:set>
+  </m:apply></m:math>
+  is actually a (unary) function.
+  On the other hand,
+  <m:math><m:apply>
+    <m:eq/>
+    <m:ci>isTheSquareOf</m:ci>
+    <m:set>
+      <m:mfenced><m:cn>0</m:cn> <m:cn>0</m:cn></m:mfenced>
+      <m:mfenced><m:cn>1</m:cn> <m:cn>1</m:cn></m:mfenced>
+      <m:mfenced><m:cn>1</m:cn> <m:cn>-1</m:cn></m:mfenced>
+      <m:mfenced><m:cn>4</m:cn> <m:cn>2</m:cn></m:mfenced>
+      <m:mfenced><m:cn>4</m:cn> <m:cn>-2</m:cn></m:mfenced>
+      <m:mfenced><m:cn>9</m:cn> <m:cn>3</m:cn></m:mfenced>
+      <m:mfenced><m:cn>9</m:cn> <m:cn>-3</m:cn></m:mfenced>
+      <m:mtext>…</m:mtext>
+    </m:set>
+  </m:apply></m:math>
+  is not a function, for two reasons.  First, some numbers occur
+  as the first element of <emphasis>multiple</emphasis> pairs.
+  Second, some numbers, like <m:math><m:cn>3</m:cn></m:math>, occurs as the first element
+  of <emphasis>no</emphasis> pairs.
+</para>
+
+<para id="imp-id20128696">
+  We can generalize this to relations of higher arity, also.
+  This is explored in
+  <link document="m12353" target-id="addsTo">this exercise</link> and
+  <link document="m12353" target-id="function-as-relation">this one</link>.
+</para>
+
+</section> 
+
+
+
+<section id="imp-id21520297">
+<title>Binary Relations</title>
+
+<para id="imp-id20764835">
+  One subclass of relations are common enough to merit some special discussion:
+  binary relations.  These are relations on pairs, like <m:math><m:ci type="fn">nhbr</m:ci></m:math>.
+</para>
+
+
+<section id="imp-id5463889">
+<title>Binary Relation Notation</title>
+
+<para id="imp-id22184758">
+  Although we introduced relations with prefix notation, e.g.,
+  <m:math><m:apply><m:ci type="function">&lt;</m:ci> <m:ci>i</m:ci> <m:ci>j</m:ci></m:apply></m:math>,
+  we'll use the more common infix notation,
+  <m:math><m:apply><m:lt/> <m:ci>i</m:ci> <m:ci>j</m:ci></m:apply></m:math>,
+  for well-known arithmetic binary relations.
+</para>
+
+</section>
+
+
+<section id="imp-id12656668">
+<title>Binary Relations as Graphs</title>
+
+<para id="imp-id21336793">
+  In fact, binary relations are common enough that sometimes
+  people use some entirely new vocabulary:
+  A domain with a binary relation can
+  be called <term>vertices</term> with <term>edges</term> between them.
+  Together this is known as a <term>graph</term>.
+  We won't stress these terms right now,
+  as we're not studying graph theory.
+</para>
+
+<para id="imp-id16211060">
+  Binary relations (graphs) can be depicted visually,
+  by drawing the domain elements (vertices) as dots,
+  and drawing arrows (edges) between related elements.
+</para>
+
+
+
+
+
+
+
+<para id="imp-id18688347">
+  A binary relation with a whole website devoted to it is
+  <quote display="inline">has starred in a movie with</quote>.
+  We'll call this relation <m:math><m:ci type="fn">hasStarredWith</m:ci></m:math>
+  over the domain of actors.  Some sample points in this relation:
+  <list id="imp-id12211493">
+    <item>
+      <m:math><m:apply>
+        <m:ci type="fn">hasStarredWith</m:ci>
+        <m:ci>Ewan McGregor</m:ci>
+        <m:ci>Cameron Diaz</m:ci>
+      </m:apply></m:math>,
+      as witnessed by the movie <cite>A Life Less Ordinary</cite>, 1997.
+    </item>
+    <item>
+      <m:math><m:apply>
+        <m:ci type="fn">hasStarredWith</m:ci>
+        <m:ci>Cameron Diaz</m:ci>
+        <m:ci>John Cusack</m:ci>
+      </m:apply></m:math>,
+      as witnessed by the movie <cite>Being John Malkovich</cite>, 1999.
+    </item>
+  </list>
+  You can think of each actor being a <quote display="inline">location</quote>,
+  and two actors being <quote display="inline">adjacent</quote> to each other
+  if they have ever starred in a movie together;
+  two of these locations, even if not adjacent might have a multi-step
+  path between them.
+  
+  (There is also a shorter path; can you think of it?
+  The (in)famous Kevin Bacon game
+  asks to find a shortest path from one location to the
+  location Kevin Bacon.
+  Make a guess, as to the longest shortest path leading from 
+  (some obscure) location to Kevin Bacon.)
+</para>
+
+<para id="imp-id22180155">
+  Some other graphs:
+  <list id="imp-id21873400">
+    <item>
+      Vertices can be tasks,
+      with edges meaning dependencies of what must be done first.
+    </item>
+    <item>
+      In parallel processing, 
+      Vertices can be lines of code;
+      there is an edge between two lines if
+      they involve common variables.
+      Finding subsets of vertices with no lines between them
+      represent sets of instructions that can be 
+      executed in parallel (and thus assigned to different processors.)
+    </item>
+    <item>
+      <quote display="inline">Word ladders</quote> seek to transform one word to another
+      by changing one letter at a time, while always remaining a word.
+      For example, a ladder leading from WHITE to SPINE in three steps is:
+      <list id="imp-id22058452">
+        <item>WHITE</item>
+        <item>WHINE</item>
+        <item>SHINE</item>
+        <item>SPINE</item>
+      </list>
+      If a solution to such a puzzle corresponds to a path,
+      what do vertices represent?  
+      What are edges?
+      Do you think there is a path from any 5-letter word to another?
+    </item>
+  </list>
+</para>
+
+</section>  
+
+
+
+</section> 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</content>
+</document>

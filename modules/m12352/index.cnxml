@@ -1,0 +1,926 @@
+<document xmlns="http://cnx.rice.edu/cnxml" xmlns:m="http://www.w3.org/1998/Math/MathML" xmlns:md="http://cnx.rice.edu/mdml">
+  
+<title>Exercises for Propositional Logic II</title>
+<metadata>
+  <md:content-id>m12352</md:content-id><md:title>Exercises for Propositional Logic II</md:title>
+  <md:abstract/>
+  <md:uuid>60c18811-a045-4008-ba13-121877003669</md:uuid>
+</metadata>
+
+
+
+<content>
+
+<section id="imp-id7234261">
+<title>Reasoning with Inference Rules</title>
+
+<para id="imp-id20473155">
+  For proofs on this homework, 
+  remember that each step must be justified by one of the following:
+  <list id="imp-id4008897">
+    <item>
+      a premise,
+    </item>
+    <item>
+      a
+      <link document="m10528" target-id="waterworld-rules">WaterWorld axioms</link>,
+    </item>
+    <item>
+      a listed
+      <link document="m10529">inference rule</link>
+      with the referenced line numbers
+      (and, if ambiguous, substitutions for the inference rule's meta-variables),
+      or
+    </item>
+    <item>
+      a subproof shown inline, or equivalently, a theorem/lemma shown
+      previously.
+    </item>
+  </list>
+  Except where otherwise directed, you may use any theorem shown in
+  the text or by a previous exercise, even if that exercise was not
+  assigned.
+</para>
+
+<exercise id="exercise1">
+  <problem id="imp-id3914202">
+    <para id="imp-id7781210">
+      Fill in the blank reasons in the following proof that ∨ commutes,
+      that is,
+      <m:math><m:mrow><m:apply><m:or/><m:ci>χ</m:ci> <m:ci>υ</m:ci></m:apply> <m:mo>⊢</m:mo> <m:apply><m:or/><m:ci>υ</m:ci> <m:ci>χ</m:ci></m:apply></m:mrow></m:math>.
+    </para>
+
+    <table id="proof1" summary="A proof">
+
+<tgroup cols="4" align="center" colsep="1" rowsep="1">
+<colspec colwidth="*" colname="c1"/>
+<colspec colwidth="*" colname="c2"/>
+<colspec colwidth="*" colname="c3"/>
+<colspec colwidth="*" colname="c4"/>
+
+<tbody>
+<row>
+<entry align="left">1</entry><entry namest="c2" nameend="c3"><m:math><m:apply><m:or/><m:ci>χ</m:ci> <m:ci>υ</m:ci></m:apply></m:math></entry><entry/><entry colname="c4">
+          Premise
+        </entry>
+</row>
+<row>
+<entry align="left">2</entry><entry namest="c2" nameend="c3">subproof:<m:math><m:mrow><m:ci>χ</m:ci> <m:mo>⊢</m:mo> <m:apply><m:or/><m:ci>υ</m:ci> <m:ci>χ</m:ci></m:apply></m:mrow></m:math></entry><entry/><entry colname="c4"/>
+</row>
+<row>
+<entry align="left">2.a</entry><entry/> <entry namest="c3" nameend="c3"><m:math><m:ci>χ</m:ci></m:math></entry><entry colname="c4">
+                Premise for subproof
+              </entry>
+</row>
+<row>
+<entry align="left">2.b</entry><entry/> <entry namest="c3" nameend="c3"><m:math><m:apply><m:or/><m:ci>υ</m:ci> <m:ci>χ</m:ci></m:apply></m:math></entry><entry colname="c4">
+                ∨Intro, line 2.a
+              </entry>
+</row>
+<row>
+<entry align="left">3</entry><entry namest="c2" nameend="c3">subproof:<m:math><m:mrow><m:ci>υ</m:ci> <m:mo>⊢</m:mo> <m:apply><m:or/><m:ci>υ</m:ci> <m:ci>χ</m:ci></m:apply></m:mrow></m:math></entry><entry/><entry colname="c4"/>
+</row>
+<row>
+<entry align="left">3.a</entry><entry/> <entry namest="c3" nameend="c3"><m:math><m:ci>υ</m:ci></m:math></entry><entry colname="c4">
+                Premise for subproof
+              </entry>
+</row>
+<row>
+<entry align="left">3.b</entry><entry/> <entry namest="c3" nameend="c3"><m:math><m:apply><m:or/><m:ci>υ</m:ci> <m:ci>χ</m:ci></m:apply></m:math></entry><entry colname="c4">
+                ____________________
+              </entry>
+</row>
+<row>
+<entry align="left">4</entry><entry namest="c2" nameend="c3"><m:math><m:apply><m:or/><m:ci>υ</m:ci> <m:ci>χ</m:ci></m:apply></m:math></entry><entry/><entry colname="c4">
+          ____________________
+        </entry>
+</row></tbody>
+</tgroup>
+</table>
+  </problem>
+
+  
+</exercise>
+
+
+<exercise id="exercise2">
+  <problem id="imp-id20471043">
+    <para id="imp-id20461670">
+      Show that
+      <m:math><m:mrow><m:apply><m:and/><m:ci>φ</m:ci> <m:ci>ψ</m:ci></m:apply><m:mtext>, </m:mtext><m:apply><m:implies/><m:ci>φ</m:ci> <m:ci>θ</m:ci></m:apply><m:mtext>, </m:mtext><m:apply><m:implies/><m:ci>ψ</m:ci> <m:ci>δ</m:ci></m:apply> <m:mo>⊢</m:mo> <m:apply><m:and/><m:ci>θ</m:ci> <m:ci>δ</m:ci></m:apply></m:mrow></m:math>.
+      <note id="imp-id14709450" type="hint">
+        It should take around 8 steps.
+      </note>
+    </para>
+  </problem>
+
+  
+</exercise>
+
+<exercise id="exercise3">
+  <problem id="imp-id21306477">
+    <para id="imp-id20469108">
+      Show what is often called the implication chain rule:
+      <m:math><m:mrow><m:apply><m:implies/><m:ci>φ</m:ci> <m:ci>ψ</m:ci></m:apply><m:mtext>, </m:mtext><m:apply><m:implies/><m:ci>ψ</m:ci> <m:ci>θ</m:ci></m:apply> <m:mo>⊢</m:mo> <m:apply><m:implies/><m:ci>φ</m:ci> <m:ci>θ</m:ci></m:apply></m:mrow></m:math>.
+    </para>
+  </problem>
+
+  
+</exercise>
+
+
+
+<exercise id="negated-or-elimination">
+  <problem id="imp-id20748934"><para id="imp-id20843032">[Practice problem<m:math><m:mo>—</m:mo></m:math>solution provided.]</para>
+    <para id="imp-id19594714">
+      Show what is often called negated-or-elimination (left):
+      <m:math><m:mrow><m:apply><m:not/><m:apply><m:or/><m:ci>φ</m:ci> <m:ci>ψ</m:ci></m:apply></m:apply> <m:mo>⊢</m:mo> <m:apply><m:not/><m:ci>φ</m:ci></m:apply></m:mrow></m:math>.
+      <note id="imp-id7190575" type="hint">
+        Think backwards.
+        How can we end with <m:math><m:apply><m:not/><m:ci>φ</m:ci></m:apply></m:math>?
+        One way is to end with RAA, under the premise <m:math><m:ci>φ</m:ci></m:math>.  Using that
+        premise <m:math><m:ci>φ</m:ci></m:math> and the starting premise
+        <m:math><m:apply><m:not/><m:apply><m:or/><m:ci>φ</m:ci> <m:ci>ψ</m:ci></m:apply></m:apply></m:math>
+        can you derive the contradiction?
+      </note>
+    </para>
+  </problem>
+
+  <solution id="imp-id6332756">
+    <table id="proof2" summary="A proof">
+
+<tgroup cols="4" align="center" colsep="1" rowsep="1">
+<colspec colwidth="*" colname="c1"/>
+<colspec colwidth="*" colname="c2"/>
+<colspec colwidth="*" colname="c3"/>
+<colspec colwidth="*" colname="c4"/>
+
+<tbody>
+<row>
+<entry align="left">1</entry><entry namest="c2" nameend="c3"><m:math><m:apply><m:not/><m:apply><m:or/><m:ci>φ</m:ci> <m:ci>ψ</m:ci></m:apply></m:apply></m:math></entry><entry/><entry colname="c4"> Premise
+        </entry>
+</row>
+<row>
+<entry align="left">2</entry><entry namest="c2" nameend="c3">subproof:<m:math><m:mrow><m:ci>φ</m:ci> <m:mo>⊢</m:mo> <m:false/></m:mrow></m:math></entry><entry/><entry colname="c4"/>
+</row>
+<row>
+<entry align="left">2.a</entry><entry/> <entry namest="c3" nameend="c3"><m:math><m:ci>φ</m:ci></m:math></entry><entry colname="c4"> Premise for subproof
+              </entry>
+</row>
+<row>
+<entry align="left">2.b</entry><entry/> <entry namest="c3" nameend="c3"><m:math><m:apply><m:or/><m:ci>φ</m:ci> <m:ci>ψ</m:ci></m:apply></m:math></entry><entry colname="c4"> ∨Intro, line 2a
+              </entry>
+</row>
+<row>
+<entry align="left">2.c</entry><entry/> <entry namest="c3" nameend="c3"><m:math><m:false/></m:math></entry><entry colname="c4"> <m:math><m:false/></m:math>Intro, lines 1,2b
+              </entry>
+</row>
+<row>
+<entry align="left">3</entry><entry namest="c2" nameend="c3"><m:math><m:apply><m:not/><m:ci>φ</m:ci></m:apply></m:math></entry><entry/><entry colname="c4"> RAA, line 2
+        </entry>
+</row></tbody>
+</tgroup>
+</table>
+  </solution>
+</exercise>
+
+<exercise id="exercise5">
+  <problem id="imp-id6944884">
+    <para id="imp-id7196804">
+      Using the inference rule RAA, prove
+      <m:math><m:mrow><m:apply><m:not/><m:ci>φ</m:ci></m:apply> <m:mo>⊢</m:mo> <m:apply><m:not/><m:apply><m:and/><m:ci>φ</m:ci> <m:ci>ψ</m:ci></m:apply></m:apply></m:mrow></m:math>.
+    </para>
+  </problem>
+
+  
+</exercise>
+
+<exercise id="exercise6">
+  <problem id="imp-id21726744">
+    <para id="imp-id10022434">
+      Show that
+      <m:math><m:mrow><m:apply><m:or/>
+          <m:apply><m:not/><m:ci>W-safe</m:ci></m:apply>
+          <m:apply><m:not/><m:ci>Y-unsafe</m:ci></m:apply>
+        </m:apply> <m:mo>⊢</m:mo> <m:apply><m:or/> <m:ci>W-unsafe</m:ci> <m:ci>Y-safe</m:ci></m:apply></m:mrow></m:math>.
+      <note id="imp-id9803870" type="hint">
+        The proof is a bit longer than you might expect.
+        Use the ∨Elim inference rule to get the final result.
+      </note>
+    </para>
+  </problem>
+
+  
+</exercise>
+
+<exercise id="exercise7">
+<problem id="imp-id20359175">
+    <para id="imp-id7180999">
+      In our inference rules, unlike our equivalences,
+      we chose to not include any corresponding to distributivity.
+    </para>
+  
+<list id="imp-id7181001" list-type="enumerated">
+<item>
+      <para id="imp-id16958261">
+        Prove a left-hand version of one direction of distributivity:
+        <m:math><m:mrow><m:apply><m:and/>
+            <m:ci>φ</m:ci>
+            <m:apply><m:or/><m:ci>ψ</m:ci><m:ci>θ</m:ci></m:apply>
+          </m:apply> <m:mo>⊢</m:mo> <m:apply><m:or/>
+            <m:apply><m:and/><m:ci>φ</m:ci> <m:ci>ψ</m:ci></m:apply>
+            <m:apply><m:and/><m:ci>φ</m:ci> <m:ci>θ</m:ci></m:apply>
+          </m:apply></m:mrow></m:math>.
+      </para>
+    </item>
+<item>
+      <para id="imp-id10860826">
+        Use the previous part's result, plus ∧'s commutativity to
+        prove the corresponding right-hand version:
+        <m:math><m:mrow><m:apply><m:and/>
+            <m:apply><m:or/><m:ci>ψ</m:ci><m:ci>θ</m:ci></m:apply>
+            <m:ci>φ</m:ci>
+          </m:apply> <m:mo>⊢</m:mo> <m:apply><m:or/>
+            <m:apply><m:and/><m:ci>ψ</m:ci> <m:ci>φ</m:ci></m:apply>
+            <m:apply><m:and/><m:ci>θ</m:ci> <m:ci>φ</m:ci></m:apply>
+          </m:apply></m:mrow></m:math>.
+      </para>
+    </item>
+</list>
+</problem>
+
+
+</exercise>
+
+<exercise id="demorgan-infrule">
+<problem id="imp-id9509607">
+    <para id="imp-id9509609">
+      In our inference rules, unlike our equivalences,
+      we chose to not include any corresponding to DeMorgan's Law.
+      Show that each of the following versions is still provable.
+    </para>
+  
+<list id="imp-id8080811" list-type="enumerated">
+<item>
+      <m:math><m:mrow><m:apply><m:or/><m:ci>φ</m:ci> <m:ci>ψ</m:ci></m:apply> <m:mo>⊢</m:mo> <m:apply><m:not/>
+          <m:apply><m:and/>
+            <m:apply><m:not/><m:ci>φ</m:ci></m:apply>
+            <m:apply><m:not/><m:ci>ψ</m:ci></m:apply>
+          </m:apply>
+        </m:apply></m:mrow></m:math>
+    </item>
+<item>
+      <m:math><m:mrow><m:apply><m:not/><m:apply><m:or/><m:ci>φ</m:ci> <m:ci>ψ</m:ci></m:apply></m:apply> <m:mo>⊢</m:mo> <m:apply><m:and/>
+          <m:apply><m:not/><m:ci>φ</m:ci></m:apply>
+          <m:apply><m:not/><m:ci>ψ</m:ci></m:apply>
+        </m:apply></m:mrow></m:math>
+    </item>
+<item>
+      <m:math><m:mrow><m:apply><m:and/><m:ci>φ</m:ci> <m:ci>ψ</m:ci></m:apply> <m:mo>⊢</m:mo> <m:apply><m:not/><m:apply><m:or/><m:apply><m:not/><m:ci>φ</m:ci></m:apply> <m:apply><m:not/><m:ci>ψ</m:ci></m:apply></m:apply></m:apply></m:mrow></m:math>
+    </item>
+<item>
+      <m:math><m:mrow><m:apply><m:not/><m:apply><m:and/><m:ci>φ</m:ci> <m:ci>ψ</m:ci></m:apply></m:apply> <m:mo>⊢</m:mo> <m:apply><m:or/><m:apply><m:not/><m:ci>φ</m:ci></m:apply> <m:apply><m:not/><m:ci>ψ</m:ci></m:apply></m:apply></m:mrow></m:math>
+    </item>
+</list>
+</problem>
+
+
+</exercise>
+
+<exercise id="exercise9">
+  <problem id="imp-id9820332">
+    <para id="imp-id11043442">
+      The
+      <link target-id="demorgan-exercise">above exercise</link> suggests that it would be useful to have
+      an inference rule or theorem that says given
+      <m:math><m:mrow><m:ci>θ</m:ci> <m:mo>⊢</m:mo> <m:apply><m:not/><m:ci>δ</m:ci></m:apply></m:mrow></m:math>,
+      then
+      <m:math><m:mrow><m:apply><m:not/><m:ci>θ</m:ci></m:apply> <m:mo>⊢</m:mo> <m:ci>δ</m:ci></m:mrow></m:math>.
+      Or, equivalently, because of ⇒Intro and ⇒Elim,
+      <m:math><m:mrow><m:apply><m:implies/><m:ci>θ</m:ci> <m:apply><m:not/><m:ci>δ</m:ci></m:apply></m:apply> <m:mo>⊢</m:mo> <m:apply><m:implies/><m:apply><m:not/><m:ci>θ</m:ci></m:apply> <m:ci>δ</m:ci></m:apply></m:mrow></m:math>.
+      Why don't we?
+    </para>
+  </problem>
+
+  
+</exercise>
+
+<exercise id="equates-if-or">
+<problem id="imp-id11043044">
+    <para id="imp-id11043046">
+      In our inference rules, unlike our equivalences,
+      we have nothing that directly equates
+      <m:math><m:apply><m:implies/><m:ci>φ</m:ci> <m:ci>ψ</m:ci></m:apply></m:math> and
+      <m:math><m:apply><m:or/><m:apply><m:not/><m:ci>φ</m:ci></m:apply> <m:ci>ψ</m:ci></m:apply></m:math>.
+      Prove each of the following.
+    </para>
+  
+<list id="imp-id8434046" list-type="enumerated">
+<item>
+      <m:math><m:mrow><m:apply><m:implies/><m:ci>φ</m:ci> <m:ci>ψ</m:ci></m:apply> <m:mo>⊢</m:mo> <m:apply><m:or/><m:apply><m:not/><m:ci>φ</m:ci></m:apply> <m:ci>ψ</m:ci></m:apply></m:mrow></m:math>
+    </item>
+<item>
+      <m:math><m:mrow><m:apply><m:or/><m:apply><m:not/><m:ci>φ</m:ci></m:apply> <m:ci>ψ</m:ci></m:apply> <m:mo>⊢</m:mo> <m:apply><m:implies/><m:ci>φ</m:ci> <m:ci>ψ</m:ci></m:apply></m:mrow></m:math>
+    </item>
+</list>
+</problem>
+
+
+</exercise>
+
+<exercise id="exercise11">
+  <problem id="imp-id10027852">
+    <para id="imp-id10027854">
+      Prove the following:
+      <m:math><m:mrow><m:apply><m:implies/><m:ci>φ</m:ci> <m:ci>ψ</m:ci></m:apply><m:mtext>, </m:mtext><m:apply><m:implies/><m:ci>ψ</m:ci> <m:ci>φ</m:ci></m:apply> <m:mo>⊢</m:mo> <m:apply><m:or/>
+          <m:apply><m:and/><m:ci>φ</m:ci> <m:ci>ψ</m:ci></m:apply>
+          <m:apply><m:and/><m:apply><m:not/><m:ci>φ</m:ci></m:apply> <m:apply><m:not/><m:ci>ψ</m:ci></m:apply></m:apply>
+        </m:apply></m:mrow></m:math>
+    </para>
+  </problem>
+
+  
+</exercise>
+
+<exercise id="excluded-middle">
+<problem id="imp-id9800556">
+    <para id="imp-id9676207">
+      Prove what is commonly called the
+      <link url="http://en.wikipedia.org/wiki/Law_of_excluded_middle"><term>Law of Excluded Middle</term></link>:
+      <m:math><m:mrow><m:mo>⊢</m:mo> <m:apply><m:or/><m:ci>χ</m:ci> <m:apply><m:not/><m:ci>χ</m:ci></m:apply></m:apply></m:mrow></m:math>.
+    </para>
+  
+<list id="imp-id20834635" list-type="enumerated">
+<item>
+      <para id="imp-id9720509">
+        Give a short proof citing our
+        <link document="m12077" target-id="raa-example">previous proof</link> of
+        <m:math><m:mrow><m:mo>⊢</m:mo> <m:apply><m:not/> <m:apply><m:and/> <m:ci>χ</m:ci> <m:apply><m:not/><m:ci>χ</m:ci></m:apply> </m:apply> </m:apply></m:mrow></m:math>
+        and the relevant version of DeMorgan's Law from
+        <link target-id="demorgan-infrule">above</link>.
+      </para>
+    </item>
+<item>
+      <para id="imp-id9687684">
+        Give a direct version without using previous theorems.
+        <note id="imp-id6990498" type="hint">
+          Use RAA two or three times.
+        </note>
+      </para>
+    </item>
+</list>
+</problem>
+
+
+</exercise>
+
+<exercise id="if-X1-then-Wunsafe-or-Yunsafe">
+  <problem id="imp-id6643840">
+    <para id="imp-id8433437">
+      Prove the missing steps and reasons in
+      the following WaterWorld proof of
+      <m:math><m:mrow><m:ci>X-has-1</m:ci> <m:mo>⊢</m:mo> <m:apply><m:or/><m:ci>W-unsafe</m:ci> <m:ci>Y-unsafe</m:ci></m:apply></m:mrow></m:math>.
+    </para>
+
+    <table id="proof3" summary="A proof">
+
+<tgroup cols="4" align="center" colsep="1" rowsep="1">
+<colspec colwidth="*" colname="c1"/>
+<colspec colwidth="*" colname="c2"/>
+<colspec colwidth="*" colname="c3"/>
+<colspec colwidth="*" colname="c4"/>
+
+<tbody>
+<row>
+<entry align="left">1</entry><entry namest="c2" nameend="c3"><m:math><m:ci>X-has-1</m:ci></m:math></entry><entry/><entry colname="c4">
+          ____________________
+        </entry>
+</row>
+<row>
+<entry align="left">2</entry><entry namest="c2" nameend="c3">____________________</entry><entry/><entry colname="c4">
+          WaterWorld axiom
+        </entry>
+</row>
+<row>
+<entry align="left">3</entry><entry namest="c2" nameend="c3">____________________</entry><entry/><entry colname="c4">
+          ⇒Elim, lines 1,2
+        </entry>
+</row>
+<row>
+<entry align="left">4</entry><entry namest="c2" nameend="c3">subproof:<m:math><m:mrow><m:apply><m:and/> <m:ci>W-safe</m:ci>   <m:ci>Y-unsafe</m:ci></m:apply> <m:mo>⊢</m:mo> <m:apply><m:or/><m:ci>W-unsafe</m:ci>   <m:ci>Y-unsafe</m:ci></m:apply></m:mrow></m:math></entry><entry/><entry colname="c4"/>
+</row>
+<row>
+<entry align="left">4.a</entry><entry/> <entry namest="c3" nameend="c3"><m:math><m:apply><m:and/> <m:ci>W-safe</m:ci>   <m:ci>Y-unsafe</m:ci></m:apply></m:math></entry><entry colname="c4">
+                Premise for subproof
+              </entry>
+</row>
+<row>
+<entry align="left">4.b</entry><entry/> <entry namest="c3" nameend="c3"><m:math><m:ci>Y-unsafe</m:ci></m:math></entry><entry colname="c4">
+                ____________________
+              </entry>
+</row>
+<row>
+<entry align="left">4.c</entry><entry/> <entry namest="c3" nameend="c3"><m:math><m:apply><m:or/><m:ci>W-unsafe</m:ci> <m:ci>Y-unsafe</m:ci></m:apply></m:math></entry><entry colname="c4">
+                ____________________
+              </entry>
+</row>
+<row>
+<entry align="left">5</entry><entry namest="c2" nameend="c3">subproof:<m:math><m:mrow><m:apply><m:not/><m:apply><m:and/> <m:ci>W-safe</m:ci>   <m:ci>Y-unsafe</m:ci></m:apply></m:apply> <m:mo>⊢</m:mo> <m:apply><m:or/> <m:ci>W-unsafe</m:ci>   <m:ci>Y-unsafe</m:ci></m:apply></m:mrow></m:math></entry><entry/><entry colname="c4"/>
+</row>
+<row>
+<entry align="left">5.a</entry><entry/> <entry namest="c3" nameend="c3"><m:math><m:apply><m:not/><m:apply><m:and/> <m:ci>W-safe</m:ci>   <m:ci>Y-unsafe</m:ci></m:apply></m:apply></m:math></entry><entry colname="c4">
+                Premise for subproof
+              </entry>
+</row>
+<row>
+<entry align="left">5.b</entry><entry/> <entry namest="c3" nameend="c3"><m:math><m:apply><m:and/><m:ci>W-unsafe</m:ci> <m:ci>Y-safe</m:ci></m:apply></m:math></entry><entry colname="c4">
+                CaseElim (left), lines ____________________
+                where <m:math><m:apply><m:eq/><m:ci>φ</m:ci> <m:mtext>____________________</m:mtext></m:apply></m:math>,
+                and   <m:math><m:apply><m:eq/><m:ci>ψ</m:ci> <m:mtext>____________________</m:mtext></m:apply></m:math>
+              </entry>
+</row>
+<row>
+<entry align="left">5.c</entry><entry/> <entry namest="c3" nameend="c3">____________________</entry><entry colname="c4">
+                ____________________
+              </entry>
+</row>
+<row>
+<entry align="left">5.d</entry><entry/> <entry namest="c3" nameend="c3"><m:math><m:apply><m:or/><m:ci>W-unsafe</m:ci> <m:ci>Y-unsafe</m:ci></m:apply></m:math></entry><entry colname="c4">
+                ____________________
+              </entry>
+</row>
+<row>
+<entry align="left">6</entry><entry namest="c2" nameend="c3"><m:math><m:apply><m:or/>
+          <m:apply><m:and/> <m:ci>W-safe</m:ci> <m:ci>Y-unsafe</m:ci></m:apply>
+          <m:apply><m:not/><m:apply><m:and/> <m:ci>W-safe</m:ci> <m:ci>Y-unsafe</m:ci></m:apply></m:apply>
+        </m:apply></m:math></entry><entry/><entry colname="c4">
+          Theorem: Excluded Middle,
+          where
+          <m:math><m:apply><m:eq/>
+            <m:ci>χ</m:ci>
+            <m:mtext>____________________</m:mtext>
+          </m:apply></m:math>
+        </entry>
+</row>
+<row>
+<entry align="left">7</entry><entry namest="c2" nameend="c3"><m:math><m:apply><m:or/><m:ci>W-unsafe</m:ci><m:ci>Y-unsafe</m:ci></m:apply></m:math></entry><entry/><entry colname="c4">
+          ____________________
+        </entry>
+</row></tbody>
+</tgroup>
+</table>
+  </problem>
+
+  
+</exercise>
+
+<exercise id="sample-board2-proof">
+  <problem id="imp-id21151202"><para id="imp-id12442896">[Practice problem<m:math><m:mo>—</m:mo></m:math>solution provided.]</para>
+    <figure id="sample-board2">
+      <media id="imp-id15858380" alt="" display="block">
+        <image mime-type="image/png" src="../../media/hwA-1.png"/>
+      </media>
+      <caption>A sample WaterWorld board</caption>
+    </figure>
+
+    <para id="imp-id19810474">
+      Given the
+      <link target-id="sample-board2">above figure</link>, and using any of the immediately obvious facts
+      as premises, prove that location <m:math><m:ci>P</m:ci></m:math> is safe
+      by using our proof system and the WaterWorld axioms.
+    </para>
+
+    <para id="imp-id20747462">
+      While this proof is longer (over two dozen steps),
+      it's not too bad when sub-proofs are used appropriately.
+      To make life easier,
+      you may use the following theorem:
+      <m:math><m:apply><m:implies/>
+        <m:ci>Q-has-1</m:ci>
+        <m:apply><m:or/>
+          <m:apply><m:and/><m:ci>P-safe</m:ci> <m:ci>R-safe</m:ci></m:apply>
+          <m:apply><m:and/><m:ci>P-safe</m:ci> <m:ci>W-safe</m:ci></m:apply>
+          <m:apply><m:and/><m:ci>R-safe</m:ci> <m:ci>W-safe</m:ci></m:apply>
+        </m:apply>
+      </m:apply></m:math>,
+      along with any proven previously.
+      When looking at the given board, you can use premises like
+      <m:math><m:ci>Y-safe</m:ci></m:math> as well as <m:math><m:apply><m:not/><m:ci>Y-unsafe</m:ci></m:apply></m:math>.
+    </para>
+  </problem>
+
+  <solution id="imp-id9811649">
+    <table id="proof4" summary="A proof">
+
+<tgroup cols="4" align="center" colsep="1" rowsep="1">
+<colspec colwidth="*" colname="c1"/>
+<colspec colwidth="*" colname="c2"/>
+<colspec colwidth="*" colname="c3"/>
+<colspec colwidth="*" colname="c4"/>
+
+<tbody>
+<row>
+<entry align="left">1</entry><entry namest="c2" nameend="c3"><m:math><m:ci>Q-has-1</m:ci></m:math></entry><entry/><entry colname="c4">
+          Premise
+        </entry>
+</row>
+<row>
+<entry align="left">2</entry><entry namest="c2" nameend="c3"><m:math><m:ci>X-has-1</m:ci></m:math></entry><entry/><entry colname="c4">
+          Premise
+        </entry>
+</row>
+<row>
+<entry align="left">3</entry><entry namest="c2" nameend="c3"><m:math><m:apply><m:not/><m:ci>Y-unsafe</m:ci></m:apply></m:math></entry><entry/><entry colname="c4">
+          Premise
+        </entry>
+</row>
+<row>
+<entry align="left">4</entry><entry namest="c2" nameend="c3"><m:math><m:apply><m:or/><m:ci>W-unsafe</m:ci> <m:ci>Y-unsafe</m:ci></m:apply></m:math></entry><entry/><entry colname="c4">
+          Theorem:
+          <link target-id="if-X1-then-Wunsafe-or-Yunsafe">above problem</link>, line 2
+        </entry>
+</row>
+<row>
+<entry align="left">5</entry><entry namest="c2" nameend="c3"><m:math><m:apply><m:or/><m:ci>Y-unsafe</m:ci> <m:ci>W-unsafe</m:ci></m:apply></m:math></entry><entry/><entry colname="c4">
+          Theorem: ∨ commutes, line 4
+        </entry>
+</row>
+<row>
+<entry align="left">6</entry><entry namest="c2" nameend="c3"><m:math><m:ci>W-unsafe</m:ci></m:math></entry><entry/><entry colname="c4">
+          CaseElim, lines 3,5
+        </entry>
+</row>
+<row>
+<entry align="left">7</entry><entry namest="c2" nameend="c3">subproof:<m:math><m:mrow><m:apply><m:not/><m:apply><m:not/><m:apply><m:and/><m:ci>P-safe</m:ci> <m:ci>W-safe</m:ci></m:apply></m:apply></m:apply> <m:mo>⊢</m:mo> <m:false/></m:mrow></m:math></entry><entry/><entry colname="c4"/>
+</row>
+<row>
+<entry align="left">7.a</entry><entry/> <entry namest="c3" nameend="c3"><m:math><m:apply><m:not/><m:apply><m:not/><m:apply><m:and/><m:ci>P-safe</m:ci> <m:ci>W-safe</m:ci></m:apply></m:apply></m:apply></m:math></entry><entry colname="c4"> Premise for subproof
+                      </entry>
+</row>
+<row>
+<entry align="left">7.b</entry><entry/> <entry namest="c3" nameend="c3"><m:math><m:apply><m:and/><m:ci>P-safe</m:ci> <m:ci>W-safe</m:ci></m:apply></m:math></entry><entry colname="c4"> ¬Elim,
+                                      line 7.a
+                      </entry>
+</row>
+<row>
+<entry align="left">7.c</entry><entry/> <entry namest="c3" nameend="c3"><m:math><m:ci>W-safe</m:ci></m:math></entry><entry colname="c4">
+                        ∧Elim, line 7.b
+                      </entry>
+</row>
+<row>
+<entry align="left">7.d</entry><entry/> <entry namest="c3" nameend="c3"><m:math><m:apply><m:implies/><m:ci>W-safe</m:ci> <m:apply><m:not/><m:ci>W-unsafe</m:ci></m:apply></m:apply></m:math></entry><entry colname="c4">
+                        WaterWorld axiom
+                      </entry>
+</row>
+<row>
+<entry align="left">7.e</entry><entry/> <entry namest="c3" nameend="c3"><m:math><m:apply><m:not/><m:ci>W-unsafe</m:ci></m:apply></m:math></entry><entry colname="c4">
+                        ⇒Elim, lines 7.c,7.d
+                      </entry>
+</row>
+<row>
+<entry align="left">7.f</entry><entry/> <entry namest="c3" nameend="c3"><m:math><m:false/></m:math></entry><entry colname="c4">
+                        <m:math><m:false/></m:math>Intro, lines 6,7.e
+                      </entry>
+</row>
+<row>
+<entry align="left">8</entry><entry namest="c2" nameend="c3"><m:math><m:apply><m:not/><m:apply><m:and/><m:ci>P-safe</m:ci> <m:ci>W-safe</m:ci></m:apply></m:apply></m:math></entry><entry/><entry colname="c4">
+          RAA, line 7
+        </entry>
+</row>
+<row>
+<entry align="left">9</entry><entry namest="c2" nameend="c3">subproof:<m:math><m:mrow><m:apply><m:not/><m:apply><m:not/><m:apply><m:and/><m:ci>R-safe</m:ci> <m:ci>W-safe</m:ci></m:apply></m:apply></m:apply> <m:mo>⊢</m:mo> <m:false/></m:mrow></m:math></entry><entry/><entry colname="c4"/>
+</row>
+<row>
+<entry align="left">9.a</entry><entry/> <entry namest="c3" nameend="c3"><m:math><m:apply><m:not/><m:apply><m:not/><m:apply><m:and/><m:ci>R-safe</m:ci> <m:ci>W-safe</m:ci></m:apply></m:apply></m:apply></m:math></entry><entry colname="c4"> Premise for subproof
+                      </entry>
+</row>
+<row>
+<entry align="left">9.b</entry><entry/> <entry namest="c3" nameend="c3"><m:math><m:apply><m:and/><m:ci>R-safe</m:ci> <m:ci>W-safe</m:ci></m:apply></m:math></entry><entry colname="c4">
+                        ¬Elim, line 9.a
+                      </entry>
+</row>
+<row>
+<entry align="left">9.c</entry><entry/> <entry namest="c3" nameend="c3"><m:math><m:ci>W-safe</m:ci></m:math></entry><entry colname="c4">
+                        ∧Elim, line 9.b
+                      </entry>
+</row>
+<row>
+<entry align="left">9.d</entry><entry/> <entry namest="c3" nameend="c3"><m:math><m:apply><m:implies/><m:ci>W-safe</m:ci> <m:apply><m:not/><m:ci>W-unsafe</m:ci></m:apply></m:apply></m:math></entry><entry colname="c4">
+                        WaterWorld axiom
+                      </entry>
+</row>
+<row>
+<entry align="left">9.e</entry><entry/> <entry namest="c3" nameend="c3"><m:math><m:apply><m:not/><m:ci>W-unsafe</m:ci></m:apply></m:math></entry><entry colname="c4">
+                        ⇒Elim, lines 9.c,9.d
+                      </entry>
+</row>
+<row>
+<entry align="left">9.f</entry><entry/> <entry namest="c3" nameend="c3"><m:math><m:false/></m:math></entry><entry colname="c4">
+                        <m:math><m:false/></m:math>Intro, lines 6,9.e
+                      </entry>
+</row>
+<row>
+<entry align="left">10</entry><entry namest="c2" nameend="c3"><m:math><m:apply><m:not/><m:apply><m:and/><m:ci>R-safe</m:ci> <m:ci>W-safe</m:ci></m:apply></m:apply></m:math></entry><entry/><entry colname="c4">
+          RAA, line 9
+        </entry>
+</row>
+<row>
+<entry align="left">11</entry><entry namest="c2" nameend="c3"><m:math><m:apply><m:implies/>
+          <m:ci>Q-has-1</m:ci>
+          <m:apply><m:or/>
+            <m:apply><m:or/>
+              <m:apply><m:and/><m:ci>P-safe</m:ci> <m:ci>R-safe</m:ci></m:apply>
+              <m:apply><m:and/><m:ci>P-safe</m:ci> <m:ci>W-safe</m:ci></m:apply>
+            </m:apply>
+            <m:apply><m:and/><m:ci>R-safe</m:ci> <m:ci>W-safe</m:ci></m:apply>
+          </m:apply>
+        </m:apply></m:math></entry><entry/><entry colname="c4">
+          Theorem: Allowed by problem statement
+        </entry>
+</row>
+<row>
+<entry align="left">12</entry><entry namest="c2" nameend="c3"><m:math><m:apply><m:or/>
+          <m:apply><m:or/>
+            <m:apply><m:and/><m:ci>P-safe</m:ci> <m:ci>R-safe</m:ci></m:apply>
+            <m:apply><m:and/><m:ci>P-safe</m:ci> <m:ci>W-safe</m:ci></m:apply>
+          </m:apply>
+          <m:apply><m:and/><m:ci>R-safe</m:ci> <m:ci>W-safe</m:ci></m:apply>
+        </m:apply></m:math></entry><entry/><entry colname="c4">
+          ⇒Elim, lines 1,11
+        </entry>
+</row>
+<row>
+<entry align="left">13</entry><entry namest="c2" nameend="c3"><m:math><m:apply><m:or/>
+          <m:apply><m:and/><m:ci>R-safe</m:ci> <m:ci>W-safe</m:ci></m:apply>
+          <m:apply><m:or/>
+            <m:apply><m:and/><m:ci>P-safe</m:ci> <m:ci>R-safe</m:ci></m:apply>
+            <m:apply><m:and/><m:ci>P-safe</m:ci> <m:ci>W-safe</m:ci></m:apply>
+          </m:apply>
+        </m:apply></m:math></entry><entry/><entry colname="c4">
+          Theorem: ∨ commutes, line 12
+        </entry>
+</row>
+<row>
+<entry align="left">14</entry><entry namest="c2" nameend="c3"><m:math><m:apply><m:or/>
+          <m:apply><m:and/><m:ci>P-safe</m:ci> <m:ci>R-safe</m:ci></m:apply>
+          <m:apply><m:and/><m:ci>P-safe</m:ci> <m:ci>W-safe</m:ci></m:apply>
+        </m:apply></m:math></entry><entry/><entry colname="c4"> CaseElim, lines 8,13
+        </entry>
+</row>
+<row>
+<entry align="left">15</entry><entry namest="c2" nameend="c3"><m:math><m:apply><m:or/>
+          <m:apply><m:and/><m:ci>P-safe</m:ci> <m:ci>W-safe</m:ci></m:apply>
+          <m:apply><m:and/><m:ci>P-safe</m:ci> <m:ci>R-safe</m:ci></m:apply>
+        </m:apply></m:math></entry><entry/><entry colname="c4"> Theorem: ∨ commutes, line 14
+        </entry>
+</row>
+<row>
+<entry align="left">16</entry><entry namest="c2" nameend="c3"><m:math><m:apply><m:and/><m:ci>P-safe</m:ci> <m:ci>R-safe</m:ci></m:apply></m:math></entry><entry/><entry colname="c4">
+          CaseElim, lines 10,15
+        </entry>
+</row>
+<row>
+<entry align="left">17</entry><entry namest="c2" nameend="c3"><m:math><m:ci>P-safe</m:ci></m:math></entry><entry/><entry colname="c4">
+          ∧Elim, line 16
+        </entry>
+</row></tbody>
+</tgroup>
+</table>
+
+    <para id="imp-id8986587">
+      Alternatively, the subproofs could easily have been pulled out into
+      lemmas.  Just like using subroutines in a program, that would
+      make the proof somewhat clearer, even though in this case
+      each lemma would be used only once.
+    </para>
+
+    <para id="imp-id8986589">
+      Observe how the two subproofs have some identical lines
+      (7.c-7.f and 9.c-9.f).
+      It would be incorrect to replace those lines in the second subproof
+      with a citation of the results of the first subproof.
+      First, because the previous subproof had been completed, and
+      moreover, the two subproofs have different premises.
+      This is analogous to two subroutines that happen to have some
+      identical code lines, even through they are called separately and have
+      different parameters.
+    </para>
+
+    <para id="imp-id8986591">
+      <note id="imp-id8933550" type="note">
+        Interestingly, we didn't need to use <m:math><m:ci>R-safe</m:ci></m:math> as a premise.
+        (In fact, we nearly proved that 
+         <m:math><m:apply><m:not/><m:ci>R-safe</m:ci></m:apply></m:math> would have been inconsistent
+         with the other premises.)
+      </note>
+    </para>
+  </solution>
+</exercise>
+
+<exercise id="exercise15">
+  <problem id="imp-id7039665">
+    <para id="imp-id7039668">
+      Starting from the WaterWorld axiom
+      <m:math><m:apply><m:implies/>
+        <m:ci>Q-has-1</m:ci>
+        <m:apply><m:or/>
+          <m:apply><m:and/>
+            <m:ci>P-safe</m:ci>
+            <m:ci>R-safe</m:ci>
+            <m:ci>W-unsafe</m:ci>
+          </m:apply>
+          <m:apply><m:and/>
+            <m:ci>P-safe</m:ci>
+            <m:ci>R-unsafe</m:ci>
+            <m:ci>W-safe</m:ci>
+          </m:apply>
+          <m:apply><m:and/>
+            <m:ci>P-unsafe</m:ci>
+            <m:ci>R-safe</m:ci>
+            <m:ci>W-safe</m:ci>
+          </m:apply>
+        </m:apply>
+      </m:apply></m:math>,
+      we could prove the following theorem cited in the
+      <link target-id="sample-board2-proof">previous problem</link>:
+      <m:math><m:apply><m:implies/>
+        <m:ci>Q-has-1</m:ci>
+        <m:apply><m:or/>
+          <m:apply><m:and/><m:ci>P-safe</m:ci> <m:ci>R-safe</m:ci></m:apply>
+          <m:apply><m:and/><m:ci>P-safe</m:ci> <m:ci>W-safe</m:ci></m:apply>
+          <m:apply><m:and/><m:ci>R-safe</m:ci> <m:ci>W-safe</m:ci></m:apply>
+        </m:apply>
+      </m:apply></m:math>.
+    </para>
+
+    <para id="imp-id6643957">
+      Prove the following theorem which is slightly simpler:
+      <m:math><m:mrow><m:apply><m:implies/>
+          <m:ci>φ</m:ci>
+          <m:apply><m:or/>
+            <m:apply><m:and/><m:ci>ψ</m:ci> <m:ci>θ</m:ci></m:apply>
+            <m:apply><m:and/><m:ci>δ</m:ci> <m:ci>ε</m:ci></m:apply>
+          </m:apply>
+        </m:apply> <m:mo>⊢</m:mo> <m:apply><m:implies/>
+          <m:ci>φ</m:ci>
+          <m:apply><m:or/>
+            <m:ci>ψ</m:ci>
+            <m:ci>δ</m:ci>
+          </m:apply>
+        </m:apply></m:mrow></m:math>.
+    </para>
+
+    <note id="imp-id21134194" type="hint">
+      If you have trouble, first prove an even simpler version:
+      <m:math><m:mrow><m:apply><m:implies/><m:ci>φ</m:ci> <m:apply><m:and/><m:ci>ψ</m:ci> <m:ci>θ</m:ci></m:apply></m:apply> <m:mo>⊢</m:mo> <m:apply><m:implies/><m:ci>φ</m:ci> <m:ci>ψ</m:ci></m:apply></m:mrow></m:math>.
+    </note>
+  </problem>
+
+  
+</exercise>
+
+<exercise id="not-elim-redundant">
+  <problem id="imp-id8436044"><para id="imp-id8436045">[Practice problem<m:math><m:mo>—</m:mo></m:math>solution provided.]</para>
+    <para id="imp-id21305990">
+      Show that the ¬Elim inference rule is redundant in our system.
+      In other words, without using ¬Elim, prove that
+      <m:math><m:mrow><m:apply><m:not/><m:apply><m:not/><m:ci>φ</m:ci></m:apply></m:apply> <m:mo>⊢</m:mo> <m:ci>φ</m:ci></m:mrow></m:math>.
+    </para>
+  </problem>
+
+  <solution id="imp-id21305929">
+    <table id="proof5" summary="A proof">
+
+<tgroup cols="4" align="center" colsep="1" rowsep="1">
+<colspec colwidth="*" colname="c1"/>
+<colspec colwidth="*" colname="c2"/>
+<colspec colwidth="*" colname="c3"/>
+<colspec colwidth="*" colname="c4"/>
+
+<tbody>
+<row>
+<entry align="left">1</entry><entry namest="c2" nameend="c3"><m:math><m:apply><m:not/><m:apply><m:not/><m:ci>φ</m:ci></m:apply></m:apply></m:math></entry><entry/><entry colname="c4">
+          Premise
+        </entry>
+</row>
+<row>
+<entry align="left">2</entry><entry namest="c2" nameend="c3">subproof:<m:math><m:mrow><m:apply><m:not/><m:ci>φ</m:ci></m:apply> <m:mo>⊢</m:mo> <m:false/></m:mrow></m:math></entry><entry/><entry colname="c4"/>
+</row>
+<row>
+<entry align="left">2.a</entry><entry/> <entry namest="c3" nameend="c3"><m:math><m:apply><m:not/><m:ci>φ</m:ci></m:apply></m:math></entry><entry colname="c4">
+                Premise for subproof
+              </entry>
+</row>
+<row>
+<entry align="left">2.b</entry><entry/> <entry namest="c3" nameend="c3"><m:math><m:false/></m:math></entry><entry colname="c4">
+                <m:math><m:false/></m:math>Intro, lines 1,2.a
+              </entry>
+</row>
+<row>
+<entry align="left">3</entry><entry namest="c2" nameend="c3"><m:math><m:ci>φ</m:ci></m:math></entry><entry/><entry colname="c4">
+          RAA, line 2
+        </entry>
+</row></tbody>
+</tgroup>
+</table>
+  </solution>
+</exercise>
+
+<exercise id="not-intro-redundant">
+  <problem id="imp-id16879673">
+    <para id="imp-id16879675">
+      Show that the ¬Intro inference rule is redundant in our system.
+      In other words, without using ¬Intro, prove that
+      <m:math><m:mrow><m:ci>φ</m:ci> <m:mo>⊢</m:mo> <m:apply><m:not/><m:apply><m:not/><m:ci>φ</m:ci></m:apply></m:apply></m:mrow></m:math>.
+      To make sure that you're not hiding any uses of ¬Intro,
+      also do not use any previous theorems.
+    </para>
+  </problem>
+
+  
+</exercise>
+
+<exercise id="case-elim-redundant">
+  <problem id="imp-id9195759">
+    <para id="imp-id9195761">
+      Show that the CaseElim inference rule is redundant in our system.
+      For brevity, we'll just consider the left-hand version.
+      In other words, without using CaseElim, prove that
+      <m:math><m:mrow><m:apply><m:or/><m:ci>φ</m:ci> <m:ci>ψ</m:ci></m:apply><m:mtext>, </m:mtext><m:apply><m:not/><m:ci>φ</m:ci></m:apply> <m:mo>⊢</m:mo> <m:ci>ψ</m:ci></m:mrow></m:math>.
+      To make sure that you're not hiding any uses of CaseElim,
+      also do not use any previous theorems.
+    </para>
+  </problem>
+
+  
+</exercise>
+
+<exercise id="exercise19">
+  <problem id="imp-id16879714">
+    <list id="imp-id16879716">
+      <item>
+        State where on a board pirates could be positioned, so that:
+        <m:math><m:apply><m:and/><m:ci>P-has-1</m:ci> <m:ci>U-has-1</m:ci> <m:ci>W-has-1</m:ci></m:apply></m:math>,
+        but <m:math><m:ci>X-safe</m:ci></m:math>.
+      </item>
+      <item>
+        Compare this with 
+        <link document="m12077" target-id="b1g1j1-implies-k">a previous theorem</link>,
+        <m:math><m:apply><m:implies/>
+          <m:apply><m:and/>
+            <m:ci>B-has-1</m:ci>
+            <m:ci>G-has-1</m:ci>
+            <m:ci>J-has-1</m:ci>
+          </m:apply>
+          <m:ci>K-unsafe</m:ci>
+        </m:apply></m:math>,
+        the same idea shifted down a couple of rows.
+        Suppose we try to translate this theorem's proof
+        so as to conclude <m:math><m:apply><m:not/><m:ci>X-safe</m:ci></m:apply></m:math> (clearly untrue, by the above).
+        What is the first step of the modified proof which doesn't hold
+        when <m:math><m:ci>B</m:ci></m:math>,<m:math><m:ci>G</m:ci></m:math>,<m:math><m:ci>J</m:ci></m:math>,<m:math><m:ci>K</m:ci></m:math>
+        are mindlessly replaced with
+        <m:math><m:ci>P</m:ci></m:math>,<m:math><m:ci>U</m:ci></m:math>,<m:math><m:ci>W</m:ci></m:math>,<m:math><m:ci>X</m:ci></m:math>,
+        respectively?
+        (Just give a line number; no explanation needed.
+         Your answer will be of the form
+         <quote display="inline">Lemma A line 1</quote> or <quote display="inline">main proof line 2</quote>.)
+      </item>
+      <item>
+        We've just seen that the mindless changing of location-names 
+        introduces false steps.  But we can be a little smarter,
+        and modify the false step to get a formula which
+        <emphasis>is</emphasis>
+        true, and is also still in the spirit of the original proof.
+        We can thus patch the problem from the previous part, 
+        and continue on modifying the original proof for several more steps.
+        But clearly we can't translate the entire original proof; we eventually
+        hit a more fundamental snag: a formula which
+        isn't true, yet can't be patched up, either.
+        What is the first line that can't be patched?
+        (Again, just give a line number; no explanation needed.
+         Your answer will be of the form <quote display="inline">Lemma A line 1</quote>
+         or <quote display="inline">main proof line 2</quote>.)
+      </item>
+    </list>
+  </problem>
+
+  
+</exercise>
+
+<exercise id="exercise20">
+  <problem id="imp-id6710323">
+    <para id="imp-id6710325">
+      Which is worse, having an unsound (but complete) inference system
+      or an incomplete (but sound) one?  Why?
+    </para>
+  </problem>
+
+  
+</exercise>
+
+
+</section> 
+
+</content>
+</document>

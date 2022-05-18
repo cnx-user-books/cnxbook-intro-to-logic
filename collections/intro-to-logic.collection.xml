@@ -1,0 +1,114 @@
+<col:collection xmlns="http://cnx.rice.edu/collxml" xmlns:md="http://cnx.rice.edu/mdml" xmlns:col="http://cnx.rice.edu/collxml" xml:lang="en">
+  <metadata xmlns:md="http://cnx.rice.edu/mdml" mdml-version="0.5">
+    <md:content-id>col10154</md:content-id>
+    <md:title>Intro to Logic</md:title>
+    <md:language>en</md:language>
+    <md:license url="http://creativecommons.org/licenses/by/1.0">Creative Commons Attribution License</md:license>
+    <md:uuid>383d4b87-2d7b-454e-99fe-2eaa43eae8ff</md:uuid>
+<md:slug>intro-to-logic</md:slug>
+</metadata>
+  <col:content>
+    <col:subcollection>
+      <md:title>Introduction</md:title>
+      <col:content>
+        <col:module document="m12727"/>
+        <col:module document="m10714"/>
+        <col:module document="m12072"/>
+      </col:content>
+    </col:subcollection>
+    <col:subcollection>
+      <md:title>Propositional Logic</md:title>
+      <col:content>
+        <col:subcollection>
+          <md:title>A formal vocabulary</md:title>
+          <col:content>
+            <col:module document="m10715"/>
+            <col:module document="m12073"/>
+          </col:content>
+        </col:subcollection>
+        <col:subcollection>
+          <md:title>Reasoning with truth tables</md:title>
+          <col:content>
+            <col:module document="m10716"/>
+            <col:module document="m12074"/>
+          </col:content>
+        </col:subcollection>
+        <col:subcollection>
+          <md:title>Reasoning with equivalences</md:title>
+          <col:content>
+            <col:module document="m10717"/>
+            <col:module document="m12075"/>
+            <col:module document="m12076"/>
+          </col:content>
+        </col:subcollection>
+        <col:subcollection>
+          <md:title>Reasoning with inference rules</md:title>
+          <col:content>
+            <col:module document="m10718"/>
+            <col:module document="m12077"/>
+            <col:module document="m12078"/>
+            <col:module document="m12079"/>
+            <col:module document="m12080"/>
+          </col:content>
+        </col:subcollection>
+        <col:module document="m10514"/>
+        <col:module document="m12352"/>
+      </col:content>
+    </col:subcollection>
+    <col:subcollection>
+      <md:title>Relations and Models</md:title>
+      <col:content>
+        <col:module document="m10724"/>
+        <col:module document="m10725"/>
+        <col:module document="m10726"/>
+        <col:module document="m12741"/>
+        <col:module document="m10727"/>
+      </col:content>
+    </col:subcollection>
+    <col:subcollection>
+      <md:title>First-Order Logic</md:title>
+      <col:content>
+        <col:subcollection>
+          <md:title>A formal vocabulary</md:title>
+          <col:content>
+            <col:module document="m10728"/>
+            <col:module document="m12081"/>
+            <col:module document="m12082"/>
+          </col:content>
+        </col:subcollection>
+        <col:subcollection>
+          <md:title>Reasoning with equivalences</md:title>
+          <col:content>
+            <col:module document="m10729"/>
+          </col:content>
+        </col:subcollection>
+        <col:subcollection>
+          <md:title>Reasoning with inference rules</md:title>
+          <col:content>
+            <col:module document="m10774"/>
+          </col:content>
+        </col:subcollection>
+        <col:module document="m12353"/>
+      </col:content>
+    </col:subcollection>
+    <col:subcollection>
+      <md:title>Conclusion, Acknowledgements</md:title>
+      <col:content>
+        <col:module document="m10775"/>
+        <col:module document="m13613"/>
+      </col:content>
+    </col:subcollection>
+    <col:subcollection>
+      <md:title>Appendices and Reference Sheets</md:title>
+      <col:content>
+        <col:module document="m10540"/>
+        <col:module document="m10529"/>
+        <col:module document="m11045"/>
+        <col:module document="m11046"/>
+        <col:module document="m10528"/>
+        <col:module document="m11072"/>
+        <col:module document="m10845"/>
+      </col:content>
+    </col:subcollection>
+  </col:content>
+</col:collection>

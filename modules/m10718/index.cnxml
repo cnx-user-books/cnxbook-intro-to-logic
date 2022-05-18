@@ -1,0 +1,685 @@
+<document xmlns="http://cnx.rice.edu/cnxml" xmlns:m="http://www.w3.org/1998/Math/MathML" xmlns:md="http://cnx.rice.edu/mdml"> 
+
+<title>Propositional Logic: inference rules</title>
+<metadata><md:content-id>undefined</md:content-id><md:title/><md:uuid>eb097c28-cb9d-472d-af87-4d865c91c2ff</md:uuid>
+</metadata>
+
+
+<content>
+
+<section id="section1">
+<title>Inference</title>
+
+<para id="para1">
+  Truth tables and equivalences are useful and powerful tools,
+  but they do not correspond to how we usually reason about things.
+  What we will do now is look at more familiar reasoning and how
+  to formalize that.
+  For example, with Boolean algebra it is awkward to prove that
+  <m:math><m:apply><m:and/><m:ci>a</m:ci> <m:ci>b</m:ci></m:apply></m:math> implies <m:math><m:ci>a</m:ci></m:math>.
+  For that, it is necessary to
+  reword the problem in terms of equivalences, as
+  <m:math><m:apply><m:equivalent/>
+    <m:apply><m:implies/><m:apply><m:and/><m:ci>a</m:ci> <m:ci>b</m:ci></m:apply> <m:ci>a</m:ci></m:apply>
+    <m:true/>
+  </m:apply></m:math>.
+  Our next tool provides a more straightforward way to reason about
+  implications.
+</para>
+
+<example id="running-example1">
+  <para id="para2">
+    Given the following piece of a WaterWorld board,
+    how would you conclude that <m:math><m:ci>G</m:ci></m:math> is unsafe?
+  </para>
+
+  <figure id="figure1">
+    <media id="idm19415472" alt=""><image src="../../media/partIId-example.png" mime-type="image/png"/></media>
+    <caption>A glimpse of a WaterWorld board</caption>
+  </figure>
+
+  <para id="para3">
+    Since <m:math><m:ci>H-has-2</m:ci></m:math>, at least two of <m:math><m:ci>H</m:ci></m:math>'s three neighbors must
+    be unsafe.  But, since we know that one of these, <m:math><m:ci>J</m:ci></m:math>,
+    isn't unsafe, then the two others,
+    including <m:math><m:ci>G</m:ci></m:math>, must both be unsafe.
+    Let's write this out more explicitly:
+  </para>
+
+  <table id="proof1" summary="">
+
+<tgroup cols="3" align="center" colsep="1" rowsep="1">
+<colspec colwidth="*" colname="c1"/>
+<colspec colwidth="*" colname="c2"/>
+<colspec colwidth="*" colname="c3"/>
+
+<tbody>
+<row>
+<entry align="left">1</entry><entry namest="c2" nameend="c2"><m:math><m:ci>H-has-2</m:ci></m:math>would imply one of the following is true:  
+      (<m:math><m:ci>P-unsafe</m:ci></m:math> and <m:math><m:ci>G-unsafe</m:ci></m:math>), or
+      (<m:math><m:ci>J-unsafe</m:ci></m:math> and <m:math><m:ci>P-unsafe</m:ci></m:math>), or
+      (<m:math><m:ci>G-unsafe</m:ci></m:math> and <m:math><m:ci>J-unsafe</m:ci></m:math>).</entry><entry colname="c3">
+        WaterWorld domain axiom,
+        <foreign>i.e.</foreign>, definition of <m:math><m:ci>H-has-2</m:ci></m:math>
+      </entry>
+</row>
+<row>
+<entry align="left">2</entry><entry namest="c2" nameend="c2"><m:math><m:ci>H-has-2</m:ci></m:math> is true.</entry><entry colname="c3">
+        Premise (by inspection of this particular board)
+      </entry>
+</row>
+<row>
+<entry align="left">3</entry><entry namest="c2" nameend="c2">One of the following is true:
+      (<m:math><m:ci>P-unsafe</m:ci></m:math> and <m:math><m:ci>G-unsafe</m:ci></m:math>), or
+      (<m:math><m:ci>J-unsafe</m:ci></m:math> and <m:math><m:ci>P-unsafe</m:ci></m:math>), or
+      (<m:math><m:ci>G-unsafe</m:ci></m:math> and <m:math><m:ci>J-unsafe</m:ci></m:math>).</entry><entry colname="c3">
+        lines 1,2
+      </entry>
+</row>
+<row>
+<entry align="left">4</entry><entry namest="c2" nameend="c2">not <m:math><m:ci>J-unsafe</m:ci></m:math></entry><entry colname="c3">
+        Premise (by inspection)
+      </entry>
+</row>
+<row>
+<entry align="left">5</entry><entry namest="c2" nameend="c2">(<m:math><m:ci>P-unsafe</m:ci></m:math> and <m:math><m:ci>G-unsafe</m:ci></m:math>)</entry><entry colname="c3">
+        lines 3,4
+      </entry>
+</row>
+<row>
+<entry align="left">6</entry><entry namest="c2" nameend="c2"><m:math><m:ci>G-unsafe</m:ci></m:math></entry><entry colname="c3">
+        line 5
+      </entry>
+</row></tbody>
+</tgroup>
+</table>
+</example>
+
+<para id="para4">
+  Whew!  A lot of small steps are involved in even this small deduction.
+  It's apparent we'd want to automate this as much as possible!
+  Let's look at some other short examples, which we'll formalize in a moment.
+</para>
+
+
+<exercise id="pA2-proves-pBunsafe">
+  <problem id="idm6348800">
+    <para id="para5">
+      How do you know that  <m:math><m:ci>A-has-2</m:ci></m:math>  proves  <m:math><m:ci>B-unsafe</m:ci></m:math> ?
+    </para>
+  </problem>
+
+  <solution id="idm7303984">
+    <para id="para6">
+      Intuitively, this is straightforward.
+      Since <m:math><m:ci>A-has-2</m:ci></m:math>, then both of its two neighbors, including <m:math><m:ci>B</m:ci></m:math>, must
+      be unsafe.
+      For this problem, let's be a bit more formal and use WFFs
+      instead of prose in the steps.
+    </para>
+
+    <table id="proof2" summary="">
+
+<tgroup cols="3" align="center" colsep="1" rowsep="1">
+<colspec colwidth="*" colname="c1"/>
+<colspec colwidth="*" colname="c2"/>
+<colspec colwidth="*" colname="c3"/>
+
+<tbody>
+<row>
+<entry align="left">1</entry><entry namest="c2" nameend="c2"><m:math><m:ci>A-has-2</m:ci></m:math></entry><entry colname="c3">
+          Premise
+        </entry>
+</row>
+<row>
+<entry align="left">2</entry><entry namest="c2" nameend="c2"><m:math><m:apply><m:implies/>
+          <m:ci>A-has-2</m:ci>
+          <m:apply><m:and/><m:ci>B-unsafe</m:ci> <m:ci>F-unsafe</m:ci></m:apply>
+        </m:apply></m:math></entry><entry colname="c3">
+          WaterWorld domain axiom,
+          <foreign>i.e.</foreign>, definition of <m:math><m:ci>A-has-2</m:ci></m:math>
+        </entry>
+</row>
+<row>
+<entry align="left">3</entry><entry namest="c2" nameend="c2"><m:math><m:apply><m:and/><m:ci>B-unsafe</m:ci> <m:ci>F-unsafe</m:ci></m:apply></m:math></entry><entry colname="c3">
+          lines 1,2
+        </entry>
+</row>
+<row>
+<entry align="left">4</entry><entry namest="c2" nameend="c2"><m:math><m:ci>B-unsafe</m:ci></m:math></entry><entry colname="c3">
+          line 3
+        </entry>
+</row></tbody>
+</tgroup>
+</table>
+  </solution>
+</exercise>
+
+<exercise id="exercise2">
+  <problem id="idm9060400">
+    <para id="para7">
+      Similarly, how do you reason that  <m:math><m:ci>A-has-1</m:ci></m:math>  and  <m:math><m:ci>G-safe</m:ci></m:math>
+      prove <m:math><m:ci>B-unsafe</m:ci></m:math>?
+    </para>
+  </problem>
+
+  <solution id="idp210032">
+    <para id="para8">
+      Again a similar idea, if <m:math><m:ci>A-has-1</m:ci></m:math>, then at least one of <m:math><m:ci>A</m:ci></m:math>'s two
+      neighbors must be unsafe.  But, since we know that one of these,
+      <m:math><m:ci>G</m:ci></m:math> isn't unsafe, then the other, <m:math><m:ci>B</m:ci></m:math>, must be unsafe.
+    </para>
+
+    <table id="proof3" summary="">
+
+<tgroup cols="3" align="center" colsep="1" rowsep="1">
+<colspec colwidth="*" colname="c1"/>
+<colspec colwidth="*" colname="c2"/>
+<colspec colwidth="*" colname="c3"/>
+
+<tbody>
+<row>
+<entry align="left">1</entry><entry namest="c2" nameend="c2"><m:math><m:apply><m:implies/>
+          <m:ci>A-has-1</m:ci>
+          <m:apply><m:or/>
+            <m:apply><m:and/><m:ci>B-safe</m:ci> <m:ci>G-unsafe</m:ci></m:apply>
+            <m:apply><m:and/><m:ci>B-unsafe</m:ci> <m:ci>G-safe</m:ci></m:apply>
+          </m:apply>
+        </m:apply></m:math></entry><entry colname="c3"> WaterWorld domain axiom </entry>
+</row>
+<row>
+<entry align="left">2</entry><entry namest="c2" nameend="c2"><m:math><m:ci>A-has-1</m:ci></m:math></entry><entry colname="c3"> Premise </entry>
+</row>
+<row>
+<entry align="left">3</entry><entry namest="c2" nameend="c2"><m:math><m:apply>
+          <m:or/>
+          <m:apply><m:and/><m:ci>B-safe</m:ci> <m:ci>G-unsafe</m:ci></m:apply>
+          <m:apply><m:and/><m:ci>B-unsafe</m:ci> <m:ci>G-safe</m:ci></m:apply>
+        </m:apply></m:math></entry><entry colname="c3"> lines 1,2 </entry>
+</row>
+<row>
+<entry align="left">4</entry><entry namest="c2" nameend="c2"><m:math><m:ci>G-safe</m:ci></m:math></entry><entry colname="c3"> Premise </entry>
+</row>
+<row>
+<entry align="left">5</entry><entry namest="c2" nameend="c2"><m:math><m:apply><m:and/><m:ci>B-unsafe</m:ci> <m:ci>G-safe</m:ci></m:apply></m:math></entry><entry colname="c3"> lines 3,4 </entry>
+</row>
+<row>
+<entry align="left">6</entry><entry namest="c2" nameend="c2"><m:math><m:ci>B-unsafe</m:ci></m:math></entry><entry colname="c3"> line 5 </entry>
+</row></tbody>
+</tgroup>
+</table>
+  </solution>
+</exercise>
+
+
+<section id="section2">
+<title>Formal inference rules and proofs</title>
+
+<para id="para9">
+  In the above examples, we relied on common sense to know what
+  new true formulas could be derived from previous ones.
+  Unfortunately, common sense is imprecise and sometimes wrong.
+  So, we need to formalize how we form proofs.
+</para>
+
+<para id="para10">
+  We now define a <term>formal proof</term> of <m:math><m:ci>θ</m:ci></m:math>
+  from the <term>premises</term> <m:math><m:ci>φ</m:ci></m:math>, …, <m:math><m:ci>ψ</m:ci></m:math>,
+  written 
+  <equation id="equation1">
+    <m:math>
+      <m:mrow><m:ci>φ</m:ci><m:mtext>, </m:mtext><m:mtext>…</m:mtext><m:mtext>, </m:mtext><m:ci>ψ</m:ci> <m:mo>⊢</m:mo> <m:ci>θ</m:ci></m:mrow>
+    </m:math>
+  </equation>
+  (A proof with no premises simply means there is nothing
+   on the left of the turnstile: <m:math><m:mrow><m:mo>⊢</m:mo> <m:ci>θ</m:ci></m:mrow></m:math>.)
+  For example, we'll show shortly that <m:math><m:mrow><m:ci>H-has-2</m:ci> <m:mo>⊢</m:mo> <m:ci>G-unsafe</m:ci></m:mrow></m:math>.
+  A proof consists of a sequence of WFFs, each with a
+  justification for its truth.
+  We will describe four permissible justifications for each step:
+  <list id="list1">
+    <item>A  premise.</item>
+    <item>An   axiom.</item>
+    <item>An inference rule.</item>
+    <item>A   subproof.</item>
+  </list>
+  <note type="aside" id="idm4548000">
+    Officially we might want to annotate the turnstile with
+    “ww”, to mean
+    “proves within the WaterWorld inference system”,
+    indicating our use of the WaterWorld domain axioms.
+    If you're proving things about other domains,
+    you'd use different domain axioms.
+  </note>
+</para>
+
+<example id="example2">
+  <para id="para11">
+    We can formalize the above examples to show each of the following:
+    <list id="list2">
+      <item>
+        <m:math><m:mrow><m:ci>H-has-2</m:ci> <m:mo>⊢</m:mo> <m:ci>G-unsafe</m:ci></m:mrow></m:math>
+      </item>
+      <item>
+        <m:math><m:mrow><m:ci>A-has-2</m:ci> <m:mo>⊢</m:mo> <m:ci>B-unsafe</m:ci></m:mrow></m:math>
+      </item>
+      <item>
+        <m:math><m:mrow><m:ci>A-has-1</m:ci><m:mtext>, </m:mtext><m:ci>G-safe</m:ci> <m:mo>⊢</m:mo> <m:ci>B-unsafe</m:ci></m:mrow></m:math>
+      </item>
+    </list>
+    See below for formal proofs of some of these.
+  </para>
+</example>
+
+<para id="para12">
+  Stating an <term>axiom</term>, a simple assumed truth, is a rather
+  trivial, boring way of coming up with a true formula.
+  Some axioms are <term>domain axioms</term>: they pertain only to the
+  domain you are considering, such as WaterWorld.
+  In our case, we don't have any axioms that aren't domain axioms.
+  If our domain were arithmetic, our axioms would describe how
+  multiplication distributes over addition, <foreign>etc.</foreign>
+</para>
+
+<para id="para13">
+  Just using axioms is not enough, however.
+  The interesting part is to deduce new true formulas from
+  axioms and the results of previous deductions.
+  <note id="idm6962496">
+   “The point of philosophy is to start with something so simple as not to
+     seem worth stating, and to end with something so paradoxical that no
+     one will believe it.”
+   <cite><cite-title>
+     <link url="http://www.humanities.mcmaster.ca/~bertrand/">Bertrand Russell</link>,
+     The Philosophy of Logical Atomism
+   </cite-title></cite>
+  </note>
+  An <term>inference rule</term> formalizes what steps are allowed in proofs.
+  We'll use this
+  <link document="m10529">list of valid 
+  inference rules</link> as our definition,
+  but, this is just one set of possible inference rules, and
+  other people could use slightly different ones.
+</para>
+
+<para id="para14">
+  First, let's look at some simple examples, using the simpler inference rules.
+</para>
+
+<example id="example3">
+  <para id="para15">
+    We'll formalize a
+    <link document="m10718" target-id="pA2-proves-pBunsafe">previous exercise</link> to show
+    <m:math><m:mrow><m:ci>A-has-2</m:ci> <m:mo>⊢</m:mo> <m:ci>B-unsafe</m:ci></m:mrow></m:math>.
+  </para>
+
+  <table id="proof4" summary="">
+
+<tgroup cols="3" align="center" colsep="1" rowsep="1">
+<colspec colwidth="*" colname="c1"/>
+<colspec colwidth="*" colname="c2"/>
+<colspec colwidth="*" colname="c3"/>
+
+<tbody>
+<row>
+<entry align="left">1</entry><entry namest="c2" nameend="c2"><m:math><m:ci>A-has-2</m:ci></m:math></entry><entry colname="c3">
+        Premise
+      </entry>
+</row>
+<row>
+<entry align="left">2</entry><entry namest="c2" nameend="c2"><m:math><m:apply><m:implies/>
+        <m:ci>A-has-2</m:ci>
+        <m:apply><m:and/> <m:ci>B-unsafe</m:ci> <m:ci>F-unsafe</m:ci> </m:apply>
+      </m:apply></m:math></entry><entry colname="c3">
+        WaterWorld domain axiom
+      </entry>
+</row>
+<row>
+<entry align="left">3</entry><entry namest="c2" nameend="c2"><m:math><m:apply><m:and/> <m:ci>B-unsafe</m:ci> <m:ci>F-unsafe</m:ci> </m:apply></m:math></entry><entry colname="c3">
+        <m:math><m:mo>⇒</m:mo></m:math>Elim, lines 1,2,
+        where
+        <m:math><m:apply><m:eq/><m:ci>φ</m:ci> <m:ci>A-has-2</m:ci></m:apply></m:math>, and
+        <m:math><m:apply>
+          <m:eq/>
+          <m:ci>ψ</m:ci>
+          <m:apply><m:and/><m:ci>B-unsafe</m:ci> <m:ci>F-unsafe</m:ci></m:apply>
+        </m:apply></m:math>
+      </entry>
+</row>
+<row>
+<entry align="left">4</entry><entry namest="c2" nameend="c2"><m:math><m:ci>B-unsafe</m:ci></m:math></entry><entry colname="c3">
+        <m:math><m:mo>∧</m:mo></m:math>Elim (left), line 3,
+        where
+        <m:math><m:apply><m:eq/><m:ci>φ</m:ci> <m:ci>B-unsafe</m:ci></m:apply></m:math>, and
+        <m:math><m:apply><m:eq/><m:ci>ψ</m:ci> <m:ci>F-unsafe</m:ci></m:apply></m:math>
+      </entry>
+</row></tbody>
+</tgroup>
+</table>
+
+  <para id="para16">
+    What we mean in line 3, for example, is that we are
+    using the domain axiom <m:math><m:mo>⇒</m:mo></m:math>Elim.
+    That states that if we know
+    <m:math><m:apply><m:implies/><m:ci>φ</m:ci> <m:ci>ψ</m:ci></m:apply></m:math>,
+    and we know <m:math><m:ci>φ</m:ci></m:math>,
+    then we can conclude <m:math><m:ci>ψ</m:ci></m:math>.  In line 3, we have defined
+    <m:math><m:apply><m:eq/><m:ci>φ</m:ci> <m:ci>A-has-2</m:ci></m:apply></m:math> and
+    <m:math><m:apply>
+      <m:eq/>
+      <m:ci>ψ</m:ci>
+      <m:apply><m:and/><m:ci>B-unsafe</m:ci> <m:ci>F-unsafe</m:ci></m:apply>
+    </m:apply></m:math>, so that
+    <m:math><m:apply><m:implies/><m:ci>φ</m:ci> <m:ci>ψ</m:ci></m:apply></m:math>
+    corresponds to the conclusion of line 2 and
+    <m:math><m:ci>φ</m:ci></m:math> corresponds to that of line 1.  Thus, this domain axiom applies, and
+    we get the conclusion <m:math><m:ci>ψ</m:ci></m:math>.
+  </para>
+
+  <para id="para17">
+    That's almost exactly like the steps we took in the previous
+    informal proof,
+    but now we're a bit pickier about our justifications for each step.
+  </para>
+</example>
+
+<para id="para18">
+  Formally, when using a domain axiom, the justification is a combination of
+  the name of that inference rule, the line numbers of which previous WFFs
+  are being used, and a description of how those WFFs are used
+  in that inference rule in this particular step.
+  Later, we'll often omit the description of exactly how the specific
+  inference rule is used, since in many cases, that information
+  is painfully obvious.
+</para>
+
+<example id="commutativity">
+  <para id="para19">
+    In this system, commutativity of <m:math><m:mo>∧</m:mo></m:math> and <m:math><m:mo>∨</m:mo></m:math> are not among
+    the inference rules.  However, they do follow.   For example,
+    consider the following proof of
+    <m:math><m:mrow><m:apply><m:and/><m:ci>A</m:ci> <m:ci>B</m:ci></m:apply> <m:mo>⊢</m:mo> <m:apply><m:and/><m:ci>B</m:ci> <m:ci>A</m:ci></m:apply></m:mrow></m:math>.
+  </para>
+
+  <table id="proof5" summary="">
+
+<tgroup cols="3" align="center" colsep="1" rowsep="1">
+<colspec colwidth="*" colname="c1"/>
+<colspec colwidth="*" colname="c2"/>
+<colspec colwidth="*" colname="c3"/>
+
+<tbody>
+<row>
+<entry align="left">1</entry><entry namest="c2" nameend="c2"><m:math><m:apply><m:and/><m:ci>A</m:ci> <m:ci>B</m:ci></m:apply></m:math></entry><entry colname="c3">
+        Premise
+      </entry>
+</row>
+<row>
+<entry align="left">2</entry><entry namest="c2" nameend="c2"><m:math><m:ci>A</m:ci></m:math></entry><entry colname="c3">
+        <m:math><m:mo>∧</m:mo></m:math>Elim (left), line 1,
+        where
+        <m:math><m:apply><m:eq/><m:ci>φ</m:ci> <m:ci>A</m:ci></m:apply></m:math>
+      </entry>
+</row>
+<row>
+<entry align="left">3</entry><entry namest="c2" nameend="c2"><m:math><m:ci>B</m:ci></m:math></entry><entry colname="c3">
+        <m:math><m:mo>∧</m:mo></m:math>Elim (right), line 1,
+        where
+        <m:math><m:apply><m:eq/><m:ci>ψ</m:ci> <m:ci>B</m:ci></m:apply></m:math>
+      </entry>
+</row>
+<row>
+<entry align="left">4</entry><entry namest="c2" nameend="c2"><m:math><m:apply><m:and/><m:ci>B</m:ci> <m:ci>A</m:ci></m:apply></m:math></entry><entry colname="c3">
+        <m:math><m:mo>∧</m:mo></m:math>Intro, lines 3,2,
+        where
+        <m:math><m:apply><m:eq/><m:ci>φ</m:ci> <m:ci>B</m:ci></m:apply></m:math>, and
+        <m:math><m:apply><m:eq/><m:ci>ψ</m:ci> <m:ci>A</m:ci></m:apply></m:math>
+      </entry>
+</row></tbody>
+</tgroup>
+</table>
+</example>
+
+<para id="para20">
+  Does
+  <link document="m10718" target-id="commutativity">this example</link> also show that
+  <m:math><m:mrow><m:apply><m:and/><m:ci>C</m:ci> <m:ci>D</m:ci></m:apply> <m:mo>⊢</m:mo> <m:apply><m:and/><m:ci>D</m:ci> <m:ci>C</m:ci></m:apply></m:mrow></m:math>?
+  Well, yes and no.
+  That proof does <emphasis>not</emphasis> have anything to do
+  with propositions <m:math><m:ci>C</m:ci></m:math> and <m:math><m:ci>D</m:ci></m:math>.
+  But, clearly, we could create another nearly identical proof for
+  <m:math><m:mrow><m:apply><m:and/><m:ci>C</m:ci> <m:ci>D</m:ci></m:apply> <m:mo>⊢</m:mo> <m:apply><m:and/><m:ci>D</m:ci> <m:ci>C</m:ci></m:apply></m:mrow></m:math>,
+  by substituting <m:math><m:ci>C</m:ci></m:math> and <m:math><m:ci>D</m:ci></m:math> for <m:math><m:ci>A</m:ci></m:math> and <m:math><m:ci>B</m:ci></m:math>, respectively.
+  What about proving the other direction of commutativity:
+  <m:math><m:mrow><m:apply><m:and/><m:ci>B</m:ci> <m:ci>A</m:ci></m:apply> <m:mo>⊢</m:mo> <m:apply><m:and/><m:ci>A</m:ci> <m:ci>B</m:ci></m:apply></m:mrow></m:math>?
+  Once again, the proof has exactly the same form, but
+  substituting <m:math><m:ci>B</m:ci></m:math> and <m:math><m:ci>A</m:ci></m:math> for <m:math><m:ci>A</m:ci></m:math> and <m:math><m:ci>B</m:ci></m:math>, respectively.
+  Stating such similar proofs over and over is technically necessary,
+  but not very interesting.
+  Instead, when the proof depends solely on the form of the
+  formula and not on any axioms, we'll use meta-variables to generalize.
+</para>
+
+<example id="example5">
+  <para id="para21">
+    Generalized <m:math><m:mo>∧</m:mo></m:math> commutativity:
+    <m:math><m:mrow><m:apply><m:and/><m:ci>χ</m:ci> <m:ci>υ</m:ci></m:apply> <m:mo>⊢</m:mo> <m:apply><m:and/><m:ci>υ</m:ci> <m:ci>χ</m:ci></m:apply></m:mrow></m:math>
+  </para>
+
+  <table id="proof6" summary="">
+
+<tgroup cols="3" align="center" colsep="1" rowsep="1">
+<colspec colwidth="*" colname="c1"/>
+<colspec colwidth="*" colname="c2"/>
+<colspec colwidth="*" colname="c3"/>
+
+<tbody>
+<row>
+<entry align="left">1</entry><entry namest="c2" nameend="c2"><m:math><m:apply><m:and/><m:ci>χ</m:ci> <m:ci>υ</m:ci></m:apply></m:math></entry><entry colname="c3">
+        Premise
+      </entry>
+</row>
+<row>
+<entry align="left">2</entry><entry namest="c2" nameend="c2"><m:math><m:ci>υ</m:ci></m:math></entry><entry colname="c3">
+        <m:math><m:mo>∧</m:mo></m:math>Elim (left), line 1,
+        where
+        <m:math><m:apply><m:eq/><m:ci>φ</m:ci> <m:ci>χ</m:ci></m:apply></m:math>
+      </entry>
+</row>
+<row>
+<entry align="left">3</entry><entry namest="c2" nameend="c2"><m:math><m:ci>χ</m:ci></m:math></entry><entry colname="c3">
+        <m:math><m:mo>∧</m:mo></m:math>Elim (right), line 1,
+        where
+        <m:math><m:apply><m:eq/><m:ci>ψ</m:ci> <m:ci>υ</m:ci></m:apply></m:math>
+      </entry>
+</row>
+<row>
+<entry align="left">4</entry><entry namest="c2" nameend="c2"><m:math><m:apply><m:and/><m:ci>υ</m:ci> <m:ci>χ</m:ci></m:apply></m:math></entry><entry colname="c3">
+        <m:math><m:mo>∧</m:mo></m:math>Intro, lines 3,2,
+        where
+        <m:math><m:apply><m:eq/><m:ci>φ</m:ci> <m:ci>υ</m:ci></m:apply></m:math>, and
+        <m:math><m:apply><m:eq/><m:ci>ψ</m:ci> <m:ci>χ</m:ci></m:apply></m:math>
+      </entry>
+</row></tbody>
+</tgroup>
+</table>
+</example>
+
+<exercise id="associativity">
+  <problem id="idm916944">
+    <para id="para22">
+      Similarly, associativity of <m:math><m:mo>∧</m:mo></m:math> and <m:math><m:mo>∨</m:mo></m:math> are not among the
+      inference rules.  This is a particularly important detail, since our
+      WaterWorld domain axioms frequently use formulas of the form
+      <m:math><m:apply><m:and/><m:ci>a</m:ci> <m:ci>b</m:ci> <m:ci>c</m:ci></m:apply></m:math>,
+      which isn't technically legal according
+      to our definition of WFFs.  What we'd like to show is that
+      <m:math><m:mrow><m:apply>
+          <m:and/>
+          <m:apply><m:and/><m:ci>χ</m:ci> <m:ci>υ</m:ci></m:apply>
+          <m:ci>ω</m:ci>
+        </m:apply> <m:mo>⊢</m:mo> <m:apply>
+          <m:and/>
+          <m:ci>χ</m:ci>
+          <m:apply><m:and/><m:ci>υ</m:ci> <m:ci>ω</m:ci></m:apply></m:apply></m:mrow></m:math>
+      and
+      <m:math><m:mrow><m:apply>
+          <m:and/>
+          <m:ci>χ</m:ci>
+          <m:apply><m:and/><m:ci>υ</m:ci> <m:ci>ω</m:ci></m:apply>
+        </m:apply> <m:mo>⊢</m:mo> <m:apply>
+          <m:and/>
+          <m:apply><m:and/><m:ci>χ</m:ci> <m:ci>υ</m:ci></m:apply>
+          <m:ci>ω</m:ci>
+        </m:apply></m:mrow></m:math>
+      as well as the equivalent for <m:math><m:mo>∨</m:mo></m:math>.
+      Thus, when we see three, four, or more terms in a conjunction
+      (or disjunction), we can legitimately group them as we see fit.
+    </para>
+  </problem>
+
+  <solution id="idm4589760">
+    <para id="para23">
+      Here, we'll show only
+      <m:math><m:mrow><m:apply>
+          <m:and/>
+          <m:apply><m:and/><m:ci>χ</m:ci> <m:ci>υ</m:ci></m:apply>
+          <m:ci>ω</m:ci>
+        </m:apply> <m:mo>⊢</m:mo> <m:apply>
+          <m:and/>
+          <m:ci>χ</m:ci>
+          <m:apply><m:and/><m:ci>υ</m:ci> <m:ci>ω</m:ci></m:apply>
+        </m:apply></m:mrow></m:math>
+      and leave the other direction (and <m:math><m:mo>∨</m:mo></m:math>'s associativity) to
+      the reader.  These are all very similar to the
+      <link document="m10718" target-id="commutativity">previous commutativity example</link>.
+    </para>
+
+    <table id="proof7" summary="">
+
+<tgroup cols="3" align="center" colsep="1" rowsep="1">
+<colspec colwidth="*" colname="c1"/>
+<colspec colwidth="*" colname="c2"/>
+<colspec colwidth="*" colname="c3"/>
+
+<tbody>
+<row>
+<entry align="left">1</entry><entry namest="c2" nameend="c2"><m:math><m:apply><m:and/><m:apply><m:and/><m:ci>χ</m:ci> <m:ci>υ</m:ci></m:apply> <m:ci>ω</m:ci></m:apply></m:math></entry><entry colname="c3">
+          Premise
+        </entry>
+</row>
+<row>
+<entry align="left">2</entry><entry namest="c2" nameend="c2"><m:math><m:apply><m:and/><m:ci>χ</m:ci> <m:ci>υ</m:ci></m:apply></m:math></entry><entry colname="c3">
+          <m:math><m:mo>∧</m:mo></m:math>Elim (left), line 1
+        </entry>
+</row>
+<row>
+<entry align="left">3</entry><entry namest="c2" nameend="c2"><m:math><m:ci>χ</m:ci></m:math></entry><entry colname="c3">
+          <m:math><m:mo>∧</m:mo></m:math>Elim (left), line 2
+        </entry>
+</row>
+<row>
+<entry align="left">4</entry><entry namest="c2" nameend="c2"><m:math><m:ci>υ</m:ci></m:math></entry><entry colname="c3">
+          <m:math><m:mo>∧</m:mo></m:math>Elim (right), line 2
+        </entry>
+</row>
+<row>
+<entry align="left">5</entry><entry namest="c2" nameend="c2"><m:math><m:ci>ω</m:ci></m:math></entry><entry colname="c3">
+          <m:math><m:mo>∧</m:mo></m:math>Elim (right), line 1
+        </entry>
+</row>
+<row>
+<entry align="left">6</entry><entry namest="c2" nameend="c2"><m:math><m:apply><m:and/><m:ci>υ</m:ci> <m:ci>ω</m:ci></m:apply></m:math></entry><entry colname="c3">
+          <m:math><m:mo>∧</m:mo></m:math>Intro, lines 4,5
+        </entry>
+</row>
+<row>
+<entry align="left">7</entry><entry namest="c2" nameend="c2"><m:math><m:apply><m:and/><m:ci>χ</m:ci> <m:apply><m:and/><m:ci>υ</m:ci> <m:ci>ω</m:ci></m:apply></m:apply></m:math></entry><entry colname="c3">
+          <m:math><m:mo>∧</m:mo></m:math>Intro, lines 3,6
+        </entry>
+</row></tbody>
+</tgroup>
+</table>
+
+    <para id="para24">
+      Note that we omitted the detailed explanation of how each
+      rule applies, since this should be clear in each of these steps.
+    </para>
+  </solution>
+</exercise>
+
+<para id="para25">
+  These deductions are straightforward and should be unsurprising,
+  but perhaps not too interesting.
+  These simple rules can carry us far and will be used commonly
+  in other examples.
+</para>
+
+<example id="example6">
+  <para id="para26">
+    The case-elimination rule is easy enough for a dog!
+    <link url="http://news.bbc.co.uk/2/hi/science/nature/3794079.stm">Rico</link>
+    has a vocabulary of over 200 words, and if asked to
+    fetch an unknown toy, he can pick it out of a group of known toys
+    by process-of-elimination.
+    
+    (It's almost enough to make you wonder whether
+     <link url="http://www.maa.org/features/elvisdog.pdf">dogs know calculus</link>.)
+  </para>
+  <figure id="figure2">
+    <media id="idm4593504" alt=""><image src="../../media/ricodog.jpg" mime-type="image/jpeg"/></media>
+    <caption>This Border Collie knows his inference rules.</caption>
+  </figure>
+</example>
+
+<para id="para27">
+  There is a subtle difference between implication (<m:math><m:mo>⇒</m:mo></m:math>) and
+  provability (⊢).
+  Both embody the idea that the truth of the right-hand-side follows
+  from the left-hand-side.
+  But, <m:math><m:mo>⇒</m:mo></m:math> is a syntactic formula connective combining two
+  WFFs into a larger WFF, while ⊢ combines a list
+  of propositions and a WFF into a statement about provability.
+</para>
+
+<exercise id="exercise4">
+  <problem id="idm7659552">
+    <para id="para28">
+      Show that, <m:math><m:mrow><m:ci>φ</m:ci> <m:mo>⊢</m:mo> <m:ci>ψ</m:ci></m:mrow></m:math>
+      is equivalent to
+      <m:math><m:mrow><m:mo>⊢</m:mo> <m:apply><m:implies/><m:ci>φ</m:ci> <m:ci>ψ</m:ci></m:apply></m:mrow></m:math>
+      in that, we can show one if and only if we can show the other.
+    </para>
+  </problem>
+
+  <solution id="idm11669520">
+    <para id="para29">
+      First, if we know <m:math><m:mrow><m:ci>φ</m:ci> <m:mo>⊢</m:mo> <m:ci>ψ</m:ci></m:mrow></m:math>, then
+      that means there is some written proof… we know
+      <m:math><m:mrow><m:mo>⊢</m:mo> <m:apply><m:implies/><m:ci>φ</m:ci> <m:ci>ψ</m:ci></m:apply></m:mrow></m:math>,
+      simply by <m:math><m:mo>⇒</m:mo></m:math>Intro.
+    </para>
+
+    <para id="para30">
+      If we know
+      <m:math><m:mrow><m:mo>⊢</m:mo> <m:apply><m:implies/><m:ci>φ</m:ci> <m:ci>ψ</m:ci></m:apply></m:mrow></m:math>,
+      then if we add a premise <m:math><m:ci>φ</m:ci></m:math>, then <m:math><m:ci>ψ</m:ci></m:math> follows by <m:math><m:mo>⇒</m:mo></m:math>Elim.
+    </para>
+
+    <para id="para31">
+      Note how this proof is about other proofs!
+      (However, while we reason about this particular inference system,
+       we're not using this system while proving things about it —
+       this proof is necessarily outside the inference system.
+    </para>
+  </solution>
+</exercise>
+
+
+</section> 
+
+</section> 
+
+</content>
+
+</document>

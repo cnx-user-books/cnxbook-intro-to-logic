@@ -1,0 +1,502 @@
+<document xmlns="http://cnx.rice.edu/cnxml" xmlns:m="http://www.w3.org/1998/Math/MathML" xmlns:md="http://cnx.rice.edu/mdml">
+  <title>first-order equivalences</title>
+  <metadata>
+  <md:content-id>m11045</md:content-id><md:title>first-order equivalences</md:title>
+  <md:abstract>Some equivalences for manipulation of first-order formulas.</md:abstract>
+  <md:uuid>b4059261-88ed-45b4-bbc4-131872ca307d</md:uuid>
+</metadata>
+
+<content>
+
+<para id="imp-id18074565">
+  The following equivalences are in addition to
+  <link document="m10540">those of propositional logic</link>.
+  In these, <m:math><m:ci>φ</m:ci></m:math> and <m:math><m:ci>ψ</m:ci></m:math>
+  each stand for any WFF, but
+  <emphasis>
+    <m:math><m:ci>θ</m:ci></m:math> stands for any WFF with
+    no free occurrences of <m:math><m:ci>x</m:ci></m:math>
+  </emphasis>.
+</para>
+
+<table id="table1" summary="First-order Logic Equivalences">
+<title>First-order Logic Equivalences</title>
+<tgroup cols="3">
+<colspec colname="c2" colnum="2"/><colspec colname="c3" colnum="3"/><thead><row>
+    <entry> Equivalence </entry>
+    <entry> ∀ Variant </entry>
+    <entry> ∃ Variant </entry>
+  </row></thead>
+<tbody><row>
+    <entry>
+      Complementation of Quantifiers
+    </entry>
+    <entry>
+      <m:math><m:apply><m:equivalent/>
+        <m:apply><m:forall/>
+          <m:bvar><m:ci>x</m:ci></m:bvar>
+          <m:apply><m:not/><m:ci>φ</m:ci></m:apply>
+        </m:apply>
+        <m:apply><m:not/>
+          <m:apply><m:exists/>
+            <m:bvar><m:ci>x</m:ci></m:bvar>
+            <m:ci>φ</m:ci>
+          </m:apply>
+        </m:apply>
+      </m:apply></m:math>
+    </entry>
+    <entry>
+      <m:math><m:apply>
+        <m:equivalent/>
+        <m:apply><m:exists/>
+          <m:bvar><m:ci>x</m:ci></m:bvar>
+          <m:apply><m:not/><m:ci>φ</m:ci></m:apply>
+        </m:apply>
+        <m:apply><m:not/>
+          <m:apply><m:forall/>
+            <m:bvar><m:ci>x</m:ci></m:bvar>
+            <m:ci>φ</m:ci>
+          </m:apply>
+        </m:apply>
+      </m:apply></m:math>
+    </entry>
+  </row>
+<row>
+    <entry>
+      Interchanging Quantifiers
+    </entry>
+    <entry>
+      <m:math><m:apply>
+        <m:equivalent/>
+        <m:apply><m:forall/>
+          <m:bvar><m:ci>x</m:ci></m:bvar>
+          <m:apply><m:forall/>
+            <m:bvar><m:ci>y</m:ci></m:bvar>
+            <m:ci>φ</m:ci>
+          </m:apply>
+        </m:apply>
+        <m:apply><m:forall/>
+          <m:bvar><m:ci>y</m:ci></m:bvar>
+          <m:apply><m:forall/>
+            <m:bvar><m:ci>x</m:ci></m:bvar>
+            <m:ci>φ</m:ci>
+          </m:apply>
+        </m:apply>
+      </m:apply></m:math>
+    </entry>
+    <entry>
+      <m:math><m:apply>
+        <m:equivalent/>
+        <m:apply><m:exists/>
+          <m:bvar><m:ci>x</m:ci></m:bvar>
+          <m:apply><m:exists/>
+            <m:bvar><m:ci>y</m:ci></m:bvar>
+            <m:ci>φ</m:ci>
+          </m:apply>
+        </m:apply>
+        <m:apply><m:exists/>
+          <m:bvar><m:ci>y</m:ci></m:bvar>
+          <m:apply><m:exists/>
+            <m:bvar><m:ci>x</m:ci></m:bvar>
+            <m:ci>φ</m:ci>
+          </m:apply>
+        </m:apply>
+      </m:apply></m:math>
+    </entry>
+  </row>
+<row>
+    <entry morerows="3">
+      Distribution of Quantifiers
+    </entry>
+    <entry>
+      <m:math><m:apply>
+        <m:equivalent/>
+        <m:apply><m:forall/>
+          <m:bvar><m:ci>x</m:ci></m:bvar>
+          <m:apply><m:and/>
+            <m:ci>φ</m:ci>
+            <m:ci>ψ</m:ci>
+          </m:apply>
+        </m:apply>
+        <m:apply><m:and/>
+          <m:apply><m:forall/>
+            <m:bvar><m:ci>x</m:ci></m:bvar>
+            <m:ci>φ</m:ci>
+          </m:apply>
+          <m:apply><m:forall/>
+            <m:bvar><m:ci>x</m:ci></m:bvar>
+            <m:ci>ψ</m:ci>
+          </m:apply>
+        </m:apply>
+      </m:apply></m:math>
+    </entry>
+    <entry>
+      <m:math><m:apply>
+        <m:equivalent/>
+        <m:apply><m:exists/>
+          <m:bvar><m:ci>x</m:ci></m:bvar>
+          <m:apply><m:or/>
+            <m:ci>φ</m:ci>
+            <m:ci>ψ</m:ci>
+          </m:apply>
+        </m:apply>
+        <m:apply><m:or/>
+          <m:apply><m:exists/>
+            <m:bvar><m:ci>x</m:ci></m:bvar>
+            <m:ci>φ</m:ci>
+          </m:apply>
+          <m:apply><m:exists/>
+            <m:bvar><m:ci>x</m:ci></m:bvar>
+            <m:ci>ψ</m:ci>
+          </m:apply>
+        </m:apply>
+      </m:apply></m:math>
+    </entry>
+  </row>
+<row>
+    <entry>
+      <m:math><m:apply>
+        <m:equivalent/>
+        <m:apply><m:forall/>
+          <m:bvar><m:ci>x</m:ci></m:bvar>
+          <m:apply> <m:or/> <m:ci>φ</m:ci> <m:ci>θ</m:ci> </m:apply>
+        </m:apply> 
+        <m:apply><m:or/>
+          <m:apply><m:forall/>
+            <m:bvar><m:ci>x</m:ci></m:bvar>
+            <m:ci>φ</m:ci>
+          </m:apply>
+          <m:ci>θ</m:ci>
+        </m:apply>
+      </m:apply></m:math>
+    </entry>
+    <entry>
+      <m:math><m:apply>
+        <m:equivalent/>
+        <m:apply><m:exists/>
+          <m:bvar><m:ci>x</m:ci></m:bvar>
+          <m:apply><m:and/> <m:ci>φ</m:ci> <m:ci>θ</m:ci> </m:apply>
+        </m:apply>
+        <m:apply><m:and/>
+          <m:apply><m:exists/>
+            <m:bvar><m:ci>x</m:ci></m:bvar>
+            <m:ci>φ</m:ci>
+          </m:apply>
+         <m:ci>θ</m:ci>
+         </m:apply>
+      </m:apply></m:math>
+    </entry>
+  </row>
+<row>
+    <entry>
+      <m:math><m:apply>
+        <m:equivalent/>
+        <m:apply><m:forall/>
+          <m:bvar><m:ci>x</m:ci></m:bvar>
+          <m:apply><m:implies/> <m:ci>φ</m:ci> <m:ci>θ</m:ci> </m:apply>
+        </m:apply>
+        <m:apply><m:implies/>
+          <m:apply><m:exists/>
+            <m:bvar><m:ci>x</m:ci></m:bvar>
+            <m:ci>φ</m:ci>
+          </m:apply>
+          <m:ci>θ</m:ci>
+        </m:apply>
+      </m:apply></m:math>
+    </entry>
+    <entry morerows="1">
+    </entry>
+  </row>
+<row>
+    <entry>
+      <m:math><m:apply>
+        <m:equivalent/>
+        <m:apply><m:forall/>
+          <m:bvar><m:ci>x</m:ci></m:bvar>
+          <m:apply><m:implies/> <m:ci>θ</m:ci> <m:ci>φ</m:ci> </m:apply>
+        </m:apply> 
+        <m:apply><m:implies/>
+          <m:ci>θ</m:ci>
+          <m:apply><m:forall/>
+            <m:bvar><m:ci>x</m:ci></m:bvar>
+            <m:ci>φ</m:ci>
+          </m:apply>
+        </m:apply>
+      </m:apply></m:math>
+    </entry>
+  </row>
+<row>
+    <entry morerows="2">
+      Distribution of Quantifiers <m:math><m:mo>—</m:mo></m:math> with non-empty domain
+    </entry>
+    <entry>
+      <m:math><m:apply>
+        <m:equivalent/>
+        <m:apply><m:forall/>
+          <m:bvar><m:ci>x</m:ci></m:bvar>
+          <m:apply><m:and/> <m:ci>φ</m:ci> <m:ci>θ</m:ci> </m:apply>
+        </m:apply> 
+        <m:apply><m:and/>
+          <m:apply><m:forall/>
+            <m:bvar><m:ci>x</m:ci></m:bvar>
+            <m:ci>φ</m:ci>
+          </m:apply>
+         <m:ci>θ</m:ci>
+         </m:apply>
+      </m:apply></m:math>
+    </entry>
+    <entry>
+      <m:math><m:apply>
+        <m:equivalent/>
+        <m:apply><m:exists/>
+          <m:bvar><m:ci>x</m:ci></m:bvar>
+          <m:apply><m:or/> <m:ci>φ</m:ci> <m:ci>θ</m:ci> </m:apply>
+        </m:apply>
+        <m:apply><m:or/>
+          <m:apply><m:exists/>
+            <m:bvar><m:ci>x</m:ci></m:bvar>
+            <m:ci>φ</m:ci>
+          </m:apply>
+          <m:ci>θ</m:ci>
+        </m:apply>
+      </m:apply></m:math>
+    </entry>
+  </row>
+<row>
+    <entry morerows="1">
+    </entry>
+    <entry>
+      <m:math><m:apply>
+        <m:equivalent/>
+        <m:apply><m:exists/>
+          <m:bvar><m:ci>x</m:ci></m:bvar>
+          <m:apply><m:implies/> <m:ci>φ</m:ci> <m:ci>θ</m:ci> </m:apply>
+        </m:apply>
+        <m:apply><m:implies/>
+          <m:apply><m:forall/>
+            <m:bvar><m:ci>x</m:ci></m:bvar>
+            <m:ci>φ</m:ci>
+          </m:apply>
+          <m:ci>θ</m:ci>
+        </m:apply>
+      </m:apply></m:math>
+    </entry>
+  </row>
+<row>
+    <entry>
+      <m:math><m:apply>
+        <m:equivalent/>
+        <m:apply><m:exists/>
+          <m:bvar><m:ci>x</m:ci></m:bvar>
+          <m:apply><m:implies/> <m:ci>θ</m:ci> <m:ci>φ</m:ci> </m:apply>
+        </m:apply>
+        <m:apply>
+          <m:implies/>
+          <m:ci>θ</m:ci>
+          <m:apply><m:exists/>
+            <m:bvar><m:ci>x</m:ci></m:bvar>
+            <m:ci>φ</m:ci>
+          </m:apply>
+        </m:apply>
+      </m:apply></m:math>
+    </entry>
+  </row>
+<row>
+    <entry>
+      Renaming
+    </entry>
+    <entry>
+      <m:math>
+        <m:declare nargs="2" occurrence="infix" type="fn">
+          <m:mo>↦</m:mo>
+        </m:declare>
+        <m:apply>
+          <m:equivalent/>
+          <m:apply><m:forall/>
+            <m:bvar><m:ci>x</m:ci></m:bvar>
+            <m:ci>φ</m:ci>
+          </m:apply>
+          <m:apply><m:forall/>
+            <m:bvar><m:ci>y</m:ci></m:bvar>
+            <m:apply>
+              <m:mo>⁡</m:mo>
+              <m:ci>φ</m:ci>
+              <m:mfenced close="]" open="[">
+                <m:apply>
+                  <m:mo>↦</m:mo> 
+                  <m:ci>x</m:ci>
+                  <m:ci>y</m:ci>
+                </m:apply>
+              </m:mfenced>
+            </m:apply>
+          </m:apply>
+        </m:apply>
+      </m:math>
+    </entry>
+    <entry>
+      <m:math>
+        <m:declare nargs="2" occurrence="infix" type="fn">
+          <m:mo>↦</m:mo>
+        </m:declare>
+        <m:apply>
+          <m:equivalent/>
+          <m:apply><m:exists/>
+            <m:bvar><m:ci>x</m:ci></m:bvar>
+            <m:ci>φ</m:ci>
+          </m:apply>
+          <m:apply><m:exists/>
+            <m:bvar><m:ci>y</m:ci></m:bvar>
+            <m:apply>
+              <m:mo>⁡</m:mo>
+              <m:ci>φ</m:ci>
+              <m:mfenced close="]" open="[">
+                <m:apply><m:mo>↦</m:mo> 
+                  <m:ci>x</m:ci>
+                  <m:ci>y</m:ci>
+                </m:apply>
+              </m:mfenced>
+            </m:apply>
+          </m:apply>
+        </m:apply>
+      </m:math>
+    </entry>
+  </row>
+<row>
+    <entry>
+      Simplification of Quantifiers <m:math><m:mo>—</m:mo></m:math> with non-empty domain
+    </entry>
+    <entry>
+      <m:math><m:apply>
+        <m:equivalent/>
+        <m:apply><m:forall/>
+          <m:bvar><m:ci>x</m:ci></m:bvar>
+          <m:ci>θ</m:ci>
+        </m:apply>
+        <m:ci>θ</m:ci>
+      </m:apply></m:math>
+    </entry>
+    <entry>
+      <m:math><m:apply>
+        <m:equivalent/>
+        <m:apply><m:exists/>
+          <m:bvar><m:ci>x</m:ci></m:bvar>
+          <m:ci>θ</m:ci>
+        </m:apply>
+        <m:ci>θ</m:ci>
+      </m:apply></m:math>
+    </entry>
+  </row>
+<row>
+    <entry>
+      Simplification of Quantifiers <m:math><m:mo>—</m:mo></m:math> with empty domain
+    </entry>
+    <entry>
+      <m:math><m:apply>
+        <m:equivalent/>
+        <m:apply><m:forall/>
+          <m:bvar><m:ci>x</m:ci></m:bvar>
+          <m:ci>φ</m:ci>
+        </m:apply>
+        <m:true/>
+      </m:apply></m:math>
+    </entry>
+    <entry>
+      <m:math><m:apply>
+        <m:equivalent/>
+        <m:apply><m:exists/>
+          <m:bvar><m:ci>x</m:ci></m:bvar>
+          <m:ci>φ</m:ci>
+        </m:apply>
+        <m:false/>
+      </m:apply></m:math>
+    </entry>
+  </row></tbody>
+</tgroup>
+</table>
+
+<para id="imp-id16825577">
+  When citing Distribution of Quantifiers,
+  say what you're distributing over what: <foreign>e.g.</foreign>,
+  <quote display="inline">
+    distribute ∀ over ∨ (with <m:math><m:ci>θ</m:ci></m:math>
+    being <m:math><m:ci>x</m:ci></m:math>-free)
+  </quote>.
+</para>
+
+<para id="imp-id15673966">
+  In
+  <link document="m10774" target-id="renaming-for-subst">renaming</link>,
+  the notation
+  <m:math>
+    <m:declare nargs="2" occurrence="infix" type="fn">
+      <m:mo>↦</m:mo>
+    </m:declare>
+    <m:apply>
+      <m:mo>⁡</m:mo>
+      <m:ci>φ</m:ci>
+      <m:mfenced close="]" open="[">
+        <m:apply>
+          <m:mo>↦</m:mo>
+          <m:ci>x</m:ci>
+          <m:ci>y</m:ci>
+        </m:apply>
+      </m:mfenced>
+    </m:apply>
+  </m:math>
+  means
+  <quote display="inline">
+    <m:math><m:ci>φ</m:ci></m:math> with each free occurrence
+    of <m:math><m:ci>x</m:ci></m:math> replaced by <m:math><m:ci>y</m:ci></m:math>
+  </quote>.
+  It is a meta-formula; when writing any particular formula
+  you don't write any brackets, and instead just do the replacement.
+  
+</para>
+
+<para id="imp-id16958798">
+  This set of equivalences isn't actually quite complete.
+  For instance,
+  <m:math><m:apply>
+    <m:implies/>
+    <m:apply>
+      <m:exists/>
+      <m:bvar><m:ci>x</m:ci></m:bvar>
+      <m:apply>
+        <m:forall/>
+        <m:bvar><m:ci>y</m:ci></m:bvar>
+        <m:apply><m:ci type="fn">R</m:ci><m:ci>x</m:ci><m:ci>y</m:ci></m:apply>
+      </m:apply>
+    </m:apply>
+    <m:apply>
+      <m:forall/>
+      <m:bvar><m:ci>y</m:ci></m:bvar>
+      <m:apply>
+        <m:exists/>
+        <m:bvar><m:ci>x</m:ci></m:bvar>
+        <m:apply><m:ci type="fn">R</m:ci><m:ci>x</m:ci><m:ci>y</m:ci></m:apply>
+      </m:apply>
+    </m:apply>
+  </m:apply></m:math>
+  is equivalent to <m:math><m:true/></m:math>, but we can't show it using only the rules above.
+  It does become complete<footnote id="imp-id11110239">
+    It's not obvious when
+    this system is complete; that's 
+    <link url="http://wikipedia.org/wiki/G%F6del's_completeness_theorem">Gödel's completeness theorem</link>,
+    his 1929 Ph.D. thesis.
+    Don't confuse it with his more celebrated
+    <emphasis>In</emphasis>completeness Theorem, on the other hand,
+    which talks about the ability to prove formulas which are true in all 
+    interpretations which include arithmetic 
+    (as opposed to <emphasis>all</emphasis> interpretations everywhere.)
+  </footnote>
+  if we add some analogs of the
+  <link document="m11046">first-order inference rules</link>,
+  replacing ⊢ with ⇒
+  (and carrying along their baggage of
+   <quote display="inline">arbitrary</quote> and 
+   <quote display="inline">free-to-substitute-in</quote>).
+  
+</para>
+
+</content>
+</document>

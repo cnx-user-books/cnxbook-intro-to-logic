@@ -1,0 +1,101 @@
+<document xmlns="http://cnx.rice.edu/cnxml" xmlns:md="http://cnx.rice.edu/mdml">
+
+<title>Acknowledgements</title>
+<metadata><md:content-id>undefined</md:content-id><md:title/><md:uuid>b6f18036-9175-4c95-9c6b-cd2e67be59a2</md:uuid>
+</metadata>
+
+
+<content>
+
+<para id="para1">
+The <link url="http://www.teachlogic.org/">TeachLogic Project</link>
+is the work of many contributors,
+and was made possible through an 
+<link url="http://www.nsf.gov/dir/index.jsp?org=CISE">NSF CISE</link> 
+grant.
+Major contributors and grant Principle Investigators
+are
+<list id="list1">
+<item>
+Moshe Vardi, Rice University 
+  
+</item>
+<item>
+Matthias Felleisen, Northeastern University
+  
+</item>
+<item>
+Ian Barland, Rice University 
+</item>
+<item>
+Phokion Kolaitis, University of California at Santa Cruz 
+  
+</item>
+<item>
+John Greiner, Rice University
+</item>
+</list>
+In addition, 
+Paul Steckler
+implemented
+the Base module's 
+<link url="http://www.teachlogic.org/WaterWorld">Waterworld game</link>.
+</para>
+
+<para id="para2">
+Students who helped contribute to various TeachLogic modules 
+include (chronologically)
+<list id="list2">
+<item>
+Peggy Fidelman
+</item>
+<item>
+Justin Garcia
+</item>
+<item>
+Brian Cohen       
+</item>
+<item>
+Sarah Trowbridge  
+</item>
+<item>
+Bryan Cash        
+</item>
+<item>
+Fuching “Jack” Chi
+</item>
+<item>
+Ben McMahan
+</item>
+</list>
+
+
+
+
+</para>
+
+
+<para id="para3">
+TeachLogic has also been influenced
+by the <link url="http://www.cs.ou.edu/~beseme/">Beseme project</link>,
+headed by
+Rex Page
+of Oklahoma University;
+in particular the Base module 
+owes both some overall structure and specific details to Beseme.
+</para>
+
+<para id="para4">
+Janice Bordeaux,
+from the Engineering Dean's office at Rice University,
+assisted with developing classroom assessment tools.
+</para>
+
+
+
+
+
+
+
+</content>
+</document>

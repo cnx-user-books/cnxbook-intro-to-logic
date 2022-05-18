@@ -1,0 +1,429 @@
+<document xmlns="http://cnx.rice.edu/cnxml" xmlns:m="http://www.w3.org/1998/Math/MathML" xmlns:md="http://cnx.rice.edu/mdml">
+  <title>Reference: first-order WaterWorld</title>
+  <metadata><md:content-id>undefined</md:content-id><md:title/><md:uuid>48a136b4-7c3f-49ce-b106-f113925c9835</md:uuid>
+</metadata>
+
+
+<content>
+
+<para id="para1">
+  We summarize the details of how we choose to model WaterWorld boards
+  in first-order logic: exactly what relations we make up, and the formal
+  domain axioms which capture the game's rules.
+</para>
+
+<para id="para2">
+  This will follow almost exactly the same pattern as our
+  <link document="m10528">WaterWorld model in propositional logic</link>.
+  However, we will take advantage of the additional flexibility provided
+  by first-order logic.
+</para>
+
+<para id="para3">
+  Rather than modeling only the default 6×4 WaterWorld board;,
+  we will be able to model any board representable by our relations.
+  This will allow boards of any size and configuration, with one major
+  constraint — each location can have at most three neighboring
+  pirates.
+</para>
+
+<section id="section1">
+<title>Domain and Relations</title>
+
+<para id="para4">
+  Our domain is simply the set of all board locations.
+  This set can be arbitrarily large — even infinite!
+</para>
+
+<para id="para5">
+  The board configuration is given by the binary “neighbor”
+  relation <m:math><m:ci type="function">nhbr</m:ci></m:math>.
+</para>
+
+<para id="para6">
+  The next relations correspond directly to the
+  <link document="m10528" target-id="waterworld-props">propositions</link>
+  in the propositional logic model.
+</para>
+
+<list id="list1">
+  <item>
+    Whether or not a location contains a pirate:
+    <m:math><m:ci type="function">safe</m:ci></m:math>.
+    This is a unary relation.
+    <note type="aside" id="idp43920">
+      We choose not to include a redundant relation
+      <m:math><m:ci type="function">unsafe</m:ci></m:math>.
+    </note>
+  </item>
+
+  <item>
+    Unary relations indicating the number of neighboring pirates:
+    <m:math><m:ci type="function">has0</m:ci></m:math>, <m:math><m:ci type="function">has1</m:ci></m:math>, <m:math><m:ci type="function">has2</m:ci></m:math>, and <m:math><m:ci type="function">has3</m:ci></m:math>.
+    <note type="aside" id="idm45312">
+      Thus, we have our restriction to three unsafe neighbors.
+      This will also be reflected in our domain axioms below.  See also
+      <link document="m10727" target-id="waterworld-shows-relation">this problem</link>
+      for a discussion of how to avoid this restriction.
+    </note>
+  </item>
+</list>
+
+<para id="para7">
+  In addition, to have encode the domain axioms for an arbitrary domain,
+  we also need an equality relation over our domain of locations.
+  As is traditional, we will use infix notation for this relation,
+  for example, <m:math><m:apply><m:eq/><m:ci>x</m:ci> <m:ci>y</m:ci></m:apply></m:math>.
+  Furthermore, we will allow ourselves to write
+  <m:math><m:apply><m:neq/> <m:ci>x</m:ci> <m:ci>y</m:ci></m:apply></m:math> as shorthand for
+  <m:math><m:apply><m:not/><m:apply><m:eq/> <m:ci>x</m:ci> <m:ci>y</m:ci></m:apply></m:apply></m:math>.
+  Thus, we do not need a distinct inequality relation.
+</para>
+
+<para id="para8">
+  Note that these relations describe the state of the underlying
+  board  — the model  — and not our particular view of it.
+  Our particular view will be reflected in which formulas 
+  we'll accept as premises.  So we'll accept
+  <m:math>
+    <m:apply>
+      <m:ci type="function">has2</m:ci>
+      <m:ci>A</m:ci>
+    </m:apply>
+  </m:math>
+  as a premise only when <m:math><m:ci>A</m:ci></m:math> has been exposed and shows a 2.
+</para>
+
+</section>
+
+
+<section id="section2">
+<title>The domain axioms</title>
+
+<para id="para9">
+  Many
+  of our axioms correspond directly, albeit much more succinctly, with
+  <link document="m10528" target-id="waterworld-rules">those</link> of the propositional model.
+  In addition, we have axioms that specify that our neighbor and equality
+  relations are self-consistent.
+</para>
+
+<para id="para10">
+  Axioms asserting that the neighbor relation is anti-reflexive and
+  symmetric:
+
+  
+
+  <list id="list2">
+    <item>
+      <m:math><m:apply><m:forall/><m:bvar><m:ci>x</m:ci></m:bvar>
+        <m:apply><m:not/><m:apply><m:ci type="function">nhbr</m:ci> <m:ci>x</m:ci> <m:ci>x</m:ci></m:apply></m:apply>
+      </m:apply></m:math>
+    </item>
+
+    <item>
+      <m:math><m:apply><m:forall/><m:bvar><m:ci>x</m:ci></m:bvar>
+        <m:apply><m:forall/><m:bvar><m:ci>y</m:ci></m:bvar>
+          <m:apply><m:implies/>
+            <m:apply><m:ci type="function">nhbr</m:ci> <m:ci>x</m:ci> <m:ci>y</m:ci></m:apply>
+            <m:apply><m:ci type="function">nhbr</m:ci> <m:ci>y</m:ci> <m:ci>x</m:ci></m:apply>
+          </m:apply>
+        </m:apply>
+      </m:apply></m:math>
+    </item>
+  </list>
+</para>
+
+<para id="para11">
+  Axioms asserting that “=” truly is an equality relation,
+  <foreign>i.e.</foreign>, it is reflexive, symmetric, and transitive.
+
+  <list id="list3">
+    <item>
+      <m:math><m:apply><m:forall/><m:bvar><m:ci>x</m:ci></m:bvar>
+        <m:apply><m:eq/><m:ci>x</m:ci> <m:ci>x</m:ci></m:apply>
+      </m:apply></m:math>
+    </item>
+
+    <item>
+      <m:math><m:apply><m:forall/><m:bvar><m:ci>x</m:ci></m:bvar>
+        <m:apply><m:forall/><m:bvar><m:ci>y</m:ci></m:bvar>
+          <m:apply><m:implies/>
+            <m:apply><m:eq/> <m:ci>x</m:ci> <m:ci>y</m:ci></m:apply>
+            <m:apply><m:eq/> <m:ci>y</m:ci> <m:ci>x</m:ci></m:apply>
+          </m:apply>
+        </m:apply>
+      </m:apply></m:math>
+    </item>
+
+    <item>
+      <m:math><m:apply><m:forall/><m:bvar><m:ci>x</m:ci></m:bvar>
+        <m:apply><m:forall/><m:bvar><m:ci>y</m:ci></m:bvar>
+          <m:apply><m:forall/><m:bvar><m:ci>z</m:ci></m:bvar>
+            <m:apply><m:implies/>
+              <m:apply><m:and/>
+                <m:apply><m:eq/> <m:ci>x</m:ci> <m:ci>y</m:ci></m:apply>
+                <m:apply><m:eq/> <m:ci>y</m:ci> <m:ci>z</m:ci></m:apply>
+              </m:apply>
+              <m:apply><m:eq/> <m:ci>x</m:ci> <m:ci>z</m:ci></m:apply>
+            </m:apply>
+          </m:apply>
+        </m:apply>
+      </m:apply></m:math>
+    </item>
+  </list>
+</para>
+
+<para id="para12">
+  Axioms asserting that the neighbor counts are correct.
+  Each of these is of the form
+  “if location <m:math><m:ci>x</m:ci></m:math> has <m:math><m:ci>n</m:ci></m:math> neighboring pirates, then there are <m:math><m:ci>n</m:ci></m:math>
+    <emphasis>distinct</emphasis>
+    unsafe neighbors of <m:math><m:ci>x</m:ci></m:math>, and any <emphasis>other distinct</emphasis>
+    neighbor <m:math><m:ci>x</m:ci></m:math> is safe.”
+  We use the equality relation to specify the distinctness of each
+  neighbor.
+
+  <list id="list4">
+    <item>
+      <m:math><m:apply><m:forall/><m:bvar><m:ci>x</m:ci></m:bvar>
+        <m:apply><m:implies/>
+          <m:apply><m:ci type="function">has0</m:ci> <m:ci>x</m:ci></m:apply>
+          <m:apply><m:forall/><m:bvar><m:ci>y</m:ci></m:bvar>
+            <m:apply><m:implies/>
+              <m:apply><m:ci type="function">nhbr</m:ci> <m:ci>x</m:ci> <m:ci>y</m:ci></m:apply>
+              <m:apply><m:ci type="function">safe</m:ci> <m:ci>y</m:ci></m:apply>
+            </m:apply>
+          </m:apply>
+        </m:apply>
+      </m:apply></m:math>
+    </item>
+
+    <item>
+      <m:math><m:apply><m:forall/><m:bvar><m:ci>x</m:ci></m:bvar>
+        <m:apply><m:implies/>
+          <m:apply><m:ci type="function">has1</m:ci> <m:ci>x</m:ci></m:apply>
+          <m:apply><m:exists/><m:bvar><m:ci>a</m:ci></m:bvar>
+            <m:apply><m:and/>
+              <m:apply><m:ci type="function">nhbr</m:ci> <m:ci>x</m:ci> <m:ci>a</m:ci></m:apply>
+              <m:apply><m:not/>
+                <m:apply><m:ci type="function">safe</m:ci> <m:ci>a</m:ci></m:apply>
+              </m:apply>
+              <m:apply><m:forall/><m:bvar><m:ci>y</m:ci></m:bvar>
+                <m:apply><m:implies/>
+                  <m:apply><m:and/>
+                    <m:apply><m:ci type="function">nhbr</m:ci> <m:ci>x</m:ci> <m:ci>y</m:ci></m:apply>
+                    <m:apply><m:neq/> <m:ci>a</m:ci> <m:ci>y</m:ci></m:apply>
+                  </m:apply>
+                  <m:apply><m:ci type="function">safe</m:ci> <m:ci>y</m:ci></m:apply>
+                </m:apply>
+              </m:apply>
+            </m:apply>
+          </m:apply>
+        </m:apply>
+      </m:apply></m:math>
+    </item>
+
+    <item>
+      <m:math><m:apply><m:forall/><m:bvar><m:ci>x</m:ci></m:bvar>
+        <m:apply><m:implies/>
+          <m:apply><m:ci type="function">has2</m:ci> <m:ci>x</m:ci></m:apply>
+          <m:apply><m:exists/><m:bvar><m:ci>a</m:ci></m:bvar>
+          <m:apply><m:exists/><m:bvar><m:ci>b</m:ci></m:bvar>
+            <m:apply><m:and/>
+              <m:apply><m:ci type="function">nhbr</m:ci> <m:ci>x</m:ci> <m:ci>a</m:ci></m:apply>
+              <m:apply><m:ci type="function">nhbr</m:ci> <m:ci>x</m:ci> <m:ci>b</m:ci></m:apply>
+              <m:apply><m:neq/> <m:ci>a</m:ci> <m:ci>b</m:ci></m:apply>
+              <m:apply><m:not/>
+                <m:apply><m:ci type="function">safe</m:ci> <m:ci>a</m:ci></m:apply>
+              </m:apply>
+              <m:apply><m:not/>
+                <m:apply><m:ci type="function">safe</m:ci> <m:ci>b</m:ci></m:apply>
+              </m:apply>
+              <m:apply><m:forall/><m:bvar><m:ci>y</m:ci></m:bvar>
+                <m:apply><m:implies/>
+                  <m:apply><m:and/>
+                    <m:apply><m:ci type="function">nhbr</m:ci> <m:ci>x</m:ci> <m:ci>y</m:ci></m:apply>
+                    <m:apply><m:neq/> <m:ci>a</m:ci> <m:ci>y</m:ci></m:apply>
+                    <m:apply><m:neq/> <m:ci>b</m:ci> <m:ci>y</m:ci></m:apply>
+                  </m:apply>
+                  <m:apply><m:ci type="function">safe</m:ci> <m:ci>y</m:ci></m:apply>
+                </m:apply>
+              </m:apply>
+            </m:apply>
+          </m:apply>
+          </m:apply>
+        </m:apply>
+      </m:apply></m:math>
+    </item>
+
+    <item>
+      <m:math><m:apply><m:forall/><m:bvar><m:ci>x</m:ci></m:bvar>
+        <m:apply><m:implies/>
+          <m:apply><m:ci type="function">has3</m:ci> <m:ci>x</m:ci></m:apply>
+          <m:apply><m:exists/><m:bvar><m:ci>a</m:ci></m:bvar>
+          <m:apply><m:exists/><m:bvar><m:ci>b</m:ci></m:bvar>
+          <m:apply><m:exists/><m:bvar><m:ci>c</m:ci></m:bvar>
+            <m:apply><m:and/>
+              <m:apply><m:ci type="function">nhbr</m:ci> <m:ci>x</m:ci> <m:ci>a</m:ci></m:apply>
+              <m:apply><m:ci type="function">nhbr</m:ci> <m:ci>x</m:ci> <m:ci>b</m:ci></m:apply>
+              <m:apply><m:ci type="function">nhbr</m:ci> <m:ci>x</m:ci> <m:ci>c</m:ci></m:apply>
+              <m:apply><m:neq/> <m:ci>a</m:ci> <m:ci>b</m:ci></m:apply>
+              <m:apply><m:neq/> <m:ci>a</m:ci> <m:ci>c</m:ci></m:apply>
+              <m:apply><m:neq/> <m:ci>b</m:ci> <m:ci>c</m:ci></m:apply>
+              <m:apply><m:not/>
+                <m:apply><m:ci type="function">safe</m:ci> <m:ci>a</m:ci></m:apply>
+              </m:apply>
+              <m:apply><m:not/>
+                <m:apply><m:ci type="function">safe</m:ci> <m:ci>b</m:ci></m:apply>
+              </m:apply>
+              <m:apply><m:not/>
+                <m:apply><m:ci type="function">safe</m:ci> <m:ci>c</m:ci></m:apply>
+              </m:apply>
+              <m:apply><m:forall/><m:bvar><m:ci>y</m:ci></m:bvar>
+                <m:apply><m:implies/>
+                  <m:apply><m:and/>
+                    <m:apply><m:ci type="function">nhbr</m:ci> <m:ci>x</m:ci> <m:ci>y</m:ci></m:apply>
+                    <m:apply><m:neq/> <m:ci>a</m:ci> <m:ci>y</m:ci></m:apply>
+                    <m:apply><m:neq/> <m:ci>b</m:ci> <m:ci>y</m:ci></m:apply>
+                    <m:apply><m:neq/> <m:ci>c</m:ci> <m:ci>y</m:ci></m:apply>
+                  </m:apply>
+                  <m:apply><m:ci type="function">safe</m:ci> <m:ci>y</m:ci></m:apply>
+                </m:apply>
+              </m:apply>
+            </m:apply>
+          </m:apply>
+          </m:apply>
+          </m:apply>
+        </m:apply>
+      </m:apply></m:math>
+    </item>
+  </list>
+</para>
+
+<para id="para13">
+  In addition, we want the implications to go the opposite way.
+  Otherwise, each of <m:math><m:ci type="function">has0</m:ci></m:math>, <m:math><m:ci type="function">has1</m:ci></m:math>, <m:math><m:ci type="function">has2</m:ci></m:math>, and <m:math><m:ci type="function">has3</m:ci></m:math> could
+  always be false, while still satisfying the above!
+  For brevity, we elide the details in the following list:
+
+  <list id="list5">
+    <item>
+      <m:math><m:apply><m:forall/><m:bvar><m:ci>x</m:ci></m:bvar>
+        <m:apply><m:implies/>
+          <m:apply><m:forall/><m:bvar><m:ci>y</m:ci></m:bvar>
+            <m:apply><m:implies/>
+              <m:apply><m:ci type="function">nhbr</m:ci> <m:ci>x</m:ci> <m:ci>y</m:ci></m:apply>
+              <m:apply><m:ci type="function">safe</m:ci> <m:ci>y</m:ci></m:apply>
+            </m:apply>
+          </m:apply>
+          <m:apply><m:ci type="function">has0</m:ci> <m:ci>x</m:ci></m:apply>
+        </m:apply>
+      </m:apply></m:math>
+    </item>
+
+    <item>
+      <m:math><m:apply><m:forall/><m:bvar><m:ci>x</m:ci></m:bvar>
+        <m:apply><m:implies/>
+          <m:mtext>…</m:mtext>
+          <m:apply><m:ci type="function">has1</m:ci> <m:ci>x</m:ci></m:apply>
+        </m:apply>
+      </m:apply></m:math>
+    </item>
+
+    <item>
+      <m:math><m:apply><m:forall/><m:bvar><m:ci>x</m:ci></m:bvar>
+        <m:apply><m:implies/>
+          <m:mtext>…</m:mtext>
+          <m:apply><m:ci type="function">has2</m:ci> <m:ci>x</m:ci></m:apply>
+        </m:apply>
+      </m:apply></m:math>
+    </item>
+
+    <item>
+      <m:math><m:apply><m:forall/><m:bvar><m:ci>x</m:ci></m:bvar>
+        <m:apply><m:implies/>
+          <m:mtext>…</m:mtext>
+          <m:apply><m:ci type="function">has3</m:ci> <m:ci>x</m:ci></m:apply>
+        </m:apply>
+      </m:apply></m:math>
+    </item>
+  </list>
+</para>
+
+<para id="para14">
+  Axioms asserting that the neighbor counts are consistent.
+  While redundant, including axioms like the following can be convenient.
+
+  <list id="list6">
+    <item>
+      <m:math><m:apply><m:forall/><m:bvar><m:ci>x</m:ci></m:bvar>
+        <m:apply><m:implies/>
+          <m:apply><m:ci type="function">has0</m:ci> <m:ci>x</m:ci></m:apply>
+          <m:apply><m:not/>
+            <m:apply><m:or/>
+              <m:apply><m:ci type="function">has1</m:ci> <m:ci>x</m:ci></m:apply>
+              <m:apply><m:ci type="function">has2</m:ci> <m:ci>x</m:ci></m:apply>
+              <m:apply><m:ci type="function">has3</m:ci> <m:ci>x</m:ci></m:apply>
+            </m:apply>
+          </m:apply>
+        </m:apply>
+      </m:apply></m:math>
+    </item>
+
+    <item>
+      <m:math><m:apply><m:forall/><m:bvar><m:ci>x</m:ci></m:bvar>
+        <m:apply><m:implies/>
+          <m:apply><m:ci type="function">has1</m:ci> <m:ci>x</m:ci></m:apply>
+          <m:apply><m:not/>
+            <m:apply><m:or/>
+              <m:apply><m:ci type="function">has0</m:ci> <m:ci>x</m:ci></m:apply>
+              <m:apply><m:ci type="function">has2</m:ci> <m:ci>x</m:ci></m:apply>
+              <m:apply><m:ci type="function">has3</m:ci> <m:ci>x</m:ci></m:apply>
+            </m:apply>
+          </m:apply>
+        </m:apply>
+      </m:apply></m:math>
+    </item>
+
+    <item>
+      <m:math><m:apply><m:forall/><m:bvar><m:ci>x</m:ci></m:bvar>
+        <m:apply><m:implies/>
+          <m:apply><m:ci type="function">has2</m:ci> <m:ci>x</m:ci></m:apply>
+          <m:apply><m:not/>
+            <m:apply><m:or/>
+              <m:apply><m:ci type="function">has0</m:ci> <m:ci>x</m:ci></m:apply>
+              <m:apply><m:ci type="function">has1</m:ci> <m:ci>x</m:ci></m:apply>
+              <m:apply><m:ci type="function">has3</m:ci> <m:ci>x</m:ci></m:apply>
+            </m:apply>
+          </m:apply>
+        </m:apply>
+      </m:apply></m:math>
+    </item>
+
+    <item>
+      <m:math><m:apply><m:forall/><m:bvar><m:ci>x</m:ci></m:bvar>
+        <m:apply><m:implies/>
+          <m:apply><m:ci type="function">has3</m:ci> <m:ci>x</m:ci></m:apply>
+          <m:apply><m:not/>
+            <m:apply><m:or/>
+              <m:apply><m:ci type="function">has0</m:ci> <m:ci>x</m:ci></m:apply>
+              <m:apply><m:ci type="function">has1</m:ci> <m:ci>x</m:ci></m:apply>
+              <m:apply><m:ci type="function">has2</m:ci> <m:ci>x</m:ci></m:apply>
+            </m:apply>
+          </m:apply>
+        </m:apply>
+      </m:apply></m:math>
+    </item>
+  </list>
+</para>
+
+<para id="para15">
+  Note that this set of axioms is not quite complete, as explored in 
+  <link document="m12353" target-id="ww-incomplete">an exercise</link>.
+</para>
+
+</section> 
+
+</content>
+</document>
